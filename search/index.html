@@ -17,7 +17,7 @@
   
   <meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/archives/index.html">
+<meta property="og:url" content="http://example.com/search/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/null">
@@ -154,77 +154,34 @@
 
         
 
-            
-<style>
-  .post-meta time{color:#00a7e0}
-  @media (max-width:767px){.posts-collapse{margin:0 20px}
-  .posts-collapse .post-meta,.posts-collapse .post-title{display:block;width:auto;text-align:left}}
-  .posts-collapse{position:relative}
-  .posts-collapse::after{content:" ";position:absolute;top:20px;left:0;margin-left:-2px;width:4px;height:calc(100% - 35px);background:#f5f5f5;z-index:-1}
-  @media (max-width:991px){.posts-collapse{margin:0 20px}}
-  .posts-collapse .collection-title{position:relative}
-  .posts-collapse .collection-title h1,.posts-collapse .collection-title h2{margin-left:20px}.posts-collapse .collection-title small{color:#bbb;margin-left:5px}
-  .posts-collapse .collection-title::before{content:" ";position:absolute;left:0;top:50%;margin-left:-4px;margin-top:-4px;width:8px;height:8px;background:#bbb;border-radius:50%}
-  .posts-collapse .post-header{position:relative;transition-duration:.2s;transition-timing-function:ease-in-out;transition-delay:0s;transition-property:border}
-  .posts-collapse .post-header::before{content:" ";position:absolute;left:0;top:12px;width:6px;height:6px;margin-left:-4px;background:#bbb;border-radius:50%;border:1px solid #fff}
-  .posts-collapse .post-header:hover{border-bottom-color:#666}.posts-collapse .post-header:hover::before{background:#222}
-  .posts-collapse .post-meta{position:absolute;font-size:12px;left:20px;top:5px}
-  .posts-collapse .post-comments-count{display:none}
-  .posts-collapse .post-title{margin-left:70px;font-size:16px;font-weight:400;line-height:inherit}
-  .posts-collapse .post-title::after{margin-left:3px;opacity:.6}.posts-collapse .post-title a{color:#666;border-bottom:none}
-  .kratos-post-content div.arc-tags{margin-bottom:30px}
-  .arc-tags a{-webkit-box-shadow:0 1px 4px rgba(0,0,0,.1);box-shadow:0 1px 4px rgba(0,0,0,.1);border:1px solid #fff;border-radius:15px;margin:4px 8px 0 0;font-weight:500;display:inline-block;padding:0 12px;background:rgba(255,255,255,.5);font-size:16px;}
-  .arc-tags a::before{content:"# ";color:#e8a6a6}
-</style>
+            <div class="kratos-hentry kratos-post-inner clearfix">
+    <div class="kratos-post-content">
+        <h2 class="title-h2 text-center">搜索</h2>
+        <form class="input-group" onsubmit="return inpSearch();">
+            <input class="form-input input-lg" id="search-input" maxlength="80" name="s" placeholder="有什么想找找看的呢o(*￣▽￣*)ブ" required type="search">
+            <button class="btn btn-primary" type="submit">找一找~</button>
+        </form>
+    </div>
+</div>
 
-  <article>
-      <div class="kratos-hentry kratos-post-inner clearfix">
-          <div class="kratos-post-content">
-            <h2 class="title-h2 text-center">文章归档</h2>
-            <div id="archives">
+<div class="alert alert-info" id="kr-search-notice">
+    这里是 Hexo 的搜索引擎~
+</div>
+
+<div id="result-posts">
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <div class="kratos-post-content">
+            <p>搜索多个关键词时请用空格分割，例如「」这样；</p>
+            <p>您也可以使用这些标签碰碰运气哦~</p>
+            <p class="search-demo-tags">
                 
-                <div class="post-block archive post" style="margin-left: 2em;">
-                  <h3 class="archive-page-counter">当前共有 1 篇文章 (゜-゜)つロ 干杯~</h3>
-                  <div class="posts-collapse">
-                    
-                    
-                      
-                      
-                        <!-- 没遇到Title的会被自动忽略年份，即使并不一致 -->
-                        
-                        <div class="collection-title">
-                          <a href="/archives/2021/"><h2 class="archive-year">2021</h2></a>
-                        </div>
-                      
-                      
-                        <article class="post" itemscope>
-                          <header class="post-header">
-                            <h3 class="post-title">
-                              
-                                  <a class="post-title-link" href="/2021/11/07/hello-world/" itemprop="url">
-                                    <span itemprop="name">Hello World</span>
-                                  </a>
-                              
-                            </h3>
-                            <div class="post-meta">
-                              <time class="post-time" itemprop="dateCreated"
-                                    datetime="2021-11-07T22:13:17+08:00"
-                                    content="2021-11-07" >
-                                11-07
-                              </time>
-                            </div>
-                          </header>
-                        </article>
-                      
-                    
-                  </div>
-                </div>
-            </div>
+            </p>
         </div>
-      </div>
-      
-  </article>
+    </div>
+</div>
 
+<script>var searchDataFile = "/search.json";</script>
+<script defer src="/js/local-search.min.js"></script>
 
         
 
