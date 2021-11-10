@@ -4,7 +4,7 @@
   <!-- 元数据 -->
   <meta charset="utf-8">
   <link rel="icon" href="">
-  <title>远程控制+Sakurafrp实现非局域网远程控制 | ilpvc</title>
+  <title>Linux命令 | ilpvc</title>
   <meta name="author" content="ilpvc" />
   <meta http-equiv="Cache-Control" content="no-transform" />
   <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -15,16 +15,16 @@
   
     <meta name="keywords" content="" />
   
-  <meta name="description" content="一、下载RD Client 安卓端网页下载或者RDClient ios端在App Store搜索RDClient  二、设置PC允许远程连接 win11：这里打开电脑设置-&gt; 系统-&gt;远程桌面   &#x3D;&#x3D;这里的打开后你能连接你的用户就是你电脑开机时的用户，例如administrator，win10也是一样的&#x3D;&#x3D;  win10：   进入控制面板-&gt;系统和安全-&gt;系统-&gt;">
+  <meta name="description" content="1. ls — Listls会列举出当前工作目录的内容（文件或文件夹）。  ls命令演示 2.mkdir — Make Directorymkdir 用于新建一个新目录  执行mkdir命令创建相应的文件夹 3.pwd — Print Working Directory显示当前工作目录  显示当前工作目录 4.cd — Change Directory切换文件路径，cd 将给定的文件夹（或目录）设">
 <meta property="og:type" content="article">
-<meta property="og:title" content="远程控制+Sakurafrp实现非局域网远程控制">
-<meta property="og:url" content="http://ilpvc.github.io/2021/11/08/python/index.html">
+<meta property="og:title" content="Linux命令">
+<meta property="og:url" content="http://ilpvc.github.io/2021/11/10/Linux%E5%91%BD%E4%BB%A4/index.html">
 <meta property="og:site_name" content="ilpvc">
-<meta property="og:description" content="一、下载RD Client 安卓端网页下载或者RDClient ios端在App Store搜索RDClient  二、设置PC允许远程连接 win11：这里打开电脑设置-&gt; 系统-&gt;远程桌面   &#x3D;&#x3D;这里的打开后你能连接你的用户就是你电脑开机时的用户，例如administrator，win10也是一样的&#x3D;&#x3D;  win10：   进入控制面板-&gt;系统和安全-&gt;系统-&gt;">
+<meta property="og:description" content="1. ls — Listls会列举出当前工作目录的内容（文件或文件夹）。  ls命令演示 2.mkdir — Make Directorymkdir 用于新建一个新目录  执行mkdir命令创建相应的文件夹 3.pwd — Print Working Directory显示当前工作目录  显示当前工作目录 4.cd — Change Directory切换文件路径，cd 将给定的文件夹（或目录）设">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://ilpvc.github.io/null">
-<meta property="article:published_time" content="2021-11-08T04:19:35.000Z">
-<meta property="article:modified_time" content="2021-11-09T02:53:34.642Z">
+<meta property="article:published_time" content="2021-11-10T08:27:24.000Z">
+<meta property="article:modified_time" content="2021-11-10T08:33:56.656Z">
 <meta property="article:author" content="ilpvc">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://ilpvc.github.io/null">
@@ -179,17 +179,17 @@
     <div class="kratos-hentry kratos-post-inner clearfix">
         <header class="kratos-entry-header">
             
-                <h1 class="kratos-entry-title text-center">远程控制+Sakurafrp实现非局域网远程控制</h1>
+                <h1 class="kratos-entry-title text-center">Linux命令</h1>
             
             
             <ul class="kratos-post-meta text-center">
-                <li><i class="fa fa-calendar"></i> 2021-11-08</li>
+                <li><i class="fa fa-calendar"></i> 2021-11-10</li>
                 <li><i class="fa fa-user"></i> 作者 ilpvc</li>
                 <li>
                     <i class="fa fa-edit"></i> 
                     
                     
-                        480
+                        ~1.84K
                     
                     字
                 </li>
@@ -198,53 +198,90 @@
         </header>
         <div class="kratos-post-content">
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1636426414642"></time> 前，其中的内容可能需要更新。
+                本文最后编辑于 <time datetime="1636533236656"></time> 前，其中的内容可能需要更新。
             </div>
             
             <hr />
-            <h2 id="一、下载RD-Client"><a href="#一、下载RD-Client" class="headerlink" title="一、下载RD Client"></a>一、下载RD Client</h2><ul>
-<li>安卓端网页下载或者<a target="_blank" rel="noopener" href="https://presenter.oss-cn-shanghai.aliyuncs.com/base.apk">RDClient</a></li>
-<li>ios端在App Store搜索RDClient</li>
-</ul>
-<h2 id="二、设置PC允许远程连接"><a href="#二、设置PC允许远程连接" class="headerlink" title="二、设置PC允许远程连接"></a>二、设置PC允许远程连接</h2><ul>
-<li><strong>win11</strong>：这里打开电脑设置-&gt; 系统-&gt;远程桌面</li>
-</ul>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/QQ%E5%9B%BE%E7%89%8720211109094906.png" alt="QQ图片20211109094906"></p>
-<p>==这里的打开后你能连接你的用户就是你电脑开机时的用户，例如administrator，win10也是一样的==</p>
-<ul>
-<li><strong>win10</strong>：</li>
-</ul>
-<p> 进入控制面板-&gt;系统和安全-&gt;系统-&gt;远程设置<br>按照下图方式勾选<br><img src="https://img-blog.csdn.net/20170215163223342?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzA0NjU2NTc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h2 id="三、注册sakura-frp（需要实名认证，支付宝授权就行）"><a href="#三、注册sakura-frp（需要实名认证，支付宝授权就行）" class="headerlink" title="三、注册sakura frp（需要实名认证，支付宝授权就行）"></a>三、注册sakura frp（需要实名认证，支付宝授权就行）</h2><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109101421526.png" alt="image-20211109101421526"></p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109101508848.png" alt="image-20211109101508848"></p>
-<p>在导航栏上</p>
-<p>用户-&gt;实名认证</p>
-<p>根据提示完成认证</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109101620430.png" alt="image-20211109101620430"></p>
-<p>点击穿透-&gt;隧道列表</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109101742287.png" alt="image-20211109101742287"></p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109102002178.png" alt="image-20211109102002178"></p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109102044910.png" alt="image-20211109102044910"></p>
-<p>点击软件下载</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109102209378.png" alt="image-20211109102209378"></p>
-<p>然后解压安装</p>
-<p>再打开frpc.ini配置文件（可以用记事本打开）</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109103125704.png" alt="image-20211109103125704"></p>
-<p>再去sakura frp网站点击<strong>隧道列表</strong>，找到你刚才新建的隧道</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109103347791.png" alt="image-20211109103347791"></p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109103506496.png" alt="image-20211109103506496"></p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109103555304.png" alt="image-20211109103555304"></p>
-<p>然后直接去刚才打开的frpc.ini粘贴即可。</p>
-<p>最后直接打开exe</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109103722486.png" alt="image-20211109103722486"></p>
-<p>运行结果：然后缩小，去平板或者手机或者pc连接电脑</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109103802090.png" alt="image-20211109103802090"></p>
-<h2 id="四、连接电脑"><a href="#四、连接电脑" class="headerlink" title="四、连接电脑"></a>四、连接电脑</h2><p>点击Desktop</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109104240443.png" alt="image-20211109104240443"></p>
-<p>然后add MANUALLY</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109104948381.png" alt="image-20211109104948381"></p>
-<p>然后点击save就行</p>
-<p>最后直接连接</p>
+            <h3 id="1-ls-—-List"><a href="#1-ls-—-List" class="headerlink" title="1. ls — List"></a>1. ls — List</h3><p>ls会列举出当前工作目录的内容（文件或文件夹）。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1712440-d16f09f5d9f399c1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/689/format/webp" alt="img"></p>
+<p>ls命令演示</p>
+<h3 id="2-mkdir-—-Make-Directory"><a href="#2-mkdir-—-Make-Directory" class="headerlink" title="2.mkdir — Make Directory"></a>2.mkdir — Make Directory</h3><p>mkdir 用于新建一个新目录</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1712440-71ff701f90ca847c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/84/format/webp" alt="img"></p>
+<p>执行mkdir命令创建相应的文件夹</p>
+<h3 id="3-pwd-—-Print-Working-Directory"><a href="#3-pwd-—-Print-Working-Directory" class="headerlink" title="3.pwd — Print Working Directory"></a>3.pwd — Print Working Directory</h3><p>显示当前工作目录</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1712440-95038b266cb1e3ab.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/302/format/webp" alt="img"></p>
+<p>显示当前工作目录</p>
+<h3 id="4-cd-—-Change-Directory"><a href="#4-cd-—-Change-Directory" class="headerlink" title="4.cd — Change Directory"></a>4.cd — Change Directory</h3><p>切换文件路径，cd 将给定的文件夹（或目录）设置成当前工作目录。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1712440-b1d50b5bcbbac513.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/262/format/webp" alt="img"></p>
+<p>切换路径到桌面</p>
+<h3 id="5-rmdir—-Remove-Directory"><a href="#5-rmdir—-Remove-Directory" class="headerlink" title="5.rmdir— Remove Directory"></a>5.rmdir— Remove Directory</h3><p>删除给定的目录。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1712440-cf76967c2555a9f9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/359/format/webp" alt="img"></p>
+<p>创建的文件夹会被删除</p>
+<h3 id="6-rm—-Remove"><a href="#6-rm—-Remove" class="headerlink" title="6. rm— Remove"></a>6. rm— Remove</h3><p>rm 会删除给定的文件</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1712440-acc84ffe7939f46b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/389/format/webp" alt="img"></p>
+<p>删除某个文件</p>
+<h3 id="7-cp—-Copy"><a href="#7-cp—-Copy" class="headerlink" title="7. cp— Copy"></a>7. cp— Copy</h3><p>cp 命令对文件进行复制</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1712440-74dca6a2c9215a75.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/404/format/webp" alt="img"></p>
+<p>文件的复制</p>
+<h3 id="8-mv—-Move"><a href="#8-mv—-Move" class="headerlink" title="8. mv— Move"></a>8. mv— Move</h3><p>mv 命令对文件或文件夹进行移动，如果文件或文件夹存在于当前工作目录，还可以对文件或文件夹进行重命名。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1712440-794d4345347f6b68.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/460/format/webp" alt="img"></p>
+<p>移动文件</p>
+<h3 id="9-cat—-concatenate-and-print-files"><a href="#9-cat—-concatenate-and-print-files" class="headerlink" title="9. cat— concatenate and print files"></a>9. cat— concatenate and print files</h3><p>cat 用于在标准输出（监控器或屏幕）上查看文件内容</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1712440-b4db478db25d6643.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/872/format/webp" alt="img"></p>
+<p>查看某个文件内容</p>
+<h3 id="10-tail-—-print-TAIL-from-last"><a href="#10-tail-—-print-TAIL-from-last" class="headerlink" title="10. tail — print TAIL(from last)"></a>10. tail — print TAIL(from last)</h3><p>ail 默认在标准输出上显示给定文件的最后10行内容，可以使用tail -n N 指定在标准输出上显示文件的最后N行内容。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1712440-22be8f6ffe6bca0c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/873/format/webp" alt="img"></p>
+<p>显示文件内容</p>
+<h3 id="11-less-—-print-LESS"><a href="#11-less-—-print-LESS" class="headerlink" title="11.less — print LESS"></a>11.less — print LESS</h3><p>less 按页或按窗口打印文件内容。在查看包含大量文本数据的大文件时是非常有用和高效的。你可以使用Ctrl+F向前翻页，Ctrl+B向后翻页。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1712440-eb3dc1cb618b3c3d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/888/format/webp" alt="img"></p>
+<p>打印文件内容</p>
+<h3 id="12-grep"><a href="#12-grep" class="headerlink" title="12.grep"></a>12.grep</h3><p>grep 在给定的文件中搜寻指定的字符串。grep -i “” 在搜寻时会忽略字符串的大小写，而grep -r “” 则会在当前工作目录的文件中递归搜寻指定的字符串。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1712440-8f2d382da7ec99e0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/534/format/webp" alt="img"></p>
+<p>查找相关内容</p>
+<h3 id="13-find"><a href="#13-find" class="headerlink" title="13.find"></a>13.find</h3><p>这个命令会在给定位置搜寻与条件匹配的文件。你可以使用find -name 的-name选项来进行区分大小写的搜寻，find -iname 来进行不区分大小写的搜寻。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1712440-7668c5809f876d83.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/580/format/webp" alt="img"></p>
+<p>三种使用示例</p>
+<h3 id="14-tar"><a href="#14-tar" class="headerlink" title="14.tar"></a>14.tar</h3><p>tar命令能创建、查看和提取tar压缩文件。tar -cvf 是创建对应压缩文件，tar -tvf 来查看对应压缩文件，tar -xvf 来提取对应压缩文件。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1712440-5bad1e453ac32975.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/620/format/webp" alt="img"></p>
+<p>创建压缩文件</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1712440-771921ded8b195bf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/759/format/webp" alt="img"></p>
+<p>查看压缩文件</p>
+<h3 id="15-gzip"><a href="#15-gzip" class="headerlink" title="15. gzip"></a>15. gzip</h3><p>gzip 命令创建和提取gzip压缩文件，还可以用gzip -d 来提取压缩文件。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1712440-1eb08f8ab6d421de.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/563/format/webp" alt="img"></p>
+<p>生成gzip文件</p>
+<h3 id="16-unzip"><a href="#16-unzip" class="headerlink" title="16. unzip"></a>16. unzip</h3><p>unzip 对gzip文档进行解压。在解压之前，可以使用unzip -l 命令查看文件内容。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1712440-a9faf5a2c8d75127.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/794/format/webp" alt="img"></p>
+<p>解压缩文件</p>
+<h3 id="17-help"><a href="#17-help" class="headerlink" title="17.help"></a>17.help</h3><p>help会在终端列出所有可用的命令,可以使用任何命令的-h或-help选项来查看该命令的具体用法。图就省略啦，会有详细列表显示出来的。</p>
+<h3 id="18-whatis-—-What-is-this-command"><a href="#18-whatis-—-What-is-this-command" class="headerlink" title="18.whatis — What is this command"></a>18.whatis — What is this command</h3><p>whatis 会用单行来描述给定的命令，就是解释当前命令。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1712440-787cb8a6826556fe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/889/format/webp" alt="img"></p>
+<p>cd的描述</p>
+<h3 id="19-exit"><a href="#19-exit" class="headerlink" title="19.exit"></a>19.exit</h3><p>exit用于结束当前的终端会话。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1712440-1f17065446c1fd63.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/671/format/webp" alt="img"></p>
+<p>结束当前终端会话</p>
+<h3 id="20-ping"><a href="#20-ping" class="headerlink" title="20.ping"></a>20.ping</h3><p>ping 通过发送数据包ping远程主机(服务器)，常用与检测网络连接和服务器状态。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1712440-37638b8ce2acfff3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/770/format/webp" alt="img"></p>
+<p>ping百度演示</p>
+<h3 id="21-who-—-Who-Is-logged-in"><a href="#21-who-—-Who-Is-logged-in" class="headerlink" title="21.who — Who Is logged in"></a>21.who — Who Is logged in</h3><p>who能列出当前登录的用户名。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1712440-b92247235b23e608.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/456/format/webp" alt="img"></p>
+<p>当前用户列表</p>
+<h3 id="22-su-—-Switch-User"><a href="#22-su-—-Switch-User" class="headerlink" title="22.su — Switch User"></a>22.su — Switch User</h3><p>su 用于切换不同的用户。即使没有使用密码，超级用户也能切换到其它用户。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1712440-4fa4eadc3d79cc19.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/383/format/webp" alt="img"></p>
+<p>切换当前用户</p>
+<h3 id="23-uname"><a href="#23-uname" class="headerlink" title="23.uname"></a>23.uname</h3><p>uname会显示出关于系统的重要信息，如内核名称、主机名、内核版本、处理机类型等等，使用uname -a可以查看所有信息。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1712440-c6a2d4392cc0f801.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/883/format/webp" alt="img"></p>
+<p>系统信息</p>
+<h3 id="24-df-—-Disk-space-Free"><a href="#24-df-—-Disk-space-Free" class="headerlink" title="24.df — Disk space Free"></a>24.df — Disk space Free</h3><p>df查看文件系统中磁盘的使用情况–硬盘已用和可用的存储空间以及其它存储设备。你可以使用df -h将结果以人类可读的方式显示。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1712440-52e99951ebb56d50.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/885/format/webp" alt="img"></p>
+<p>磁盘使用情况</p>
+<h3 id="25-ps-—-ProcesseS"><a href="#25-ps-—-ProcesseS" class="headerlink" title="25.ps — ProcesseS"></a>25.ps — ProcesseS</h3><p>ps显示系统的运行进程。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1712440-e2bbe9821ceb0459.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/430/format/webp" alt="img"></p>
+<p>系统进程</p>
+<h3 id="26-top-—-Top-processes"><a href="#26-top-—-Top-processes" class="headerlink" title="26.top — Top processes"></a>26.top — Top processes</h3><p>top命令会默认按照CPU的占用情况，显示占用量较大的进程,可以使用top -u 查看某个用户的CPU使用排名情况。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1712440-753bac6c23e50395.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/939/format/webp" alt="img"></p>
+<p>cpu占用情况</p>
+<h3 id="27-shutdown"><a href="#27-shutdown" class="headerlink" title="27. shutdown"></a>27. shutdown</h3><p>shutdown用于关闭计算机，而shutdown -r用于重启计算机。这个我就不试了……</p>
+<p>出自：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/0056d671ea6d">https://www.jianshu.com/p/0056d671ea6d</a></p>
 
         </div>
         
@@ -298,7 +335,7 @@
     <script type="text/javascript">
         $(()=>{
             new QRCode("wechat-qr", {
-                text: "http://ilpvc.github.io/2021/11/08/python/",
+                text: "http://ilpvc.github.io/2021/11/10/Linux%E5%91%BD%E4%BB%A4/",
                 width: 150,
                 height: 150,
                 correctLevel : QRCode.CorrectLevel.H
@@ -310,17 +347,15 @@
             const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
             const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
             const twitterBase   = "https://twitter.com/intent/tweet?";
-            const hostUrl       = "http://ilpvc.github.io/2021/11/08/python/";
-            const title         = "「远程控制+Sakurafrp实现非局域网远程控制」";
-            const excerpt       = `一、下载RD Client
-安卓端网页下载或者RDClient
-ios端在App Store搜索RDClient
+            const hostUrl       = "http://ilpvc.github.io/2021/11/10/Linux%E5%91%BD%E4%BB%A4/";
+            const title         = "「Linux命令」";
+            const excerpt       = `1. ls — Listls会列举出当前工作目录的内容（文件或文件夹）。
 
-二、设置PC允许远程连接
-win11：这里打开电脑设置-&gt; 系统-&gt;远程桌面
+ls命令演示
+2.mkdir — Make Directorymkdir 用于新建一个新目录
 
-
-==这里的打开后你能连接...`;
+执行mkdir命令创建相应的文件夹
+3.pwd — Print...`;
             let _URL;
             switch (dest) {
                 case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
@@ -342,7 +377,7 @@ win11：这里打开电脑设置-&gt; 系统-&gt;远程桌面
                     
                 </div>
                 <div class="pull-date">
-                <span>最后编辑：2021-11-09</span>
+                <span>最后编辑：2021-11-10</span>
                 </div>
             </div>
         </footer>
@@ -351,12 +386,12 @@ win11：这里打开电脑设置-&gt; 系统-&gt;远程桌面
         <nav class="navigation post-navigation clearfix" role="navigation">
             
             <div class="nav-previous clearfix">
-                <a title=" Hello World" href="/2021/11/07/hello-world/">&lt; 上一篇</a>
+                <a title=" 远程控制+Sakurafrp实现非局域网远程控制" href="/2021/11/08/python/">&lt; 上一篇</a>
             </div>
             
             
             <div class="nav-next clearfix">
-                <a title=" Linux命令" href="/2021/11/10/Linux命令/">下一篇 &gt;</a>
+                <a title=" Git命令" href="/2021/11/10/Git命令/">下一篇 &gt;</a>
             </div>
             
         </nav>

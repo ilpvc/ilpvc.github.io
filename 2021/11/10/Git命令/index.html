@@ -4,7 +4,7 @@
   <!-- 元数据 -->
   <meta charset="utf-8">
   <link rel="icon" href="">
-  <title>远程控制+Sakurafrp实现非局域网远程控制 | ilpvc</title>
+  <title>Git命令 | ilpvc</title>
   <meta name="author" content="ilpvc" />
   <meta http-equiv="Cache-Control" content="no-transform" />
   <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -15,16 +15,16 @@
   
     <meta name="keywords" content="" />
   
-  <meta name="description" content="一、下载RD Client 安卓端网页下载或者RDClient ios端在App Store搜索RDClient  二、设置PC允许远程连接 win11：这里打开电脑设置-&gt; 系统-&gt;远程桌面   &#x3D;&#x3D;这里的打开后你能连接你的用户就是你电脑开机时的用户，例如administrator，win10也是一样的&#x3D;&#x3D;  win10：   进入控制面板-&gt;系统和安全-&gt;系统-&gt;">
+  <meta name="description" content="一、Git常用命令1、常用 1234567891011121314git remote add origin git@github.com:yeszao&#x2F;dofiler.git     # 配置远程git版本库git pull origin master                     # 下载代码及快速合并git push origin master">
 <meta property="og:type" content="article">
-<meta property="og:title" content="远程控制+Sakurafrp实现非局域网远程控制">
-<meta property="og:url" content="http://ilpvc.github.io/2021/11/08/python/index.html">
+<meta property="og:title" content="Git命令">
+<meta property="og:url" content="http://ilpvc.github.io/2021/11/10/Git%E5%91%BD%E4%BB%A4/index.html">
 <meta property="og:site_name" content="ilpvc">
-<meta property="og:description" content="一、下载RD Client 安卓端网页下载或者RDClient ios端在App Store搜索RDClient  二、设置PC允许远程连接 win11：这里打开电脑设置-&gt; 系统-&gt;远程桌面   &#x3D;&#x3D;这里的打开后你能连接你的用户就是你电脑开机时的用户，例如administrator，win10也是一样的&#x3D;&#x3D;  win10：   进入控制面板-&gt;系统和安全-&gt;系统-&gt;">
+<meta property="og:description" content="一、Git常用命令1、常用 1234567891011121314git remote add origin git@github.com:yeszao&#x2F;dofiler.git     # 配置远程git版本库git pull origin master                     # 下载代码及快速合并git push origin master">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://ilpvc.github.io/null">
-<meta property="article:published_time" content="2021-11-08T04:19:35.000Z">
-<meta property="article:modified_time" content="2021-11-09T02:53:34.642Z">
+<meta property="article:published_time" content="2021-11-10T08:34:46.000Z">
+<meta property="article:modified_time" content="2021-11-10T08:49:26.005Z">
 <meta property="article:author" content="ilpvc">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://ilpvc.github.io/null">
@@ -179,17 +179,17 @@
     <div class="kratos-hentry kratos-post-inner clearfix">
         <header class="kratos-entry-header">
             
-                <h1 class="kratos-entry-title text-center">远程控制+Sakurafrp实现非局域网远程控制</h1>
+                <h1 class="kratos-entry-title text-center">Git命令</h1>
             
             
             <ul class="kratos-post-meta text-center">
-                <li><i class="fa fa-calendar"></i> 2021-11-08</li>
+                <li><i class="fa fa-calendar"></i> 2021-11-10</li>
                 <li><i class="fa fa-user"></i> 作者 ilpvc</li>
                 <li>
                     <i class="fa fa-edit"></i> 
                     
                     
-                        480
+                        ~3.69K
                     
                     字
                 </li>
@@ -198,53 +198,48 @@
         </header>
         <div class="kratos-post-content">
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1636426414642"></time> 前，其中的内容可能需要更新。
+                本文最后编辑于 <time datetime="1636534166005"></time> 前，其中的内容可能需要更新。
             </div>
             
             <hr />
-            <h2 id="一、下载RD-Client"><a href="#一、下载RD-Client" class="headerlink" title="一、下载RD Client"></a>一、下载RD Client</h2><ul>
-<li>安卓端网页下载或者<a target="_blank" rel="noopener" href="https://presenter.oss-cn-shanghai.aliyuncs.com/base.apk">RDClient</a></li>
-<li>ios端在App Store搜索RDClient</li>
-</ul>
-<h2 id="二、设置PC允许远程连接"><a href="#二、设置PC允许远程连接" class="headerlink" title="二、设置PC允许远程连接"></a>二、设置PC允许远程连接</h2><ul>
-<li><strong>win11</strong>：这里打开电脑设置-&gt; 系统-&gt;远程桌面</li>
-</ul>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/QQ%E5%9B%BE%E7%89%8720211109094906.png" alt="QQ图片20211109094906"></p>
-<p>==这里的打开后你能连接你的用户就是你电脑开机时的用户，例如administrator，win10也是一样的==</p>
-<ul>
-<li><strong>win10</strong>：</li>
-</ul>
-<p> 进入控制面板-&gt;系统和安全-&gt;系统-&gt;远程设置<br>按照下图方式勾选<br><img src="https://img-blog.csdn.net/20170215163223342?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzA0NjU2NTc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h2 id="三、注册sakura-frp（需要实名认证，支付宝授权就行）"><a href="#三、注册sakura-frp（需要实名认证，支付宝授权就行）" class="headerlink" title="三、注册sakura frp（需要实名认证，支付宝授权就行）"></a>三、注册sakura frp（需要实名认证，支付宝授权就行）</h2><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109101421526.png" alt="image-20211109101421526"></p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109101508848.png" alt="image-20211109101508848"></p>
-<p>在导航栏上</p>
-<p>用户-&gt;实名认证</p>
-<p>根据提示完成认证</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109101620430.png" alt="image-20211109101620430"></p>
-<p>点击穿透-&gt;隧道列表</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109101742287.png" alt="image-20211109101742287"></p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109102002178.png" alt="image-20211109102002178"></p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109102044910.png" alt="image-20211109102044910"></p>
-<p>点击软件下载</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109102209378.png" alt="image-20211109102209378"></p>
-<p>然后解压安装</p>
-<p>再打开frpc.ini配置文件（可以用记事本打开）</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109103125704.png" alt="image-20211109103125704"></p>
-<p>再去sakura frp网站点击<strong>隧道列表</strong>，找到你刚才新建的隧道</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109103347791.png" alt="image-20211109103347791"></p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109103506496.png" alt="image-20211109103506496"></p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109103555304.png" alt="image-20211109103555304"></p>
-<p>然后直接去刚才打开的frpc.ini粘贴即可。</p>
-<p>最后直接打开exe</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109103722486.png" alt="image-20211109103722486"></p>
-<p>运行结果：然后缩小，去平板或者手机或者pc连接电脑</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109103802090.png" alt="image-20211109103802090"></p>
-<h2 id="四、连接电脑"><a href="#四、连接电脑" class="headerlink" title="四、连接电脑"></a>四、连接电脑</h2><p>点击Desktop</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109104240443.png" alt="image-20211109104240443"></p>
-<p>然后add MANUALLY</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109104948381.png" alt="image-20211109104948381"></p>
-<p>然后点击save就行</p>
-<p>最后直接连接</p>
+            <h2 id="一、Git常用命令"><a href="#一、Git常用命令" class="headerlink" title="一、Git常用命令"></a>一、Git常用命令</h2><p><strong>1、常用</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin git@github.com:yeszao/dofiler.git     # 配置远程git版本库</span><br><span class="line">git pull origin master                     # 下载代码及快速合并</span><br><span class="line">git push origin master                     # 上传代码及快速合并</span><br><span class="line">git fetch origin                        # 从远程库获取代码</span><br><span class="line">git branch                           # 显示所有分支</span><br><span class="line">git checkout master                       # 切换到master分支</span><br><span class="line">git checkout -b dev                       # 创建并切换到dev分支</span><br><span class="line">git commit -m &quot;first version&quot;                  # 提交</span><br><span class="line">git status                           # 查看状态</span><br><span class="line">git log                             # 查看提交历史</span><br><span class="line">git config --global core.editor vim               # 设置默认编辑器为vim（git默认用nano）</span><br><span class="line">git config core.ignorecase false                # 设置大小写敏感</span><br><span class="line">git config --global user.name &quot;YOUR NAME&quot;            # 设置用户名</span><br><span class="line">git config --global user.email &quot;YOUR EMAIL ADDRESS&quot;       # 设置邮箱</span><br></pre></td></tr></table></figure>
+
+<p><strong>2、别名alias</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">git config --global alias.br=&quot;branch&quot;         # 创建/查看本地分支</span><br><span class="line">git config --global alias.co=&quot;checkout&quot;        # 切换分支</span><br><span class="line">git config --global alias.cb=&quot;checkout -b&quot;      # 创建并切换到新分支</span><br><span class="line">git config --global alias.cm=&quot;commit -m&quot;       # 提交</span><br><span class="line">git config --global alias.st=&quot;status&quot;         # 查看状态</span><br><span class="line">git config --global alias.pullm=&quot;pull origin master&quot; # 拉取分支</span><br><span class="line">git config --global alias.pushm=&quot;push origin master&quot; # 提交分支</span><br><span class="line">git config --global alias.log=&quot;git log --oneline --graph --decorate --color=always&quot; # 单行、分颜色显示记录</span><br><span class="line">git config --global alias.logg=&quot;git log --graph --all --format=format:&#x27;%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)&#x27; --abbrev-commit --date=relative&quot; # 复杂显示</span><br></pre></td></tr></table></figure>
+
+<p>3.创建版本库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git clone         # 克隆远程版本库</span><br><span class="line">git init            # 初始化本地版本库</span><br></pre></td></tr></table></figure>
+
+<p>4.修改和提交</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">git status           # 查看状态</span><br><span class="line">git diff            # 查看变更内容</span><br><span class="line">git add .            # 跟踪所有改动过的文件</span><br><span class="line">git add          # 跟踪指定的文件</span><br><span class="line">git mv        # 文件改名</span><br><span class="line">git rm          # 删除文件</span><br><span class="line">git rm --cached      # 停止跟踪文件但不删除</span><br><span class="line">git commit -m “commit message” # 提交所有更新过的文件</span><br><span class="line">git commit --amend       # 修改最后一次提交</span><br></pre></td></tr></table></figure>
+
+<p>5.查看历史</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git log             # 查看提交历史</span><br><span class="line">git log -p        # 查看指定文件的提交历史</span><br><span class="line">git blame         # 以列表方式查看指定文件的提交历史</span><br></pre></td></tr></table></figure>
+
+<p>6.撤销</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard HEAD      # 撤消工作目录中所有未提交文件的修改内容</span><br><span class="line">git reset --hard    # 撤销到某个特定版本</span><br><span class="line">git checkout HEAD     # 撤消指定的未提交文件的修改内容</span><br><span class="line">git checkout --      # 同上一个命令</span><br><span class="line">git revert       # 撤消指定的提交分支与标签</span><br></pre></td></tr></table></figure>
+
+<p>7.分支与标签</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">git branch           # 显示所有本地分支</span><br><span class="line">git checkout    # 切换到指定分支或标签</span><br><span class="line">git branch     # 创建新分支</span><br><span class="line">git branch -d      # 删除本地分支</span><br><span class="line">git tag             # 列出所有本地标签</span><br><span class="line">git tag        # 基于最新提交创建标签</span><br><span class="line">git tag -a &quot;v1.0&quot; -m &quot;一些说明&quot; # -a指定标签名称，-m指定标签说明</span><br><span class="line">git tag -d       # 删除标签</span><br><span class="line">git checkout dev        # 合并特定的commit到dev分支上</span><br><span class="line">git cherry-pick 62ecb3</span><br></pre></td></tr></table></figure>
+
+<p>8.合并与衍合</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git merge        # 合并指定分支到当前分支</span><br><span class="line">git merge --abort        # 取消当前合并，重建合并前状态</span><br><span class="line">git merge dev -Xtheirs     # 以合并dev分支到当前分支，有冲突则以dev分支为准</span><br><span class="line">git rebase       # 衍合指定分支到当前分支</span><br></pre></td></tr></table></figure>
+
+<p>9.远程操作</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">git remote -v          # 查看远程版本库信息</span><br><span class="line">git remote show     # 查看指定远程版本库信息</span><br><span class="line">git remote add  # 添加远程版本库</span><br><span class="line">git remote remove    # 删除指定的远程版本库</span><br><span class="line">git fetch        # 从远程库获取代码</span><br><span class="line">git pull    # 下载代码及快速合并</span><br><span class="line">git push    # 上传代码及快速合并</span><br><span class="line">git push : # 删除远程分支或标签</span><br><span class="line">git push --tags         # 上传所有标签</span><br></pre></td></tr></table></figure>
+
+<p>10.打包</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git archive --format=zip --output ../file.zip master  # 将master分支打包成file.zip文件，保存在上一级目录</span><br><span class="line">git archive --format=zip --output ../v1.2.zip v1.2   # 打包v1.2标签的文件，保存在上一级目录v1.2.zip文件中</span><br><span class="line">git archive --format=zip v1.2 &gt; ../v1.2.zip       # 作用同上一条命令</span><br></pre></td></tr></table></figure>
+
+<p>11.全和局部配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">全局配置保存在：$Home/.gitconfig</span><br><span class="line">本地仓库配置保存在：.git/config</span><br></pre></td></tr></table></figure>
+
+<p>12.远程与本地合并</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git init               # 初始化本地代码仓</span><br><span class="line">git add .               # 添加本地代码</span><br><span class="line">git commit -m &quot;add local source&quot;   # 提交本地代码</span><br><span class="line">git pull origin master        # 下载远程代码</span><br><span class="line">git merge master           # 合并master分支</span><br><span class="line">git push -u origin master       # 上传代码</span><br></pre></td></tr></table></figure>
+
+
+
 
         </div>
         
@@ -298,7 +293,7 @@
     <script type="text/javascript">
         $(()=>{
             new QRCode("wechat-qr", {
-                text: "http://ilpvc.github.io/2021/11/08/python/",
+                text: "http://ilpvc.github.io/2021/11/10/Git%E5%91%BD%E4%BB%A4/",
                 width: 150,
                 height: 150,
                 correctLevel : QRCode.CorrectLevel.H
@@ -310,17 +305,10 @@
             const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
             const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
             const twitterBase   = "https://twitter.com/intent/tweet?";
-            const hostUrl       = "http://ilpvc.github.io/2021/11/08/python/";
-            const title         = "「远程控制+Sakurafrp实现非局域网远程控制」";
-            const excerpt       = `一、下载RD Client
-安卓端网页下载或者RDClient
-ios端在App Store搜索RDClient
-
-二、设置PC允许远程连接
-win11：这里打开电脑设置-&gt; 系统-&gt;远程桌面
-
-
-==这里的打开后你能连接...`;
+            const hostUrl       = "http://ilpvc.github.io/2021/11/10/Git%E5%91%BD%E4%BB%A4/";
+            const title         = "「Git命令」";
+            const excerpt       = `一、Git常用命令1、常用
+1234567891011121314git remote add origin git@github.com:yeszao/dofiler.git     # 配置远程git版本库git pull ori...`;
             let _URL;
             switch (dest) {
                 case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
@@ -342,7 +330,7 @@ win11：这里打开电脑设置-&gt; 系统-&gt;远程桌面
                     
                 </div>
                 <div class="pull-date">
-                <span>最后编辑：2021-11-09</span>
+                <span>最后编辑：2021-11-10</span>
                 </div>
             </div>
         </footer>
@@ -351,13 +339,9 @@ win11：这里打开电脑设置-&gt; 系统-&gt;远程桌面
         <nav class="navigation post-navigation clearfix" role="navigation">
             
             <div class="nav-previous clearfix">
-                <a title=" Hello World" href="/2021/11/07/hello-world/">&lt; 上一篇</a>
+                <a title=" Linux命令" href="/2021/11/10/Linux命令/">&lt; 上一篇</a>
             </div>
             
-            
-            <div class="nav-next clearfix">
-                <a title=" Linux命令" href="/2021/11/10/Linux命令/">下一篇 &gt;</a>
-            </div>
             
         </nav>
     
