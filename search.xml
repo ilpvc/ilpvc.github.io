@@ -42,6 +42,9 @@
 
 
 ]]></content>
+      <tags>
+        <tag>git</tag>
+      </tags>
   </entry>
   <entry>
     <title>Linux命令</title>
@@ -126,6 +129,9 @@
 <h3 id="27-shutdown"><a href="#27-shutdown" class="headerlink" title="27. shutdown"></a>27. shutdown</h3><p>shutdown用于关闭计算机，而shutdown -r用于重启计算机。这个我就不试了……</p>
 <p>出自：<a href="https://www.jianshu.com/p/0056d671ea6d">https://www.jianshu.com/p/0056d671ea6d</a></p>
 ]]></content>
+      <tags>
+        <tag>linux</tag>
+      </tags>
   </entry>
   <entry>
     <title>Hello World</title>
@@ -242,5 +248,492 @@
 <p>然后点击save就行</p>
 <p>最后直接连接</p>
 ]]></content>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>win11文件管理器卡顿解决</title>
+    <url>/2021/11/16/win11%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%99%A8%E5%8D%A1%E9%A1%BF%E8%A7%A3%E5%86%B3/</url>
+    <content><![CDATA[<h2 id="win11的资源管理器卡顿"><a href="#win11的资源管理器卡顿" class="headerlink" title="win11的资源管理器卡顿"></a>win11的资源管理器卡顿</h2><p>解决办法：</p>
+<blockquote>
+<p>1.打开注册表 win+r ，输入regedit。复制这个路径进去搜索<code>计算机\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell Extensions</code></p>
+<p>2.在 <code>Shell Extensions</code> 上右键新建==项==，命名为 <code>Blocked</code></p>
+<p>3.右键 <code>Blocked</code> ，新建字符串值，命名为 <code>&#123;e2bf9676-5f8f-435c-97eb-11607a5bedf7&#125;</code></p>
+<p>4.最后重启资源管理器</p>
+<p>==注：若想回到win11，删除Blocked即可==</p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>win11</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Git基础</title>
+    <url>/2021/11/19/git%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<h1 id="git基础"><a href="#git基础" class="headerlink" title="git基础"></a>git基础</h1><p>==在windows安装好git之后，会在右键菜单出现一个git bash here，点击这个就能进入命令行窗口。==</p>
+<h2 id="1-用户信息配置"><a href="#1-用户信息配置" class="headerlink" title="1.用户信息配置"></a>1.用户信息配置</h2><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210418091827.png" alt="image-20210418091827503"></p>
+<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch -a      //查看当前项目的分支</span><br><span class="line">git checkout [branch]   //修改分支</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="文本编辑器"><a href="#文本编辑器" class="headerlink" title="文本编辑器"></a>文本编辑器</h3><p>设置Git默认使用的文本编辑器, 一般可能会是 Vi 或者 Vim。如果你有其他偏好，比如 Emacs 的话，可以重新设置：:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ git config --global core.editor emacs</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看配置信息"><a href="#查看配置信息" class="headerlink" title="查看配置信息"></a>查看配置信息</h3><p>要检查已有的配置信息，可以使用 git config –list 命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ git config --list</span><br><span class="line">http.postbuffer=2M</span><br><span class="line">user.name=runoob</span><br><span class="line">user.email=test@runoob.com</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-创建仓库"><a href="#2-创建仓库" class="headerlink" title="2.创建仓库"></a>2.创建仓库</h2><h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git init</span><br><span class="line">// 使用当前目录作为Git仓库，我们只需使它初始化。</span><br><span class="line">git init newpro</span><br><span class="line">//在当前目录创建一个newpro文件作为仓库</span><br></pre></td></tr></table></figure>
+
+<h2 id="git-clone"><a href="#git-clone" class="headerlink" title="git clone"></a>git clone</h2><p>我们使用 <strong>git clone</strong> 从现有 Git 仓库中拷贝项目（类似 <strong>svn checkout</strong>）。</p>
+<p>克隆仓库的命令格式为：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git clone &lt;repo&gt;</span><br></pre></td></tr></table></figure>
+
+<p>如果我们需要克隆到指定的目录，可以使用以下命令格式：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git clone &lt;repo&gt; &lt;directory&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>git 的设置使用 <strong>git config</strong> 命令。</p>
+<p>显示当前的 git 配置信息：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ git config --list</span><br><span class="line">credential.helper=osxkeychain</span><br><span class="line">core.repositoryformatversion=0</span><br><span class="line">core.filemode=true</span><br><span class="line">core.bare=false</span><br><span class="line">core.logallrefupdates=true</span><br><span class="line">core.ignorecase=true</span><br><span class="line">core.precomposeunicode=true</span><br></pre></td></tr></table></figure>
+
+<p>编辑 git 配置文件:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ git config -e    # 针对当前仓库 </span><br></pre></td></tr></table></figure>
+
+<p>或者：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ git config -e --global   # 针对系统上所有仓库</span><br></pre></td></tr></table></figure>
+
+<p>设置提交代码时的用户信息：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ git config --global user.name &quot;runoob&quot;</span><br><span class="line">$ git config --global user.email test@runoob.com</span><br></pre></td></tr></table></figure>
+
+<p>如果去掉 <strong>–global</strong> 参数只对当前仓库有效。</p>
+<h2 id="3-Git-远程仓库-Github"><a href="#3-Git-远程仓库-Github" class="headerlink" title="3.Git 远程仓库(Github)"></a>3.Git 远程仓库(Github)</h2><h3 id="添加远程库"><a href="#添加远程库" class="headerlink" title="添加远程库"></a>添加远程库</h3><p>要添加一个新的远程仓库，可以指定一个简单的名字，以便将来引用,命令格式如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git remote add [shortname] [url]</span><br></pre></td></tr></table></figure>
+
+<p>本例以 Github 为例作为远程仓库，如果你没有 Github 可以在官网 <a href="https://github.com/%E6%B3%A8%E5%86%8C%E3%80%82">https://github.com/注册。</a></p>
+<p>由于你的本地 Git 仓库和 GitHub 仓库之间的传输是通过SSH加密的，所以我们需要配置验证信息：</p>
+<p>使用以下命令生成 SSH Key：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C &quot;github上注册的邮箱&quot;</span><br></pre></td></tr></table></figure>
+
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C <span class="string">&quot;429240967@qq.com&quot;</span></span><br><span class="line">Generating <span class="keyword">public</span>/<span class="keyword">private</span> rsa key pair.</span><br><span class="line"><span class="function">Enter file in which to save the <span class="title">key</span> <span class="params">(/Users/tianqixin/.ssh/id_rsa)</span>: </span></span><br><span class="line"><span class="function">Enter <span class="title">passphrase</span> <span class="params">(empty <span class="keyword">for</span> no passphrase)</span>:    # 直接回车</span></span><br><span class="line"><span class="function">Enter same passphrase again:                   # 直接回车</span></span><br><span class="line"><span class="function">Your identification has been saved in /Users/tianqixin/.ssh/id_rsa.</span></span><br><span class="line"><span class="function">Your <span class="keyword">public</span> key has been saved in /Users/tianqixin/.ssh/id_rsa.pub.</span></span><br><span class="line"><span class="function">The key fingerprint is:</span></span><br><span class="line"><span class="function">SHA256:MDKVidPTDXIQoJwoqUmI4LBAsg5XByBlrOEzkxrwARI 429240967@qq.com</span></span><br><span class="line"><span class="function">The key&#x27;s randomart image is:</span></span><br><span class="line"><span class="function">+---[RSA 3072]----+</span></span><br><span class="line"><span class="function">|E*+.+</span>=**oo       |</span><br><span class="line">|%Oo+oo=o. .      |</span><br><span class="line">|%**.o.o.         |</span><br><span class="line">|OO.  o o         |</span><br><span class="line">|+o+     S        |</span><br><span class="line">|.                |</span><br><span class="line">|                 |</span><br><span class="line">|                 |</span><br><span class="line">|                 |</span><br><span class="line">+----[SHA256]-----+</span><br></pre></td></tr></table></figure>
+
+<p>然后在上面第7排的所显示的目录下找到id_rsa.pub,用记事本打开，复制里面所有的信息。</p>
+<p>回到 github 上，进入 Account =&gt; Settings（账户配置）。</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210418100925.jpeg" alt="img"></p>
+<p>左边选择 <strong>SSH and GPG keys</strong>，然后点击 <strong>New SSH key</strong> 按钮,title 设置标题，可以随便填，粘贴在你电脑上生成的 key。</p>
+<p><img src="https://www.runoob.com/wp-content/uploads/2015/03/B0589847-A498-4415-8700-252BDE1B20C0.jpg" alt="img"></p>
+<p><img src="https://www.runoob.com/wp-content/uploads/2015/03/106AD534-A38A-47F3-88A3-B7BE3F2FEEF1.jpg" alt="img"></p>
+<p>将复制的key粘贴进去</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210418101218.jpeg" alt="img"></p>
+<p>为了验证是否成功，输入以下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ ssh -T git@github.com</span><br><span class="line">The authenticity of host &#x27;github.com (52.74.223.119)&#x27; can&#x27;t be established.</span><br><span class="line">RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.</span><br><span class="line">Are you sure you want to continue connecting (yes/no/[fingerprint])? yes                   # 输入 yes</span><br><span class="line">Warning: Permanently added &#x27;github.com,52.74.223.119&#x27; (RSA) to the list of known hosts.</span><br><span class="line">Hi tianqixin! You&#x27;ve successfully authenticated, but GitHub does not provide shell access. # 成功信息</span><br></pre></td></tr></table></figure>
+
+<p>之后登录后点击” New repository “ ,就是新建一个项目如下图所示：</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210418101349.jpeg" alt="img"></p>
+<p>之后在在Repository name 填入 runoob-git-test(远程仓库名) ，其他保持默认设置，点击”Create repository”按钮，就成功地创建了一个新的Git仓库：<img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210418101442.jpeg" alt="img"></p>
+<p>创建成功后，显示如下信息：</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210418101453.jpeg" alt="img"></p>
+<p>右键打开git bash here，然后输入以下命令</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ mkdir runoob-git-test                     # 创建测试目录</span><br><span class="line">$ cd runoob-git-test/                       # 进入测试目录</span><br><span class="line">$ echo &quot;# 菜鸟教程 Git 测试&quot; &gt;&gt; README.md     # 创建 README.md 文件并写入内容</span><br><span class="line">$ ls                                        # 查看目录下的文件</span><br><span class="line">README</span><br><span class="line">$ git init                                  # 初始化</span><br><span class="line">$ git add README.md                         # 添加文件</span><br><span class="line">$ git commit -m &quot;添加 README.md 文件&quot;        # 提交并备注信息</span><br><span class="line">[master (root-commit) 0205aab] 添加 README.md 文件</span><br><span class="line"> 1 file changed, 1 insertion(+)</span><br><span class="line"> create mode 100644 README.md</span><br><span class="line"></span><br><span class="line"># 提交到 Github</span><br><span class="line">$ git remote add origin git@github.com:tianqixin/runoob-git-test.git</span><br><span class="line">$ git push -u origin master</span><br></pre></td></tr></table></figure>
+
+<p>这就可以在github上面看到我们刚才上传的的内容</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210418101658.jpeg" alt="img"></p>
+<h2 id="查看当前的远程库"><a href="#查看当前的远程库" class="headerlink" title="查看当前的远程库"></a>查看当前的远程库</h2><p>要查看当前配置有哪些远程仓库，可以用命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git remote</span><br></pre></td></tr></table></figure>
+
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ git remote</span><br><span class="line">origin</span><br><span class="line">$ git remote -v</span><br><span class="line">origin    git@github.com:tianqixin/runoob-git-test.git (fetch)</span><br><span class="line">origin    git@github.com:tianqixin/runoob-git-test.git (push)</span><br></pre></td></tr></table></figure>
+
+<p>执行时加上 -v 参数，你还可以看到每个别名的实际链接地址。</p>
+<hr>
+<h2 id="提取远程仓库"><a href="#提取远程仓库" class="headerlink" title="提取远程仓库"></a>提取远程仓库</h2><p>Git 有两个命令用来提取远程仓库的更新。</p>
+<p>1、从远程仓库下载新分支与数据：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git fetch</span><br></pre></td></tr></table></figure>
+
+<p>该命令执行完后需要执行 git merge 远程分支到你所在的分支。</p>
+<p>2、从远端仓库提取数据并尝试合并到当前分支：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git merge</span><br></pre></td></tr></table></figure>
+
+<p>该命令就是在执行 git fetch 之后紧接着执行 git merge 远程分支到你所在的任意分支。</p>
+<p>假设你配置好了一个远程仓库，并且你想要提取更新的数据，你可以首先执行 <strong>git fetch [alias]</strong> 告诉 Git 去获取它有你没有的数据，然后你可以执行 <strong>git merge [alias]/[branch]</strong> 以将服务器上的任何更新（假设有人这时候推送到服务器了）合并到你的当前分支。</p>
+<p>接下来我们在 Github 上点击” README.md” 并在线修改它:</p>
+<p><img src="https://www.runoob.com/wp-content/uploads/2015/03/C5A6670F-202D-4F2C-8A63-07CEA37BB67A.jpg" alt="img"></p>
+<p>然后我们在本地更新修改。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ git fetch origin</span><br><span class="line">remote: Counting objects: 3, done.</span><br><span class="line">remote: Compressing objects: 100% (2/2), done.</span><br><span class="line">remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0</span><br><span class="line">Unpacking objects: 100% (3/3), done.</span><br><span class="line">From github.com:tianqixin/runoob-git-test</span><br><span class="line">   0205aab..febd8ed  master     -&gt; origin/master</span><br></pre></td></tr></table></figure>
+
+<p>以上信息”0205aab..febd8ed master -&gt; origin/master” 说明 master 分支已被更新，我们可以使用以下命令将更新同步到本地：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ git merge origin/master</span><br><span class="line">Updating 0205aab..febd8ed</span><br><span class="line">Fast-forward</span><br><span class="line"> README.md | 1 +</span><br><span class="line"> 1 file changed, 1 insertion(+)</span><br></pre></td></tr></table></figure>
+
+<p>查看 README.md 文件内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ cat README.md </span><br><span class="line"># 菜鸟教程 Git 测试</span><br><span class="line">## 第一次修改内容</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="推送到远程仓库"><a href="#推送到远程仓库" class="headerlink" title="推送到远程仓库"></a>推送到远程仓库</h2><p>推送你的新分支与数据到某个远端仓库命令:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git push [alias] [branch]</span><br></pre></td></tr></table></figure>
+
+<p>以上命令将你的 [branch] 分支推送成为 [alias] 远程仓库上的 [branch] 分支，实例如下。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ touch runoob-test.txt      # 添加文件</span><br><span class="line">$ git add runoob-test.txt </span><br><span class="line">$ git commit -m &quot;添加到远程&quot;</span><br><span class="line">master 69e702d] 添加到远程</span><br><span class="line"> 1 file changed, 0 insertions(+), 0 deletions(-)</span><br><span class="line"> create mode 100644 runoob-test.txt</span><br><span class="line"></span><br><span class="line">$ git push origin master    # 推送到 Github</span><br></pre></td></tr></table></figure>
+
+<p>重新回到我们的 Github 仓库，可以看到文件已经提交上来了：</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210418101854.jpeg" alt="img"></p>
+<hr>
+<h2 id="删除远程仓库"><a href="#删除远程仓库" class="headerlink" title="删除远程仓库"></a>删除远程仓库</h2><p>删除远程仓库你可以使用命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git remote rm [别名]</span><br></pre></td></tr></table></figure>
+
+<h3 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ git remote -v</span><br><span class="line">origin    git@github.com:tianqixin/runoob-git-test.git (fetch)</span><br><span class="line">origin    git@github.com:tianqixin/runoob-git-test.git (push)</span><br><span class="line"></span><br><span class="line"># 添加仓库 origin2</span><br><span class="line">$ git remote add origin2 git@github.com:tianqixin/runoob-git-test.git</span><br><span class="line"></span><br><span class="line">$ git remote -v</span><br><span class="line">origin    git@github.com:tianqixin/runoob-git-test.git (fetch)</span><br><span class="line">origin    git@github.com:tianqixin/runoob-git-test.git (push)</span><br><span class="line">origin2    git@github.com:tianqixin/runoob-git-test.git (fetch)</span><br><span class="line">origin2    git@github.com:tianqixin/runoob-git-test.git (push)</span><br><span class="line"></span><br><span class="line"># 删除仓库 origin2</span><br><span class="line">$ git remote rm origin2</span><br><span class="line">$ git remote -v</span><br><span class="line">origin    git@github.com:tianqixin/runoob-git-test.git (fetch)</span><br><span class="line">origin    git@github.com:tianqixin/runoob-git-test.git (push)</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>图床搭建</title>
+    <url>/2021/11/19/picgo+%E9%98%BF%E9%87%8C%E4%BA%91oss+typora%E5%9B%BE%E5%BA%8A%E6%90%AD%E5%BB%BA/</url>
+    <content><![CDATA[<h1 id="picgo-阿里云oss-typora图床搭建"><a href="#picgo-阿里云oss-typora图床搭建" class="headerlink" title="picgo+阿里云oss+typora图床搭建"></a>picgo+阿里云oss+typora图床搭建</h1><h2 id="1-购买阿里云的oss对象储存"><a href="#1-购买阿里云的oss对象储存" class="headerlink" title="1.购买阿里云的oss对象储存"></a>1.购买阿里云的oss对象储存</h2><h2 id="2-建立-bucket"><a href="#2-建立-bucket" class="headerlink" title="2.建立 bucket"></a>2.建立 bucket</h2><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210416171724.png" alt="image-20210416171724270"></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210416172033.png" alt="image-20210416172033033"></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210416172125.png" alt="image-20210416172125379"></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210416172219.png" alt="image-20210416172219107"></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210416172312.png" alt="image-20210416172312448"></p>
+<h3 id="然后记下来显示的AccessKey和AccessKey-Serect。分别是用户号和密码"><a href="#然后记下来显示的AccessKey和AccessKey-Serect。分别是用户号和密码" class="headerlink" title="然后记下来显示的AccessKey和AccessKey Serect。分别是用户号和密码"></a>然后记下来显示的AccessKey和AccessKey Serect。分别是用户号和密码</h3><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210416172507.png" alt="image-20210416172507376"></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210416172540.png" alt="image-20210416172540595"></p>
+<p>再到picgo</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210416172627.png" alt="image-20210416172627340"></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210416172754.png" alt="image-20210416172754089"></p>
+<p>然后就可以了。</p>
+]]></content>
+      <tags>
+        <tag>图床</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>staruml破解</title>
+    <url>/2021/11/19/staruml%E7%A0%B4%E8%A7%A3/</url>
+    <content><![CDATA[<h1 id="starUML破解步骤"><a href="#starUML破解步骤" class="headerlink" title="starUML破解步骤"></a>starUML破解步骤</h1><h2 id="1下载starUML"><a href="#1下载starUML" class="headerlink" title="1下载starUML"></a>1下载starUML</h2><p>在官网下载：<a href="http://staruml.io/download">http://staruml.io/download</a></p>
+<h2 id="2安装"><a href="#2安装" class="headerlink" title="2安装"></a>2安装</h2><h2 id="3破解"><a href="#3破解" class="headerlink" title="3破解"></a>3破解</h2><h3 id="3-1安装nodejs，配置环境"><a href="#3-1安装nodejs，配置环境" class="headerlink" title="3.1安装nodejs，配置环境"></a>3.1安装nodejs，配置环境</h3><h3 id="3-2、反编译Star-UML"><a href="#3-2、反编译Star-UML" class="headerlink" title="3.2、反编译Star UML"></a>3.2、反编译Star UML</h3><p>使用管理员打开cmd,依次执行下面的命令</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">npm install -g asar</span><br><span class="line">cd C:\Program Files\StarUML\resources  <span class="comment">//进入到StarUML的默认安装目录下面</span></span><br><span class="line">asar extract app.asar app  <span class="comment">//反编译软件</span></span><br></pre></td></tr></table></figure>
+
+<p>反编译完成后会发现这里有一个app文件夹</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211117141008058.png" alt="image-20211117141008058"></p>
+<p>打开app\src\engine\license-manager.js文件，把原来的注释掉，然后加上一句setStatus(this,true)</p>
+<p><strong>修改前</strong></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211117141247967.png" alt="image-20211117141247967"></p>
+<p><strong>修改后</strong></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211117142645167.png" alt="image-20211117142645167"></p>
+<p><strong>3.3 再把代码编译成软件就可以了</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> C:\Program Files\StarUML\resources  //进入到StarUML的默认安装目录下面</span><br><span class="line">asar pack app app.asar</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>破解</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JQuery</title>
+    <url>/2021/11/19/JQuery/</url>
+    <content><![CDATA[<h1 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h1><h2 id="JQuery介绍"><a href="#JQuery介绍" class="headerlink" title="JQuery介绍"></a>JQuery介绍</h2><p><strong>是什么：</strong>JQuery是辅助JavaScript开发的一个js的类库。“J”就是javascript，‘Query’就是查询的意思</p>
+<p><strong>目前JQuery是最流行的javascript库</strong></p>
+<p><strong>从官网下载的JQuery实际是是一个.js的文本</strong></p>
+<h2 id="JQuery的使用"><a href="#JQuery的使用" class="headerlink" title="JQuery的使用"></a>JQuery的使用</h2><p>实例：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 这里的src就是引用JQuery库，直接从官网将整个js代码复制下来保存就行--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attr">src</span>=<span class="string">&quot;../代码/JQuery.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="handlebars"><span class="xml"> </span></span></span><br><span class="line"><span class="xml"><span class="handlebars"><span class="comment">&lt;!-- $符号就是JQuery中的一个函数，JQuery的基本使用如下--&gt;</span></span></span></span><br><span class="line"><span class="xml"><span class="handlebars"><span class="comment">&lt;!-- 获取的某个标签的属性.click(function()&#123;&#125;)这样的形式--&gt;</span></span></span></span><br><span class="line"><span class="xml"><span class="handlebars">$(function()&#123;</span></span></span><br><span class="line"><span class="xml"><span class="handlebars">    var $but=$(&#x27;#item&#x27;);</span></span></span><br><span class="line"><span class="xml"><span class="handlebars">    $but.click(function()&#123;</span></span></span><br><span class="line"><span class="xml"><span class="handlebars">        alert(&quot;danji&quot;)</span></span></span><br><span class="line"><span class="xml"><span class="handlebars">    &#125;)</span></span></span><br><span class="line"><span class="xml"><span class="handlebars">&#125;)</span></span></span><br><span class="line"><span class="xml"><span class="handlebars"></span></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="JQuery的核心函数"><a href="#JQuery的核心函数" class="headerlink" title="JQuery的核心函数"></a>JQuery的核心函数</h2><p><strong>‘$’符号</strong>：是JQuery的核心函数能够完成JQuery的核心功能，$()就是调用$这个函数</p>
+<p><strong>1、当传入的参数是函数时’$(function)’</strong>:</p>
+<p>表示页面加载完成后，相当于window.onload=function(){}</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attr">src</span>=<span class="string">&quot;../AJAX/代码/JQuery.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> &gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript">    $(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        alert(<span class="string">&#x27;页面加载完毕！！！&#x27;</span>)</span></span><br><span class="line"><span class="javascript">    &#125;)</span></span><br><span class="line"><span class="javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>2、当传入的的参数为【html字符串】时：</strong></p>
+<p>会直接为我们创建这个html标签对象</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attr">src</span>=<span class="string">&quot;../AJAX/代码/JQuery.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> &gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript">    $(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        alert(<span class="string">&#x27;页面加载完毕！！！&#x27;</span>)</span></span><br><span class="line"><span class="javascript">        $(<span class="string">&#x27;&lt;div&gt;&#x27;</span>+</span></span><br><span class="line"><span class="javascript">        <span class="string">&#x27;&lt;span&gt;wenjian1&lt;/span&gt;&#x27;</span>+</span></span><br><span class="line"><span class="javascript">        <span class="string">&#x27;&lt;span&gt;wenjian2&lt;/span&gt;&#x27;</span>+</span></span><br><span class="line"><span class="javascript">        <span class="string">&#x27;&lt;/div&gt;&#x27;</span>).appendTo(<span class="string">&quot;body&quot;</span>)</span></span><br><span class="line"><span class="javascript">    &#125;)    </span></span><br><span class="line"><span class="javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>3、当传入参数为选择器参数时：</strong></p>
+<p><strong>$(“#id”)：</strong>按照id查询标签对象</p>
+<p><strong>$(“标签名”)：</strong>按照标签名查询标签对象</p>
+<p><strong>$(“.class属性值”)：</strong>按照class属性查询标签</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">$(<span class="string">&quot;#sp1&quot;</span>))</span><br><span class="line">$(<span class="string">&quot;.class sp&quot;</span>))</span><br><span class="line">$(<span class="string">&quot;span&quot;</span>).length</span><br></pre></td></tr></table></figure>
+
+<p><strong>4、当传入的参数为DOM’对象时，会自动转为JQuery对象：</strong></p>
+<p>第三点里面的查出来的值全部都转换为了JQuery对象</p>
+<h2 id="JQuery对象的本质"><a href="#JQuery对象的本质" class="headerlink" title="JQuery对象的本质"></a>JQuery对象的本质</h2><p><strong>JQuery对象本质是DOM对象数组+JQuery提供的一系列功能函数</strong></p>
+<h2 id="JQuery对象和DOM对象的区别"><a href="#JQuery对象和DOM对象的区别" class="headerlink" title="JQuery对象和DOM对象的区别"></a>JQuery对象和DOM对象的区别</h2><p><strong>JQuery对象不能使用DOM对象的属性和方法，DOM对象也不能使用JQuery对象的属性和方法</strong></p>
+<p>==但是JQuery和DOM可以互相转换，也就可以实现两种对象的方法都能使用==</p>
+<p>DOM转换为JQuery直接用$()就行，而JQuery转DOM则根据JQuery是数组，取下标就能进行转换。</p>
+<h1 id="JQuery选择器"><a href="#JQuery选择器" class="headerlink" title="JQuery选择器"></a>JQuery选择器</h1><h2 id="基本选择器"><a href="#基本选择器" class="headerlink" title="基本选择器"></a>基本选择器</h2><p><a href="https://presenter.oss-cn-shanghai.aliyuncs.com/jQueryAPI_1.7.1_CN.chm">选择器API文档下载</a></p>
+<p>$(“#id”)</p>
+<p>$(“”)</p>
+<h1 id="JQuery属性操作"><a href="#JQuery属性操作" class="headerlink" title="JQuery属性操作"></a>JQuery属性操作</h1><h2 id="jquery属性操作"><a href="#jquery属性操作" class="headerlink" title="jquery属性操作"></a>jquery属性操作</h2><p><strong>html()</strong>                可以设置和获取起始标签和结束标签的内容，和DOM中的innerHTML()一样</p>
+<p>**text()    **             可以设置和获取起始标签和结束标签的内容，和DOM中的innerTEXT()一样</p>
+<p><strong>val()</strong>                   可以设置和获取表单项的value属性值</p>
+<p><strong>在这里面不传参是获取，传参是设置。</strong></p>
+<p>实例：</p>
+ <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attr">src</span>=<span class="string">&quot;../AJAX/代码/JQuery.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript">    $(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        alert($(<span class="string">&#x27;div&#x27;</span>).html())</span></span><br><span class="line"><span class="javascript">        $(<span class="string">&#x27;div&#x27;</span>).eq(<span class="number">1</span>).html(<span class="string">&#x27;这不是第二个div标签&#x27;</span>)</span></span><br><span class="line"><span class="javascript">        $(<span class="string">&#x27;div&#x27;</span>).first().html(<span class="string">&#x27;这不是第一个div标签&#x27;</span>)</span></span><br><span class="line"><span class="javascript">        $(<span class="string">&quot;button&quot;</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">		$(<span class="string">&quot;#usename&quot;</span>).val(<span class="string">&quot;niupida&quot;</span>)</span></span><br><span class="line"><span class="javascript">&#125;)</span></span><br><span class="line"><span class="javascript">    &#125;)</span></span><br><span class="line"><span class="javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>第一个div标签<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>第二个div标签<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>第三个div标签<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">id</span>=<span class="string">&quot;usename&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">button</span>&gt;</span>提交<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>注：在html()中传进去的参数会将包含的标签进行转换，而在text()中，一切都当文本处理。</strong></p>
+<p><strong>例如：text(“&lt;h1&gt;这是一个标题&lt;/h1&gt;”)，那么会将这个文本直接读取出来，不会识别标签。&lt;h1&gt;这是一个标题&lt;/h1&gt;</strong></p>
+<p>还有一些重要的属性值操作方法</p>
+<p><strong>attr()</strong>                获取某个特定的属性值，在进行改变，一个参数是获取，两个参数是改变，不推荐操控checked，readonly，selected，disabled等等。</p>
+<p><strong>prop()</strong>              同上，但是只推荐操作checked，readonly，selected，disabled等等</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attr">src</span>=<span class="string">&quot;../AJAX/代码/JQuery.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript">    $(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        alert($(<span class="string">&quot;[name=&#x27;dv&#x27;]:first&quot;</span>).attr(<span class="string">&#x27;name&#x27;</span>,<span class="string">&#x27;ddiic&#x27;</span>))</span></span><br><span class="line"><span class="javascript">    &#125;)</span></span><br><span class="line"><span class="javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="JQuery插入"><a href="#JQuery插入" class="headerlink" title="JQuery插入"></a>JQuery插入</h2><h3 id="内部插入"><a href="#内部插入" class="headerlink" title="内部插入"></a>内部插入</h3><p><strong>appendTo()</strong>            a.appendTo(b)            将a插入到b中，且成为最后一个元素</p>
+<p><strong>prependTo()</strong>          a.prependTo(b)           把a插到b所有子元素前面，并成为第一个子元素</p>
+<h3 id="外部插入"><a href="#外部插入" class="headerlink" title="外部插入"></a>外部插入</h3><p><strong>insertAfter()</strong>             a.insertAfter(b)         得到ba         </p>
+<p><strong>bainsertBefore()</strong>     a.insertBefore(b)      得到ab</p>
+<h3 id="替换"><a href="#替换" class="headerlink" title="替换"></a>替换</h3><p><strong>replaceWith()</strong>             a.replaceWith(b)          用 b 替换掉 a</p>
+<p><strong>areplaceAll()</strong>               a.replaceAll(b)              用 a 替换掉所有 b</p>
+<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><p><strong>remove()</strong>                     a.remove()                 删除 a 标签</p>
+<p><strong>empty()</strong>                       a.empty()                   清空 a 标签里的</p>
+<h2 id="CSS-样式操作"><a href="#CSS-样式操作" class="headerlink" title="CSS 样式操作"></a>CSS 样式操作</h2><p><strong>addClass()</strong>                    添加样式</p>
+<p><strong>removeClass()</strong>            删除样式</p>
+<p><strong>toggleClass()</strong>               有就删除，没有就添加样式。</p>
+<p><strong>offset()</strong>                         获取和设置元素的坐标。 </p>
+<p>例子：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">    <span class="selector-tag">div</span><span class="selector-class">.bagaq</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">background-color</span>: aqua;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-tag">div</span><span class="selector-class">.bagbr</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">background-color</span>: brown;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-tag">div</span><span class="selector-class">.sty</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">background-color</span>: chartreuse;</span></span><br><span class="line"><span class="css">        <span class="attribute">font-size</span>: large;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attr">src</span>=<span class="string">&quot;../AJAX/代码/JQuery.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript">    $(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        $(<span class="string">&#x27;div:first&#x27;</span>).addClass(<span class="string">&#x27;bagaq&#x27;</span>)</span></span><br><span class="line"><span class="javascript">        $(<span class="string">&#x27;div:eq(1)&#x27;</span>).removeClass()</span></span><br><span class="line"><span class="javascript">        $(<span class="string">&#x27;div:last&#x27;</span>).toggleClass(<span class="string">&#x27;sty&#x27;</span>)</span></span><br><span class="line"><span class="javascript">        $(<span class="string">&#x27;div:eq(1)&#x27;</span>).offset(&#123;</span></span><br><span class="line"><span class="javascript">            <span class="attr">top</span>:<span class="number">100</span>,</span></span><br><span class="line"><span class="javascript">            <span class="attr">left</span>:<span class="number">100</span></span></span><br><span class="line"><span class="javascript">        &#125;</span></span><br><span class="line"><span class="javascript">        )</span></span><br><span class="line"><span class="javascript">    &#125;)</span></span><br><span class="line"><span class="javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">table</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">div</span>&gt;</span>厉害啊<span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;bagbr&quot;</span>&gt;</span>不厉害<span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">div</span>&gt;</span>就这嘛<span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="jQuery-动画"><a href="#jQuery-动画" class="headerlink" title="jQuery 动画"></a>jQuery 动画</h2><h3 id="基本动画"><a href="#基本动画" class="headerlink" title="基本动画"></a>基本动画</h3><p><strong>show()</strong>                  将隐藏的元素显示</p>
+<p><strong>hide()</strong>                    将可见的元素隐藏。</p>
+<p><strong>toggle()</strong>                可见就隐藏，不可见就显示。</p>
+<p><strong>以上动画方法都可以添加参数。</strong></p>
+<p>​                <strong>1、第一个参数是动画 执行的时长，以毫秒为单位</strong></p>
+<p>​                <strong>2、第二个参数是动画的回调函数 (动画完成后自动调用的函数)</strong></p>
+<h3 id="淡入淡出动画"><a href="#淡入淡出动画" class="headerlink" title="淡入淡出动画"></a>淡入淡出动画</h3><p><strong>fadeIn()</strong>                 淡入（慢慢可见）</p>
+<p><strong>fadeOut()</strong>             淡出（慢慢消失）</p>
+<p><strong>fadeTo()</strong>               在指定时长内慢慢的将透明度修改到指定的值。0 透明，1 完成可见，0.5 半透明</p>
+<p><strong>fadeToggle()</strong>       淡入/淡出 </p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript">	<span class="comment">/* 	</span></span></span><br><span class="line"><span class="comment"><span class="javascript">		基本</span></span></span><br><span class="line"><span class="comment"><span class="javascript">		show([speed,[easing],[fn]]) </span></span></span><br><span class="line"><span class="comment"><span class="javascript">		hide([speed,[easing],[fn]]) </span></span></span><br><span class="line"><span class="comment"><span class="javascript">		toggle([speed],[easing],[fn]) </span></span></span><br><span class="line"><span class="comment"><span class="javascript">		滑动</span></span></span><br><span class="line"><span class="comment"><span class="javascript">		slideDown([spe],[eas],[fn]) </span></span></span><br><span class="line"><span class="comment"><span class="javascript">		slideUp([speed,[easing],[fn]]) </span></span></span><br><span class="line"><span class="comment"><span class="javascript">		slideToggle([speed],[easing],[fn]) </span></span></span><br><span class="line"><span class="comment"><span class="javascript">		淡入淡出</span></span></span><br><span class="line"><span class="comment"><span class="javascript">		fadeIn([speed],[eas],[fn]) </span></span></span><br><span class="line"><span class="comment"><span class="javascript">		fadeOut([speed],[eas],[fn]) </span></span></span><br><span class="line"><span class="comment"><span class="javascript">		fadeTo([[spe],opa,[eas],[fn]]) </span></span></span><br><span class="line"><span class="comment"><span class="javascript">		fadeToggle([speed,[eas],[fn]])</span></span></span><br><span class="line"><span class="comment"><span class="javascript">		*/</span></span></span><br><span class="line"><span class="javascript">		$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">			<span class="comment">//显示   show()</span></span></span><br><span class="line"><span class="javascript">			$(<span class="string">&quot;#btn1&quot;</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">				$(<span class="string">&quot;#div1&quot;</span>).show(<span class="number">2000</span>,<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">					alert(<span class="string">&quot;show动画完成 &quot;</span>)</span></span><br><span class="line"><span class="javascript">				&#125;);</span></span><br><span class="line"><span class="javascript">			&#125;);		</span></span><br><span class="line"><span class="javascript">			<span class="comment">//隐藏  hide()</span></span></span><br><span class="line"><span class="javascript">			$(<span class="string">&quot;#btn2&quot;</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">				$(<span class="string">&quot;#div1&quot;</span>).hide(<span class="number">1000</span>,<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">					alert(<span class="string">&quot;hide动画 执行完成 &quot;</span>)</span></span><br><span class="line"><span class="javascript">				&#125;);</span></span><br><span class="line"><span class="javascript">			&#125;);	</span></span><br><span class="line"><span class="javascript">			<span class="comment">//切换   toggle()</span></span></span><br><span class="line"><span class="javascript">			$(<span class="string">&quot;#btn3&quot;</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">				$(<span class="string">&quot;#div1&quot;</span>).toggle(<span class="number">1000</span>,<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">					alert(<span class="string">&quot;toggle动画 完成 &quot;</span>)</span></span><br><span class="line"><span class="javascript">				&#125;);</span></span><br><span class="line"><span class="javascript">			&#125;);</span></span><br><span class="line"><span class="javascript"></span></span><br><span class="line"><span class="javascript">			<span class="comment">// var abc = function()&#123;</span></span></span><br><span class="line"><span class="javascript">			<span class="comment">// 	$(&quot;#div1&quot;).toggle(1000,abc);</span></span></span><br><span class="line"><span class="javascript">			<span class="comment">// &#125;</span></span></span><br><span class="line"><span class="javascript">			<span class="comment">// abc();</span></span></span><br><span class="line"><span class="javascript"></span></span><br><span class="line"><span class="javascript">			<span class="comment">//淡入   fadeIn()</span></span></span><br><span class="line"><span class="javascript">			$(<span class="string">&quot;#btn4&quot;</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">				$(<span class="string">&quot;#div1&quot;</span>).fadeIn(<span class="number">2000</span>,<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">					alert(<span class="string">&quot;fadeIn完成 &quot;</span>)</span></span><br><span class="line"><span class="javascript">				&#125;);</span></span><br><span class="line"><span class="javascript">			&#125;);	</span></span><br><span class="line"><span class="javascript">			<span class="comment">//淡出  fadeOut()</span></span></span><br><span class="line"><span class="javascript">			$(<span class="string">&quot;#btn5&quot;</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">				$(<span class="string">&quot;#div1&quot;</span>).fadeOut(<span class="number">2000</span>,<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">					alert(<span class="string">&quot;fadeOut完成 &quot;</span>)</span></span><br><span class="line"><span class="javascript">				&#125;);</span></span><br><span class="line"><span class="javascript">			&#125;);	</span></span><br><span class="line"><span class="javascript">			</span></span><br><span class="line"><span class="javascript">			<span class="comment">//淡化到  fadeTo()</span></span></span><br><span class="line"><span class="javascript">			$(<span class="string">&quot;#btn6&quot;</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">				$(<span class="string">&quot;#div1&quot;</span>).fadeTo(<span class="number">2000</span>,<span class="number">0.5</span>,<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">					alert(<span class="string">&#x27;fadeTo完成 &#x27;</span>)</span></span><br><span class="line"><span class="javascript">				&#125;);</span></span><br><span class="line"><span class="javascript">			&#125;);	</span></span><br><span class="line"><span class="javascript">			<span class="comment">//淡化切换  fadeToggle()</span></span></span><br><span class="line"><span class="javascript">			$(<span class="string">&quot;#btn7&quot;</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">				$(<span class="string">&quot;#div1&quot;</span>).fadeToggle(<span class="number">1000</span>,<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">					alert(<span class="string">&quot;fadeToggle完成 &quot;</span>)</span></span><br><span class="line"><span class="javascript">				&#125;);</span></span><br><span class="line"><span class="javascript">			&#125;);	</span></span><br><span class="line"><span class="javascript">		&#125;)</span></span><br><span class="line"><span class="javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">	</span><br><span class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">table</span> <span class="attr">style</span>=<span class="string">&quot;float: left;&quot;</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;btn1&quot;</span>&gt;</span>显示show()<span class="tag">&lt;/<span class="name">button</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;btn2&quot;</span>&gt;</span>隐藏hide()<span class="tag">&lt;/<span class="name">button</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;btn3&quot;</span>&gt;</span>显示/隐藏切换 toggle()<span class="tag">&lt;/<span class="name">button</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;btn4&quot;</span>&gt;</span>淡入fadeIn()<span class="tag">&lt;/<span class="name">button</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;btn5&quot;</span>&gt;</span>淡出fadeOut()<span class="tag">&lt;/<span class="name">button</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;btn6&quot;</span>&gt;</span>淡化到fadeTo()<span class="tag">&lt;/<span class="name">button</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;btn7&quot;</span>&gt;</span>淡化切换fadeToggle()<span class="tag">&lt;/<span class="name">button</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line">		</span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;div1&quot;</span> <span class="attr">style</span>=<span class="string">&quot;float:left;border: 1px solid;background-color: blue;width: 300px;height: 200px;&quot;</span>&gt;</span></span><br><span class="line">			jquery动画定义了很多种动画效果，可以很方便的使用这些动画效果</span><br><span class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="JQuery-事件"><a href="#JQuery-事件" class="headerlink" title="JQuery 事件"></a>JQuery 事件</h2><h3 id="基本"><a href="#基本" class="headerlink" title="基本"></a>基本</h3><p>**$( function(){} )    和    window.onload = function(){}    的区别？    **</p>
+<p><strong>他们分别是在什么时候触发？</strong></p>
+<p>1、jQuery 的页面加载完成之后是浏览器的内核解析完页面的标签创建好 DOM 对象之后就会马上执行。</p>
+<p>2、原生 js 的页面加载完成之后，除了要等浏览器内核解析完标签创建好 DOM 对象，还要等标签显示时需要的内容加载完成。</p>
+<p><strong>他们触发的顺序？</strong></p>
+<p>1、jQuery 页面加载完成之后先执行</p>
+<p>2、原生 js 的页面加载完成之后</p>
+<p><strong>他们执行的次数？</strong></p>
+<p>1、原生 js 的页面加载完成之后，只会执行最后一次的赋值函数。</p>
+<p>2、jQuery 的页面加载完成之后是全部把注册的 function 函数，依次顺序全部执行。</p>
+<p><strong>jQuery 中其他的事件处理方法：</strong></p>
+<blockquote>
+<p><strong>click()</strong>                          它可以绑定单击事件，以及触发单击事件</p>
+<p><strong>mouseover()</strong>              鼠标移入事件</p>
+<p>**mouseout()  **              鼠标移出事件</p>
+<p><strong>bind()</strong>                           可以给元素一次性绑定一个或多个事件。</p>
+<p>**one() **                           使用上跟 bind 一样。但是 one 方法绑定的事件只会响应一次</p>
+<p><strong>unbind()</strong>                      跟 bind 方法相反的操作，解除事件的绑定</p>
+<p><strong>live()</strong>                             也是用来绑定事件。它可以用来绑定选择器匹配的所有元素的事件。哪怕这个元素是后面动态创建出来的也</p>
+</blockquote>
+<h3 id="事件的冒泡"><a href="#事件的冒泡" class="headerlink" title="事件的冒泡"></a>事件的冒泡</h3><p><strong>什么是事件的冒泡？</strong></p>
+<p>​            事件的冒泡是指，父子元素同时监听同一个事件。当触发子元素的事件的时候，同一个事件也被传递到了父元素的事件里去响应。</p>
+<p><strong>那么如何阻止事件冒泡呢？</strong></p>
+<p>​            ==在子元素事件函数体内，return false; 可以阻止事件的冒泡传==</p>
+]]></content>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>centos命令</title>
+    <url>/2021/11/19/centos%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<h1 id="centos"><a href="#centos" class="headerlink" title="centos"></a>centos</h1><h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>Centos升级到7之后，内置的防火墙已经从iptables变成了firewalld。所以，端口的开启还是要从两种情况来说明的，即iptables和firewalld。更多关于CentOs防火墙的最新内容，请参考Redhat官网[<a href="https://access.redhat.com/documentation/zh-CN/Red_Hat_Enterprise_Linux/7/html/Security_Guide/sec-Using_Firewalls.html">4.5 使用防火墙</a>]。</p>
+<h3 id="一、iptables-centos-6及以前"><a href="#一、iptables-centos-6及以前" class="headerlink" title="一、iptables(centos 6及以前)"></a>一、iptables(centos 6及以前)</h3><p>1.打开/关闭/重启防火墙</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">开启防火墙(重启后永久生效)：chkconfig iptables on</span><br><span class="line"></span><br><span class="line">关闭防火墙(重启后永久生效)：chkconfig iptables off</span><br><span class="line"></span><br><span class="line">开启防火墙(即时生效，重启后失效)：service iptables start</span><br><span class="line"></span><br><span class="line">关闭防火墙(即时生效，重启后失效)：service iptables stop</span><br><span class="line"></span><br><span class="line">重启防火墙:service iptables restartd</span><br></pre></td></tr></table></figure>
+
+<p>2.查看打开的端口</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/etc/init.d/iptables status</span><br></pre></td></tr></table></figure>
+
+<p>3.打开某个端口(以8080为例)</p>
+<p>（1）开启端口</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">iptables -A INPUT -p tcp --dport 8080 -j ACCEPT </span><br></pre></td></tr></table></figure>
+
+<p>（2）保存并重启防火墙</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/etc/rc.d/init.d/iptables save</span><br><span class="line">/etc/init.d/iptables restart</span><br></pre></td></tr></table></figure>
+
+<p>4.打开49152~65534之间的端口</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">iptables -A INPUT -p tcp --dport 49152:65534 -j ACCEPT  </span><br></pre></td></tr></table></figure>
+
+<p>同样，这里需要对设置进行保存，并重启防火墙。</p>
+<p>5.其他打开方式</p>
+<p>我们还可以通过修改/etc/sysconfig/iptables文件的方式开启端口，如下</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vi /etc/sysconfig/iptables</span><br></pre></td></tr></table></figure>
+
+<p>然后在文件中增加一行</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-A RH-Firewall-1-INPUT -m state –state NEW -m tcp -p tcp –dport 8080 -j ACCEPT</span><br></pre></td></tr></table></figure>
+
+<p>参数说明:</p>
+<ul>
+<li>–A 参数就看成是添加一条规则</li>
+<li>–p 指定是什么协议，我们常用的tcp 协议，当然也有udp，例如53端口的DNS</li>
+<li>–dport 就是目标端口，当数据从外部进入服务器为目标端口</li>
+<li>–sport 数据从服务器出去，则为数据源端口使用</li>
+<li>–j 就是指定是 ACCEPT -接收 或者 DROP 不接收</li>
+</ul>
+<h3 id="二、firewalld-centos7"><a href="#二、firewalld-centos7" class="headerlink" title="二、firewalld(centos7)"></a>二、firewalld(centos7)</h3><p>Centos7默认安装了firewalld，如果没有安装的话，可以使用 <code>yum install firewalld firewalld-config</code>进行安装。</p>
+<p>1.启动防火墙</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">systemctl start firewalld </span><br></pre></td></tr></table></figure>
+
+<p>2.禁用防火墙</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">systemctl stop firewalld</span><br></pre></td></tr></table></figure>
+
+<p>3.设置开机启动</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">systemctl enable firewalld</span><br></pre></td></tr></table></figure>
+
+<p>4.停止并禁用开机启动</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sytemctl disable firewalld</span><br></pre></td></tr></table></figure>
+
+<p>5.重启防火墙</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+
+<p>6.查看状态</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">systemctl status firewalld或者 firewall-cmd --state</span><br></pre></td></tr></table></figure>
+
+<p>7.查看版本</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --version</span><br></pre></td></tr></table></figure>
+
+<p>8.查看帮助</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --help</span><br></pre></td></tr></table></figure>
+
+<p>9.查看区域信息</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --get-active-zones</span><br></pre></td></tr></table></figure>
+
+<p>10.查看指定接口所属区域信息</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --get-zone-of-interface=eth0</span><br></pre></td></tr></table></figure>
+
+<p>11.拒绝所有包</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --panic-on</span><br></pre></td></tr></table></figure>
+
+<p>12.取消拒绝状态</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --panic-off</span><br></pre></td></tr></table></figure>
+
+<p>13.查看是否拒绝</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --query-panic</span><br></pre></td></tr></table></figure>
+
+<p>14.将接口添加到区域(默认接口都在public)</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-interface=eth0(永久生效再加上 --permanent 然后reload防火墙)</span><br></pre></td></tr></table></figure>
+
+<p>15.设置默认接口区域</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --set-default-zone=public(立即生效，无需重启)</span><br></pre></td></tr></table></figure>
+
+<p>16.更新防火墙规则</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --reload或firewall-cmd --complete-reload(两者的区别就是第一个无需断开连接，就是firewalld特性之一动态</span><br><span class="line">添加规则，第二个需要断开连接，类似重启服务)</span><br></pre></td></tr></table></figure>
+
+<p>17.查看指定区域所有打开的端口</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --zone=public --list-ports</span><br></pre></td></tr></table></figure>
+
+<p>18.在指定区域打开(关闭)端口（记得重启防火墙）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-port=80/tcp(永久生效再加上 --permanent)</span><br><span class="line">firewall-cmd --zone=public --remove-port=80/tcp</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>说明：<br>–zone 作用域<br>–add-port=8080/tcp 添加端口，格式为：端口/通讯协议<br>–permanent #永久生效，没有此参数重启后失效</p>
+</blockquote>
+<h2 id="服务"><a href="#服务" class="headerlink" title="服务"></a>服务</h2><h3 id="CentOS6"><a href="#CentOS6" class="headerlink" title="CentOS6"></a>CentOS6</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">chkconfig / chkconfig --list显示开机启动服务列表</span><br><span class="line"></span><br><span class="line">chkconfig --level 3 服务名 on/off</span><br><span class="line"></span><br><span class="line">chkconfig 服务名 on/off</span><br><span class="line"></span><br><span class="line">chkconfig --del 服务名 删除（关闭）服务</span><br><span class="line"></span><br><span class="line">chkconfig --add 服务名 添加（开启）服务</span><br><span class="line"></span><br><span class="line">/var/<span class="built_in">log</span>/messages核心系统日志文件</span><br><span class="line"></span><br><span class="line">etc/logrotate.conf</span><br><span class="line"></span><br><span class="line">messages由syslogd这个守护进程产生的，如果停掉这个服务则系统不会产生/var/<span class="built_in">log</span>/messages</span><br><span class="line"></span><br><span class="line">/var/<span class="built_in">log</span>/wtmp 查看用户登录历史 last</span><br><span class="line"></span><br><span class="line">lastlog 所有的用户登陆信息</span><br><span class="line"></span><br><span class="line">/var/<span class="built_in">log</span>/btmp lastb 查看无效登录历史</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/var/<span class="built_in">log</span>/maillog</span><br><span class="line"></span><br><span class="line">/var/<span class="built_in">log</span>/secure</span><br><span class="line"></span><br><span class="line">dmesg</span><br><span class="line"></span><br><span class="line">/var/<span class="built_in">log</span>/dmesg 系统启动产生的硬件信息</span><br><span class="line"></span><br><span class="line">screen</span><br><span class="line"></span><br><span class="line">ctrl a d 退出screen界面</span><br><span class="line"></span><br><span class="line">screen -r 返回screen界面</span><br><span class="line"></span><br><span class="line">screen -ls 查看screen 列表</span><br><span class="line"></span><br><span class="line">screen -r screenID 返回选择的screen界面</span><br></pre></td></tr></table></figure>
+
+<h3 id="centos7"><a href="#centos7" class="headerlink" title="centos7+"></a>centos7+</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">2、如何启动/关闭、启用/禁用服务？</span><br><span class="line"></span><br><span class="line">启动一个服务：systemctl start postfix.service</span><br><span class="line"></span><br><span class="line">关闭一个服务：systemctl stop postfix.service</span><br><span class="line"></span><br><span class="line">重启一个服务：systemctl restart postfix.service</span><br><span class="line"></span><br><span class="line">显示一个服务的状态：systemctl status postfix.service</span><br><span class="line"></span><br><span class="line">在开机时启用一个服务：systemctl <span class="built_in">enable</span> postfix.service</span><br><span class="line"></span><br><span class="line">在开机时禁用一个服务：systemctl <span class="built_in">disable</span> postfix.service</span><br><span class="line"></span><br><span class="line">查看服务是否开机启动：systemctl is-enabled postfix.service;<span class="built_in">echo</span> $?</span><br><span class="line"></span><br><span class="line">查看已启动的服务列表：systemctl list-unit-files|grep enabled</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看服务启动日志</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">journalctl -u docker.service</span><br></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>linux基础</title>
+    <url>/2021/11/19/linux%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<h1 id="Linux基础"><a href="#Linux基础" class="headerlink" title="Linux基础"></a>Linux基础</h1><h2 id="Linux系统目录结构"><a href="#Linux系统目录结构" class="headerlink" title="Linux系统目录结构"></a>Linux系统目录结构</h2><p>登录系统后，在当前命令窗口下输入命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ls / </span><br></pre></td></tr></table></figure>
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210422192703.png" alt="img"></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210422192721.jpeg" alt="img"></p>
+<p>以下是对这些目录的解释：</p>
+<ul>
+<li><p><strong>/bin</strong>：<br>bin 是 Binaries (二进制文件) 的缩写, 这个目录存放着最经常使用的命令。</p>
+</li>
+<li><p><strong>/boot：</strong><br>这里存放的是启动 Linux 时使用的一些核心文件，包括一些连接文件以及镜像文件。</p>
+</li>
+<li><p><strong>/dev ：</strong><br>dev 是 Device(设备) 的缩写, 该目录下存放的是 Linux 的外部设备，在 Linux 中访问设备的方式和访问文件的方式是相同的。</p>
+</li>
+<li><p><strong>/etc：</strong><br>etc 是 Etcetera(等等) 的缩写,这个目录用来存放所有的系统管理所需要的配置文件和子目录。</p>
+</li>
+<li><p><strong>/home</strong>：<br>用户的主目录，在 Linux 中，每个用户都有一个自己的目录，一般该目录名是以用户的账号命名的，如上图中的 alice、bob 和 eve。</p>
+</li>
+<li><p><strong>/lib</strong>：<br>lib 是 Library(库) 的缩写这个目录里存放着系统最基本的动态连接共享库，其作用类似于 Windows 里的 DLL 文件。几乎所有的应用程序都需要用到这些共享库。</p>
+</li>
+<li><p><strong>/lost+found</strong>：<br>这个目录一般情况下是空的，当系统非法关机后，这里就存放了一些文件。</p>
+</li>
+<li><p><strong>/media</strong>：<br>linux 系统会自动识别一些设备，例如U盘、光驱等等，当识别后，Linux 会把识别的设备挂载到这个目录下。</p>
+</li>
+<li><p><strong>/mnt</strong>：<br>系统提供该目录是为了让用户临时挂载别的文件系统的，我们可以将光驱挂载在 /mnt/ 上，然后进入该目录就可以查看光驱里的内容了。</p>
+</li>
+<li><p><strong>/opt</strong>：<br>opt 是 optional(可选) 的缩写，这是给主机额外安装软件所摆放的目录。比如你安装一个ORACLE数据库则就可以放到这个目录下。默认是空的。</p>
+</li>
+<li><p><strong>/proc</strong>：<br>proc 是 Processes(进程) 的缩写，/proc 是一种伪文件系统（也即虚拟文件系统），存储的是当前内核运行状态的一系列特殊文件，这个目录是一个虚拟的目录，它是系统内存的映射，我们可以通过直接访问这个目录来获取系统信息。<br>这个目录的内容不在硬盘上而是在内存里，我们也可以直接修改里面的某些文件，比如可以通过下面的命令来屏蔽主机的ping命令，使别人无法ping你的机器：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">echo 1 &gt; /proc/sys/net/ipv4/icmp_echo_ignore_all</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>/root</strong>：<br>该目录为系统管理员，也称作超级权限者的用户主目录。</p>
+</li>
+<li><p><strong>/sbin</strong>：<br>s 就是 Super User 的意思，是 Superuser Binaries (超级用户的二进制文件) 的缩写，这里存放的是系统管理员使用的系统管理程序。</p>
+</li>
+<li><p><strong>/selinux</strong>：<br>这个目录是 Redhat/CentOS 所特有的目录，Selinux 是一个安全机制，类似于 windows 的防火墙，但是这套机制比较复杂，这个目录就是存放selinux相关的文件的。</p>
+</li>
+<li><p><strong>/srv</strong>：<br>该目录存放一些服务启动之后需要提取的数据。</p>
+</li>
+<li><p><strong>/sys</strong>：</p>
+<p>这是 Linux2.6 内核的一个很大的变化。该目录下安装了 2.6 内核中新出现的一个文件系统 sysfs 。</p>
+<p>sysfs 文件系统集成了下面3种文件系统的信息：针对进程信息的 proc 文件系统、针对设备的 devfs 文件系统以及针对伪终端的 devpts 文件系统。</p>
+<p>该文件系统是内核设备树的一个直观反映。</p>
+<p>当一个内核对象被创建的时候，对应的文件和目录也在内核对象子系统中被创建。</p>
+</li>
+<li><p><strong>/tmp</strong>：<br>tmp 是 temporary(临时) 的缩写这个目录是用来存放一些临时文件的。</p>
+</li>
+<li><p><strong>/usr</strong>：<br>usr 是 unix shared resources(共享资源) 的缩写，这是一个非常重要的目录，用户的很多应用程序和文件都放在这个目录下，类似于 windows 下的 program files 目录。</p>
+</li>
+<li><p><strong>/usr/bin：</strong><br>系统用户使用的应用程序。</p>
+</li>
+<li><p><strong>/usr/sbin：</strong><br>超级用户使用的比较高级的管理程序和系统守护程序。</p>
+</li>
+<li><p><strong>/usr/src：</strong><br>内核源代码默认的放置目录。</p>
+</li>
+<li><p><strong>/var</strong>：<br>var 是 variable(变量) 的缩写，这个目录中存放着在不断扩充着的东西，我们习惯将那些经常被修改的目录放在这个目录下。包括各种日志文件。</p>
+</li>
+<li><p><strong>/run</strong>：<br>是一个临时文件系统，存储系统启动以来的信息。当系统重启时，这个目录下的文件应该被删掉或清除。如果你的系统上有 /var/run 目录，应该让它指向 run。</p>
+</li>
+</ul>
+<p>在 Linux 系统中，有几个目录是比较重要的，平时需要注意不要误删除或者随意更改内部文件。</p>
+<p><strong>/etc</strong>： 上边也提到了，这个是系统中的配置文件，如果你更改了该目录下的某个文件可能会导致系统不能启动。</p>
+<p><strong>/bin, /sbin, /usr/bin, /usr/sbin</strong>: 这是系统预设的执行文件的放置目录，比如 ls 就是在 /bin/ls 目录下的。</p>
+<p>值得提出的是，/bin, /usr/bin 是给系统用户使用的指令（除root外的通用户），而/sbin, /usr/sbin 则是给 root 使用的指令。</p>
+<p><strong>/var</strong>： 这是一个非常重要的目录，系统上跑了很多程序，那么每个程序都会有相应的日志产生，而这些日志就被记录到这个目录下，具体在 /var/log 目录下，另外 mail 的预设放置也是在这里。</p>
+<h2 id="Linux-文件与目录管理"><a href="#Linux-文件与目录管理" class="headerlink" title="Linux 文件与目录管理"></a>Linux 文件与目录管理</h2><p>我们知道Linux的目录结构为树状结构，最顶级的目录为根目录 /。</p>
+<p>其他目录通过挂载可以将它们添加到树中，通过解除挂载可以移除它们。</p>
+<p>在开始本教程前我们需要先知道什么是绝对路径与相对路径。</p>
+<ul>
+<li><strong>绝对路径：</strong><br>路径的写法，由根目录 <strong>/</strong> 写起，例如： /usr/share/doc 这个目录。</li>
+<li><strong>相对路径：</strong><br>路径的写法，不是由 <strong>/</strong> 写起，例如由 /usr/share/doc 要到 /usr/share/man 底下时，可以写成： <strong>cd ../man</strong> 这就是相对路径的写法。</li>
+</ul>
+<hr>
+<h2 id="处理目录的常用命令"><a href="#处理目录的常用命令" class="headerlink" title="处理目录的常用命令"></a>处理目录的常用命令</h2><p>接下来我们就来看几个常见的处理目录的命令吧：</p>
+<ul>
+<li>ls（英文全拼：list files）: 列出目录及文件名</li>
+<li>cd（英文全拼：change directory）：切换目录</li>
+<li>pwd（英文全拼：print work directory）：显示目前的目录</li>
+<li>mkdir（英文全拼：make directory）：创建一个新的目录</li>
+<li>rmdir（英文全拼：remove directory）：删除一个空的目录</li>
+<li>cp（英文全拼：copy file）: 复制文件或目录</li>
+<li>rm（英文全拼：remove）: 删除文件或目录</li>
+<li>mv（英文全拼：move file）: 移动文件与目录，或修改文件与目录的名称</li>
+</ul>
+<p>你可以使用 <em>man [命令]</em> 来查看各个命令的使用文档，如 ：man cp。</p>
+<p>注：详细用法在<a href="https://www.runoob.com/linux/linux-file-content-manage.html">这里</a></p>
+]]></content>
+      <tags>
+        <tag>linux</tag>
+      </tags>
   </entry>
 </search>

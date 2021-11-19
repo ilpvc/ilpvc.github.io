@@ -4,7 +4,7 @@
   <!-- 元数据 -->
   <meta charset="utf-8">
   <link rel="icon" href="/images/logo.png">
-  <title>远程控制+Sakurafrp实现非局域网远程控制 | ilpvc</title>
+  <title>ilpvc</title>
   <meta name="author" content="ilpvc" />
   <meta http-equiv="Cache-Control" content="no-transform" />
   <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -13,20 +13,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <meta name="format-detection" content="telphone=no, email=no" />
   
-    <meta name="keywords" content="python" />
+    <meta name="keywords" content="" />
   
-  <meta name="description" content="一、下载RD Client 安卓端网页下载或者RDClient ios端在App Store搜索RDClient  二、设置PC允许远程连接 win11：这里打开电脑设置-&gt; 系统-&gt;远程桌面   &#x3D;&#x3D;这里的打开后你能连接你的用户就是你电脑开机时的用户，例如administrator，win10也是一样的&#x3D;&#x3D;  win10：   进入控制面板-&gt;系统和安全-&gt;系统-&gt;">
-<meta property="og:type" content="article">
-<meta property="og:title" content="远程控制+Sakurafrp实现非局域网远程控制">
-<meta property="og:url" content="http://ilpvc.github.io/2021/11/08/python/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="ilpvc">
+<meta property="og:url" content="http://ilpvc.github.io/tags/%E5%9B%BE%E5%BA%8A/index.html">
 <meta property="og:site_name" content="ilpvc">
-<meta property="og:description" content="一、下载RD Client 安卓端网页下载或者RDClient ios端在App Store搜索RDClient  二、设置PC允许远程连接 win11：这里打开电脑设置-&gt; 系统-&gt;远程桌面   &#x3D;&#x3D;这里的打开后你能连接你的用户就是你电脑开机时的用户，例如administrator，win10也是一样的&#x3D;&#x3D;  win10：   进入控制面板-&gt;系统和安全-&gt;系统-&gt;">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://ilpvc.github.io/images/logo.png">
-<meta property="article:published_time" content="2021-11-08T04:19:35.000Z">
-<meta property="article:modified_time" content="2021-11-19T10:13:48.331Z">
 <meta property="article:author" content="ilpvc">
-<meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://ilpvc.github.io/images/logo.png">
 <meta name="twitter:site" content="@null">
@@ -176,194 +171,82 @@
 
         
 
-            <article>
-    <div class="kratos-hentry kratos-post-inner clearfix">
-        <header class="kratos-entry-header">
             
-                <h1 class="kratos-entry-title text-center">远程控制+Sakurafrp实现非局域网远程控制</h1>
-            
-            
-            <ul class="kratos-post-meta text-center">
-                <li><i class="fa fa-calendar"></i> 2021-11-08</li>
-                <li><i class="fa fa-user"></i> 作者 ilpvc</li>
-                <li>
-                    <i class="fa fa-edit"></i> 
-                    
-                    
-                        480
-                    
-                    字
-                </li>
+    
+    
+        <article class="kratos-hentry clearfix">
+            <div class="kratos-entry-border-new clearfix">
                 
-            </ul>
-        </header>
-        <div class="kratos-post-content">
-            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1637316828331"></time> 前，其中的内容可能需要更新。
-            </div>
-            
-            <hr />
-            <h2 id="一、下载RD-Client"><a href="#一、下载RD-Client" class="headerlink" title="一、下载RD Client"></a>一、下载RD Client</h2><ul>
-<li>安卓端网页下载或者<a target="_blank" rel="noopener" href="https://presenter.oss-cn-shanghai.aliyuncs.com/base.apk">RDClient</a></li>
-<li>ios端在App Store搜索RDClient</li>
-</ul>
-<h2 id="二、设置PC允许远程连接"><a href="#二、设置PC允许远程连接" class="headerlink" title="二、设置PC允许远程连接"></a>二、设置PC允许远程连接</h2><ul>
-<li><strong>win11</strong>：这里打开电脑设置-&gt; 系统-&gt;远程桌面</li>
-</ul>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/QQ%E5%9B%BE%E7%89%8720211109094906.png" alt="QQ图片20211109094906"></p>
-<p>==这里的打开后你能连接你的用户就是你电脑开机时的用户，例如administrator，win10也是一样的==</p>
-<ul>
-<li><strong>win10</strong>：</li>
-</ul>
-<p> 进入控制面板-&gt;系统和安全-&gt;系统-&gt;远程设置<br>按照下图方式勾选<br><img src="https://img-blog.csdn.net/20170215163223342?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzA0NjU2NTc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h2 id="三、注册sakura-frp（需要实名认证，支付宝授权就行）"><a href="#三、注册sakura-frp（需要实名认证，支付宝授权就行）" class="headerlink" title="三、注册sakura frp（需要实名认证，支付宝授权就行）"></a>三、注册sakura frp（需要实名认证，支付宝授权就行）</h2><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109101421526.png" alt="image-20211109101421526"></p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109101508848.png" alt="image-20211109101508848"></p>
-<p>在导航栏上</p>
-<p>用户-&gt;实名认证</p>
-<p>根据提示完成认证</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109101620430.png" alt="image-20211109101620430"></p>
-<p>点击穿透-&gt;隧道列表</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109101742287.png" alt="image-20211109101742287"></p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109102002178.png" alt="image-20211109102002178"></p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109102044910.png" alt="image-20211109102044910"></p>
-<p>点击软件下载</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109102209378.png" alt="image-20211109102209378"></p>
-<p>然后解压安装</p>
-<p>再打开frpc.ini配置文件（可以用记事本打开）</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109103125704.png" alt="image-20211109103125704"></p>
-<p>再去sakura frp网站点击<strong>隧道列表</strong>，找到你刚才新建的隧道</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109103347791.png" alt="image-20211109103347791"></p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109103506496.png" alt="image-20211109103506496"></p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109103555304.png" alt="image-20211109103555304"></p>
-<p>然后直接去刚才打开的frpc.ini粘贴即可。</p>
-<p>最后直接打开exe</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109103722486.png" alt="image-20211109103722486"></p>
-<p>运行结果：然后缩小，去平板或者手机或者pc连接电脑</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109103802090.png" alt="image-20211109103802090"></p>
-<h2 id="四、连接电脑"><a href="#四、连接电脑" class="headerlink" title="四、连接电脑"></a>四、连接电脑</h2><p>点击Desktop</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109104240443.png" alt="image-20211109104240443"></p>
-<p>然后add MANUALLY</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109104948381.png" alt="image-20211109104948381"></p>
-<p>然后点击save就行</p>
-<p>最后直接连接</p>
+                <div class="kratos-entry-thumb-new">
+                    <a href="/2021/11/19/picgo+%E9%98%BF%E9%87%8C%E4%BA%91oss+typora%E5%9B%BE%E5%BA%8A%E6%90%AD%E5%BB%BA/">
+                        
+                            <img class="kratos-entry-thumb-new-img">
+                        
+                    </a>
+                </div>
+                <div class="kratos-post-inner-new">
+                    <header class="kratos-entry-header-new">
+                            
+                        <h2 class="kratos-entry-title-new"><a href="/2021/11/19/picgo+%E9%98%BF%E9%87%8C%E4%BA%91oss+typora%E5%9B%BE%E5%BA%8A%E6%90%AD%E5%BB%BA/">图床搭建</a>
+                    </header>
+                    <div class="kratos-entry-content-new">
+                        <p>
+                            
+                                picgo+阿里云oss+typora图床搭建1.购买阿里云的oss对象储存2.建立 bucket
 
-        </div>
+
+
+
+然后记下来显示的AccessKey和AccessKey Serect。分别是用户号和密码
+
+再到picgo
+
+
+然后就可以了。
+
+                            
+                        </p>
+                    </div>
+                </div>
+                <footer class="kratos-post-meta-new">
+                    <span class="pull-left">
+                        <a>
+                            <i class="fa fa-calendar"></i>
+                            2021-11-19
+                        </a>
+                        <a>
+                            
+                                <i class="fa fa-tags"></i>
+                                <a class="tag-none-link" href="/tags/%E5%9B%BE%E5%BA%8A/" rel="tag">图床</a>
+                            
+                        </a>
+                        
+                            <!-- 当前仅支持valine/waline自带的统计功能 -->
+                            
+                        
+                        
+                            <!-- 当前仅支持waline自带的统计功能 -->
+                            
+                        
+                    </span>
+                    <span class="pull-right">
+                        <a class="read-more" href="/2021/11/19/picgo+%E9%98%BF%E9%87%8C%E4%BA%91oss+typora%E5%9B%BE%E5%BA%8A%E6%90%AD%E5%BB%BA/" title="阅读全文">阅读全文<i class="fa fa-chevron-circle-right"></i></a>
+                    </span>
+                </footer>
+            </div>
+        </article>
+    
+
+
+
+
+
+    <div class="hidden">
+        <!-- 加载文章阅读对应的统计功能，评论自带的那种 -->
         
-            <div class="kratos-copyright text-center clearfix">
-                <h5>本作品采用 <a rel="license nofollow" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">知识共享署名-相同方式共享 4.0 国际许可协议</a> 进行许可</h5>
-            </div>
-        
-        <footer class="kratos-entry-footer clearfix">
-            
-                <div class="post-like-donate text-center clearfix" id="post-like-donate">
-                
-                
-                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> 分享</a>
-                    <div class="share-wrap" style="display: none;">
-    <div class="share-group">
-        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
-            <div class="icon-wrap">
-                <i class="fa fa-qq"></i>
-            </div>
-        </a>
-        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
-            <div class="icon-wrap">
-                <i class="fa fa-star"></i>
-            </div>
-        </a>
-        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
-            <div class="icon-wrap">
-                <i class="fa fa-weixin"></i>
-            </div>
-            <div class="share-int">
-                <div class="qrcode" id="wechat-qr"></div>
-                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
-            </div>
-        </a>
-        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
-            <div class="icon-wrap">
-                <i class="fa fa-weibo"></i>
-            </div>
-        </a>
-        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
-            <div class="icon-wrap">
-                <i class="fa fa-facebook"></i>
-            </div>
-        </a>
-        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
-            <div class="icon-wrap">
-                <i class="fa fa-twitter"></i>
-            </div>
-        </a>
     </div>
-    <script type="text/javascript">
-        $(()=>{
-            new QRCode("wechat-qr", {
-                text: "http://ilpvc.github.io/2021/11/08/python/",
-                width: 150,
-                height: 150,
-                correctLevel : QRCode.CorrectLevel.H
-            });
-        });
-        function share(dest) {
-            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
-            const weiboBase     = "https://service.weibo.com/share/share.php?";
-            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
-            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
-            const twitterBase   = "https://twitter.com/intent/tweet?";
-            const hostUrl       = "http://ilpvc.github.io/2021/11/08/python/";
-            const title         = "「远程控制+Sakurafrp实现非局域网远程控制」";
-            const excerpt       = `一、下载RD Client
-安卓端网页下载或者RDClient
-ios端在App Store搜索RDClient
-
-二、设置PC允许远程连接
-win11：这里打开电脑设置-&gt; 系统-&gt;远程桌面
 
 
-==这里的打开后你能连接...`;
-            let _URL;
-            switch (dest) {
-                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
-                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
-                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
-                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
-                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
-            }
-            window.open(_URL);
-        };
-    </script>
-</div>
-                
-                </div>
-            
-            <div class="footer-tag clearfix">
-                <div class="pull-left">
-                <i class="fa fa-tags"></i>
-                    <a class="tag-none-link" href="/tags/python/" rel="tag">python</a>
-                </div>
-                <div class="pull-date">
-                <span>最后编辑：2021-11-19</span>
-                </div>
-            </div>
-        </footer>
-    </div>
-    
-        <nav class="navigation post-navigation clearfix" role="navigation">
-            
-            <div class="nav-previous clearfix">
-                <a title=" Hello World" href="/2021/11/07/hello-world/">&lt; 上一篇</a>
-            </div>
-            
-            
-            <div class="nav-next clearfix">
-                <a title=" Linux命令" href="/2021/11/10/Linux命令/">下一篇 &gt;</a>
-            </div>
-            
-        </nav>
-    
-    
-</article>
 
         
 
@@ -376,6 +259,8 @@ win11：这里打开电脑设置-&gt; 系统-&gt;远程桌面
 
 <section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
     <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+        <div class="sticky-area">
     
     
                 <aside id="krw-about" class="widget widget-kratos-about clearfix">
@@ -390,8 +275,6 @@ win11：这里打开电脑设置-&gt; 系统-&gt;远程桌面
     </div>
 </aside>
             
-                    <div class="sticky-area">
-                
                 
 
             
