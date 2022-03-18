@@ -483,6 +483,9 @@
 <p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
 <h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 
+<h2 id="分类和标签"><a href="#分类和标签" class="headerlink" title="分类和标签"></a>分类和标签</h2><p>只有文章支持分类和标签，您可以在 Front-matter 中设置。在其他系统中，分类和标签听起来很接近，但是在 Hexo 中两者有着明显的差别：分类具有顺序性和层次性，也就是说 <code>Foo, Bar</code> 不等于 <code>Bar, Foo</code>；而标签没有顺序和层次。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">categories:</span><br><span class="line">- Diary</span><br><span class="line">tags:</span><br><span class="line">- PS3</span><br><span class="line">- Games</span><br></pre></td></tr></table></figure>
+
 <p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
   </entry>
@@ -748,6 +751,21 @@
 ]]></content>
       <tags>
         <tag>office</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>kali安装.deb的安装包</title>
+    <url>/2022/03/18/kali%E5%AE%89%E8%A3%85-deb%E7%9A%84%E5%AE%89%E8%A3%85%E5%8C%85/</url>
+    <content><![CDATA[<h3 id="在kali中安装一些下载好的deb安装包时"><a href="#在kali中安装一些下载好的deb安装包时" class="headerlink" title="在kali中安装一些下载好的deb安装包时"></a>在kali中安装一些下载好的deb安装包时</h3><h4 id="一，找到安装包位置"><a href="#一，找到安装包位置" class="headerlink" title="一，找到安装包位置"></a>一，找到安装包位置</h4><p> <img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220318155623220.png" alt="image-20220318155623220"></p>
+<p>==这里原本有个utools==</p>
+<h4 id="二，打开终端"><a href="#二，打开终端" class="headerlink" title="二，打开终端"></a>二，打开终端</h4><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220318155937843.png" alt="image-20220318155937843"></p>
+<p>命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo su</span><br><span class="line"><span class="comment">#超级用户</span></span><br><span class="line"><span class="built_in">cd</span> /tmp/mozilla_kali0</span><br><span class="line"><span class="comment">#打开需要安装文件所在目录</span></span><br><span class="line">ls</span><br><span class="line"><span class="comment">#显示当前目录所有文件和文件夹</span></span><br><span class="line">dpkg -i [需要安装文件的全名称]</span><br><span class="line"><span class="comment">#安装</span></span><br></pre></td></tr></table></figure>
+
+<p>等待安装即可</p>
+]]></content>
+      <tags>
+        <tag>linux</tag>
       </tags>
   </entry>
 </search>
