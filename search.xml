@@ -768,4 +768,46 @@
         <tag>linux</tag>
       </tags>
   </entry>
+  <entry>
+    <title>bat批处理</title>
+    <url>/2022/03/18/bat%E6%89%B9%E5%A4%84%E7%90%86/</url>
+    <content><![CDATA[<h3 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h3><blockquote>
+<p><em><strong>pause</strong></em>  :使脚本程序暂停，即会输出“请按任意键输出的字样”，主要用于需要打印一些数据，如果不加pause，脚本运行结束直接关闭，将无法看到结果。可以加 &gt;nul把这个信息隐藏。</p>
+<p>***@***：它的作用是隐藏它后面这一行的命令本身（只能影响当前行）。</p>
+<p><strong>%</strong> : %0表示这个文件本身，%1，%2（%[0-9]）分别是后面的参数</p>
+</blockquote>
+<p><strong>一、for循环</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#1.</span></span><br><span class="line"><span class="comment">#输出ABC</span></span><br><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"><span class="keyword">for</span>  %%I <span class="keyword">in</span> (ABC) <span class="keyword">do</span> <span class="built_in">echo</span> %%I</span><br><span class="line">pause</span><br><span class="line"><span class="comment">#结果</span></span><br><span class="line"><span class="comment">#ABC</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#2.</span></span><br><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"><span class="keyword">for</span>  %%I <span class="keyword">in</span> (A,B,C) <span class="keyword">do</span> <span class="built_in">echo</span> %%I</span><br><span class="line">pause</span><br><span class="line"><span class="comment">#结果</span></span><br><span class="line"><span class="comment">#A</span></span><br><span class="line"><span class="comment">#B</span></span><br><span class="line"><span class="comment">#C</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>高级用法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#搜索当前目录的所有文件</span></span><br><span class="line"></span><br><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"><span class="keyword">for</span> %%i <span class="keyword">in</span> (*.*) <span class="keyword">do</span> <span class="built_in">echo</span> <span class="string">&quot;%%i&quot;</span></span><br><span class="line">pause</span><br><span class="line"></span><br><span class="line"><span class="comment">#搜索当前目录的文本文件</span></span><br><span class="line"></span><br><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"><span class="keyword">for</span> %%i <span class="keyword">in</span> (*.txt) <span class="built_in">echo</span> <span class="string">&quot;%%i&quot;</span></span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h3 id="批量处理文件"><a href="#批量处理文件" class="headerlink" title="批量处理文件"></a>批量处理文件</h3><p><strong>实例</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">#批量修改文件名称</span></span><br><span class="line"></span><br><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> a=1</span><br><span class="line"></span><br><span class="line">setlocal EnableDelayedExpansion</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> %%n <span class="keyword">in</span> (*.jpg) <span class="keyword">do</span> (</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> /A a+=1</span><br><span class="line"></span><br><span class="line">ren <span class="string">&quot;%%n&quot;</span> <span class="string">&quot;动漫!a!.jpg&quot;</span></span><br><span class="line"></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+]]></content>
+      <tags>
+        <tag>bat</tag>
+      </tags>
+  </entry>
 </search>

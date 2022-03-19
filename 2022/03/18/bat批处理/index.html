@@ -4,7 +4,7 @@
   <!-- 元数据 -->
   <meta charset="utf-8">
   <link rel="icon" href="/images/logo.png">
-  <title>Git命令 | ilpvc</title>
+  <title>bat批处理 | ilpvc</title>
   <meta name="author" content="ilpvc" />
   <meta http-equiv="Cache-Control" content="no-transform" />
   <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -13,20 +13,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <meta name="format-detection" content="telphone=no, email=no" />
   
-    <meta name="keywords" content="git" />
+    <meta name="keywords" content="bat" />
   
-  <meta name="description" content="一、Git常用命令1、常用 1234567891011121314git remote add origin git@github.com:yeszao&#x2F;dofiler.git     # 配置远程git版本库git pull origin master                     # 下载代码及快速合并git push origin master">
+  <meta name="description" content="基本用法 pause  :使脚本程序暂停，即会输出“请按任意键输出的字样”，主要用于需要打印一些数据，如果不加pause，脚本运行结束直接关闭，将无法看到结果。可以加 &gt;nul把这个信息隐藏。 ***@***：它的作用是隐藏它后面这一行的命令本身（只能影响当前行）。 % : %0表示这个文件本身，%1，%2（%[0-9]）分别是后面的参数  一、for循环 12345678910111213">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Git命令">
-<meta property="og:url" content="http://ilpvc.github.io/2021/11/10/Git%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:title" content="bat批处理">
+<meta property="og:url" content="http://ilpvc.github.io/2022/03/18/bat%E6%89%B9%E5%A4%84%E7%90%86/index.html">
 <meta property="og:site_name" content="ilpvc">
-<meta property="og:description" content="一、Git常用命令1、常用 1234567891011121314git remote add origin git@github.com:yeszao&#x2F;dofiler.git     # 配置远程git版本库git pull origin master                     # 下载代码及快速合并git push origin master">
+<meta property="og:description" content="基本用法 pause  :使脚本程序暂停，即会输出“请按任意键输出的字样”，主要用于需要打印一些数据，如果不加pause，脚本运行结束直接关闭，将无法看到结果。可以加 &gt;nul把这个信息隐藏。 ***@***：它的作用是隐藏它后面这一行的命令本身（只能影响当前行）。 % : %0表示这个文件本身，%1，%2（%[0-9]）分别是后面的参数  一、for循环 12345678910111213">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://ilpvc.github.io/images/logo.png">
-<meta property="article:published_time" content="2021-11-10T08:34:46.000Z">
-<meta property="article:modified_time" content="2021-11-19T10:14:10.780Z">
+<meta property="article:published_time" content="2022-03-18T15:48:04.000Z">
+<meta property="article:modified_time" content="2022-03-19T10:24:39.019Z">
 <meta property="article:author" content="ilpvc">
-<meta property="article:tag" content="git">
+<meta property="article:tag" content="bat">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://ilpvc.github.io/images/logo.png">
 <meta name="twitter:site" content="@null">
@@ -180,17 +180,17 @@
     <div class="kratos-hentry kratos-post-inner clearfix">
         <header class="kratos-entry-header">
             
-                <h1 class="kratos-entry-title text-center">Git命令</h1>
+                <h1 class="kratos-entry-title text-center">bat批处理</h1>
             
             
             <ul class="kratos-post-meta text-center">
-                <li><i class="fa fa-calendar"></i> 2021-11-10</li>
+                <li><i class="fa fa-calendar"></i> 2022-03-18</li>
                 <li><i class="fa fa-user"></i> 作者 ilpvc</li>
                 <li>
                     <i class="fa fa-edit"></i> 
                     
                     
-                        ~3.69K
+                        673
                     
                     字
                 </li>
@@ -199,45 +199,41 @@
         </header>
         <div class="kratos-post-content">
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1637316850780"></time> 前，其中的内容可能需要更新。
+                本文最后编辑于 <time datetime="1647685479019"></time> 前，其中的内容可能需要更新。
             </div>
             
             <hr />
-            <h2 id="一、Git常用命令"><a href="#一、Git常用命令" class="headerlink" title="一、Git常用命令"></a>一、Git常用命令</h2><p><strong>1、常用</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin git@github.com:yeszao/dofiler.git     # 配置远程git版本库</span><br><span class="line">git pull origin master                     # 下载代码及快速合并</span><br><span class="line">git push origin master                     # 上传代码及快速合并</span><br><span class="line">git fetch origin                        # 从远程库获取代码</span><br><span class="line">git branch                           # 显示所有分支</span><br><span class="line">git checkout master                       # 切换到master分支</span><br><span class="line">git checkout -b dev                       # 创建并切换到dev分支</span><br><span class="line">git commit -m &quot;first version&quot;                  # 提交</span><br><span class="line">git status                           # 查看状态</span><br><span class="line">git log                             # 查看提交历史</span><br><span class="line">git config --global core.editor vim               # 设置默认编辑器为vim（git默认用nano）</span><br><span class="line">git config core.ignorecase false                # 设置大小写敏感</span><br><span class="line">git config --global user.name &quot;YOUR NAME&quot;            # 设置用户名</span><br><span class="line">git config --global user.email &quot;YOUR EMAIL ADDRESS&quot;       # 设置邮箱</span><br></pre></td></tr></table></figure>
+            <h3 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h3><blockquote>
+<p><em><strong>pause</strong></em>  :使脚本程序暂停，即会输出“请按任意键输出的字样”，主要用于需要打印一些数据，如果不加pause，脚本运行结束直接关闭，将无法看到结果。可以加 &gt;nul把这个信息隐藏。</p>
+<p>***@***：它的作用是隐藏它后面这一行的命令本身（只能影响当前行）。</p>
+<p><strong>%</strong> : %0表示这个文件本身，%1，%2（%[0-9]）分别是后面的参数</p>
+</blockquote>
+<p><strong>一、for循环</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1.</span></span><br><span class="line"><span class="comment">#输出ABC</span></span><br><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"><span class="keyword">for</span>  %%I <span class="keyword">in</span> (ABC) <span class="keyword">do</span> <span class="built_in">echo</span> %%I</span><br><span class="line">pause</span><br><span class="line"><span class="comment">#结果</span></span><br><span class="line"><span class="comment">#ABC</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#2.</span></span><br><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"><span class="keyword">for</span>  %%I <span class="keyword">in</span> (A,B,C) <span class="keyword">do</span> <span class="built_in">echo</span> %%I</span><br><span class="line">pause</span><br><span class="line"><span class="comment">#结果</span></span><br><span class="line"><span class="comment">#A</span></span><br><span class="line"><span class="comment">#B</span></span><br><span class="line"><span class="comment">#C</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p><strong>2、别名alias</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">git config --global alias.br=&quot;branch&quot;         # 创建/查看本地分支</span><br><span class="line">git config --global alias.co=&quot;checkout&quot;        # 切换分支</span><br><span class="line">git config --global alias.cb=&quot;checkout -b&quot;      # 创建并切换到新分支</span><br><span class="line">git config --global alias.cm=&quot;commit -m&quot;       # 提交</span><br><span class="line">git config --global alias.st=&quot;status&quot;         # 查看状态</span><br><span class="line">git config --global alias.pullm=&quot;pull origin master&quot; # 拉取分支</span><br><span class="line">git config --global alias.pushm=&quot;push origin master&quot; # 提交分支</span><br><span class="line">git config --global alias.log=&quot;git log --oneline --graph --decorate --color=always&quot; # 单行、分颜色显示记录</span><br><span class="line">git config --global alias.logg=&quot;git log --graph --all --format=format:&#x27;%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)&#x27; --abbrev-commit --date=relative&quot; # 复杂显示</span><br></pre></td></tr></table></figure>
+<p><strong>高级用法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#搜索当前目录的所有文件</span></span><br><span class="line"></span><br><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"><span class="keyword">for</span> %%i <span class="keyword">in</span> (*.*) <span class="keyword">do</span> <span class="built_in">echo</span> <span class="string">&quot;%%i&quot;</span></span><br><span class="line">pause</span><br><span class="line"></span><br><span class="line"><span class="comment">#搜索当前目录的文本文件</span></span><br><span class="line"></span><br><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"><span class="keyword">for</span> %%i <span class="keyword">in</span> (*.txt) <span class="built_in">echo</span> <span class="string">&quot;%%i&quot;</span></span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
 
-<p>3.创建版本库</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git clone         # 克隆远程版本库</span><br><span class="line">git init            # 初始化本地版本库</span><br></pre></td></tr></table></figure>
 
-<p>4.修改和提交</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">git status           # 查看状态</span><br><span class="line">git diff            # 查看变更内容</span><br><span class="line">git add .            # 跟踪所有改动过的文件</span><br><span class="line">git add          # 跟踪指定的文件</span><br><span class="line">git mv        # 文件改名</span><br><span class="line">git rm          # 删除文件</span><br><span class="line">git rm --cached      # 停止跟踪文件但不删除</span><br><span class="line">git commit -m “commit message” # 提交所有更新过的文件</span><br><span class="line">git commit --amend       # 修改最后一次提交</span><br></pre></td></tr></table></figure>
 
-<p>5.查看历史</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git log             # 查看提交历史</span><br><span class="line">git log -p        # 查看指定文件的提交历史</span><br><span class="line">git blame         # 以列表方式查看指定文件的提交历史</span><br></pre></td></tr></table></figure>
 
-<p>6.撤销</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard HEAD      # 撤消工作目录中所有未提交文件的修改内容</span><br><span class="line">git reset --hard    # 撤销到某个特定版本</span><br><span class="line">git checkout HEAD     # 撤消指定的未提交文件的修改内容</span><br><span class="line">git checkout --      # 同上一个命令</span><br><span class="line">git revert       # 撤消指定的提交分支与标签</span><br></pre></td></tr></table></figure>
 
-<p>7.分支与标签</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">git branch           # 显示所有本地分支</span><br><span class="line">git checkout    # 切换到指定分支或标签</span><br><span class="line">git branch     # 创建新分支</span><br><span class="line">git branch -d      # 删除本地分支</span><br><span class="line">git tag             # 列出所有本地标签</span><br><span class="line">git tag        # 基于最新提交创建标签</span><br><span class="line">git tag -a &quot;v1.0&quot; -m &quot;一些说明&quot; # -a指定标签名称，-m指定标签说明</span><br><span class="line">git tag -d       # 删除标签</span><br><span class="line">git checkout dev        # 合并特定的commit到dev分支上</span><br><span class="line">git cherry-pick 62ecb3</span><br></pre></td></tr></table></figure>
 
-<p>8.合并与衍合</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git merge        # 合并指定分支到当前分支</span><br><span class="line">git merge --abort        # 取消当前合并，重建合并前状态</span><br><span class="line">git merge dev -Xtheirs     # 以合并dev分支到当前分支，有冲突则以dev分支为准</span><br><span class="line">git rebase       # 衍合指定分支到当前分支</span><br></pre></td></tr></table></figure>
 
-<p>9.远程操作</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">git remote -v          # 查看远程版本库信息</span><br><span class="line">git remote show     # 查看指定远程版本库信息</span><br><span class="line">git remote add  # 添加远程版本库</span><br><span class="line">git remote remove    # 删除指定的远程版本库</span><br><span class="line">git fetch        # 从远程库获取代码</span><br><span class="line">git pull    # 下载代码及快速合并</span><br><span class="line">git push    # 上传代码及快速合并</span><br><span class="line">git push : # 删除远程分支或标签</span><br><span class="line">git push --tags         # 上传所有标签</span><br></pre></td></tr></table></figure>
 
-<p>10.打包</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git archive --format=zip --output ../file.zip master  # 将master分支打包成file.zip文件，保存在上一级目录</span><br><span class="line">git archive --format=zip --output ../v1.2.zip v1.2   # 打包v1.2标签的文件，保存在上一级目录v1.2.zip文件中</span><br><span class="line">git archive --format=zip v1.2 &gt; ../v1.2.zip       # 作用同上一条命令</span><br></pre></td></tr></table></figure>
 
-<p>11.全和局部配置</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">全局配置保存在：$Home/.gitconfig</span><br><span class="line">本地仓库配置保存在：.git/config</span><br></pre></td></tr></table></figure>
 
-<p>12.远程与本地合并</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git init               # 初始化本地代码仓</span><br><span class="line">git add .               # 添加本地代码</span><br><span class="line">git commit -m &quot;add local source&quot;   # 提交本地代码</span><br><span class="line">git pull origin master        # 下载远程代码</span><br><span class="line">git merge master           # 合并master分支</span><br><span class="line">git push -u origin master       # 上传代码</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="批量处理文件"><a href="#批量处理文件" class="headerlink" title="批量处理文件"></a>批量处理文件</h3><p><strong>实例</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">#批量修改文件名称</span></span><br><span class="line"></span><br><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> a=1</span><br><span class="line"></span><br><span class="line">setlocal EnableDelayedExpansion</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> %%n <span class="keyword">in</span> (*.jpg) <span class="keyword">do</span> (</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> /A a+=1</span><br><span class="line"></span><br><span class="line">ren <span class="string">&quot;%%n&quot;</span> <span class="string">&quot;动漫!a!.jpg&quot;</span></span><br><span class="line"></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+
+
+
+
 
 
 
@@ -294,7 +290,7 @@
     <script type="text/javascript">
         $(()=>{
             new QRCode("wechat-qr", {
-                text: "http://ilpvc.github.io/2021/11/10/Git%E5%91%BD%E4%BB%A4/",
+                text: "http://ilpvc.github.io/2022/03/18/bat%E6%89%B9%E5%A4%84%E7%90%86/",
                 width: 150,
                 height: 150,
                 correctLevel : QRCode.CorrectLevel.H
@@ -306,10 +302,11 @@
             const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
             const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
             const twitterBase   = "https://twitter.com/intent/tweet?";
-            const hostUrl       = "http://ilpvc.github.io/2021/11/10/Git%E5%91%BD%E4%BB%A4/";
-            const title         = "「Git命令」";
-            const excerpt       = `一、Git常用命令1、常用
-1234567891011121314git remote add origin git@github.com:yeszao/dofiler.git     # 配置远程git版本库git pull ori...`;
+            const hostUrl       = "http://ilpvc.github.io/2022/03/18/bat%E6%89%B9%E5%A4%84%E7%90%86/";
+            const title         = "「bat批处理」";
+            const excerpt       = `基本用法
+pause  :使脚本程序暂停，即会输出“请按任意键输出的字样”，主要用于需要打印一些数据，如果不加pause，脚本运行结束直接关闭，将无法看到结果。可以加 &gt;nul把这个信息隐藏。
+***@***：它的作用是隐藏它后...`;
             let _URL;
             switch (dest) {
                 case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
@@ -328,10 +325,10 @@
             <div class="footer-tag clearfix">
                 <div class="pull-left">
                 <i class="fa fa-tags"></i>
-                    <a class="tag-none-link" href="/tags/git/" rel="tag">git</a>
+                    <a class="tag-none-link" href="/tags/bat/" rel="tag">bat</a>
                 </div>
                 <div class="pull-date">
-                <span>最后编辑：2021-11-19</span>
+                <span>最后编辑：2022-03-19</span>
                 </div>
             </div>
         </footer>
@@ -340,13 +337,9 @@
         <nav class="navigation post-navigation clearfix" role="navigation">
             
             <div class="nav-previous clearfix">
-                <a title=" Linux命令" href="/2021/11/10/Linux命令/">&lt; 上一篇</a>
+                <a title=" kali安装.deb的安装包" href="/2022/03/18/kali安装-deb的安装包/">&lt; 上一篇</a>
             </div>
             
-            
-            <div class="nav-next clearfix">
-                <a title=" npm指令" href="/2021/11/12/npm指令/">下一篇 &gt;</a>
-            </div>
             
         </nav>
     
