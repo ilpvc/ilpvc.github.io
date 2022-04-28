@@ -4,7 +4,7 @@
   <!-- 元数据 -->
   <meta charset="utf-8">
   <link rel="icon" href="/images/logo.png">
-  <title>centos命令 | ilpvc</title>
+  <title>hexo基础使用 | ilpvc</title>
   <meta name="author" content="ilpvc" />
   <meta http-equiv="Cache-Control" content="no-transform" />
   <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -13,20 +13,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <meta name="format-detection" content="telphone=no, email=no" />
   
-    <meta name="keywords" content="linux" />
+    <meta name="keywords" content="" />
   
-  <meta name="description" content="centos端口Centos升级到7之后，内置的防火墙已经从iptables变成了firewalld。所以，端口的开启还是要从两种情况来说明的，即iptables和firewalld。更多关于CentOs防火墙的最新内容，请参考Redhat官网[4.5 使用防火墙]。 一、iptables(centos 6及以前)1.打开&#x2F;关闭&#x2F;重启防火墙 123456789开启防火墙(重启后永久生效)：chkc">
+  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
 <meta property="og:type" content="article">
-<meta property="og:title" content="centos命令">
-<meta property="og:url" content="http://ilpvc.github.io/2021/11/19/centos%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:title" content="hexo基础使用">
+<meta property="og:url" content="http://ilpvc.github.io/2021/11/07/hexo%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="ilpvc">
-<meta property="og:description" content="centos端口Centos升级到7之后，内置的防火墙已经从iptables变成了firewalld。所以，端口的开启还是要从两种情况来说明的，即iptables和firewalld。更多关于CentOs防火墙的最新内容，请参考Redhat官网[4.5 使用防火墙]。 一、iptables(centos 6及以前)1.打开&#x2F;关闭&#x2F;重启防火墙 123456789开启防火墙(重启后永久生效)：chkc">
+<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://ilpvc.github.io/images/logo.png">
-<meta property="article:published_time" content="2021-11-19T10:18:31.000Z">
-<meta property="article:modified_time" content="2021-11-19T10:18:57.409Z">
+<meta property="article:published_time" content="2021-11-07T14:13:17.369Z">
+<meta property="article:modified_time" content="2022-04-28T14:14:30.198Z">
 <meta property="article:author" content="ilpvc">
-<meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://ilpvc.github.io/images/logo.png">
 <meta name="twitter:site" content="@null">
@@ -180,17 +179,17 @@
     <div class="kratos-hentry kratos-post-inner clearfix">
         <header class="kratos-entry-header">
             
-                <h1 class="kratos-entry-title text-center">centos命令</h1>
+                <h1 class="kratos-entry-title text-center">hexo基础使用</h1>
             
             
             <ul class="kratos-post-meta text-center">
-                <li><i class="fa fa-calendar"></i> 2021-11-19</li>
+                <li><i class="fa fa-calendar"></i> 2021-11-07</li>
                 <li><i class="fa fa-user"></i> 作者 ilpvc</li>
                 <li>
                     <i class="fa fa-edit"></i> 
                     
                     
-                        ~3.19K
+                        615
                     
                     字
                 </li>
@@ -199,109 +198,27 @@
         </header>
         <div class="kratos-post-content">
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1637317137409"></time> 前，其中的内容可能需要更新。
+                本文最后编辑于 <time datetime="1651155270198"></time> 前，其中的内容可能需要更新。
             </div>
             
             <hr />
-            <h1 id="centos"><a href="#centos" class="headerlink" title="centos"></a>centos</h1><h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>Centos升级到7之后，内置的防火墙已经从iptables变成了firewalld。所以，端口的开启还是要从两种情况来说明的，即iptables和firewalld。更多关于CentOs防火墙的最新内容，请参考Redhat官网[<a target="_blank" rel="noopener" href="https://access.redhat.com/documentation/zh-CN/Red_Hat_Enterprise_Linux/7/html/Security_Guide/sec-Using_Firewalls.html">4.5 使用防火墙</a>]。</p>
-<h3 id="一、iptables-centos-6及以前"><a href="#一、iptables-centos-6及以前" class="headerlink" title="一、iptables(centos 6及以前)"></a>一、iptables(centos 6及以前)</h3><p>1.打开/关闭/重启防火墙</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">开启防火墙(重启后永久生效)：chkconfig iptables on</span><br><span class="line"></span><br><span class="line">关闭防火墙(重启后永久生效)：chkconfig iptables off</span><br><span class="line"></span><br><span class="line">开启防火墙(即时生效，重启后失效)：service iptables start</span><br><span class="line"></span><br><span class="line">关闭防火墙(即时生效，重启后失效)：service iptables stop</span><br><span class="line"></span><br><span class="line">重启防火墙:service iptables restartd</span><br></pre></td></tr></table></figure>
+            <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
 
-<p>2.查看打开的端口</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/iptables status</span><br></pre></td></tr></table></figure>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 
-<p>3.打开某个端口(以8080为例)</p>
-<p>（1）开启端口</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -p tcp --dport 8080 -j ACCEPT </span><br></pre></td></tr></table></figure>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
 
-<p>（2）保存并重启防火墙</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/etc/rc.d/init.d/iptables save</span><br><span class="line">/etc/init.d/iptables restart</span><br></pre></td></tr></table></figure>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 
-<p>4.打开49152~65534之间的端口</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -p tcp --dport 49152:65534 -j ACCEPT  </span><br></pre></td></tr></table></figure>
+<h2 id="分类和标签"><a href="#分类和标签" class="headerlink" title="分类和标签"></a>分类和标签</h2><p>只有文章支持分类和标签，您可以在 Front-matter 中设置。在其他系统中，分类和标签听起来很接近，但是在 Hexo 中两者有着明显的差别：分类具有顺序性和层次性，也就是说 <code>Foo, Bar</code> 不等于 <code>Bar, Foo</code>；而标签没有顺序和层次。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">categories:</span><br><span class="line">- Diary</span><br><span class="line">tags:</span><br><span class="line">- PS3</span><br><span class="line">- Games</span><br></pre></td></tr></table></figure>
 
-<p>同样，这里需要对设置进行保存，并重启防火墙。</p>
-<p>5.其他打开方式</p>
-<p>我们还可以通过修改/etc/sysconfig/iptables文件的方式开启端口，如下</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/sysconfig/iptables</span><br></pre></td></tr></table></figure>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 
-<p>然后在文件中增加一行</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-A RH-Firewall-1-INPUT -m state –state NEW -m tcp -p tcp –dport 8080 -j ACCEPT</span><br></pre></td></tr></table></figure>
-
-<p>参数说明:</p>
-<ul>
-<li>–A 参数就看成是添加一条规则</li>
-<li>–p 指定是什么协议，我们常用的tcp 协议，当然也有udp，例如53端口的DNS</li>
-<li>–dport 就是目标端口，当数据从外部进入服务器为目标端口</li>
-<li>–sport 数据从服务器出去，则为数据源端口使用</li>
-<li>–j 就是指定是 ACCEPT -接收 或者 DROP 不接收</li>
-</ul>
-<h3 id="二、firewalld-centos7"><a href="#二、firewalld-centos7" class="headerlink" title="二、firewalld(centos7)"></a>二、firewalld(centos7)</h3><p>Centos7默认安装了firewalld，如果没有安装的话，可以使用 <code>yum install firewalld firewalld-config</code>进行安装。</p>
-<p>1.启动防火墙</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start firewalld </span><br></pre></td></tr></table></figure>
-
-<p>2.禁用防火墙</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld</span><br></pre></td></tr></table></figure>
-
-<p>3.设置开机启动</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable firewalld</span><br></pre></td></tr></table></figure>
-
-<p>4.停止并禁用开机启动</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sytemctl disable firewalld</span><br></pre></td></tr></table></figure>
-
-<p>5.重启防火墙</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
-
-<p>6.查看状态</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status firewalld或者 firewall-cmd --state</span><br></pre></td></tr></table></figure>
-
-<p>7.查看版本</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --version</span><br></pre></td></tr></table></figure>
-
-<p>8.查看帮助</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --help</span><br></pre></td></tr></table></figure>
-
-<p>9.查看区域信息</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --get-active-zones</span><br></pre></td></tr></table></figure>
-
-<p>10.查看指定接口所属区域信息</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --get-zone-of-interface=eth0</span><br></pre></td></tr></table></figure>
-
-<p>11.拒绝所有包</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --panic-on</span><br></pre></td></tr></table></figure>
-
-<p>12.取消拒绝状态</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --panic-off</span><br></pre></td></tr></table></figure>
-
-<p>13.查看是否拒绝</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --query-panic</span><br></pre></td></tr></table></figure>
-
-<p>14.将接口添加到区域(默认接口都在public)</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-interface=eth0(永久生效再加上 --permanent 然后reload防火墙)</span><br></pre></td></tr></table></figure>
-
-<p>15.设置默认接口区域</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --set-default-zone=public(立即生效，无需重启)</span><br></pre></td></tr></table></figure>
-
-<p>16.更新防火墙规则</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --reload或firewall-cmd --complete-reload(两者的区别就是第一个无需断开连接，就是firewalld特性之一动态</span><br><span class="line">添加规则，第二个需要断开连接，类似重启服务)</span><br></pre></td></tr></table></figure>
-
-<p>17.查看指定区域所有打开的端口</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --zone=public --list-ports</span><br></pre></td></tr></table></figure>
-
-<p>18.在指定区域打开(关闭)端口（记得重启防火墙）</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-port=80/tcp(永久生效再加上 --permanent)</span><br><span class="line">firewall-cmd --zone=public --remove-port=80/tcp</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>说明：<br>–zone 作用域<br>–add-port=8080/tcp 添加端口，格式为：端口/通讯协议<br>–permanent #永久生效，没有此参数重启后失效</p>
-</blockquote>
-<h2 id="服务"><a href="#服务" class="headerlink" title="服务"></a>服务</h2><h3 id="CentOS6"><a href="#CentOS6" class="headerlink" title="CentOS6"></a>CentOS6</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">chkconfig / chkconfig --list显示开机启动服务列表</span><br><span class="line"></span><br><span class="line">chkconfig --level 3 服务名 on/off</span><br><span class="line"></span><br><span class="line">chkconfig 服务名 on/off</span><br><span class="line"></span><br><span class="line">chkconfig --del 服务名 删除（关闭）服务</span><br><span class="line"></span><br><span class="line">chkconfig --add 服务名 添加（开启）服务</span><br><span class="line"></span><br><span class="line">/var/<span class="built_in">log</span>/messages核心系统日志文件</span><br><span class="line"></span><br><span class="line">etc/logrotate.conf</span><br><span class="line"></span><br><span class="line">messages由syslogd这个守护进程产生的，如果停掉这个服务则系统不会产生/var/<span class="built_in">log</span>/messages</span><br><span class="line"></span><br><span class="line">/var/<span class="built_in">log</span>/wtmp 查看用户登录历史 last</span><br><span class="line"></span><br><span class="line">lastlog 所有的用户登陆信息</span><br><span class="line"></span><br><span class="line">/var/<span class="built_in">log</span>/btmp lastb 查看无效登录历史</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/var/<span class="built_in">log</span>/maillog</span><br><span class="line"></span><br><span class="line">/var/<span class="built_in">log</span>/secure</span><br><span class="line"></span><br><span class="line">dmesg</span><br><span class="line"></span><br><span class="line">/var/<span class="built_in">log</span>/dmesg 系统启动产生的硬件信息</span><br><span class="line"></span><br><span class="line">screen</span><br><span class="line"></span><br><span class="line">ctrl a d 退出screen界面</span><br><span class="line"></span><br><span class="line">screen -r 返回screen界面</span><br><span class="line"></span><br><span class="line">screen -ls 查看screen 列表</span><br><span class="line"></span><br><span class="line">screen -r screenID 返回选择的screen界面</span><br></pre></td></tr></table></figure>
-
-<h3 id="centos7"><a href="#centos7" class="headerlink" title="centos7+"></a>centos7+</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">2、如何启动/关闭、启用/禁用服务？</span><br><span class="line"></span><br><span class="line">启动一个服务：systemctl start postfix.service</span><br><span class="line"></span><br><span class="line">关闭一个服务：systemctl stop postfix.service</span><br><span class="line"></span><br><span class="line">重启一个服务：systemctl restart postfix.service</span><br><span class="line"></span><br><span class="line">显示一个服务的状态：systemctl status postfix.service</span><br><span class="line"></span><br><span class="line">在开机时启用一个服务：systemctl <span class="built_in">enable</span> postfix.service</span><br><span class="line"></span><br><span class="line">在开机时禁用一个服务：systemctl <span class="built_in">disable</span> postfix.service</span><br><span class="line"></span><br><span class="line">查看服务是否开机启动：systemctl is-enabled postfix.service;<span class="built_in">echo</span> $?</span><br><span class="line"></span><br><span class="line">查看已启动的服务列表：systemctl list-unit-files|grep enabled</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>查看服务启动日志</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">journalctl -u docker.service</span><br></pre></td></tr></table></figure>
         </div>
         
             <div class="kratos-copyright text-center clearfix">
@@ -354,7 +271,7 @@
     <script type="text/javascript">
         $(()=>{
             new QRCode("wechat-qr", {
-                text: "http://ilpvc.github.io/2021/11/19/centos%E5%91%BD%E4%BB%A4/",
+                text: "http://ilpvc.github.io/2021/11/07/hexo%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/",
                 width: 150,
                 height: 150,
                 correctLevel : QRCode.CorrectLevel.H
@@ -366,9 +283,9 @@
             const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
             const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
             const twitterBase   = "https://twitter.com/intent/tweet?";
-            const hostUrl       = "http://ilpvc.github.io/2021/11/19/centos%E5%91%BD%E4%BB%A4/";
-            const title         = "「centos命令」";
-            const excerpt       = `centos端口Centos升级到7之后，内置的防火墙已经从iptables变成了firewalld。所以，端口的开启还是要从两种情况来说明的，即iptables和firewalld。更多关于CentOs防火墙的最新内容，请参考Red...`;
+            const hostUrl       = "http://ilpvc.github.io/2021/11/07/hexo%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/";
+            const title         = "「hexo基础使用」";
+            const excerpt       = `Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using ...`;
             let _URL;
             switch (dest) {
                 case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
@@ -387,10 +304,10 @@
             <div class="footer-tag clearfix">
                 <div class="pull-left">
                 <i class="fa fa-tags"></i>
-                    <a class="tag-none-link" href="/tags/linux/" rel="tag">linux</a>
+                    
                 </div>
                 <div class="pull-date">
-                <span>最后编辑：2021-11-19</span>
+                <span>最后编辑：2022-04-28</span>
                 </div>
             </div>
         </footer>
@@ -398,13 +315,9 @@
     
         <nav class="navigation post-navigation clearfix" role="navigation">
             
-            <div class="nav-previous clearfix">
-                <a title=" staruml破解" href="/2021/11/19/staruml破解/">&lt; 上一篇</a>
-            </div>
-            
             
             <div class="nav-next clearfix">
-                <a title=" linux基础" href="/2021/11/19/linux基础/">下一篇 &gt;</a>
+                <a title=" 远程控制+Sakurafrp实现非局域网远程控制" href="/2021/11/08/python/">下一篇 &gt;</a>
             </div>
             
         </nav>
