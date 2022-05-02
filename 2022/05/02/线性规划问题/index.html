@@ -4,7 +4,7 @@
   <!-- 元数据 -->
   <meta charset="utf-8">
   <link rel="icon" href="/images/logo.png">
-  <title>lex词法分析器语法+实验 | ilpvc</title>
+  <title>线性规划问题 | ilpvc</title>
   <meta name="author" content="ilpvc" />
   <meta http-equiv="Cache-Control" content="no-transform" />
   <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -13,20 +13,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <meta name="format-detection" content="telphone=no, email=no" />
   
-    <meta name="keywords" content="c语言" />
+    <meta name="keywords" content="最优化理论" />
   
-  <meta name="description" content="lex词法分析器Lex是LEXical compiler的缩写，是Unix环境下非常著名的工具,主要功能是生成一个词法分析器(scanner)的C源码,描述规则采用正则表达式(regular expression)。描述词法分析器的文件*.l，经过lex编译后，生成一个lex.yy.c 的文件，然后由C编译器编译生成一个词法分析器。词法分析器，简单来说，其任务就是将输入的各种符号，转化成相应的标识">
+  <meta name="description" content="1.线性规划的概念线性规划(Linear Programming 简记 LP)是了运筹学中数学规划的一个重要分支。自从 1947 年 G. B. Dantzig 提出 求解线性规划的单纯形法以来，线性规划在理论上趋向成熟，在实用中由于计算机能处理成千上万个约束条件和决策变量的线性规划问题之后，线性规划现代管理中经常采用的基本方法之一。 在解决实际问题时，需要把问题归结成一个线性规划数学模型，关键及">
 <meta property="og:type" content="article">
-<meta property="og:title" content="lex词法分析器语法+实验">
-<meta property="og:url" content="http://ilpvc.github.io/2022/04/29/lex%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8%E8%AF%AD%E6%B3%95-%E5%AE%9E%E9%AA%8C/index.html">
+<meta property="og:title" content="线性规划问题">
+<meta property="og:url" content="http://ilpvc.github.io/2022/05/02/%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="ilpvc">
-<meta property="og:description" content="lex词法分析器Lex是LEXical compiler的缩写，是Unix环境下非常著名的工具,主要功能是生成一个词法分析器(scanner)的C源码,描述规则采用正则表达式(regular expression)。描述词法分析器的文件*.l，经过lex编译后，生成一个lex.yy.c 的文件，然后由C编译器编译生成一个词法分析器。词法分析器，简单来说，其任务就是将输入的各种符号，转化成相应的标识">
+<meta property="og:description" content="1.线性规划的概念线性规划(Linear Programming 简记 LP)是了运筹学中数学规划的一个重要分支。自从 1947 年 G. B. Dantzig 提出 求解线性规划的单纯形法以来，线性规划在理论上趋向成熟，在实用中由于计算机能处理成千上万个约束条件和决策变量的线性规划问题之后，线性规划现代管理中经常采用的基本方法之一。 在解决实际问题时，需要把问题归结成一个线性规划数学模型，关键及">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://ilpvc.github.io/images/logo.png">
-<meta property="article:published_time" content="2022-04-29T08:34:29.000Z">
-<meta property="article:modified_time" content="2022-04-29T08:44:12.992Z">
+<meta property="article:published_time" content="2022-05-02T00:23:33.000Z">
+<meta property="article:modified_time" content="2022-05-02T00:35:43.345Z">
 <meta property="article:author" content="ilpvc">
-<meta property="article:tag" content="c语言">
+<meta property="article:tag" content="最优化理论">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://ilpvc.github.io/images/logo.png">
 <meta name="twitter:site" content="@null">
@@ -180,17 +180,17 @@
     <div class="kratos-hentry kratos-post-inner clearfix">
         <header class="kratos-entry-header">
             
-                <h1 class="kratos-entry-title text-center">lex词法分析器语法+实验</h1>
+                <h1 class="kratos-entry-title text-center">线性规划问题</h1>
             
             
             <ul class="kratos-post-meta text-center">
-                <li><i class="fa fa-calendar"></i> 2022-04-29</li>
+                <li><i class="fa fa-calendar"></i> 2022-05-02</li>
                 <li><i class="fa fa-user"></i> 作者 ilpvc</li>
                 <li>
                     <i class="fa fa-edit"></i> 
                     
                     
-                        ~1.72K
+                        ~1.82K
                     
                     字
                 </li>
@@ -199,40 +199,57 @@
         </header>
         <div class="kratos-post-content">
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1651221852992"></time> 前，其中的内容可能需要更新。
+                本文最后编辑于 <time datetime="1651451743345"></time> 前，其中的内容可能需要更新。
             </div>
             
             <hr />
-            <h3 id="lex词法分析器"><a href="#lex词法分析器" class="headerlink" title="lex词法分析器"></a>lex词法分析器</h3><p>Lex是LEXical compiler的缩写，是Unix环境下非常著名的工具,主要功能是生成一个词法分析器(scanner)的C源码,描述规则采用正则表达式(regular expression)。描述词法分析器的文件*.l，经过lex编译后，生成一个lex.yy.c 的文件，然后由C编译器编译生成一个词法分析器。词法分析器，简单来说，其任务就是将输入的各种符号，转化成相应的标识符(token)，转化后的标识符 很容易被后续阶段处理。 —— [<a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=DKF+jPXr/IrO38QOqzaDew==.YXj5UoakqwCBY404TA0/uw3J2B6Khy7T9K5AzuhOw9ouSgDDUZFRI38JcPO/Dd9m"> 百度百科 ]</a></p>
-<h3 id="Lex语法格式"><a href="#Lex语法格式" class="headerlink" title="Lex语法格式"></a>Lex语法格式</h3><p>flex的语法被分为三个部分：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;definitions&#125; <span class="comment">//声明部分</span></span><br><span class="line">%%</span><br><span class="line">&#123;rules&#125; <span class="comment">//转换规则</span></span><br><span class="line">%%</span><br><span class="line">&#123;user subroutines&#125;<span class="comment">//辅助函数</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+            <h3 id="1-线性规划的概念"><a href="#1-线性规划的概念" class="headerlink" title="1.线性规划的概念"></a>1.线性规划的概念</h3><p>线性规划(Linear Programming 简记 LP)是了运筹学中数学规划的一个重要分支。自从 1947 年 G. B. Dantzig 提出 求解线性规划的单纯形法以来，线性规划在理论上趋向成熟，在实用中由于计算机能处理成千上万个约束条件和决策变量的线性规划问题之后，线性规划现代管理中经常采用的基本方法之一。 在解决实际问题时，需要把问题归结成一个线性规划数学模型，关键及难点在于选适当的决策变量建立恰当的模型，这直接影响到问题的求解。</p>
+<p> 线性规划问题的目标函数及约束条件均为线性函数；约束条件记为 s.t.(即 subject to)。目标函数可以是求最大值，也可以是求最小值，约束条件的不等号可以 是小于号也可以是大于号。</p>
+<p>一般线性规划问题的（数学）标准型为</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/20190329151240157.png"></p>
+<p>​    <strong>实例：</strong></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/20190424195022627.png"></p>
+<h3 id="2-线性规划问题的解的概念-：可行解、可行域、图解法"><a href="#2-线性规划问题的解的概念-：可行解、可行域、图解法" class="headerlink" title="2.线性规划问题的解的概念 ：可行解、可行域、图解法"></a>2.线性规划问题的解的概念 ：可行解、可行域、图解法</h3><p>可行解  满足约束条件（4）的解  称为线性规划问题的可行解， 而使目标函数（3）达到最大值的可行解叫最优解。</p>
+<p>可行域  所有可行解构成的集合称为问题的可行域，记为R 。</p>
+<p>图解法 简单直观，适用于二维决策变量，它有助于了解线性规划问题求解的基本原理。。对于每一固定的值z，使目标函数值等于z的点构成的直线称为目标函数等位线，当z变动时，我们得到一族平行直线。</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/20190424195312914.png"></p>
+<h3 id="2-1-推广到多维空间的线性规划：超平面、多胞形、多面体"><a href="#2-1-推广到多维空间的线性规划：超平面、多胞形、多面体" class="headerlink" title="2.1. 推广到多维空间的线性规划：超平面、多胞形、多面体"></a>2.1. 推广到多维空间的线性规划：超平面、多胞形、多面体</h3><p>以下结论可以推广到一般的线性规划问题，区别只在于空间的维数：</p>
+<p>（1）可行域R 可能会出现多种情况。R 可能是空集也可能是非空集合，当R 非空 时，它必定是若干个半平面的交集（除非遇到空间维数的退化） 。R 既可能是有界区域， 也可能是无界区域。</p>
+<p>（2）在R 非空时，线性规划既可以存在有限最优解，也可以不存在有限最优解（其 目标函数值无界）。</p>
+<p>（3）若线性规划存在有限最优解，则必可找到具有最优目标函数值的可行域R 的 “顶点” 。</p>
+<p>在一般的n维 空间中，满足线性等式  <img src="https://presenter.oss-cn-shanghai.aliyuncs.com/gif.gif">的点集被称为一个<strong>超平面；</strong></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/gif.gif">或<img src="https://presenter.oss-cn-shanghai.aliyuncs.com/gif.gif">的点集被称为一个半空间，其中<img src="https://presenter.oss-cn-shanghai.aliyuncs.com/gif%20(1).gif">为一个n维行向量，b为一个实数。</p>
+<p>若干个半空间的交集被称为多胞形，有界的多胞形又被称为多面体。易见，线性规划的可行域必为多胞形（为统一起见，空集Φ也被视为多胞形）。 在一般n维空间中，要直接得出多胞形“顶点”概念还有一些困难。二维空间中的顶点可以看成为边界直线的交点，但这一几何概念的推广在一般n维空间中的几何意义并不十分直观。为此，我们将采用另一途径来定义它。</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/20190329152724917.png"></p>
+<p>单纯形法是求解线性规划问题的最常用、最有效的算法之一 ，此处不作介绍。这里我们就不介绍 单纯形法，有兴趣的读者可以参看其它线性规划书籍。下面我们介绍线性规划的 Matlab 解法。</p>
+<h3 id="3-求解线性规划的-Matlab-解法"><a href="#3-求解线性规划的-Matlab-解法" class="headerlink" title="3.求解线性规划的 Matlab 解法"></a>3.求解线性规划的 Matlab 解法</h3><p>Matlab 中规定线性规划的标准形式为</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/2019032915072569.png"></p>
+<p>其中c和 x为n 维列向量， A、 Aeq 为适当维数的矩阵，b 、beq为适当维数的列向量。 （<strong>Aeq</strong> 对应约束条件中<strong>等式约束</strong>的系数矩阵，A为约<strong>不等式约束</strong>的系数矩阵）。</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/20190329153446939.png"></p>
+<p>基本函数形式为 linprog(c,A,b)，它的返回值是向量 x的值。还有其它的一些函数调用形 式（在 Matlab 指令窗运行 help linprog 可以看到所有的函数调用形式），如：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[x,fval]=linprog(c,A,b,Aeq,beq,LB,UB,X0,OPTIONS) </span><br></pre></td></tr></table></figure>
 
-<p>声明部分</p>
-<p>声明部分通常包括变量，明示常量和正则表达式的定义，明示常量是一个值为数字的标识符，用来表示词法单元的类型。</p>
-<p>转换规则</p>
-<p>转换规则具有如下的形式: 模式 { 动作 }。每个模式是一个正则表达式，可以使用声明部分给出的正则定义。动作部分是代码片段，通常用 C 语言编写。</p>
-<p>辅助函数</p>
-<p>这个部分中定义了各个动作所需要的函数，也可以包含 main 函数，这部分的代码将会放到输出的 C 代码中。</p>
-<p><strong>实例：</strong></p>
-<ol>
-<li>为文本文件添加行号</li>
-</ol>
-<p>代码：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"> %&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="keyword">int</span> lineno=<span class="number">1</span>;</span><br><span class="line">%&#125;</span><br><span class="line"></span><br><span class="line">%%</span><br><span class="line">[^\n] 	&#123;yymore();&#125;</span><br><span class="line">\n 	&#123;<span class="built_in">printf</span>(<span class="string">&quot;%1d %s&quot;</span>,lineno++,yytext);&#125;</span><br><span class="line">%%</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">yywrap</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line">main()</span><br><span class="line">&#123;</span><br><span class="line">  yylex();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里 <strong>fval 返回目标函数的值，LB 和 UB 分别是变量 x的下界和上界， 0 x 是x的初始值， OPTIONS 是控制参数</strong>。 </p>
+<h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><p>例如求解下列线性规划问题 </p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/20190329153141919.png"></p>
+<p>解 （i）编写 M 文件 </p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">c=[<span class="number">2</span>;<span class="number">3</span>;<span class="number">-5</span>]; </span><br><span class="line">a=[<span class="number">-2</span>,<span class="number">5</span>,<span class="number">-1</span>;<span class="number">1</span>,<span class="number">3</span>,<span class="number">1</span>]; </span><br><span class="line">b=[<span class="number">-10</span>;<span class="number">12</span>]; </span><br><span class="line">aeq=[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]; </span><br><span class="line">beq=<span class="number">7</span>; </span><br><span class="line">x=linprog(-c,a,b,aeq,beq,<span class="built_in">zeros</span>(<span class="number">3</span>,<span class="number">1</span>)) </span><br><span class="line">value=c&#x27;*x</span><br></pre></td></tr></table></figure>
 
-<p>待测试文件：</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/wps2.jpg" alt="img"> </p>
-<p>结果：</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/wps3.jpg" alt="img"> </p>
-<ol start="2">
-<li>编写LEX源程序，其功能是将文本中的十进制数替换成十六进制，并打印被替换的次数</li>
-</ol>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">%&#123;</span><br><span class="line">    <span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line">    <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line">    <span class="keyword">int</span> count=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> n=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> i=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> j =<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">char</span> hex[<span class="number">16</span>];</span><br><span class="line">    <span class="keyword">char</span> arr[] = <span class="string">&quot;0123456789ABCDEF&quot;</span>;</span><br><span class="line">%&#125;</span><br><span class="line">%%</span><br><span class="line"></span><br><span class="line">[<span class="number">0</span>][x][<span class="number">0</span><span class="number">-9</span>A-F]* &#123;<span class="built_in">printf</span>(<span class="string">&quot;\nCONFIRM IS hexadecimal!!!&quot;</span>);&#125; </span><br><span class="line"></span><br><span class="line">[<span class="number">1</span><span class="number">-9</span>][<span class="number">0</span><span class="number">-9</span>]* &#123;</span><br><span class="line">  n = atoi(yytext);</span><br><span class="line">  <span class="keyword">while</span> (n)</span><br><span class="line">    &#123;</span><br><span class="line">        hex[i++] = arr[n%<span class="number">16</span>];  </span><br><span class="line">        n = n / <span class="number">16</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (j = i - <span class="number">1</span>; j &gt;= <span class="number">0</span>; --j)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>, hex[j]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\nNumber of conversion: %d&quot;</span>,++count);</span><br><span class="line">    <span class="keyword">for</span> (j = i - <span class="number">1</span>; j &gt;= <span class="number">0</span>; --j)&#123;</span><br><span class="line">        hex[j]=<span class="string">&quot; &quot;</span>;</span><br><span class="line">        i=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">[<span class="number">0</span><span class="number">-9</span>]+ &#123;<span class="built_in">printf</span>(<span class="string">&quot;\nerror number!!&quot;</span>);&#125;</span><br><span class="line">%%</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">yywrap</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line">main()</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">int</span> n=yylex();</span><br><span class="line">  <span class="keyword">return</span> n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>（ii）将M文件存盘，并命名为example1.m。</p>
+<p>（iii）在Matlab指令窗运行example1即可得所求结果。 </p>
+<p>例3 求解线性规划问题 </p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/20190424195629342.png"></p>
+<p>解  编写Matlab程序如下： </p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">c=[<span class="number">2</span>;<span class="number">3</span>;<span class="number">1</span>]; </span><br><span class="line">a=[<span class="number">1</span>,<span class="number">4</span>,<span class="number">2</span>;<span class="number">3</span>,<span class="number">2</span>,<span class="number">0</span>]; </span><br><span class="line">b=[<span class="number">8</span>;<span class="number">6</span>]; </span><br><span class="line">[x,y]=linprog(c,-a,-b,[],[],<span class="built_in">zeros</span>(<span class="number">3</span>,<span class="number">1</span>)) </span><br></pre></td></tr></table></figure>
 
-<p>待测试文件：</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/wps4.jpg" alt="img"> </p>
-<p>测试结果：</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/wps5.jpg" alt="img"> </p>
+
+
+
+
+
+
+
+
 
         </div>
         
@@ -286,7 +303,7 @@
     <script type="text/javascript">
         $(()=>{
             new QRCode("wechat-qr", {
-                text: "http://ilpvc.github.io/2022/04/29/lex%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8%E8%AF%AD%E6%B3%95-%E5%AE%9E%E9%AA%8C/",
+                text: "http://ilpvc.github.io/2022/05/02/%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92%E9%97%AE%E9%A2%98/",
                 width: 150,
                 height: 150,
                 correctLevel : QRCode.CorrectLevel.H
@@ -298,9 +315,9 @@
             const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
             const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
             const twitterBase   = "https://twitter.com/intent/tweet?";
-            const hostUrl       = "http://ilpvc.github.io/2022/04/29/lex%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8%E8%AF%AD%E6%B3%95-%E5%AE%9E%E9%AA%8C/";
-            const title         = "「lex词法分析器语法+实验」";
-            const excerpt       = `lex词法分析器Lex是LEXical compiler的缩写，是Unix环境下非常著名的工具,主要功能是生成一个词法分析器(scanner)的C源码,描述规则采用正则表达式(regular expression)。描述词法分析器的文...`;
+            const hostUrl       = "http://ilpvc.github.io/2022/05/02/%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92%E9%97%AE%E9%A2%98/";
+            const title         = "「线性规划问题」";
+            const excerpt       = `1.线性规划的概念线性规划(Linear Programming 简记 LP)是了运筹学中数学规划的一个重要分支。自从 1947 年 G. B. Dantzig 提出 求解线性规划的单纯形法以来，线性规划在理论上趋向成熟，在实用中由于...`;
             let _URL;
             switch (dest) {
                 case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
@@ -319,10 +336,10 @@
             <div class="footer-tag clearfix">
                 <div class="pull-left">
                 <i class="fa fa-tags"></i>
-                    <a class="tag-none-link" href="/tags/c%E8%AF%AD%E8%A8%80/" rel="tag">c语言</a>
+                    <a class="tag-none-link" href="/tags/%E6%9C%80%E4%BC%98%E5%8C%96%E7%90%86%E8%AE%BA/" rel="tag">最优化理论</a>
                 </div>
                 <div class="pull-date">
-                <span>最后编辑：2022-04-29</span>
+                <span>最后编辑：2022-05-02</span>
                 </div>
             </div>
         </footer>
@@ -331,13 +348,9 @@
         <nav class="navigation post-navigation clearfix" role="navigation">
             
             <div class="nav-previous clearfix">
-                <a title=" Android的Fragment实现导航栏" href="/2022/04/28/Android的Fragment实现导航栏/">&lt; 上一篇</a>
+                <a title=" 二叉树遍历" href="/2022/05/01/二叉树遍历/">&lt; 上一篇</a>
             </div>
             
-            
-            <div class="nav-next clearfix">
-                <a title=" Android使用SQLite基础" href="/2022/04/30/Android使用SQLite基础/">下一篇 &gt;</a>
-            </div>
             
         </nav>
     

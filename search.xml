@@ -2260,4 +2260,59 @@
         <tag>数据结构</tag>
       </tags>
   </entry>
+  <entry>
+    <title>线性规划问题</title>
+    <url>/2022/05/02/%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<h3 id="1-线性规划的概念"><a href="#1-线性规划的概念" class="headerlink" title="1.线性规划的概念"></a>1.线性规划的概念</h3><p>线性规划(Linear Programming 简记 LP)是了运筹学中数学规划的一个重要分支。自从 1947 年 G. B. Dantzig 提出 求解线性规划的单纯形法以来，线性规划在理论上趋向成熟，在实用中由于计算机能处理成千上万个约束条件和决策变量的线性规划问题之后，线性规划现代管理中经常采用的基本方法之一。 在解决实际问题时，需要把问题归结成一个线性规划数学模型，关键及难点在于选适当的决策变量建立恰当的模型，这直接影响到问题的求解。</p>
+<p> 线性规划问题的目标函数及约束条件均为线性函数；约束条件记为 s.t.(即 subject to)。目标函数可以是求最大值，也可以是求最小值，约束条件的不等号可以 是小于号也可以是大于号。</p>
+<p>一般线性规划问题的（数学）标准型为</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/20190329151240157.png"></p>
+<p>​    <strong>实例：</strong></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/20190424195022627.png"></p>
+<h3 id="2-线性规划问题的解的概念-：可行解、可行域、图解法"><a href="#2-线性规划问题的解的概念-：可行解、可行域、图解法" class="headerlink" title="2.线性规划问题的解的概念 ：可行解、可行域、图解法"></a>2.线性规划问题的解的概念 ：可行解、可行域、图解法</h3><p>可行解  满足约束条件（4）的解  称为线性规划问题的可行解， 而使目标函数（3）达到最大值的可行解叫最优解。</p>
+<p>可行域  所有可行解构成的集合称为问题的可行域，记为R 。</p>
+<p>图解法 简单直观，适用于二维决策变量，它有助于了解线性规划问题求解的基本原理。。对于每一固定的值z，使目标函数值等于z的点构成的直线称为目标函数等位线，当z变动时，我们得到一族平行直线。</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/20190424195312914.png"></p>
+<h3 id="2-1-推广到多维空间的线性规划：超平面、多胞形、多面体"><a href="#2-1-推广到多维空间的线性规划：超平面、多胞形、多面体" class="headerlink" title="2.1. 推广到多维空间的线性规划：超平面、多胞形、多面体"></a>2.1. 推广到多维空间的线性规划：超平面、多胞形、多面体</h3><p>以下结论可以推广到一般的线性规划问题，区别只在于空间的维数：</p>
+<p>（1）可行域R 可能会出现多种情况。R 可能是空集也可能是非空集合，当R 非空 时，它必定是若干个半平面的交集（除非遇到空间维数的退化） 。R 既可能是有界区域， 也可能是无界区域。</p>
+<p>（2）在R 非空时，线性规划既可以存在有限最优解，也可以不存在有限最优解（其 目标函数值无界）。</p>
+<p>（3）若线性规划存在有限最优解，则必可找到具有最优目标函数值的可行域R 的 “顶点” 。</p>
+<p>在一般的n维 空间中，满足线性等式  <img src="https://presenter.oss-cn-shanghai.aliyuncs.com/gif.gif">的点集被称为一个<strong>超平面；</strong></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/gif.gif">或<img src="https://presenter.oss-cn-shanghai.aliyuncs.com/gif.gif">的点集被称为一个半空间，其中<img src="https://presenter.oss-cn-shanghai.aliyuncs.com/gif%20(1).gif">为一个n维行向量，b为一个实数。</p>
+<p>若干个半空间的交集被称为多胞形，有界的多胞形又被称为多面体。易见，线性规划的可行域必为多胞形（为统一起见，空集Φ也被视为多胞形）。 在一般n维空间中，要直接得出多胞形“顶点”概念还有一些困难。二维空间中的顶点可以看成为边界直线的交点，但这一几何概念的推广在一般n维空间中的几何意义并不十分直观。为此，我们将采用另一途径来定义它。</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/20190329152724917.png"></p>
+<p>单纯形法是求解线性规划问题的最常用、最有效的算法之一 ，此处不作介绍。这里我们就不介绍 单纯形法，有兴趣的读者可以参看其它线性规划书籍。下面我们介绍线性规划的 Matlab 解法。</p>
+<h3 id="3-求解线性规划的-Matlab-解法"><a href="#3-求解线性规划的-Matlab-解法" class="headerlink" title="3.求解线性规划的 Matlab 解法"></a>3.求解线性规划的 Matlab 解法</h3><p>Matlab 中规定线性规划的标准形式为</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/2019032915072569.png"></p>
+<p>其中c和 x为n 维列向量， A、 Aeq 为适当维数的矩阵，b 、beq为适当维数的列向量。 （<strong>Aeq</strong> 对应约束条件中<strong>等式约束</strong>的系数矩阵，A为约<strong>不等式约束</strong>的系数矩阵）。</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/20190329153446939.png"></p>
+<p>基本函数形式为 linprog(c,A,b)，它的返回值是向量 x的值。还有其它的一些函数调用形 式（在 Matlab 指令窗运行 help linprog 可以看到所有的函数调用形式），如：</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">[x,fval]=linprog(c,A,b,Aeq,beq,LB,UB,X0,OPTIONS) </span><br></pre></td></tr></table></figure>
+
+<p>这里 <strong>fval 返回目标函数的值，LB 和 UB 分别是变量 x的下界和上界， 0 x 是x的初始值， OPTIONS 是控制参数</strong>。 </p>
+<h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><p>例如求解下列线性规划问题 </p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/20190329153141919.png"></p>
+<p>解 （i）编写 M 文件 </p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">c=[<span class="number">2</span>;<span class="number">3</span>;<span class="number">-5</span>]; </span><br><span class="line">a=[<span class="number">-2</span>,<span class="number">5</span>,<span class="number">-1</span>;<span class="number">1</span>,<span class="number">3</span>,<span class="number">1</span>]; </span><br><span class="line">b=[<span class="number">-10</span>;<span class="number">12</span>]; </span><br><span class="line">aeq=[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]; </span><br><span class="line">beq=<span class="number">7</span>; </span><br><span class="line">x=linprog(-c,a,b,aeq,beq,<span class="built_in">zeros</span>(<span class="number">3</span>,<span class="number">1</span>)) </span><br><span class="line">value=c&#x27;*x</span><br></pre></td></tr></table></figure>
+
+<p>（ii）将M文件存盘，并命名为example1.m。</p>
+<p>（iii）在Matlab指令窗运行example1即可得所求结果。 </p>
+<p>例3 求解线性规划问题 </p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/20190424195629342.png"></p>
+<p>解  编写Matlab程序如下： </p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">c=[<span class="number">2</span>;<span class="number">3</span>;<span class="number">1</span>]; </span><br><span class="line">a=[<span class="number">1</span>,<span class="number">4</span>,<span class="number">2</span>;<span class="number">3</span>,<span class="number">2</span>,<span class="number">0</span>]; </span><br><span class="line">b=[<span class="number">8</span>;<span class="number">6</span>]; </span><br><span class="line">[x,y]=linprog(c,-a,-b,[],[],<span class="built_in">zeros</span>(<span class="number">3</span>,<span class="number">1</span>)) </span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+]]></content>
+      <tags>
+        <tag>最优化理论</tag>
+      </tags>
+  </entry>
 </search>
