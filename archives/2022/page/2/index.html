@@ -4,7 +4,7 @@
   <!-- 元数据 -->
   <meta charset="utf-8">
   <link rel="icon" href="/images/logo.png">
-  <title>bat批处理 | ilpvc</title>
+  <title>ilpvc</title>
   <meta name="author" content="ilpvc" />
   <meta http-equiv="Cache-Control" content="no-transform" />
   <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -13,20 +13,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <meta name="format-detection" content="telphone=no, email=no" />
   
-    <meta name="keywords" content="bat" />
+    <meta name="keywords" content="" />
   
-  <meta name="description" content="基本用法 pause  :使脚本程序暂停，即会输出“请按任意键输出的字样”，主要用于需要打印一些数据，如果不加pause，脚本运行结束直接关闭，将无法看到结果。可以加 &gt;nul把这个信息隐藏。 **@**：它的作用是隐藏它后面这一行的命令本身（只能影响当前行）。 % : %0表示这个文件本身，%1，%2（%[0-9]）分别是后面的参数  一、for循环 1234567891011121314">
-<meta property="og:type" content="article">
-<meta property="og:title" content="bat批处理">
-<meta property="og:url" content="http://ilpvc.github.io/2022/03/18/bat%E6%89%B9%E5%A4%84%E7%90%86/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="ilpvc">
+<meta property="og:url" content="http://ilpvc.github.io/archives/2022/page/2/index.html">
 <meta property="og:site_name" content="ilpvc">
-<meta property="og:description" content="基本用法 pause  :使脚本程序暂停，即会输出“请按任意键输出的字样”，主要用于需要打印一些数据，如果不加pause，脚本运行结束直接关闭，将无法看到结果。可以加 &gt;nul把这个信息隐藏。 **@**：它的作用是隐藏它后面这一行的命令本身（只能影响当前行）。 % : %0表示这个文件本身，%1，%2（%[0-9]）分别是后面的参数  一、for循环 1234567891011121314">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://ilpvc.github.io/images/logo.png">
-<meta property="article:published_time" content="2022-03-18T15:48:04.000Z">
-<meta property="article:modified_time" content="2022-04-28T14:39:49.856Z">
 <meta property="article:author" content="ilpvc">
-<meta property="article:tag" content="bat">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://ilpvc.github.io/images/logo.png">
 <meta name="twitter:site" content="@null">
@@ -176,179 +171,85 @@
 
         
 
-            <article>
-    <div class="kratos-hentry kratos-post-inner clearfix">
-        <header class="kratos-entry-header">
             
-                <h1 class="kratos-entry-title text-center">bat批处理</h1>
-            
-            
-            <ul class="kratos-post-meta text-center">
-                <li><i class="fa fa-calendar"></i> 2022-03-18</li>
-                <li><i class="fa fa-user"></i> 作者 ilpvc</li>
-                <li>
-                    <i class="fa fa-edit"></i> 
-                    
-                    
-                        671
-                    
-                    字
-                </li>
+<style>
+  .post-meta time{color:#00a7e0}
+  @media (max-width:767px){.posts-collapse{margin:0 20px}
+  .posts-collapse .post-meta,.posts-collapse .post-title{display:block;width:auto;text-align:left}}
+  .posts-collapse{position:relative}
+  .posts-collapse::after{content:" ";position:absolute;top:20px;left:0;margin-left:-2px;width:4px;height:calc(100% - 35px);background:#f5f5f5;z-index:-1}
+  @media (max-width:991px){.posts-collapse{margin:0 20px}}
+  .posts-collapse .collection-title{position:relative}
+  .posts-collapse .collection-title h1,.posts-collapse .collection-title h2{margin-left:20px}.posts-collapse .collection-title small{color:#bbb;margin-left:5px}
+  .posts-collapse .collection-title::before{content:" ";position:absolute;left:0;top:50%;margin-left:-4px;margin-top:-4px;width:8px;height:8px;background:#bbb;border-radius:50%}
+  .posts-collapse .post-header{position:relative;transition-duration:.2s;transition-timing-function:ease-in-out;transition-delay:0s;transition-property:border}
+  .posts-collapse .post-header::before{content:" ";position:absolute;left:0;top:12px;width:6px;height:6px;margin-left:-4px;background:#bbb;border-radius:50%;border:1px solid #fff}
+  .posts-collapse .post-header:hover{border-bottom-color:#666}.posts-collapse .post-header:hover::before{background:#222}
+  .posts-collapse .post-meta{position:absolute;font-size:12px;left:20px;top:5px}
+  .posts-collapse .post-comments-count{display:none}
+  .posts-collapse .post-title{margin-left:70px;font-size:16px;font-weight:400;line-height:inherit}
+  .posts-collapse .post-title::after{margin-left:3px;opacity:.6}.posts-collapse .post-title a{color:#666;border-bottom:none}
+  .kratos-post-content div.arc-tags{margin-bottom:30px}
+  .arc-tags a{-webkit-box-shadow:0 1px 4px rgba(0,0,0,.1);box-shadow:0 1px 4px rgba(0,0,0,.1);border:1px solid #fff;border-radius:15px;margin:4px 8px 0 0;font-weight:500;display:inline-block;padding:0 12px;background:rgba(255,255,255,.5);font-size:16px;}
+  .arc-tags a::before{content:"# ";color:#e8a6a6}
+</style>
+
+  <article>
+      <div class="kratos-hentry kratos-post-inner clearfix">
+          <div class="kratos-post-content">
+            <h2 class="title-h2 text-center">文章归档</h2>
+            <div id="archives">
                 
-            </ul>
-        </header>
-        <div class="kratos-post-content">
-            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1651156789856"></time> 前，其中的内容可能需要更新。
+                  <div class="arc-tags">
+                      <a class="tag-none-link" href="/tags/Android/" rel="tag">Android</a> <a class="tag-none-link" href="/tags/C%E8%AF%AD%E8%A8%80/" rel="tag">C语言</a> <a class="tag-none-link" href="/tags/LINUX/" rel="tag">LINUX</a> <a class="tag-none-link" href="/tags/bat/" rel="tag">bat</a> <a class="tag-none-link" href="/tags/c%E8%AF%AD%E8%A8%80/" rel="tag">c语言</a> <a class="tag-none-link" href="/tags/git/" rel="tag">git</a> <a class="tag-none-link" href="/tags/linux/" rel="tag">linux</a> <a class="tag-none-link" href="/tags/npm/" rel="tag">npm</a> <a class="tag-none-link" href="/tags/office/" rel="tag">office</a> <a class="tag-none-link" href="/tags/ps/" rel="tag">ps</a> <a class="tag-none-link" href="/tags/python/" rel="tag">python</a> <a class="tag-none-link" href="/tags/win11/" rel="tag">win11</a> <a class="tag-none-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a> <a class="tag-none-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a> <a class="tag-none-link" href="/tags/%E6%9C%80%E4%BC%98%E5%8C%96%E7%90%86%E8%AE%BA/" rel="tag">最优化理论</a> <a class="tag-none-link" href="/tags/%E7%A0%B4%E8%A7%A3/" rel="tag">破解</a> <a class="tag-none-link" href="/tags/%E9%98%BF%E9%87%8C%E4%BA%91/" rel="tag">阿里云</a>
+                  </div>
+                
+                <div class="post-block archive post" style="margin-left: 2em;">
+                  <h3 class="archive-page-counter">当前共有 1 篇文章 (゜-゜)つロ 干杯~</h3>
+                  <div class="posts-collapse">
+                    
+                    
+                      
+                      
+                        <!-- 没遇到Title的会被自动忽略年份，即使并不一致 -->
+                        
+                        <div class="collection-title">
+                          <a href="/archives/2022/"><h2 class="archive-year">2022</h2></a>
+                        </div>
+                      
+                      
+                        <article class="post" itemscope>
+                          <header class="post-header">
+                            <h3 class="post-title">
+                              
+                                  <a class="post-title-link" href="/2022/03/12/office%E6%BF%80%E6%B4%BB/" itemprop="url">
+                                    <span itemprop="name">office激活</span>
+                                  </a>
+                              
+                            </h3>
+                            <div class="post-meta">
+                              <time class="post-time" itemprop="dateCreated"
+                                    datetime="2022-03-12T18:26:42+08:00"
+                                    content="2022-03-12" >
+                                03-12
+                              </time>
+                            </div>
+                          </header>
+                        </article>
+                      
+                    
+                  </div>
+                </div>
             </div>
-            
-            <hr />
-            <h3 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h3><blockquote>
-<p><em><strong>pause</strong></em>  :使脚本程序暂停，即会输出“请按任意键输出的字样”，主要用于需要打印一些数据，如果不加pause，脚本运行结束直接关闭，将无法看到结果。可以加 &gt;nul把这个信息隐藏。</p>
-<p>**@**：它的作用是隐藏它后面这一行的命令本身（只能影响当前行）。</p>
-<p><strong>%</strong> : %0表示这个文件本身，%1，%2（%[0-9]）分别是后面的参数</p>
-</blockquote>
-<p><strong>一、for循环</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1.</span></span><br><span class="line"><span class="comment">#输出ABC</span></span><br><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"><span class="keyword">for</span>  %%I <span class="keyword">in</span> (ABC) <span class="keyword">do</span> <span class="built_in">echo</span> %%I</span><br><span class="line">pause</span><br><span class="line"><span class="comment">#结果</span></span><br><span class="line"><span class="comment">#ABC</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#2.</span></span><br><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"><span class="keyword">for</span>  %%I <span class="keyword">in</span> (A,B,C) <span class="keyword">do</span> <span class="built_in">echo</span> %%I</span><br><span class="line">pause</span><br><span class="line"><span class="comment">#结果</span></span><br><span class="line"><span class="comment">#A</span></span><br><span class="line"><span class="comment">#B</span></span><br><span class="line"><span class="comment">#C</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><strong>高级用法：</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#搜索当前目录的所有文件</span></span><br><span class="line"></span><br><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"><span class="keyword">for</span> %%i <span class="keyword">in</span> (*.*) <span class="keyword">do</span> <span class="built_in">echo</span> <span class="string">&quot;%%i&quot;</span></span><br><span class="line">pause</span><br><span class="line"></span><br><span class="line"><span class="comment">#搜索当前目录的文本文件</span></span><br><span class="line"></span><br><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"><span class="keyword">for</span> %%i <span class="keyword">in</span> (*.txt) <span class="built_in">echo</span> <span class="string">&quot;%%i&quot;</span></span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h3 id="批量处理文件"><a href="#批量处理文件" class="headerlink" title="批量处理文件"></a>批量处理文件</h3><p><strong>实例</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">#批量修改文件名称</span></span><br><span class="line"></span><br><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> a=1</span><br><span class="line"></span><br><span class="line">setlocal EnableDelayedExpansion</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> %%n <span class="keyword">in</span> (*.jpg) <span class="keyword">do</span> (</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> /A a+=1</span><br><span class="line"></span><br><span class="line">ren <span class="string">&quot;%%n&quot;</span> <span class="string">&quot;动漫!a!.jpg&quot;</span></span><br><span class="line"></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"> </span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
         </div>
-        
-            <div class="kratos-copyright text-center clearfix">
-                <h5>本作品采用 <a rel="license nofollow" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">知识共享署名-相同方式共享 4.0 国际许可协议</a> 进行许可</h5>
-            </div>
-        
-        <footer class="kratos-entry-footer clearfix">
-            
-                <div class="post-like-donate text-center clearfix" id="post-like-donate">
-                
-                
-                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> 分享</a>
-                    <div class="share-wrap" style="display: none;">
-    <div class="share-group">
-        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
-            <div class="icon-wrap">
-                <i class="fa fa-qq"></i>
-            </div>
-        </a>
-        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
-            <div class="icon-wrap">
-                <i class="fa fa-star"></i>
-            </div>
-        </a>
-        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
-            <div class="icon-wrap">
-                <i class="fa fa-weixin"></i>
-            </div>
-            <div class="share-int">
-                <div class="qrcode" id="wechat-qr"></div>
-                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
-            </div>
-        </a>
-        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
-            <div class="icon-wrap">
-                <i class="fa fa-weibo"></i>
-            </div>
-        </a>
-        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
-            <div class="icon-wrap">
-                <i class="fa fa-facebook"></i>
-            </div>
-        </a>
-        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
-            <div class="icon-wrap">
-                <i class="fa fa-twitter"></i>
-            </div>
-        </a>
-    </div>
-    <script type="text/javascript">
-        $(()=>{
-            new QRCode("wechat-qr", {
-                text: "http://ilpvc.github.io/2022/03/18/bat%E6%89%B9%E5%A4%84%E7%90%86/",
-                width: 150,
-                height: 150,
-                correctLevel : QRCode.CorrectLevel.H
-            });
-        });
-        function share(dest) {
-            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
-            const weiboBase     = "https://service.weibo.com/share/share.php?";
-            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
-            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
-            const twitterBase   = "https://twitter.com/intent/tweet?";
-            const hostUrl       = "http://ilpvc.github.io/2022/03/18/bat%E6%89%B9%E5%A4%84%E7%90%86/";
-            const title         = "「bat批处理」";
-            const excerpt       = `基本用法
-pause  :使脚本程序暂停，即会输出“请按任意键输出的字样”，主要用于需要打印一些数据，如果不加pause，脚本运行结束直接关闭，将无法看到结果。可以加 &gt;nul把这个信息隐藏。
-**@**：它的作用是隐藏它后面这...`;
-            let _URL;
-            switch (dest) {
-                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
-                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
-                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
-                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
-                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
-            }
-            window.open(_URL);
-        };
-    </script>
-</div>
-                
-                </div>
-            
-            <div class="footer-tag clearfix">
-                <div class="pull-left">
-                <i class="fa fa-tags"></i>
-                    <a class="tag-none-link" href="/tags/bat/" rel="tag">bat</a>
-                </div>
-                <div class="pull-date">
-                <span>最后编辑：2022-04-28</span>
-                </div>
-            </div>
-        </footer>
-    </div>
-    
-        <nav class="navigation post-navigation clearfix" role="navigation">
-            
-            <div class="nav-previous clearfix">
-                <a title=" kali安装.deb的安装包" href="/2022/03/18/kali安装-deb的安装包/">&lt; 上一篇</a>
-            </div>
-            
-            
-            <div class="nav-next clearfix">
-                <a title=" ps快捷键" href="/2022/04/28/ps快捷键/">下一篇 &gt;</a>
-            </div>
-            
-        </nav>
-    
-    
-</article>
+      </div>
+      
+        <div class='text-center pagination'>
+        <a class="extend prev" rel="prev" href="/archives/2022/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/2022/">1</a><span class="page-number current">2</span>
+        </div>
+      
+  </article>
+
 
         
 
@@ -361,6 +262,8 @@ pause  :使脚本程序暂停，即会输出“请按任意键输出的字样”
 
 <section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
     <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+        <div class="sticky-area">
     
     
                 <aside id="krw-about" class="widget widget-kratos-about clearfix">
@@ -375,8 +278,6 @@ pause  :使脚本程序暂停，即会输出“请按任意键输出的字样”
     </div>
 </aside>
             
-                    <div class="sticky-area">
-                
                 
 
             

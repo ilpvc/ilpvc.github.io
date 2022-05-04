@@ -2348,4 +2348,57 @@
         <tag>C语言</tag>
       </tags>
   </entry>
+  <entry>
+    <title>VMware配置静态IP</title>
+    <url>/2022/05/04/VMware%E9%85%8D%E7%BD%AE%E9%9D%99%E6%80%81IP/</url>
+    <content><![CDATA[<h1 id="VMware虚拟机中配置静态IP的方法"><a href="#VMware虚拟机中配置静态IP的方法" class="headerlink" title="VMware虚拟机中配置静态IP的方法"></a><a href="https://www.cnblogs.com/jiucai/p/12497925.html">VMware虚拟机中配置静态IP的方法</a></h1><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/1868057-20200315154409190-813762847.png" alt="img">VMnet0：用于虚拟桥接网络下的虚拟交换机</p>
+<p>桥接网络是指本地物理网卡和虚拟网卡通过VMnet0虚拟交换机进行桥接，物理网卡和虚拟网卡在拓扑图上处于同等地位。</p>
+<p>VMnet1：用于虚拟Host-Only网络下的虚拟交换机（仅主机）</p>
+<p>在Host-Only模式下，虚拟网络是一个全封闭的网络，它唯一能够访问的就是主机。</p>
+<p>VMnet8：用于虚拟NAT网络下的虚拟交换机</p>
+<p>在NAT网络中，会用到VMware Network Adepter VMnet8虚拟网卡，主机上的VMware Network Adepter VMnet8虚拟网卡被直接连接到VMnet8虚拟交换机上与虚拟网卡进行通信。</p>
+<p>VMware Network Adepter VMnet1：Host用于与Host-Only虚拟网络进行通信的虚拟网卡</p>
+<p>VMware Network Adepter VMnet8：Host用于与NAT虚拟网络进行通信的虚拟网卡</p>
+<p><strong>综上所诉：在这三种网络模式中NAT模式是最简单的，基本不需要手动配置IP地址相关参数。桥接模需要配置额外的IP地址。</strong></p>
+<h4 id="1、查看网关，以及网段"><a href="#1、查看网关，以及网段" class="headerlink" title="1、查看网关，以及网段"></a>1、查看网关，以及网段</h4><p>【编辑】——〉【虚拟网络编辑器】</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/1868057-20200315154409190-813762847.png" alt="img"></p>
+<p><strong>我们使用NAT模式，所以选择VMnet8.取消【使用本地DHCP】这个选项不打勾，这是分配动态IP的。</strong></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/1868057-20200315160047395-767075949.png" alt="img"></p>
+<p>网关IP需要记住，通过这个我们得知</p>
+<p>我们的网关192.168.228.2，子网掩码是255.255.255.0。子网IP的192.168.228.0的意思是如果你要往这个网段内添加机器，你的机器ip只能是192.168.228.0~192.168.228.255这个范围内的。其实你会发现192.168.228.2是网关IP了。</p>
+<p>一般而言192.168.228.255是广播IP所以不用，192.168.228.0一般是网段IP也不用。也就是说除了0 2 255这三个，其他的数字你可以随便设置。</p>
+<h4 id="2、设置虚拟机IP"><a href="#2、设置虚拟机IP" class="headerlink" title="2、设置虚拟机IP"></a>2、设置虚拟机IP</h4><p>这里演示的是centos系统</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vi /etc/sysconfig/network-scripts/ifcfg-ens33</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/1868057-20200315160108866-52349871.png" alt="img"></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /etc/sysconfig/network-scripts/**</span><br><span class="line">ls</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/1868057-20200315160117499-1422848875.png" alt="img"></p>
+<p><strong>ifcfg-ens33****第一个就是网卡名称</strong></p>
+<p>编辑</p>
+<p>输入i后编辑更改成ONBOOT：yes</p>
+<p>BOOTPROTO：static</p>
+<p>把IP地址、网关、子网掩码、DNS添加上</p>
+<p>IPADDR：192.168.228.119</p>
+<p>NETMASK：255.255.255.0</p>
+<p>GETEWAY：192.168.228.254</p>
+<p>DNS1：114.114.114.114</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/1868057-20200315160204742-936507531.png" alt="img"></p>
+<p>同样需要在windows下修改vmware8的ip</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/1868057-20200315160305010-661807387.png" alt="img"></p>
+<p>点击internet协议版本4（TCP/IPv4）</p>
+<p>点击输入使用下面的IP地址（S）</p>
+<p>输入IP地址：192.168.228.98</p>
+<p>子网掩码：255.255.255.0</p>
+<p>默认网关：192.168.228.254</p>
+<p>首选DNS服务器（P）：114.114.114.114</p>
+<p>确定再确定保存</p>
+<p>现在就配置完成了，可以尝试ping一下试试能不能ping通</p>
+]]></content>
+      <tags>
+        <tag>LINUX</tag>
+      </tags>
+  </entry>
 </search>

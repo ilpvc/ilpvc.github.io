@@ -4,7 +4,7 @@
   <!-- 元数据 -->
   <meta charset="utf-8">
   <link rel="icon" href="/images/logo.png">
-  <title>bat批处理 | ilpvc</title>
+  <title>VMware配置静态IP | ilpvc</title>
   <meta name="author" content="ilpvc" />
   <meta http-equiv="Cache-Control" content="no-transform" />
   <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -13,20 +13,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <meta name="format-detection" content="telphone=no, email=no" />
   
-    <meta name="keywords" content="bat" />
+    <meta name="keywords" content="LINUX" />
   
-  <meta name="description" content="基本用法 pause  :使脚本程序暂停，即会输出“请按任意键输出的字样”，主要用于需要打印一些数据，如果不加pause，脚本运行结束直接关闭，将无法看到结果。可以加 &gt;nul把这个信息隐藏。 **@**：它的作用是隐藏它后面这一行的命令本身（只能影响当前行）。 % : %0表示这个文件本身，%1，%2（%[0-9]）分别是后面的参数  一、for循环 1234567891011121314">
+  <meta name="description" content="VMware虚拟机中配置静态IP的方法VMnet0：用于虚拟桥接网络下的虚拟交换机 桥接网络是指本地物理网卡和虚拟网卡通过VMnet0虚拟交换机进行桥接，物理网卡和虚拟网卡在拓扑图上处于同等地位。 VMnet1：用于虚拟Host-Only网络下的虚拟交换机（仅主机） 在Host-Only模式下，虚拟网络是一个全封闭的网络，它唯一能够访问的就是主机。 VMnet8：用于虚拟NAT网络下的虚拟交换机">
 <meta property="og:type" content="article">
-<meta property="og:title" content="bat批处理">
-<meta property="og:url" content="http://ilpvc.github.io/2022/03/18/bat%E6%89%B9%E5%A4%84%E7%90%86/index.html">
+<meta property="og:title" content="VMware配置静态IP">
+<meta property="og:url" content="http://ilpvc.github.io/2022/05/04/VMware%E9%85%8D%E7%BD%AE%E9%9D%99%E6%80%81IP/index.html">
 <meta property="og:site_name" content="ilpvc">
-<meta property="og:description" content="基本用法 pause  :使脚本程序暂停，即会输出“请按任意键输出的字样”，主要用于需要打印一些数据，如果不加pause，脚本运行结束直接关闭，将无法看到结果。可以加 &gt;nul把这个信息隐藏。 **@**：它的作用是隐藏它后面这一行的命令本身（只能影响当前行）。 % : %0表示这个文件本身，%1，%2（%[0-9]）分别是后面的参数  一、for循环 1234567891011121314">
+<meta property="og:description" content="VMware虚拟机中配置静态IP的方法VMnet0：用于虚拟桥接网络下的虚拟交换机 桥接网络是指本地物理网卡和虚拟网卡通过VMnet0虚拟交换机进行桥接，物理网卡和虚拟网卡在拓扑图上处于同等地位。 VMnet1：用于虚拟Host-Only网络下的虚拟交换机（仅主机） 在Host-Only模式下，虚拟网络是一个全封闭的网络，它唯一能够访问的就是主机。 VMnet8：用于虚拟NAT网络下的虚拟交换机">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://ilpvc.github.io/images/logo.png">
-<meta property="article:published_time" content="2022-03-18T15:48:04.000Z">
-<meta property="article:modified_time" content="2022-04-28T14:39:49.856Z">
+<meta property="article:published_time" content="2022-05-04T02:21:27.000Z">
+<meta property="article:modified_time" content="2022-05-04T02:29:00.059Z">
 <meta property="article:author" content="ilpvc">
-<meta property="article:tag" content="bat">
+<meta property="article:tag" content="LINUX">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://ilpvc.github.io/images/logo.png">
 <meta name="twitter:site" content="@null">
@@ -180,17 +180,17 @@
     <div class="kratos-hentry kratos-post-inner clearfix">
         <header class="kratos-entry-header">
             
-                <h1 class="kratos-entry-title text-center">bat批处理</h1>
+                <h1 class="kratos-entry-title text-center">VMware配置静态IP</h1>
             
             
             <ul class="kratos-post-meta text-center">
-                <li><i class="fa fa-calendar"></i> 2022-03-18</li>
+                <li><i class="fa fa-calendar"></i> 2022-05-04</li>
                 <li><i class="fa fa-user"></i> 作者 ilpvc</li>
                 <li>
                     <i class="fa fa-edit"></i> 
                     
                     
-                        671
+                        1308
                     
                     字
                 </li>
@@ -199,44 +199,55 @@
         </header>
         <div class="kratos-post-content">
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1651156789856"></time> 前，其中的内容可能需要更新。
+                本文最后编辑于 <time datetime="1651631340059"></time> 前，其中的内容可能需要更新。
             </div>
             
             <hr />
-            <h3 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h3><blockquote>
-<p><em><strong>pause</strong></em>  :使脚本程序暂停，即会输出“请按任意键输出的字样”，主要用于需要打印一些数据，如果不加pause，脚本运行结束直接关闭，将无法看到结果。可以加 &gt;nul把这个信息隐藏。</p>
-<p>**@**：它的作用是隐藏它后面这一行的命令本身（只能影响当前行）。</p>
-<p><strong>%</strong> : %0表示这个文件本身，%1，%2（%[0-9]）分别是后面的参数</p>
-</blockquote>
-<p><strong>一、for循环</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1.</span></span><br><span class="line"><span class="comment">#输出ABC</span></span><br><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"><span class="keyword">for</span>  %%I <span class="keyword">in</span> (ABC) <span class="keyword">do</span> <span class="built_in">echo</span> %%I</span><br><span class="line">pause</span><br><span class="line"><span class="comment">#结果</span></span><br><span class="line"><span class="comment">#ABC</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#2.</span></span><br><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"><span class="keyword">for</span>  %%I <span class="keyword">in</span> (A,B,C) <span class="keyword">do</span> <span class="built_in">echo</span> %%I</span><br><span class="line">pause</span><br><span class="line"><span class="comment">#结果</span></span><br><span class="line"><span class="comment">#A</span></span><br><span class="line"><span class="comment">#B</span></span><br><span class="line"><span class="comment">#C</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><strong>高级用法：</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#搜索当前目录的所有文件</span></span><br><span class="line"></span><br><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"><span class="keyword">for</span> %%i <span class="keyword">in</span> (*.*) <span class="keyword">do</span> <span class="built_in">echo</span> <span class="string">&quot;%%i&quot;</span></span><br><span class="line">pause</span><br><span class="line"></span><br><span class="line"><span class="comment">#搜索当前目录的文本文件</span></span><br><span class="line"></span><br><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"><span class="keyword">for</span> %%i <span class="keyword">in</span> (*.txt) <span class="built_in">echo</span> <span class="string">&quot;%%i&quot;</span></span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-
+            <h1 id="VMware虚拟机中配置静态IP的方法"><a href="#VMware虚拟机中配置静态IP的方法" class="headerlink" title="VMware虚拟机中配置静态IP的方法"></a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/jiucai/p/12497925.html">VMware虚拟机中配置静态IP的方法</a></h1><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/1868057-20200315154409190-813762847.png" alt="img">VMnet0：用于虚拟桥接网络下的虚拟交换机</p>
+<p>桥接网络是指本地物理网卡和虚拟网卡通过VMnet0虚拟交换机进行桥接，物理网卡和虚拟网卡在拓扑图上处于同等地位。</p>
+<p>VMnet1：用于虚拟Host-Only网络下的虚拟交换机（仅主机）</p>
+<p>在Host-Only模式下，虚拟网络是一个全封闭的网络，它唯一能够访问的就是主机。</p>
+<p>VMnet8：用于虚拟NAT网络下的虚拟交换机</p>
+<p>在NAT网络中，会用到VMware Network Adepter VMnet8虚拟网卡，主机上的VMware Network Adepter VMnet8虚拟网卡被直接连接到VMnet8虚拟交换机上与虚拟网卡进行通信。</p>
+<p>VMware Network Adepter VMnet1：Host用于与Host-Only虚拟网络进行通信的虚拟网卡</p>
+<p>VMware Network Adepter VMnet8：Host用于与NAT虚拟网络进行通信的虚拟网卡</p>
+<p><strong>综上所诉：在这三种网络模式中NAT模式是最简单的，基本不需要手动配置IP地址相关参数。桥接模需要配置额外的IP地址。</strong></p>
+<h4 id="1、查看网关，以及网段"><a href="#1、查看网关，以及网段" class="headerlink" title="1、查看网关，以及网段"></a>1、查看网关，以及网段</h4><p>【编辑】——〉【虚拟网络编辑器】</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/1868057-20200315154409190-813762847.png" alt="img"></p>
+<p><strong>我们使用NAT模式，所以选择VMnet8.取消【使用本地DHCP】这个选项不打勾，这是分配动态IP的。</strong></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/1868057-20200315160047395-767075949.png" alt="img"></p>
+<p>网关IP需要记住，通过这个我们得知</p>
+<p>我们的网关192.168.228.2，子网掩码是255.255.255.0。子网IP的192.168.228.0的意思是如果你要往这个网段内添加机器，你的机器ip只能是192.168.228.0~192.168.228.255这个范围内的。其实你会发现192.168.228.2是网关IP了。</p>
+<p>一般而言192.168.228.255是广播IP所以不用，192.168.228.0一般是网段IP也不用。也就是说除了0 2 255这三个，其他的数字你可以随便设置。</p>
+<h4 id="2、设置虚拟机IP"><a href="#2、设置虚拟机IP" class="headerlink" title="2、设置虚拟机IP"></a>2、设置虚拟机IP</h4><p>这里演示的是centos系统</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/sysconfig/network-scripts/ifcfg-ens33</span><br></pre></td></tr></table></figure>
 
 
 
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/1868057-20200315160108866-52349871.png" alt="img"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /etc/sysconfig/network-scripts/**</span><br><span class="line">ls</span><br></pre></td></tr></table></figure>
 
-
-<h3 id="批量处理文件"><a href="#批量处理文件" class="headerlink" title="批量处理文件"></a>批量处理文件</h3><p><strong>实例</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">#批量修改文件名称</span></span><br><span class="line"></span><br><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> a=1</span><br><span class="line"></span><br><span class="line">setlocal EnableDelayedExpansion</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> %%n <span class="keyword">in</span> (*.jpg) <span class="keyword">do</span> (</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> /A a+=1</span><br><span class="line"></span><br><span class="line">ren <span class="string">&quot;%%n&quot;</span> <span class="string">&quot;动漫!a!.jpg&quot;</span></span><br><span class="line"></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"> </span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/1868057-20200315160117499-1422848875.png" alt="img"></p>
+<p><strong>ifcfg-ens33****第一个就是网卡名称</strong></p>
+<p>编辑</p>
+<p>输入i后编辑更改成ONBOOT：yes</p>
+<p>BOOTPROTO：static</p>
+<p>把IP地址、网关、子网掩码、DNS添加上</p>
+<p>IPADDR：192.168.228.119</p>
+<p>NETMASK：255.255.255.0</p>
+<p>GETEWAY：192.168.228.254</p>
+<p>DNS1：114.114.114.114</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/1868057-20200315160204742-936507531.png" alt="img"></p>
+<p>同样需要在windows下修改vmware8的ip</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/1868057-20200315160305010-661807387.png" alt="img"></p>
+<p>点击internet协议版本4（TCP/IPv4）</p>
+<p>点击输入使用下面的IP地址（S）</p>
+<p>输入IP地址：192.168.228.98</p>
+<p>子网掩码：255.255.255.0</p>
+<p>默认网关：192.168.228.254</p>
+<p>首选DNS服务器（P）：114.114.114.114</p>
+<p>确定再确定保存</p>
+<p>现在就配置完成了，可以尝试ping一下试试能不能ping通</p>
 
         </div>
         
@@ -290,7 +301,7 @@
     <script type="text/javascript">
         $(()=>{
             new QRCode("wechat-qr", {
-                text: "http://ilpvc.github.io/2022/03/18/bat%E6%89%B9%E5%A4%84%E7%90%86/",
+                text: "http://ilpvc.github.io/2022/05/04/VMware%E9%85%8D%E7%BD%AE%E9%9D%99%E6%80%81IP/",
                 width: 150,
                 height: 150,
                 correctLevel : QRCode.CorrectLevel.H
@@ -302,11 +313,11 @@
             const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
             const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
             const twitterBase   = "https://twitter.com/intent/tweet?";
-            const hostUrl       = "http://ilpvc.github.io/2022/03/18/bat%E6%89%B9%E5%A4%84%E7%90%86/";
-            const title         = "「bat批处理」";
-            const excerpt       = `基本用法
-pause  :使脚本程序暂停，即会输出“请按任意键输出的字样”，主要用于需要打印一些数据，如果不加pause，脚本运行结束直接关闭，将无法看到结果。可以加 &gt;nul把这个信息隐藏。
-**@**：它的作用是隐藏它后面这...`;
+            const hostUrl       = "http://ilpvc.github.io/2022/05/04/VMware%E9%85%8D%E7%BD%AE%E9%9D%99%E6%80%81IP/";
+            const title         = "「VMware配置静态IP」";
+            const excerpt       = `VMware虚拟机中配置静态IP的方法VMnet0：用于虚拟桥接网络下的虚拟交换机
+桥接网络是指本地物理网卡和虚拟网卡通过VMnet0虚拟交换机进行桥接，物理网卡和虚拟网卡在拓扑图上处于同等地位。
+VMnet1：用于虚拟Host-On...`;
             let _URL;
             switch (dest) {
                 case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
@@ -325,10 +336,10 @@ pause  :使脚本程序暂停，即会输出“请按任意键输出的字样”
             <div class="footer-tag clearfix">
                 <div class="pull-left">
                 <i class="fa fa-tags"></i>
-                    <a class="tag-none-link" href="/tags/bat/" rel="tag">bat</a>
+                    <a class="tag-none-link" href="/tags/LINUX/" rel="tag">LINUX</a>
                 </div>
                 <div class="pull-date">
-                <span>最后编辑：2022-04-28</span>
+                <span>最后编辑：2022-05-04</span>
                 </div>
             </div>
         </footer>
@@ -337,13 +348,9 @@ pause  :使脚本程序暂停，即会输出“请按任意键输出的字样”
         <nav class="navigation post-navigation clearfix" role="navigation">
             
             <div class="nav-previous clearfix">
-                <a title=" kali安装.deb的安装包" href="/2022/03/18/kali安装-deb的安装包/">&lt; 上一篇</a>
+                <a title=" YACC语法分析器" href="/2022/05/03/YACC语法分析器/">&lt; 上一篇</a>
             </div>
             
-            
-            <div class="nav-next clearfix">
-                <a title=" ps快捷键" href="/2022/04/28/ps快捷键/">下一篇 &gt;</a>
-            </div>
             
         </nav>
     
