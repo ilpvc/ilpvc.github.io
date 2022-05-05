@@ -2407,6 +2407,7 @@
 <p>首选DNS服务器（P）：114.114.114.114</p>
 <p>确定再确定保存</p>
 <p>现在就配置完成了，可以尝试ping一下试试能不能ping通</p>
+<p><strong>windows网络和虚拟机的网络ip不要一样，否则会连不上</strong></p>
 ]]></content>
       <tags>
         <tag>linux</tag>
