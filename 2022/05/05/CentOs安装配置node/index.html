@@ -4,7 +4,7 @@
   <!-- 元数据 -->
   <meta charset="utf-8">
   <link rel="icon" href="/images/logo.png">
-  <title>lex词法分析器语法+实验 | ilpvc</title>
+  <title>CentOs安装配置node | ilpvc</title>
   <meta name="author" content="ilpvc" />
   <meta http-equiv="Cache-Control" content="no-transform" />
   <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -13,20 +13,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <meta name="format-detection" content="telphone=no, email=no" />
   
-    <meta name="keywords" content="c语言" />
+    <meta name="keywords" content="linux" />
   
-  <meta name="description" content="lex词法分析器Lex是LEXical compiler的缩写，是Unix环境下非常著名的工具,主要功能是生成一个词法分析器(scanner)的C源码,描述规则采用正则表达式(regular expression)。描述词法分析器的文件*.l，经过lex编译后，生成一个lex.yy.c 的文件，然后由C编译器编译生成一个词法分析器。词法分析器，简单来说，其任务就是将输入的各种符号，转化成相应的标识">
+  <meta name="description" content="一、找好安装位置，我这里是：&#x2F;home&#x2F;node 二、去node官网下载Linux镜像或者通过命令直接下载 12wget https:&#x2F;&#x2F;npm.taobao.org&#x2F;mirrors&#x2F;node&#x2F;v12.16.1&#x2F;node-v12.16.1-linux-x64.tar.gz    三、解压 1tar -xvf node-v12.16.1-linux-x64.tar.gz    四、进入解压后的文件执">
 <meta property="og:type" content="article">
-<meta property="og:title" content="lex词法分析器语法+实验">
-<meta property="og:url" content="http://ilpvc.github.io/2022/04/29/lex%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8%E8%AF%AD%E6%B3%95-%E5%AE%9E%E9%AA%8C/index.html">
+<meta property="og:title" content="CentOs安装配置node">
+<meta property="og:url" content="http://ilpvc.github.io/2022/05/05/CentOs%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEnode/index.html">
 <meta property="og:site_name" content="ilpvc">
-<meta property="og:description" content="lex词法分析器Lex是LEXical compiler的缩写，是Unix环境下非常著名的工具,主要功能是生成一个词法分析器(scanner)的C源码,描述规则采用正则表达式(regular expression)。描述词法分析器的文件*.l，经过lex编译后，生成一个lex.yy.c 的文件，然后由C编译器编译生成一个词法分析器。词法分析器，简单来说，其任务就是将输入的各种符号，转化成相应的标识">
+<meta property="og:description" content="一、找好安装位置，我这里是：&#x2F;home&#x2F;node 二、去node官网下载Linux镜像或者通过命令直接下载 12wget https:&#x2F;&#x2F;npm.taobao.org&#x2F;mirrors&#x2F;node&#x2F;v12.16.1&#x2F;node-v12.16.1-linux-x64.tar.gz    三、解压 1tar -xvf node-v12.16.1-linux-x64.tar.gz    四、进入解压后的文件执">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://ilpvc.github.io/images/logo.png">
-<meta property="article:published_time" content="2022-04-29T08:34:29.000Z">
-<meta property="article:modified_time" content="2022-04-29T08:44:12.992Z">
+<meta property="article:published_time" content="2022-05-05T05:47:24.000Z">
+<meta property="article:modified_time" content="2022-05-05T05:54:02.435Z">
 <meta property="article:author" content="ilpvc">
-<meta property="article:tag" content="c语言">
+<meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://ilpvc.github.io/images/logo.png">
 <meta name="twitter:site" content="@null">
@@ -180,17 +180,17 @@
     <div class="kratos-hentry kratos-post-inner clearfix">
         <header class="kratos-entry-header">
             
-                <h1 class="kratos-entry-title text-center">lex词法分析器语法+实验</h1>
+                <h1 class="kratos-entry-title text-center">CentOs安装配置node</h1>
             
             
             <ul class="kratos-post-meta text-center">
-                <li><i class="fa fa-calendar"></i> 2022-04-29</li>
+                <li><i class="fa fa-calendar"></i> 2022-05-05</li>
                 <li><i class="fa fa-user"></i> 作者 ilpvc</li>
                 <li>
                     <i class="fa fa-edit"></i> 
                     
                     
-                        ~1.72K
+                        792
                     
                     字
                 </li>
@@ -199,40 +199,50 @@
         </header>
         <div class="kratos-post-content">
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1651221852992"></time> 前，其中的内容可能需要更新。
+                本文最后编辑于 <time datetime="1651730042435"></time> 前，其中的内容可能需要更新。
             </div>
             
             <hr />
-            <h3 id="lex词法分析器"><a href="#lex词法分析器" class="headerlink" title="lex词法分析器"></a>lex词法分析器</h3><p>Lex是LEXical compiler的缩写，是Unix环境下非常著名的工具,主要功能是生成一个词法分析器(scanner)的C源码,描述规则采用正则表达式(regular expression)。描述词法分析器的文件*.l，经过lex编译后，生成一个lex.yy.c 的文件，然后由C编译器编译生成一个词法分析器。词法分析器，简单来说，其任务就是将输入的各种符号，转化成相应的标识符(token)，转化后的标识符 很容易被后续阶段处理。 —— [<a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=DKF+jPXr/IrO38QOqzaDew==.YXj5UoakqwCBY404TA0/uw3J2B6Khy7T9K5AzuhOw9ouSgDDUZFRI38JcPO/Dd9m"> 百度百科 ]</a></p>
-<h3 id="Lex语法格式"><a href="#Lex语法格式" class="headerlink" title="Lex语法格式"></a>Lex语法格式</h3><p>flex的语法被分为三个部分：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;definitions&#125; <span class="comment">//声明部分</span></span><br><span class="line">%%</span><br><span class="line">&#123;rules&#125; <span class="comment">//转换规则</span></span><br><span class="line">%%</span><br><span class="line">&#123;user subroutines&#125;<span class="comment">//辅助函数</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+            <h4 id="一、找好安装位置，我这里是：-home-node"><a href="#一、找好安装位置，我这里是：-home-node" class="headerlink" title="一、找好安装位置，我这里是：/home/node"></a>一、找好安装位置，我这里是：/home/node</h4><p> 二、去<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=node&spm=1001.2101.3001.7020">node</a>官网下载Linux镜像或者通过命令直接下载</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https:<span class="comment">//npm.taobao.org/mirrors/node/v12.16.1/node-v12.16.1-linux-x64.tar.gz</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p>声明部分</p>
-<p>声明部分通常包括变量，明示常量和正则表达式的定义，明示常量是一个值为数字的标识符，用来表示词法单元的类型。</p>
-<p>转换规则</p>
-<p>转换规则具有如下的形式: 模式 { 动作 }。每个模式是一个正则表达式，可以使用声明部分给出的正则定义。动作部分是代码片段，通常用 C 语言编写。</p>
-<p>辅助函数</p>
-<p>这个部分中定义了各个动作所需要的函数，也可以包含 main 函数，这部分的代码将会放到输出的 C 代码中。</p>
-<p><strong>实例：</strong></p>
-<ol>
-<li>为文本文件添加行号</li>
-</ol>
-<p>代码：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"> %&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="keyword">int</span> lineno=<span class="number">1</span>;</span><br><span class="line">%&#125;</span><br><span class="line"></span><br><span class="line">%%</span><br><span class="line">[^\n] 	&#123;yymore();&#125;</span><br><span class="line">\n 	&#123;<span class="built_in">printf</span>(<span class="string">&quot;%1d %s&quot;</span>,lineno++,yytext);&#125;</span><br><span class="line">%%</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">yywrap</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line">main()</span><br><span class="line">&#123;</span><br><span class="line">  yylex();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>待测试文件：</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/wps2.jpg" alt="img"> </p>
-<p>结果：</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/wps3.jpg" alt="img"> </p>
-<ol start="2">
-<li>编写LEX源程序，其功能是将文本中的十进制数替换成十六进制，并打印被替换的次数</li>
-</ol>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">%&#123;</span><br><span class="line">    <span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line">    <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line">    <span class="keyword">int</span> count=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> n=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> i=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> j =<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">char</span> hex[<span class="number">16</span>];</span><br><span class="line">    <span class="keyword">char</span> arr[] = <span class="string">&quot;0123456789ABCDEF&quot;</span>;</span><br><span class="line">%&#125;</span><br><span class="line">%%</span><br><span class="line"></span><br><span class="line">[<span class="number">0</span>][x][<span class="number">0</span><span class="number">-9</span>A-F]* &#123;<span class="built_in">printf</span>(<span class="string">&quot;\nCONFIRM IS hexadecimal!!!&quot;</span>);&#125; </span><br><span class="line"></span><br><span class="line">[<span class="number">1</span><span class="number">-9</span>][<span class="number">0</span><span class="number">-9</span>]* &#123;</span><br><span class="line">  n = atoi(yytext);</span><br><span class="line">  <span class="keyword">while</span> (n)</span><br><span class="line">    &#123;</span><br><span class="line">        hex[i++] = arr[n%<span class="number">16</span>];  </span><br><span class="line">        n = n / <span class="number">16</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (j = i - <span class="number">1</span>; j &gt;= <span class="number">0</span>; --j)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>, hex[j]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\nNumber of conversion: %d&quot;</span>,++count);</span><br><span class="line">    <span class="keyword">for</span> (j = i - <span class="number">1</span>; j &gt;= <span class="number">0</span>; --j)&#123;</span><br><span class="line">        hex[j]=<span class="string">&quot; &quot;</span>;</span><br><span class="line">        i=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">[<span class="number">0</span><span class="number">-9</span>]+ &#123;<span class="built_in">printf</span>(<span class="string">&quot;\nerror number!!&quot;</span>);&#125;</span><br><span class="line">%%</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">yywrap</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line">main()</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">int</span> n=yylex();</span><br><span class="line">  <span class="keyword">return</span> n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>待测试文件：</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/wps4.jpg" alt="img"> </p>
-<p>测试结果：</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/wps5.jpg" alt="img"> </p>
+<p>三、解压</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xvf node-v12.16.1-linux-x64.tar.gz</span><br></pre></td></tr></table></figure>
+
+
+
+<p>四、进入解压后的文件执行命令     </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#切换路径：</span></span><br><span class="line"><span class="built_in">cd</span> node-v12.16.1-linux-x64.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="comment">#执行这个命令：</span></span><br><span class="line">yum install gcc gcc-c++</span><br></pre></td></tr></table></figure>
+
+<p>五、重命名文件名</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv node-v12.16.1-linux-x64.tar.gz Node</span><br></pre></td></tr></table></figure>
+
+<p> 六、ln指令创建关联</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ln -s /home/node/node/bin/node /usr/bin/node</span><br><span class="line"></span><br><span class="line">ln -s /home/node/node/bin/npm /usr/bin/npm</span><br><span class="line"></span><br><span class="line">ln -s /home/node/node/bin/npx /usr/bin/npx</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p> 八、安装node守护进程 forever</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 全局安装forever</span><br><span class="line">npm i -g forever</span><br><span class="line">// 通过forever启动应用</span><br><span class="line">forever start app.js</span><br><span class="line">// 关闭应用</span><br><span class="line">forever stop app.js</span><br><span class="line">// 关闭所有应用</span><br><span class="line">forever stopall</span><br><span class="line">// 重启所有应用</span><br><span class="line">forever restartall</span><br><span class="line">// 显示所有运行的服务</span><br><span class="line">forever list</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm i forever -g </span><br><span class="line"></span><br><span class="line">ln -s /usr/<span class="built_in">local</span>/temp/Node.js/bin/forever /usr/<span class="built_in">local</span>/bin/forever</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         </div>
         
@@ -286,7 +296,7 @@
     <script type="text/javascript">
         $(()=>{
             new QRCode("wechat-qr", {
-                text: "http://ilpvc.github.io/2022/04/29/lex%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8%E8%AF%AD%E6%B3%95-%E5%AE%9E%E9%AA%8C/",
+                text: "http://ilpvc.github.io/2022/05/05/CentOs%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEnode/",
                 width: 150,
                 height: 150,
                 correctLevel : QRCode.CorrectLevel.H
@@ -298,9 +308,10 @@
             const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
             const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
             const twitterBase   = "https://twitter.com/intent/tweet?";
-            const hostUrl       = "http://ilpvc.github.io/2022/04/29/lex%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8%E8%AF%AD%E6%B3%95-%E5%AE%9E%E9%AA%8C/";
-            const title         = "「lex词法分析器语法+实验」";
-            const excerpt       = `lex词法分析器Lex是LEXical compiler的缩写，是Unix环境下非常著名的工具,主要功能是生成一个词法分析器(scanner)的C源码,描述规则采用正则表达式(regular expression)。描述词法分析器的文...`;
+            const hostUrl       = "http://ilpvc.github.io/2022/05/05/CentOs%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEnode/";
+            const title         = "「CentOs安装配置node」";
+            const excerpt       = `一、找好安装位置，我这里是：/home/node 二、去node官网下载Linux镜像或者通过命令直接下载
+12wget https://npm.taobao.org/mirrors/node/v12.16.1/node-v12.16...`;
             let _URL;
             switch (dest) {
                 case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
@@ -319,10 +330,10 @@
             <div class="footer-tag clearfix">
                 <div class="pull-left">
                 <i class="fa fa-tags"></i>
-                    <a class="tag-none-link" href="/tags/c%E8%AF%AD%E8%A8%80/" rel="tag">c语言</a>
+                    <a class="tag-none-link" href="/tags/linux/" rel="tag">linux</a>
                 </div>
                 <div class="pull-date">
-                <span>最后编辑：2022-04-29</span>
+                <span>最后编辑：2022-05-05</span>
                 </div>
             </div>
         </footer>
@@ -331,13 +342,9 @@
         <nav class="navigation post-navigation clearfix" role="navigation">
             
             <div class="nav-previous clearfix">
-                <a title=" Android的Fragment实现导航栏" href="/2022/04/28/Android的Fragment实现导航栏/">&lt; 上一篇</a>
+                <a title=" CentOS搭建本地服务器" href="/2022/05/04/CentOS搭建本地服务器/">&lt; 上一篇</a>
             </div>
             
-            
-            <div class="nav-next clearfix">
-                <a title=" Android使用SQLite基础" href="/2022/04/30/Android使用SQLite基础/">下一篇 &gt;</a>
-            </div>
             
         </nav>
     

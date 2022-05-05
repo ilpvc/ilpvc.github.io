@@ -2407,7 +2407,7 @@
 <p>首选DNS服务器（P）：114.114.114.114</p>
 <p>确定再确定保存</p>
 <p>现在就配置完成了，可以尝试ping一下试试能不能ping通</p>
-<p><strong>windows网络和虚拟机的网络ip不要一样，否则会连不上</strong></p>
+<p><strong>windows网络和虚拟机的网络ip不要一样，否则会连不上(造成IP冲突)</strong></p>
 ]]></content>
       <tags>
         <tag>linux</tag>
@@ -2443,6 +2443,54 @@
 <p>使用这个就能成功登录</p>
 <p>第一次进入宝塔面板可以进入设置修改用户名和密码</p>
 <p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220504224502759.png" alt="image-20220504224502759"></p>
+]]></content>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CentOs安装配置node</title>
+    <url>/2022/05/05/CentOs%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEnode/</url>
+    <content><![CDATA[<h4 id="一、找好安装位置，我这里是：-home-node"><a href="#一、找好安装位置，我这里是：-home-node" class="headerlink" title="一、找好安装位置，我这里是：/home/node"></a>一、找好安装位置，我这里是：/home/node</h4><p> 二、去<a href="https://so.csdn.net/so/search?q=node&spm=1001.2101.3001.7020">node</a>官网下载Linux镜像或者通过命令直接下载</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">wget https:<span class="comment">//npm.taobao.org/mirrors/node/v12.16.1/node-v12.16.1-linux-x64.tar.gz</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>三、解压</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -xvf node-v12.16.1-linux-x64.tar.gz</span><br></pre></td></tr></table></figure>
+
+
+
+<p>四、进入解压后的文件执行命令     </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#切换路径：</span></span><br><span class="line"><span class="built_in">cd</span> node-v12.16.1-linux-x64.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="comment">#执行这个命令：</span></span><br><span class="line">yum install gcc gcc-c++</span><br></pre></td></tr></table></figure>
+
+<p>五、重命名文件名</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mv node-v12.16.1-linux-x64.tar.gz Node</span><br></pre></td></tr></table></figure>
+
+<p> 六、ln指令创建关联</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ln -s /home/node/node/bin/node /usr/bin/node</span><br><span class="line"></span><br><span class="line">ln -s /home/node/node/bin/npm /usr/bin/npm</span><br><span class="line"></span><br><span class="line">ln -s /home/node/node/bin/npx /usr/bin/npx</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p> 八、安装node守护进程 forever</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">// 全局安装forever</span><br><span class="line">npm i -g forever</span><br><span class="line">// 通过forever启动应用</span><br><span class="line">forever start app.js</span><br><span class="line">// 关闭应用</span><br><span class="line">forever stop app.js</span><br><span class="line">// 关闭所有应用</span><br><span class="line">forever stopall</span><br><span class="line">// 重启所有应用</span><br><span class="line">forever restartall</span><br><span class="line">// 显示所有运行的服务</span><br><span class="line">forever list</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm i forever -g </span><br><span class="line"></span><br><span class="line">ln -s /usr/<span class="built_in">local</span>/temp/Node.js/bin/forever /usr/<span class="built_in">local</span>/bin/forever</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
 ]]></content>
       <tags>
         <tag>linux</tag>
