@@ -19,33 +19,86 @@
       </tags>
   </entry>
   <entry>
-    <title>Android的Fragment实现导航栏</title>
-    <url>/2022/04/28/Android%E7%9A%84Fragment%E5%AE%9E%E7%8E%B0%E5%AF%BC%E8%88%AA%E6%A0%8F/</url>
-    <content><![CDATA[<p>这里只粘贴关键代码，留作自己遗忘查看</p>
-<p>首先activity_main.xml</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">LinearLayout</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:app</span>=<span class="string">&quot;http://schemas.android.com/apk/res-auto&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:tools</span>=<span class="string">&quot;http://schemas.android.com/tools&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:orientation</span>=<span class="string">&quot;vertical&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">tools:context</span>=<span class="string">&quot;.MainActivity&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:background</span>=<span class="string">&quot;@color/white&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">FrameLayout</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:background</span>=<span class="string">&quot;@color/background&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">&quot;@+id/main_frame&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_weight</span>=<span class="string">&quot;1&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;0dp&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">RadioGroup</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">&quot;@+id/rg_main&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:background</span>=<span class="string">&quot;@color/white&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:padding</span>=<span class="string">&quot;5dp&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:orientation</span>=<span class="string">&quot;horizontal&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">        &gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">RadioButton</span></span></span><br><span class="line"><span class="tag">            <span class="attr">style</span>=<span class="string">&quot;@style/Bottom_tab_style&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:id</span>=<span class="string">&quot;@+id/rb_index&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:drawableTop</span>=<span class="string">&quot;@drawable/main_nav_index&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:text</span>=<span class="string">&quot;首页&quot;</span> /&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--@drawable/main_nav_index：首页对应的图标图片--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">RadioButton</span></span></span><br><span class="line"><span class="tag">            <span class="attr">style</span>=<span class="string">&quot;@style/Bottom_tab_style&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:id</span>=<span class="string">&quot;@+id/rb_message&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:drawableTop</span>=<span class="string">&quot;@drawable/main_nav_message&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:text</span>=<span class="string">&quot;消息&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">RadioButton</span></span></span><br><span class="line"><span class="tag">            <span class="attr">style</span>=<span class="string">&quot;@style/Bottom_tab_style&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:id</span>=<span class="string">&quot;@+id/rb_friend&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:drawableTop</span>=<span class="string">&quot;@drawable/main_nav_friend&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:text</span>=<span class="string">&quot;好友&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">RadioButton</span></span></span><br><span class="line"><span class="tag">            <span class="attr">style</span>=<span class="string">&quot;@style/Bottom_tab_style&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:id</span>=<span class="string">&quot;@+id/rb_friend_circle&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:drawableTop</span>=<span class="string">&quot;@drawable/main_nav_friend_circle&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:text</span>=<span class="string">&quot;生活圈&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">RadioGroup</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+    <title>CentOS搭建本地服务器</title>
+    <url>/2022/05/04/CentOS%E6%90%AD%E5%BB%BA%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
+    <content><![CDATA[<h3 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h3><h4 id="更换国内yum源"><a href="#更换国内yum源" class="headerlink" title="更换国内yum源"></a>更换国内yum源</h4><p>国内速度太慢，目前国内的大公司有许多开源镜像站，例如阿里云、网易、清华大学、华为等等，这里使用阿里云的yum源。</p>
+<p>参考官方文档<a href="https://developer.aliyun.com/mirror/centos?spm=a2c6h.13651102.0.0.3e221b11bXrW8A%EF%BC%8C%E4%BE%9D%E6%AC%A1%E6%89%A7%E8%A1%8C">https://developer.aliyun.com/mirror/centos?spm=a2c6h.13651102.0.0.3e221b11bXrW8A，依次执行</a></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#备份原来的源文件</span></span><br><span class="line">mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup </span><br><span class="line"><span class="comment">#修改</span></span><br><span class="line">curl -o /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo</span><br><span class="line">yum clean all</span><br><span class="line">yum makecache</span><br></pre></td></tr></table></figure>
 
-<p>上述xml文件中的style.xml：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">resources</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">&quot;Bottom_tab_style&quot;</span> &gt;</span><span class="xml"></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">&quot;android:layout_width&quot;</span>&gt;</span>wrap_content<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">&quot;android:layout_height&quot;</span>&gt;</span>wrap_content<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">&quot;android:layout_weight&quot;</span>&gt;</span>1<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">&quot;android:textColor&quot;</span>&gt;</span>@drawable/main_nav_text_color<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">&quot;android:gravity&quot;</span>&gt;</span>center<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">&quot;android:button&quot;</span>&gt;</span>@null<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">&quot;android:textSize&quot;</span>&gt;</span>14sp<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span></span><br><span class="line"><span class="xml">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resources</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="安装ssh"><a href="#安装ssh" class="headerlink" title="安装ssh"></a>安装ssh</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo yum install openssh -y</span><br></pre></td></tr></table></figure>
 
-<p>main_nav_text_color.xml:</p>
-<p>其他三个也是同样的写法</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">selector</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">item</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:state_checked</span>=<span class="string">&quot;false&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:color</span>=<span class="string">&quot;@color/black&quot;</span></span></span><br><span class="line"><span class="tag">        /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">item</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:state_checked</span>=<span class="string">&quot;true&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:color</span>=<span class="string">&quot;#ff8fdf&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">selector</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>启动ssh的服务：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl start sshd.service</span><br></pre></td></tr></table></figure>
 
-<p>IndexFragment：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IndexFragment</span> <span class="keyword">extends</span> <span class="title">Fragment</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Nullable</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> View <span class="title">onCreateView</span><span class="params">(<span class="meta">@NonNull</span> LayoutInflater inflater, <span class="meta">@Nullable</span> ViewGroup container, <span class="meta">@Nullable</span> Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        View view = inflater.inflate(R.layout.fragment_index,<span class="keyword">null</span>);</span><br><span class="line">        <span class="keyword">return</span> view;</span><br><span class="line"><span class="comment">//        return super.onCreateView(inflater, container, savedInstanceState);</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>设置开机自动启动ssh服务</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> sshd.service</span><br></pre></td></tr></table></figure>
 
+<p>配置文件在<code>/etc/ssh/sshd_config</code>，一般不用修改。</p>
+<h4 id="安装ftp"><a href="#安装ftp" class="headerlink" title="安装ftp"></a>安装ftp</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo yum install ftp -y</span><br></pre></td></tr></table></figure>
 
+<h3 id="安装宝塔面板"><a href="#安装宝塔面板" class="headerlink" title="安装宝塔面板"></a>安装宝塔面板</h3><p>宝塔面板可以更简单明了的进行网站的部署和服务器的监控，非常值得推荐。参考官方网站<a href="https://www.bt.cn/bbs/thread-19376-1-1.html">https://www.bt.cn/bbs/thread-19376-1-1.html</a></p>
+<h4 id="一键安装命令"><a href="#一键安装命令" class="headerlink" title="一键安装命令"></a>一键安装命令</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo yum install -y wget &amp;&amp; wget -O install.sh http://download.bt.cn/install/install_6.0.sh &amp;&amp; sh install.sh</span><br></pre></td></tr></table></figure>
 
-<p>MainActivity.java文件：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">FragmentActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> FragmentManager mFragmentManager;</span><br><span class="line">    <span class="comment">//这四个分别是底部导航栏的四个分类，源文件在上方</span></span><br><span class="line">    <span class="keyword">private</span> IndexFragment indexFragment;</span><br><span class="line">    <span class="keyword">private</span> MessageFragment messageFragment;</span><br><span class="line">    <span class="keyword">private</span> FriendCircleFragment friendCircleFragment;</span><br><span class="line">    <span class="keyword">private</span> FriendFragment friendfragment;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> FragmentTransaction mTransaction;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> FrameLayout main_frame;</span><br><span class="line">    <span class="keyword">private</span> RadioGroup rg_main;</span><br><span class="line">    <span class="keyword">private</span> RadioButton rb_index;</span><br><span class="line">    <span class="keyword">private</span> RadioButton rb_message;</span><br><span class="line">    <span class="keyword">private</span> RadioButton rb_friend;</span><br><span class="line">    <span class="keyword">private</span> RadioButton rb_friend_circle;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> position;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> List&lt;Fragment&gt; fragments = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        main_frame = findViewById(R.id.main_frame);</span><br><span class="line">        rg_main = findViewById(R.id.rg_main);</span><br><span class="line">        rb_index = findViewById(R.id.rb_index);</span><br><span class="line">        rb_message = findViewById(R.id.rb_message);</span><br><span class="line">        rb_friend = findViewById(R.id.rb_friend);</span><br><span class="line">        rb_friend_circle = findViewById(R.id.rb_friend_circle);</span><br><span class="line"></span><br><span class="line">        initView();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="comment">//设置返回按钮不是退出软件，而是返回主页。</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onKeyDown</span><span class="params">(<span class="keyword">int</span> keyCode, KeyEvent event)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(keyCode == event.KEYCODE_BACK)&#123;</span><br><span class="line">            moveTaskToBack(<span class="keyword">false</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.onKeyDown(keyCode, event);</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">//初始化每个Fragment</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initView</span><span class="params">()</span></span>&#123;</span><br><span class="line">        mFragmentManager = getSupportFragmentManager();</span><br><span class="line">        mTransaction = mFragmentManager.beginTransaction();</span><br><span class="line">        rg_main.check(R.id.rb_index);</span><br><span class="line">        indexFragment = <span class="keyword">new</span> IndexFragment();</span><br><span class="line">        fragments.add(indexFragment);</span><br><span class="line">        hideOtherFragment(indexFragment,<span class="keyword">true</span>);</span><br><span class="line">        rg_main.setOnCheckedChangeListener(<span class="keyword">new</span> RadioGroup.OnCheckedChangeListener() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCheckedChanged</span><span class="params">(RadioGroup radioGroup, <span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">switch</span> (i)&#123;</span><br><span class="line">                    <span class="keyword">case</span> R.id.rb_index:</span><br><span class="line">                        position = <span class="number">0</span>;</span><br><span class="line">                        hideOtherFragment(indexFragment,<span class="keyword">false</span>);</span><br><span class="line">                        System.out.println(<span class="string">&quot;切换成功！！&quot;</span>);</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    <span class="keyword">case</span> R.id.rb_message:</span><br><span class="line">                        position = <span class="number">1</span>;</span><br><span class="line">                        <span class="keyword">if</span> (messageFragment==<span class="keyword">null</span>)&#123;</span><br><span class="line">                            messageFragment = <span class="keyword">new</span> MessageFragment();</span><br><span class="line">                            fragments.add(messageFragment);</span><br><span class="line">                            hideOtherFragment(messageFragment,<span class="keyword">true</span>);</span><br><span class="line">                            System.out.println(<span class="string">&quot;切换成功！！&quot;</span>);</span><br><span class="line">                        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                            hideOtherFragment(messageFragment,<span class="keyword">false</span>);</span><br><span class="line">                            System.out.println(<span class="string">&quot;切换成功！！&quot;</span>);</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    <span class="keyword">case</span> R.id.rb_friend:</span><br><span class="line">                        position = <span class="number">2</span>;</span><br><span class="line">                        <span class="keyword">if</span> (friendfragment==<span class="keyword">null</span>)&#123;</span><br><span class="line">                            friendfragment = <span class="keyword">new</span> FriendFragment();</span><br><span class="line">                            fragments.add(friendfragment);</span><br><span class="line">                            hideOtherFragment(friendfragment,<span class="keyword">true</span>);</span><br><span class="line">                            System.out.println(<span class="string">&quot;切换成功！！&quot;</span>);</span><br><span class="line">                        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                            hideOtherFragment(friendfragment,<span class="keyword">false</span>);</span><br><span class="line">                            System.out.println(<span class="string">&quot;切换成功！！&quot;</span>);</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    <span class="keyword">case</span> R.id.rb_friend_circle:</span><br><span class="line">                        position = <span class="number">3</span>;</span><br><span class="line">                        <span class="keyword">if</span>(friendCircleFragment == <span class="keyword">null</span>)&#123;</span><br><span class="line">                            friendCircleFragment = <span class="keyword">new</span> FriendCircleFragment();</span><br><span class="line">                            fragments.add(friendCircleFragment);</span><br><span class="line">                            hideOtherFragment(friendCircleFragment,<span class="keyword">true</span>);</span><br><span class="line">                            System.out.println(<span class="string">&quot;切换成功！！&quot;</span>);</span><br><span class="line">                        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                            hideOtherFragment(friendCircleFragment,<span class="keyword">false</span>);</span><br><span class="line">                            System.out.println(<span class="string">&quot;切换成功！！&quot;</span>);</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">hideOtherFragment</span><span class="params">(Fragment showFragment, <span class="keyword">boolean</span> add)</span> </span>&#123;</span><br><span class="line">        mTransaction = mFragmentManager.beginTransaction();</span><br><span class="line">        <span class="keyword">if</span> (add)&#123;</span><br><span class="line">            mTransaction.add(R.id.main_frame,showFragment);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (Fragment fragment:fragments)&#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (showFragment.equals(fragment))&#123;</span><br><span class="line">                mTransaction.show(fragment);</span><br><span class="line">                <span class="comment">//打印当前fragment</span></span><br><span class="line">                System.out.println(showFragment);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                mTransaction.hide(fragment);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        mTransaction.commit();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>耐心等待其安装完成，之后会得到一个访问地址和账户密码，我们先使用内网访问地址进行操作。</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220504224253823.png" alt="image-20220504224253823"></p>
+<p>如果发现登录不上。先进入Centos查看ip</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ip addr</span><br></pre></td></tr></table></figure>
 
-<p>展示图片：</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220428223342959.png" alt="image-20220428223342959"></p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220428223356012.png" alt="image-20220428223356012"></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220504224404341.png" alt="image-20220504224404341"></p>
+<p>使用这个就能成功登录</p>
+<p>第一次进入宝塔面板可以进入设置修改用户名和密码</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220504224502759.png" alt="image-20220504224502759"></p>
 ]]></content>
       <tags>
-        <tag>Android</tag>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CentOs安装配置node</title>
+    <url>/2022/05/05/CentOs%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEnode/</url>
+    <content><![CDATA[<h4 id="一、找好安装位置，我这里是：-home-node"><a href="#一、找好安装位置，我这里是：-home-node" class="headerlink" title="一、找好安装位置，我这里是：/home/node"></a>一、找好安装位置，我这里是：/home/node</h4><p> 二、去<a href="https://so.csdn.net/so/search?q=node&spm=1001.2101.3001.7020">node</a>官网下载Linux镜像或者通过命令直接下载</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">wget https:<span class="comment">//npm.taobao.org/mirrors/node/v12.16.1/node-v12.16.1-linux-x64.tar.gz</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>三、解压</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -xvf node-v12.16.1-linux-x64.tar.gz</span><br></pre></td></tr></table></figure>
+
+
+
+<p>四、进入解压后的文件执行命令     </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#切换路径：</span></span><br><span class="line"><span class="built_in">cd</span> node-v12.16.1-linux-x64.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="comment">#执行这个命令：</span></span><br><span class="line">yum install gcc gcc-c++</span><br></pre></td></tr></table></figure>
+
+<p>五、重命名文件名</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mv node-v12.16.1-linux-x64.tar.gz Node</span><br></pre></td></tr></table></figure>
+
+<p> 六、ln指令创建关联</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ln -s /home/node/node/bin/node /usr/bin/node</span><br><span class="line"></span><br><span class="line">ln -s /home/node/node/bin/npm /usr/bin/npm</span><br><span class="line"></span><br><span class="line">ln -s /home/node/node/bin/npx /usr/bin/npx</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p> 八、安装node守护进程 forever</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">// 全局安装forever</span><br><span class="line">npm i -g forever</span><br><span class="line">// 通过forever启动应用</span><br><span class="line">forever start app.js</span><br><span class="line">// 关闭应用</span><br><span class="line">forever stop app.js</span><br><span class="line">// 关闭所有应用</span><br><span class="line">forever stopall</span><br><span class="line">// 重启所有应用</span><br><span class="line">forever restartall</span><br><span class="line">// 显示所有运行的服务</span><br><span class="line">forever list</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm i forever -g </span><br><span class="line"></span><br><span class="line">ln -s /usr/<span class="built_in">local</span>/temp/Node.js/bin/forever /usr/<span class="built_in">local</span>/bin/forever</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+]]></content>
+      <tags>
+        <tag>linux</tag>
       </tags>
   </entry>
   <entry>
@@ -204,6 +257,36 @@
       </tags>
   </entry>
   <entry>
+    <title>Android的Fragment实现导航栏</title>
+    <url>/2022/04/28/Android%E7%9A%84Fragment%E5%AE%9E%E7%8E%B0%E5%AF%BC%E8%88%AA%E6%A0%8F/</url>
+    <content><![CDATA[<p>这里只粘贴关键代码，留作自己遗忘查看</p>
+<p>首先activity_main.xml</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">LinearLayout</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:app</span>=<span class="string">&quot;http://schemas.android.com/apk/res-auto&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:tools</span>=<span class="string">&quot;http://schemas.android.com/tools&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:orientation</span>=<span class="string">&quot;vertical&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">tools:context</span>=<span class="string">&quot;.MainActivity&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:background</span>=<span class="string">&quot;@color/white&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">FrameLayout</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:background</span>=<span class="string">&quot;@color/background&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">&quot;@+id/main_frame&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_weight</span>=<span class="string">&quot;1&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;0dp&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">RadioGroup</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">&quot;@+id/rg_main&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:background</span>=<span class="string">&quot;@color/white&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:padding</span>=<span class="string">&quot;5dp&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:orientation</span>=<span class="string">&quot;horizontal&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">        &gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">RadioButton</span></span></span><br><span class="line"><span class="tag">            <span class="attr">style</span>=<span class="string">&quot;@style/Bottom_tab_style&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:id</span>=<span class="string">&quot;@+id/rb_index&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:drawableTop</span>=<span class="string">&quot;@drawable/main_nav_index&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:text</span>=<span class="string">&quot;首页&quot;</span> /&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--@drawable/main_nav_index：首页对应的图标图片--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">RadioButton</span></span></span><br><span class="line"><span class="tag">            <span class="attr">style</span>=<span class="string">&quot;@style/Bottom_tab_style&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:id</span>=<span class="string">&quot;@+id/rb_message&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:drawableTop</span>=<span class="string">&quot;@drawable/main_nav_message&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:text</span>=<span class="string">&quot;消息&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">RadioButton</span></span></span><br><span class="line"><span class="tag">            <span class="attr">style</span>=<span class="string">&quot;@style/Bottom_tab_style&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:id</span>=<span class="string">&quot;@+id/rb_friend&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:drawableTop</span>=<span class="string">&quot;@drawable/main_nav_friend&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:text</span>=<span class="string">&quot;好友&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">RadioButton</span></span></span><br><span class="line"><span class="tag">            <span class="attr">style</span>=<span class="string">&quot;@style/Bottom_tab_style&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:id</span>=<span class="string">&quot;@+id/rb_friend_circle&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:drawableTop</span>=<span class="string">&quot;@drawable/main_nav_friend_circle&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:text</span>=<span class="string">&quot;生活圈&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">RadioGroup</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>上述xml文件中的style.xml：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">resources</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">&quot;Bottom_tab_style&quot;</span> &gt;</span><span class="xml"></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">&quot;android:layout_width&quot;</span>&gt;</span>wrap_content<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">&quot;android:layout_height&quot;</span>&gt;</span>wrap_content<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">&quot;android:layout_weight&quot;</span>&gt;</span>1<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">&quot;android:textColor&quot;</span>&gt;</span>@drawable/main_nav_text_color<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">&quot;android:gravity&quot;</span>&gt;</span>center<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">&quot;android:button&quot;</span>&gt;</span>@null<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">&quot;android:textSize&quot;</span>&gt;</span>14sp<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span></span><br><span class="line"><span class="xml">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resources</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>main_nav_text_color.xml:</p>
+<p>其他三个也是同样的写法</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">selector</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">item</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:state_checked</span>=<span class="string">&quot;false&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:color</span>=<span class="string">&quot;@color/black&quot;</span></span></span><br><span class="line"><span class="tag">        /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">item</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:state_checked</span>=<span class="string">&quot;true&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:color</span>=<span class="string">&quot;#ff8fdf&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">selector</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>IndexFragment：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IndexFragment</span> <span class="keyword">extends</span> <span class="title">Fragment</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Nullable</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> View <span class="title">onCreateView</span><span class="params">(<span class="meta">@NonNull</span> LayoutInflater inflater, <span class="meta">@Nullable</span> ViewGroup container, <span class="meta">@Nullable</span> Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        View view = inflater.inflate(R.layout.fragment_index,<span class="keyword">null</span>);</span><br><span class="line">        <span class="keyword">return</span> view;</span><br><span class="line"><span class="comment">//        return super.onCreateView(inflater, container, savedInstanceState);</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>MainActivity.java文件：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">FragmentActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> FragmentManager mFragmentManager;</span><br><span class="line">    <span class="comment">//这四个分别是底部导航栏的四个分类，源文件在上方</span></span><br><span class="line">    <span class="keyword">private</span> IndexFragment indexFragment;</span><br><span class="line">    <span class="keyword">private</span> MessageFragment messageFragment;</span><br><span class="line">    <span class="keyword">private</span> FriendCircleFragment friendCircleFragment;</span><br><span class="line">    <span class="keyword">private</span> FriendFragment friendfragment;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> FragmentTransaction mTransaction;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> FrameLayout main_frame;</span><br><span class="line">    <span class="keyword">private</span> RadioGroup rg_main;</span><br><span class="line">    <span class="keyword">private</span> RadioButton rb_index;</span><br><span class="line">    <span class="keyword">private</span> RadioButton rb_message;</span><br><span class="line">    <span class="keyword">private</span> RadioButton rb_friend;</span><br><span class="line">    <span class="keyword">private</span> RadioButton rb_friend_circle;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> position;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> List&lt;Fragment&gt; fragments = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        main_frame = findViewById(R.id.main_frame);</span><br><span class="line">        rg_main = findViewById(R.id.rg_main);</span><br><span class="line">        rb_index = findViewById(R.id.rb_index);</span><br><span class="line">        rb_message = findViewById(R.id.rb_message);</span><br><span class="line">        rb_friend = findViewById(R.id.rb_friend);</span><br><span class="line">        rb_friend_circle = findViewById(R.id.rb_friend_circle);</span><br><span class="line"></span><br><span class="line">        initView();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="comment">//设置返回按钮不是退出软件，而是返回主页。</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onKeyDown</span><span class="params">(<span class="keyword">int</span> keyCode, KeyEvent event)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(keyCode == event.KEYCODE_BACK)&#123;</span><br><span class="line">            moveTaskToBack(<span class="keyword">false</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.onKeyDown(keyCode, event);</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">//初始化每个Fragment</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initView</span><span class="params">()</span></span>&#123;</span><br><span class="line">        mFragmentManager = getSupportFragmentManager();</span><br><span class="line">        mTransaction = mFragmentManager.beginTransaction();</span><br><span class="line">        rg_main.check(R.id.rb_index);</span><br><span class="line">        indexFragment = <span class="keyword">new</span> IndexFragment();</span><br><span class="line">        fragments.add(indexFragment);</span><br><span class="line">        hideOtherFragment(indexFragment,<span class="keyword">true</span>);</span><br><span class="line">        rg_main.setOnCheckedChangeListener(<span class="keyword">new</span> RadioGroup.OnCheckedChangeListener() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCheckedChanged</span><span class="params">(RadioGroup radioGroup, <span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">switch</span> (i)&#123;</span><br><span class="line">                    <span class="keyword">case</span> R.id.rb_index:</span><br><span class="line">                        position = <span class="number">0</span>;</span><br><span class="line">                        hideOtherFragment(indexFragment,<span class="keyword">false</span>);</span><br><span class="line">                        System.out.println(<span class="string">&quot;切换成功！！&quot;</span>);</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    <span class="keyword">case</span> R.id.rb_message:</span><br><span class="line">                        position = <span class="number">1</span>;</span><br><span class="line">                        <span class="keyword">if</span> (messageFragment==<span class="keyword">null</span>)&#123;</span><br><span class="line">                            messageFragment = <span class="keyword">new</span> MessageFragment();</span><br><span class="line">                            fragments.add(messageFragment);</span><br><span class="line">                            hideOtherFragment(messageFragment,<span class="keyword">true</span>);</span><br><span class="line">                            System.out.println(<span class="string">&quot;切换成功！！&quot;</span>);</span><br><span class="line">                        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                            hideOtherFragment(messageFragment,<span class="keyword">false</span>);</span><br><span class="line">                            System.out.println(<span class="string">&quot;切换成功！！&quot;</span>);</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    <span class="keyword">case</span> R.id.rb_friend:</span><br><span class="line">                        position = <span class="number">2</span>;</span><br><span class="line">                        <span class="keyword">if</span> (friendfragment==<span class="keyword">null</span>)&#123;</span><br><span class="line">                            friendfragment = <span class="keyword">new</span> FriendFragment();</span><br><span class="line">                            fragments.add(friendfragment);</span><br><span class="line">                            hideOtherFragment(friendfragment,<span class="keyword">true</span>);</span><br><span class="line">                            System.out.println(<span class="string">&quot;切换成功！！&quot;</span>);</span><br><span class="line">                        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                            hideOtherFragment(friendfragment,<span class="keyword">false</span>);</span><br><span class="line">                            System.out.println(<span class="string">&quot;切换成功！！&quot;</span>);</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    <span class="keyword">case</span> R.id.rb_friend_circle:</span><br><span class="line">                        position = <span class="number">3</span>;</span><br><span class="line">                        <span class="keyword">if</span>(friendCircleFragment == <span class="keyword">null</span>)&#123;</span><br><span class="line">                            friendCircleFragment = <span class="keyword">new</span> FriendCircleFragment();</span><br><span class="line">                            fragments.add(friendCircleFragment);</span><br><span class="line">                            hideOtherFragment(friendCircleFragment,<span class="keyword">true</span>);</span><br><span class="line">                            System.out.println(<span class="string">&quot;切换成功！！&quot;</span>);</span><br><span class="line">                        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                            hideOtherFragment(friendCircleFragment,<span class="keyword">false</span>);</span><br><span class="line">                            System.out.println(<span class="string">&quot;切换成功！！&quot;</span>);</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">hideOtherFragment</span><span class="params">(Fragment showFragment, <span class="keyword">boolean</span> add)</span> </span>&#123;</span><br><span class="line">        mTransaction = mFragmentManager.beginTransaction();</span><br><span class="line">        <span class="keyword">if</span> (add)&#123;</span><br><span class="line">            mTransaction.add(R.id.main_frame,showFragment);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (Fragment fragment:fragments)&#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (showFragment.equals(fragment))&#123;</span><br><span class="line">                mTransaction.show(fragment);</span><br><span class="line">                <span class="comment">//打印当前fragment</span></span><br><span class="line">                System.out.println(showFragment);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                mTransaction.hide(fragment);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        mTransaction.commit();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>展示图片：</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220428223342959.png" alt="image-20220428223342959"></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220428223356012.png" alt="image-20220428223356012"></p>
+]]></content>
+      <tags>
+        <tag>Android</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Linux命令</title>
     <url>/2021/11/10/Linux%E5%91%BD%E4%BB%A4/</url>
     <content><![CDATA[<h3 id="1-ls-—-List"><a href="#1-ls-—-List" class="headerlink" title="1. ls — List"></a>1. ls — List</h3><p>ls会列举出当前工作目录的内容（文件或文件夹）。</p>
@@ -288,6 +371,93 @@
 ]]></content>
       <tags>
         <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>VMware配置静态IP</title>
+    <url>/2022/05/04/VMware%E9%85%8D%E7%BD%AE%E9%9D%99%E6%80%81IP/</url>
+    <content><![CDATA[<h1 id="VMware虚拟机中配置静态IP的方法"><a href="#VMware虚拟机中配置静态IP的方法" class="headerlink" title="VMware虚拟机中配置静态IP的方法"></a><a href="https://www.cnblogs.com/jiucai/p/12497925.html">VMware虚拟机中配置静态IP的方法</a></h1><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/1868057-20200315154409190-813762847.png" alt="img">VMnet0：用于虚拟桥接网络下的虚拟交换机</p>
+<p>桥接网络是指本地物理网卡和虚拟网卡通过VMnet0虚拟交换机进行桥接，物理网卡和虚拟网卡在拓扑图上处于同等地位。</p>
+<p>VMnet1：用于虚拟Host-Only网络下的虚拟交换机（仅主机）</p>
+<p>在Host-Only模式下，虚拟网络是一个全封闭的网络，它唯一能够访问的就是主机。</p>
+<p>VMnet8：用于虚拟NAT网络下的虚拟交换机</p>
+<p>在NAT网络中，会用到VMware Network Adepter VMnet8虚拟网卡，主机上的VMware Network Adepter VMnet8虚拟网卡被直接连接到VMnet8虚拟交换机上与虚拟网卡进行通信。</p>
+<p>VMware Network Adepter VMnet1：Host用于与Host-Only虚拟网络进行通信的虚拟网卡</p>
+<p>VMware Network Adepter VMnet8：Host用于与NAT虚拟网络进行通信的虚拟网卡</p>
+<p><strong>综上所诉：在这三种网络模式中NAT模式是最简单的，基本不需要手动配置IP地址相关参数。桥接模需要配置额外的IP地址。</strong></p>
+<h4 id="1、查看网关，以及网段"><a href="#1、查看网关，以及网段" class="headerlink" title="1、查看网关，以及网段"></a>1、查看网关，以及网段</h4><p>【编辑】——〉【虚拟网络编辑器】</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/1868057-20200315154409190-813762847.png" alt="img"></p>
+<p><strong>我们使用NAT模式，所以选择VMnet8.取消【使用本地DHCP】这个选项不打勾，这是分配动态IP的。</strong></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/1868057-20200315160047395-767075949.png" alt="img"></p>
+<p>网关IP需要记住，通过这个我们得知</p>
+<p>我们的网关192.168.228.2，子网掩码是255.255.255.0。子网IP的192.168.228.0的意思是如果你要往这个网段内添加机器，你的机器ip只能是192.168.228.0~192.168.228.255这个范围内的。其实你会发现192.168.228.2是网关IP了。</p>
+<p>一般而言192.168.228.255是广播IP所以不用，192.168.228.0一般是网段IP也不用。也就是说除了0 2 255这三个，其他的数字你可以随便设置。</p>
+<h4 id="2、设置虚拟机IP"><a href="#2、设置虚拟机IP" class="headerlink" title="2、设置虚拟机IP"></a>2、设置虚拟机IP</h4><p>这里演示的是centos系统</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vi /etc/sysconfig/network-scripts/ifcfg-ens33</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/1868057-20200315160108866-52349871.png" alt="img"></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /etc/sysconfig/network-scripts/**</span><br><span class="line">ls</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/1868057-20200315160117499-1422848875.png" alt="img"></p>
+<p><strong>ifcfg-ens33****第一个就是网卡名称</strong></p>
+<p>编辑</p>
+<p>输入i后编辑更改成ONBOOT：yes</p>
+<p>BOOTPROTO：static</p>
+<p>把IP地址、网关、子网掩码、DNS添加上</p>
+<p>IPADDR：192.168.228.119</p>
+<p>NETMASK：255.255.255.0</p>
+<p>GETEWAY：192.168.228.254</p>
+<p>DNS1：114.114.114.114</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/1868057-20200315160204742-936507531.png" alt="img"></p>
+<p>同样需要在windows下修改vmware8的ip</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/1868057-20200315160305010-661807387.png" alt="img"></p>
+<p>点击internet协议版本4（TCP/IPv4）</p>
+<p>点击输入使用下面的IP地址（S）</p>
+<p>输入IP地址：192.168.228.98</p>
+<p>子网掩码：255.255.255.0</p>
+<p>默认网关：192.168.228.254</p>
+<p>首选DNS服务器（P）：114.114.114.114</p>
+<p>确定再确定保存</p>
+<p>现在就配置完成了，可以尝试ping一下试试能不能ping通</p>
+<p><strong>windows网络和虚拟机的网络ip不要一样，否则会连不上(造成IP冲突)</strong></p>
+]]></content>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>YACC语法分析器</title>
+    <url>/2022/05/03/YACC%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8/</url>
+    <content><![CDATA[<h3 id="YACC概述"><a href="#YACC概述" class="headerlink" title="YACC概述"></a>YACC概述</h3><p>yacc(Yet Another Compiler Compiler)，是一个经典的生成语法分析器的工具。yacc生成的编译器主要是用C语言写成的语法解析器（Parser），需要与词法解析器Lex一起使用，再把两部份产生出来的C程序一并编译。</p>
+<h3 id="YACC语法规则"><a href="#YACC语法规则" class="headerlink" title="YACC语法规则"></a>YACC语法规则</h3><p>yacc语法包括三部分：定义段、规则段和用户子例程段</p>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">...定义段...</span><br><span class="line"></span><br><span class="line"><span class="string">%%</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">...规则段...</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">%</span>%</span><br><span class="line"></span><br><span class="line">...用户子例程段...</span><br></pre></td></tr></table></figure>
+
+<p><strong>实例：</strong></p>
+<p>一个简单的四则运算：</p>
+<p>test.l</p>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line"><span class="string">%&#123;</span></span><br><span class="line"><span class="string">#include &quot;test.tab.h&quot;</span></span><br><span class="line"><span class="string">extern int yylval;</span></span><br><span class="line"><span class="string">%&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="string">%%</span></span><br><span class="line"><span class="string">[0-9]+  &#123; yylval = atoi(yytext); return NUMBER; &#125;</span></span><br><span class="line"><span class="string">[ \t]   ;       /* ignore white space */</span></span><br><span class="line"><span class="string">\n  return 0;   /* logical EOF */</span></span><br><span class="line"><span class="string">.   return yytext[0];</span></span><br><span class="line"><span class="string">%</span>%</span><br></pre></td></tr></table></figure>
+
+<p>test.y</p>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line"><span class="string">%&#123;</span></span><br><span class="line"><span class="string">#include &lt;stdio.h&gt;</span></span><br><span class="line"><span class="string">%&#125;</span></span><br><span class="line">%token NAME NUMBER</span><br><span class="line"><span class="string">%%</span></span><br><span class="line"><span class="string">statement:  NAME &#x27;=&#x27; expression</span></span><br><span class="line"><span class="string">    |   expression      &#123; printf(&quot;= %</span>d\n<span class="string">&quot;, $1); &#125;</span></span><br><span class="line"><span class="string">    ;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">expression: expression &#x27;+&#x27; NUMBER   &#123; $$ = $1 + $3; &#125;</span></span><br><span class="line"><span class="string">    |   expression &#x27;-&#x27; NUMBER   &#123; $$ = $1 - $3; &#125;</span></span><br><span class="line"><span class="string">    |   expression &#x27;*&#x27; NUMBER   &#123; $$ = $1 * $3; &#125;</span></span><br><span class="line"><span class="string">    |   expression &#x27;/&#x27; NUMBER   &#123; $$ = $1 / $3; &#125;</span></span><br><span class="line"><span class="string">    |   expression &#x27;%&#x27; NUMBER   &#123; $$ = $1 % $3; &#125;</span></span><br><span class="line"><span class="string">    |   NUMBER          &#123; $$ = $1; &#125;</span></span><br><span class="line"><span class="string">    ;</span></span><br><span class="line"><span class="string">%%</span></span><br><span class="line"><span class="string">int main()</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">    yyparse();</span></span><br><span class="line"><span class="string">    return 0;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">int yyerror(char *s)</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">    printf(&quot;</span>%s/n<span class="string">&quot;,s);</span></span><br><span class="line"><span class="string">    return 0;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">flex test.l</span><br><span class="line">bison -d test.y</span><br><span class="line">gcc -o <span class="built_in">test</span> test.tab.c test.yy.c -lfl</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<p>结果：</p>
+<p><img src="C:/Users/ADMINI~1/AppData/Local/Temp/ksohtml21936/wps1.jpg" alt="img"></p>
+<p><img src="C:/Users/ADMINI~1/AppData/Local/Temp/ksohtml21936/wps2.jpg" alt="img"> </p>
+]]></content>
+      <tags>
+        <tag>C语言</tag>
       </tags>
   </entry>
   <entry>
@@ -450,6 +620,27 @@
       </tags>
   </entry>
   <entry>
+    <title>hexo基础使用</title>
+    <url>/2021/11/07/hexo%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<h2 id="分类和标签"><a href="#分类和标签" class="headerlink" title="分类和标签"></a>分类和标签</h2><p>只有文章支持分类和标签，您可以在 Front-matter 中设置。在其他系统中，分类和标签听起来很接近，但是在 Hexo 中两者有着明显的差别：分类具有顺序性和层次性，也就是说 <code>Foo, Bar</code> 不等于 <code>Bar, Foo</code>；而标签没有顺序和层次。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">categories:</span><br><span class="line">- Diary</span><br><span class="line">tags:</span><br><span class="line">- PS3</span><br><span class="line">- Games</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
     <title>Git基础</title>
     <url>/2021/11/19/git%E5%9F%BA%E7%A1%80/</url>
     <content><![CDATA[<h1 id="git基础"><a href="#git基础" class="headerlink" title="git基础"></a>git基础</h1><p>==在windows安装好git之后，会在右键菜单出现一个git bash here，点击这个就能进入命令行窗口。==</p>
@@ -567,42 +758,6 @@
 ]]></content>
       <tags>
         <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>hexo基础使用</title>
-    <url>/2021/11/07/hexo%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<h2 id="分类和标签"><a href="#分类和标签" class="headerlink" title="分类和标签"></a>分类和标签</h2><p>只有文章支持分类和标签，您可以在 Front-matter 中设置。在其他系统中，分类和标签听起来很接近，但是在 Hexo 中两者有着明显的差别：分类具有顺序性和层次性，也就是说 <code>Foo, Bar</code> 不等于 <code>Bar, Foo</code>；而标签没有顺序和层次。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">categories:</span><br><span class="line">- Diary</span><br><span class="line">tags:</span><br><span class="line">- PS3</span><br><span class="line">- Games</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>kali安装.deb的安装包</title>
-    <url>/2022/03/18/kali%E5%AE%89%E8%A3%85-deb%E7%9A%84%E5%AE%89%E8%A3%85%E5%8C%85/</url>
-    <content><![CDATA[<h3 id="在kali中安装一些下载好的deb安装包时"><a href="#在kali中安装一些下载好的deb安装包时" class="headerlink" title="在kali中安装一些下载好的deb安装包时"></a>在kali中安装一些下载好的deb安装包时</h3><h4 id="一，找到安装包位置"><a href="#一，找到安装包位置" class="headerlink" title="一，找到安装包位置"></a>一，找到安装包位置</h4><p> <img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220318155623220.png" alt="image-20220318155623220"></p>
-<p>==这里原本有个utools==</p>
-<h4 id="二，打开终端"><a href="#二，打开终端" class="headerlink" title="二，打开终端"></a>二，打开终端</h4><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220318155937843.png" alt="image-20220318155937843"></p>
-<p>命令：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo su</span><br><span class="line"><span class="comment">#超级用户</span></span><br><span class="line"><span class="built_in">cd</span> /tmp/mozilla_kali0</span><br><span class="line"><span class="comment">#打开需要安装文件所在目录</span></span><br><span class="line">ls</span><br><span class="line"><span class="comment">#显示当前目录所有文件和文件夹</span></span><br><span class="line">dpkg -i [需要安装文件的全名称]</span><br><span class="line"><span class="comment">#安装</span></span><br></pre></td></tr></table></figure>
-
-<p>等待安装即可</p>
-]]></content>
-      <tags>
-        <tag>linux</tag>
       </tags>
   </entry>
   <entry>
@@ -736,6 +891,40 @@
       </tags>
   </entry>
   <entry>
+    <title>图床搭建</title>
+    <url>/2021/11/19/picgo+%E9%98%BF%E9%87%8C%E4%BA%91oss+typora%E5%9B%BE%E5%BA%8A%E6%90%AD%E5%BB%BA/</url>
+    <content><![CDATA[<h1 id="picgo-阿里云oss-typora图床搭建"><a href="#picgo-阿里云oss-typora图床搭建" class="headerlink" title="picgo+阿里云oss+typora图床搭建"></a>picgo+阿里云oss+typora图床搭建</h1><h2 id="1-购买阿里云的oss对象储存"><a href="#1-购买阿里云的oss对象储存" class="headerlink" title="1.购买阿里云的oss对象储存"></a>1.购买阿里云的oss对象储存</h2><h2 id="2-建立-bucket"><a href="#2-建立-bucket" class="headerlink" title="2.建立 bucket"></a>2.建立 bucket</h2><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210416171724.png" alt="image-20210416171724270"></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210416172033.png" alt="image-20210416172033033"></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210416172125.png" alt="image-20210416172125379"></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210416172219.png" alt="image-20210416172219107"></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210416172312.png" alt="image-20210416172312448"></p>
+<h3 id="然后记下来显示的AccessKey和AccessKey-Serect。分别是用户号和密码"><a href="#然后记下来显示的AccessKey和AccessKey-Serect。分别是用户号和密码" class="headerlink" title="然后记下来显示的AccessKey和AccessKey Serect。分别是用户号和密码"></a>然后记下来显示的AccessKey和AccessKey Serect。分别是用户号和密码</h3><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210416172507.png" alt="image-20210416172507376"></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210416172540.png" alt="image-20210416172540595"></p>
+<p>再到picgo</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210416172627.png" alt="image-20210416172627340"></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210416172754.png" alt="image-20210416172754089"></p>
+<p>然后就可以了。</p>
+]]></content>
+      <tags>
+        <tag>阿里云</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>kali安装.deb的安装包</title>
+    <url>/2022/03/18/kali%E5%AE%89%E8%A3%85-deb%E7%9A%84%E5%AE%89%E8%A3%85%E5%8C%85/</url>
+    <content><![CDATA[<h3 id="在kali中安装一些下载好的deb安装包时"><a href="#在kali中安装一些下载好的deb安装包时" class="headerlink" title="在kali中安装一些下载好的deb安装包时"></a>在kali中安装一些下载好的deb安装包时</h3><h4 id="一，找到安装包位置"><a href="#一，找到安装包位置" class="headerlink" title="一，找到安装包位置"></a>一，找到安装包位置</h4><p> <img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220318155623220.png" alt="image-20220318155623220"></p>
+<p>==这里原本有个utools==</p>
+<h4 id="二，打开终端"><a href="#二，打开终端" class="headerlink" title="二，打开终端"></a>二，打开终端</h4><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220318155937843.png" alt="image-20220318155937843"></p>
+<p>命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo su</span><br><span class="line"><span class="comment">#超级用户</span></span><br><span class="line"><span class="built_in">cd</span> /tmp/mozilla_kali0</span><br><span class="line"><span class="comment">#打开需要安装文件所在目录</span></span><br><span class="line">ls</span><br><span class="line"><span class="comment">#显示当前目录所有文件和文件夹</span></span><br><span class="line">dpkg -i [需要安装文件的全名称]</span><br><span class="line"><span class="comment">#安装</span></span><br></pre></td></tr></table></figure>
+
+<p>等待安装即可</p>
+]]></content>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>npm指令</title>
     <url>/2021/11/12/npm%E6%8C%87%E4%BB%A4/</url>
     <content><![CDATA[<h1 id="npm常用命令"><a href="#npm常用命令" class="headerlink" title="npm常用命令"></a>npm常用命令</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>npm是跟随node一起安装的包（模块）管理器。常见的使用场景有以下几种：</p>
@@ -800,73 +989,32 @@
       </tags>
   </entry>
   <entry>
-    <title>图床搭建</title>
-    <url>/2021/11/19/picgo+%E9%98%BF%E9%87%8C%E4%BA%91oss+typora%E5%9B%BE%E5%BA%8A%E6%90%AD%E5%BB%BA/</url>
-    <content><![CDATA[<h1 id="picgo-阿里云oss-typora图床搭建"><a href="#picgo-阿里云oss-typora图床搭建" class="headerlink" title="picgo+阿里云oss+typora图床搭建"></a>picgo+阿里云oss+typora图床搭建</h1><h2 id="1-购买阿里云的oss对象储存"><a href="#1-购买阿里云的oss对象储存" class="headerlink" title="1.购买阿里云的oss对象储存"></a>1.购买阿里云的oss对象储存</h2><h2 id="2-建立-bucket"><a href="#2-建立-bucket" class="headerlink" title="2.建立 bucket"></a>2.建立 bucket</h2><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210416171724.png" alt="image-20210416171724270"></p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210416172033.png" alt="image-20210416172033033"></p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210416172125.png" alt="image-20210416172125379"></p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210416172219.png" alt="image-20210416172219107"></p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210416172312.png" alt="image-20210416172312448"></p>
-<h3 id="然后记下来显示的AccessKey和AccessKey-Serect。分别是用户号和密码"><a href="#然后记下来显示的AccessKey和AccessKey-Serect。分别是用户号和密码" class="headerlink" title="然后记下来显示的AccessKey和AccessKey Serect。分别是用户号和密码"></a>然后记下来显示的AccessKey和AccessKey Serect。分别是用户号和密码</h3><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210416172507.png" alt="image-20210416172507376"></p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210416172540.png" alt="image-20210416172540595"></p>
-<p>再到picgo</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210416172627.png" alt="image-20210416172627340"></p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210416172754.png" alt="image-20210416172754089"></p>
-<p>然后就可以了。</p>
+    <title>宝塔面板+wordpress搭建博客</title>
+    <url>/2022/05/06/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF-wordpress%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h3 id="在这之前默认已经装好了宝塔面板。"><a href="#在这之前默认已经装好了宝塔面板。" class="headerlink" title="在这之前默认已经装好了宝塔面板。"></a>在这之前默认已经装好了宝塔面板。</h3><p><strong># 5.2 安装 WordPress</strong></p>
+<p>在主面板，软件中选择 “一键部署源码”。如果没有，就在软件商店进行下载</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220506151731695.png"></p>
+<p>如果主面板没有，勾上面板显示</p>
+<p>一键部署 WordPress。</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/v2-126ddbc167827fa2c4c149cef9a6b8de_720w.jpg"></p>
+<p>在域名输入框中填写自己的域名，其他默认，点击 “提交”。（域名我填的本地局域网ip）</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220506151934690.png"></p>
+<p>提交之后可以直接访问这个ip地址就可以</p>
+<p>可能会出现以下错误</p>
+<p><strong>centos 6 7 检测配置文件 /usr/local/nginx/sbin/nginx -t<br>出现以下错误：</strong><br><strong>/usr/local/nginx/sbin/nginx: error while loading shared libraries: libluajit-5.1.so.2: cannot open shared object file: No such file or directory</strong><br>解决方案：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum -y install lua*</span><br></pre></td></tr></table></figure>
+
+<p>接下来访问-》点击现在开始</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220506152135208.png"></p>
+<p>填写上面记录下的数据库信息，提交。（这里是之前得到的账号密码）</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/v2-a61f146678390151326ef1bae08d0a64_720w.jpg"></p>
+<p>填写网站信息，安装WordPress。</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/v2-6604cd5e86c0b03e9e6e48b91205a5f2_r.jpg"></p>
+<p>安装完成后，登陆网站后台，开始创作之旅！访问域名，即可进入自己的网站。</p>
+<p>现在就完成了。（后面可以发布文章，修改主题，下载插件）</p>
 ]]></content>
       <tags>
-        <tag>阿里云</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>远程控制+Sakurafrp实现非局域网远程控制</title>
-    <url>/2021/11/08/python/</url>
-    <content><![CDATA[<h2 id="一、下载RD-Client"><a href="#一、下载RD-Client" class="headerlink" title="一、下载RD Client"></a>一、下载RD Client</h2><ul>
-<li>安卓端网页下载或者<a href="https://presenter.oss-cn-shanghai.aliyuncs.com/base.apk">RDClient</a></li>
-<li>ios端在App Store搜索RDClient</li>
-</ul>
-<h2 id="二、设置PC允许远程连接"><a href="#二、设置PC允许远程连接" class="headerlink" title="二、设置PC允许远程连接"></a>二、设置PC允许远程连接</h2><ul>
-<li><strong>win11</strong>：这里打开电脑设置-&gt; 系统-&gt;远程桌面</li>
-</ul>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/QQ%E5%9B%BE%E7%89%8720211109094906.png" alt="QQ图片20211109094906"></p>
-<p>==这里的打开后你能连接你的用户就是你电脑开机时的用户，例如administrator，win10也是一样的==</p>
-<ul>
-<li><strong>win10</strong>：</li>
-</ul>
-<p> 进入控制面板-&gt;系统和安全-&gt;系统-&gt;远程设置<br>按照下图方式勾选<br><img src="https://img-blog.csdn.net/20170215163223342?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzA0NjU2NTc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h2 id="三、注册sakura-frp（需要实名认证，支付宝授权就行）"><a href="#三、注册sakura-frp（需要实名认证，支付宝授权就行）" class="headerlink" title="三、注册sakura frp（需要实名认证，支付宝授权就行）"></a>三、注册sakura frp（需要实名认证，支付宝授权就行）</h2><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109101421526.png" alt="image-20211109101421526"></p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109101508848.png" alt="image-20211109101508848"></p>
-<p>在导航栏上</p>
-<p>用户-&gt;实名认证</p>
-<p>根据提示完成认证</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109101620430.png" alt="image-20211109101620430"></p>
-<p>点击穿透-&gt;隧道列表</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109101742287.png" alt="image-20211109101742287"></p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109102002178.png" alt="image-20211109102002178"></p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109102044910.png" alt="image-20211109102044910"></p>
-<p>点击软件下载</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109102209378.png" alt="image-20211109102209378"></p>
-<p>然后解压安装</p>
-<p>再打开frpc.ini配置文件（可以用记事本打开）</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109103125704.png" alt="image-20211109103125704"></p>
-<p>再去sakura frp网站点击<strong>隧道列表</strong>，找到你刚才新建的隧道</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109103347791.png" alt="image-20211109103347791"></p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109103506496.png" alt="image-20211109103506496"></p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109103555304.png" alt="image-20211109103555304"></p>
-<p>然后直接去刚才打开的frpc.ini粘贴即可。</p>
-<p>最后直接打开exe</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109103722486.png" alt="image-20211109103722486"></p>
-<p>运行结果：然后缩小，去平板或者手机或者pc连接电脑</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109103802090.png" alt="image-20211109103802090"></p>
-<h2 id="四、连接电脑"><a href="#四、连接电脑" class="headerlink" title="四、连接电脑"></a>四、连接电脑</h2><p>点击Desktop</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109104240443.png" alt="image-20211109104240443"></p>
-<p>然后add MANUALLY</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109104948381.png" alt="image-20211109104948381"></p>
-<p>然后点击save就行</p>
-<p>最后直接连接</p>
-]]></content>
-      <tags>
-        <tag>python</tag>
+        <tag>博客</tag>
       </tags>
   </entry>
   <entry>
@@ -892,6 +1040,61 @@
       </tags>
   </entry>
   <entry>
+    <title>线性规划问题</title>
+    <url>/2022/05/02/%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<h3 id="1-线性规划的概念"><a href="#1-线性规划的概念" class="headerlink" title="1.线性规划的概念"></a>1.线性规划的概念</h3><p>线性规划(Linear Programming 简记 LP)是了运筹学中数学规划的一个重要分支。自从 1947 年 G. B. Dantzig 提出 求解线性规划的单纯形法以来，线性规划在理论上趋向成熟，在实用中由于计算机能处理成千上万个约束条件和决策变量的线性规划问题之后，线性规划现代管理中经常采用的基本方法之一。 在解决实际问题时，需要把问题归结成一个线性规划数学模型，关键及难点在于选适当的决策变量建立恰当的模型，这直接影响到问题的求解。</p>
+<p> 线性规划问题的目标函数及约束条件均为线性函数；约束条件记为 s.t.(即 subject to)。目标函数可以是求最大值，也可以是求最小值，约束条件的不等号可以 是小于号也可以是大于号。</p>
+<p>一般线性规划问题的（数学）标准型为</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/20190329151240157.png"></p>
+<p>​    <strong>实例：</strong></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/20190424195022627.png"></p>
+<h3 id="2-线性规划问题的解的概念-：可行解、可行域、图解法"><a href="#2-线性规划问题的解的概念-：可行解、可行域、图解法" class="headerlink" title="2.线性规划问题的解的概念 ：可行解、可行域、图解法"></a>2.线性规划问题的解的概念 ：可行解、可行域、图解法</h3><p>可行解  满足约束条件（4）的解  称为线性规划问题的可行解， 而使目标函数（3）达到最大值的可行解叫最优解。</p>
+<p>可行域  所有可行解构成的集合称为问题的可行域，记为R 。</p>
+<p>图解法 简单直观，适用于二维决策变量，它有助于了解线性规划问题求解的基本原理。。对于每一固定的值z，使目标函数值等于z的点构成的直线称为目标函数等位线，当z变动时，我们得到一族平行直线。</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/20190424195312914.png"></p>
+<h3 id="2-1-推广到多维空间的线性规划：超平面、多胞形、多面体"><a href="#2-1-推广到多维空间的线性规划：超平面、多胞形、多面体" class="headerlink" title="2.1. 推广到多维空间的线性规划：超平面、多胞形、多面体"></a>2.1. 推广到多维空间的线性规划：超平面、多胞形、多面体</h3><p>以下结论可以推广到一般的线性规划问题，区别只在于空间的维数：</p>
+<p>（1）可行域R 可能会出现多种情况。R 可能是空集也可能是非空集合，当R 非空 时，它必定是若干个半平面的交集（除非遇到空间维数的退化） 。R 既可能是有界区域， 也可能是无界区域。</p>
+<p>（2）在R 非空时，线性规划既可以存在有限最优解，也可以不存在有限最优解（其 目标函数值无界）。</p>
+<p>（3）若线性规划存在有限最优解，则必可找到具有最优目标函数值的可行域R 的 “顶点” 。</p>
+<p>在一般的n维 空间中，满足线性等式  <img src="https://presenter.oss-cn-shanghai.aliyuncs.com/gif.gif">的点集被称为一个<strong>超平面；</strong></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/gif.gif">或<img src="https://presenter.oss-cn-shanghai.aliyuncs.com/gif.gif">的点集被称为一个半空间，其中<img src="https://presenter.oss-cn-shanghai.aliyuncs.com/gif%20(1).gif">为一个n维行向量，b为一个实数。</p>
+<p>若干个半空间的交集被称为多胞形，有界的多胞形又被称为多面体。易见，线性规划的可行域必为多胞形（为统一起见，空集Φ也被视为多胞形）。 在一般n维空间中，要直接得出多胞形“顶点”概念还有一些困难。二维空间中的顶点可以看成为边界直线的交点，但这一几何概念的推广在一般n维空间中的几何意义并不十分直观。为此，我们将采用另一途径来定义它。</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/20190329152724917.png"></p>
+<p>单纯形法是求解线性规划问题的最常用、最有效的算法之一 ，此处不作介绍。这里我们就不介绍 单纯形法，有兴趣的读者可以参看其它线性规划书籍。下面我们介绍线性规划的 Matlab 解法。</p>
+<h3 id="3-求解线性规划的-Matlab-解法"><a href="#3-求解线性规划的-Matlab-解法" class="headerlink" title="3.求解线性规划的 Matlab 解法"></a>3.求解线性规划的 Matlab 解法</h3><p>Matlab 中规定线性规划的标准形式为</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/2019032915072569.png"></p>
+<p>其中c和 x为n 维列向量， A、 Aeq 为适当维数的矩阵，b 、beq为适当维数的列向量。 （<strong>Aeq</strong> 对应约束条件中<strong>等式约束</strong>的系数矩阵，A为约<strong>不等式约束</strong>的系数矩阵）。</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/20190329153446939.png"></p>
+<p>基本函数形式为 linprog(c,A,b)，它的返回值是向量 x的值。还有其它的一些函数调用形 式（在 Matlab 指令窗运行 help linprog 可以看到所有的函数调用形式），如：</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">[x,fval]=linprog(c,A,b,Aeq,beq,LB,UB,X0,OPTIONS) </span><br></pre></td></tr></table></figure>
+
+<p>这里 <strong>fval 返回目标函数的值，LB 和 UB 分别是变量 x的下界和上界， 0 x 是x的初始值， OPTIONS 是控制参数</strong>。 </p>
+<h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><p>例如求解下列线性规划问题 </p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/20190329153141919.png"></p>
+<p>解 （i）编写 M 文件 </p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">c=[<span class="number">2</span>;<span class="number">3</span>;<span class="number">-5</span>]; </span><br><span class="line">a=[<span class="number">-2</span>,<span class="number">5</span>,<span class="number">-1</span>;<span class="number">1</span>,<span class="number">3</span>,<span class="number">1</span>]; </span><br><span class="line">b=[<span class="number">-10</span>;<span class="number">12</span>]; </span><br><span class="line">aeq=[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]; </span><br><span class="line">beq=<span class="number">7</span>; </span><br><span class="line">x=linprog(-c,a,b,aeq,beq,<span class="built_in">zeros</span>(<span class="number">3</span>,<span class="number">1</span>)) </span><br><span class="line">value=c&#x27;*x</span><br></pre></td></tr></table></figure>
+
+<p>（ii）将M文件存盘，并命名为example1.m。</p>
+<p>（iii）在Matlab指令窗运行example1即可得所求结果。 </p>
+<p>例3 求解线性规划问题 </p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/20190424195629342.png"></p>
+<p>解  编写Matlab程序如下： </p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">c=[<span class="number">2</span>;<span class="number">3</span>;<span class="number">1</span>]; </span><br><span class="line">a=[<span class="number">1</span>,<span class="number">4</span>,<span class="number">2</span>;<span class="number">3</span>,<span class="number">2</span>,<span class="number">0</span>]; </span><br><span class="line">b=[<span class="number">8</span>;<span class="number">6</span>]; </span><br><span class="line">[x,y]=linprog(c,-a,-b,[],[],<span class="built_in">zeros</span>(<span class="number">3</span>,<span class="number">1</span>)) </span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+]]></content>
+      <tags>
+        <tag>最优化理论</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>win11文件管理器卡顿解决</title>
     <url>/2021/11/16/win11%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%99%A8%E5%8D%A1%E9%A1%BF%E8%A7%A3%E5%86%B3/</url>
     <content><![CDATA[<h2 id="win11的资源管理器卡顿"><a href="#win11的资源管理器卡顿" class="headerlink" title="win11的资源管理器卡顿"></a>win11的资源管理器卡顿</h2><p>解决办法：</p>
@@ -905,6 +1108,60 @@
 ]]></content>
       <tags>
         <tag>win11</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>二叉树遍历</title>
+    <url>/2022/05/01/%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86/</url>
+    <content><![CDATA[<p><strong>二叉树是一种非常重要的数据结构，很多其它数据结构都是基于二叉树的基础演变而来的。对于二叉树，有深度遍历和广度遍历，深度遍历有前序、中序以及后序三种遍历方法，广度遍历即我们平常所说的层次遍历。因为树的定义本身就是递归定义，因此采用递归的方法去实现树的三种遍历不仅容易理解而且代码很简洁，而对于广度遍历来说，需要其他数据结构的支撑，比如堆了。所以，对于一段代码来说，可读性有时候要比代码本身的效率要重要的多。</strong></p>
+<p>四种主要的遍历思想为：</p>
+<p>前序遍历：根结点 —&gt; 左子树 —&gt; 右子树</p>
+<p>中序遍历：左子树—&gt; 根结点 —&gt; 右子树</p>
+<p>后序遍历：左子树 —&gt; 右子树 —&gt; 根结点</p>
+<p>层次遍历：只需按层次遍历即可</p>
+<p>例如，求下面二叉树的各种遍历</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/20150204101904649.png" alt="20150204101904649"></p>
+<ul>
+<li><p>前序遍历：1  2  4  5  7  8  3  6 </p>
+</li>
+<li><p>中序遍历：4  2  7  5  8  1  3  6</p>
+</li>
+<li><p>后序遍历：4  7  8  5  2  6  3  1</p>
+</li>
+<li><p>层次遍历：1  2  3  4  5  6  7  8</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//前序遍历</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">preOrderTraverse1</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (root != <span class="keyword">null</span>) &#123;</span><br><span class="line">			System.out.print(root.val+<span class="string">&quot;  &quot;</span>);</span><br><span class="line">			preOrderTraverse1(root.left);</span><br><span class="line">			preOrderTraverse1(root.right);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//中序遍历</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">inOrderTraverse1</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (root != <span class="keyword">null</span>) &#123;</span><br><span class="line">			inOrderTraverse1(root.left);</span><br><span class="line">			System.out.print(root.val+<span class="string">&quot;  &quot;</span>);</span><br><span class="line">			inOrderTraverse1(root.right);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//后序遍历</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">postOrderTraverse1</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (root != <span class="keyword">null</span>) &#123;</span><br><span class="line">			postOrderTraverse1(root.left);</span><br><span class="line">			postOrderTraverse1(root.right);</span><br><span class="line">			System.out.print(root.val+<span class="string">&quot;  &quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]]></content>
+      <tags>
+        <tag>数据结构</tag>
       </tags>
   </entry>
   <entry>
@@ -2218,282 +2475,54 @@
       </tags>
   </entry>
   <entry>
-    <title>二叉树遍历</title>
-    <url>/2022/05/01/%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86/</url>
-    <content><![CDATA[<p><strong>二叉树是一种非常重要的数据结构，很多其它数据结构都是基于二叉树的基础演变而来的。对于二叉树，有深度遍历和广度遍历，深度遍历有前序、中序以及后序三种遍历方法，广度遍历即我们平常所说的层次遍历。因为树的定义本身就是递归定义，因此采用递归的方法去实现树的三种遍历不仅容易理解而且代码很简洁，而对于广度遍历来说，需要其他数据结构的支撑，比如堆了。所以，对于一段代码来说，可读性有时候要比代码本身的效率要重要的多。</strong></p>
-<p>四种主要的遍历思想为：</p>
-<p>前序遍历：根结点 —&gt; 左子树 —&gt; 右子树</p>
-<p>中序遍历：左子树—&gt; 根结点 —&gt; 右子树</p>
-<p>后序遍历：左子树 —&gt; 右子树 —&gt; 根结点</p>
-<p>层次遍历：只需按层次遍历即可</p>
-<p>例如，求下面二叉树的各种遍历</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/20150204101904649.png" alt="20150204101904649"></p>
-<ul>
-<li><p>前序遍历：1  2  4  5  7  8  3  6 </p>
-</li>
-<li><p>中序遍历：4  2  7  5  8  1  3  6</p>
-</li>
-<li><p>后序遍历：4  7  8  5  2  6  3  1</p>
-</li>
-<li><p>层次遍历：1  2  3  4  5  6  7  8</p>
-</li>
+    <title>远程控制+Sakurafrp实现非局域网远程控制</title>
+    <url>/2021/11/08/%E8%BF%9C%E7%A8%8B%E6%8E%A7%E5%88%B6+Sakurafrp%E5%AE%9E%E7%8E%B0%E9%9D%9E%E5%B1%80%E5%9F%9F%E7%BD%91%E8%BF%9C%E7%A8%8B%E6%8E%A7%E5%88%B6/</url>
+    <content><![CDATA[<h2 id="一、下载RD-Client"><a href="#一、下载RD-Client" class="headerlink" title="一、下载RD Client"></a>一、下载RD Client</h2><ul>
+<li>安卓端网页下载或者<a href="https://presenter.oss-cn-shanghai.aliyuncs.com/base.apk">RDClient</a></li>
+<li>ios端在App Store搜索RDClient</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//前序遍历</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">preOrderTraverse1</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (root != <span class="keyword">null</span>) &#123;</span><br><span class="line">			System.out.print(root.val+<span class="string">&quot;  &quot;</span>);</span><br><span class="line">			preOrderTraverse1(root.left);</span><br><span class="line">			preOrderTraverse1(root.right);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//中序遍历</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">inOrderTraverse1</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (root != <span class="keyword">null</span>) &#123;</span><br><span class="line">			inOrderTraverse1(root.left);</span><br><span class="line">			System.out.print(root.val+<span class="string">&quot;  &quot;</span>);</span><br><span class="line">			inOrderTraverse1(root.right);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//后序遍历</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">postOrderTraverse1</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (root != <span class="keyword">null</span>) &#123;</span><br><span class="line">			postOrderTraverse1(root.left);</span><br><span class="line">			postOrderTraverse1(root.right);</span><br><span class="line">			System.out.print(root.val+<span class="string">&quot;  &quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<h2 id="二、设置PC允许远程连接"><a href="#二、设置PC允许远程连接" class="headerlink" title="二、设置PC允许远程连接"></a>二、设置PC允许远程连接</h2><ul>
+<li><strong>win11</strong>：这里打开电脑设置-&gt; 系统-&gt;远程桌面</li>
+</ul>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/QQ%E5%9B%BE%E7%89%8720211109094906.png" alt="QQ图片20211109094906"></p>
+<p>==这里的打开后你能连接你的用户就是你电脑开机时的用户，例如administrator，win10也是一样的==</p>
+<ul>
+<li><strong>win10</strong>：</li>
+</ul>
+<p> 进入控制面板-&gt;系统和安全-&gt;系统-&gt;远程设置<br>按照下图方式勾选<br><img src="https://img-blog.csdn.net/20170215163223342?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzA0NjU2NTc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h2 id="三、注册sakura-frp（需要实名认证，支付宝授权就行）"><a href="#三、注册sakura-frp（需要实名认证，支付宝授权就行）" class="headerlink" title="三、注册sakura frp（需要实名认证，支付宝授权就行）"></a>三、注册sakura frp（需要实名认证，支付宝授权就行）</h2><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109101421526.png" alt="image-20211109101421526"></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109101508848.png" alt="image-20211109101508848"></p>
+<p>在导航栏上</p>
+<p>用户-&gt;实名认证</p>
+<p>根据提示完成认证</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109101620430.png" alt="image-20211109101620430"></p>
+<p>点击穿透-&gt;隧道列表</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109101742287.png" alt="image-20211109101742287"></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109102002178.png" alt="image-20211109102002178"></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109102044910.png" alt="image-20211109102044910"></p>
+<p>点击软件下载</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109102209378.png" alt="image-20211109102209378"></p>
+<p>然后解压安装</p>
+<p>再打开frpc.ini配置文件（可以用记事本打开）</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109103125704.png" alt="image-20211109103125704"></p>
+<p>再去sakura frp网站点击<strong>隧道列表</strong>，找到你刚才新建的隧道</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109103347791.png" alt="image-20211109103347791"></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109103506496.png" alt="image-20211109103506496"></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109103555304.png" alt="image-20211109103555304"></p>
+<p>然后直接去刚才打开的frpc.ini粘贴即可。</p>
+<p>最后直接打开exe</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109103722486.png" alt="image-20211109103722486"></p>
+<p>运行结果：然后缩小，去平板或者手机或者pc连接电脑</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109103802090.png" alt="image-20211109103802090"></p>
+<h2 id="四、连接电脑"><a href="#四、连接电脑" class="headerlink" title="四、连接电脑"></a>四、连接电脑</h2><p>点击Desktop</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109104240443.png" alt="image-20211109104240443"></p>
+<p>然后add MANUALLY</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109104948381.png" alt="image-20211109104948381"></p>
+<p>然后点击save就行</p>
+<p>最后直接连接</p>
 ]]></content>
       <tags>
-        <tag>数据结构</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>线性规划问题</title>
-    <url>/2022/05/02/%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<h3 id="1-线性规划的概念"><a href="#1-线性规划的概念" class="headerlink" title="1.线性规划的概念"></a>1.线性规划的概念</h3><p>线性规划(Linear Programming 简记 LP)是了运筹学中数学规划的一个重要分支。自从 1947 年 G. B. Dantzig 提出 求解线性规划的单纯形法以来，线性规划在理论上趋向成熟，在实用中由于计算机能处理成千上万个约束条件和决策变量的线性规划问题之后，线性规划现代管理中经常采用的基本方法之一。 在解决实际问题时，需要把问题归结成一个线性规划数学模型，关键及难点在于选适当的决策变量建立恰当的模型，这直接影响到问题的求解。</p>
-<p> 线性规划问题的目标函数及约束条件均为线性函数；约束条件记为 s.t.(即 subject to)。目标函数可以是求最大值，也可以是求最小值，约束条件的不等号可以 是小于号也可以是大于号。</p>
-<p>一般线性规划问题的（数学）标准型为</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/20190329151240157.png"></p>
-<p>​    <strong>实例：</strong></p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/20190424195022627.png"></p>
-<h3 id="2-线性规划问题的解的概念-：可行解、可行域、图解法"><a href="#2-线性规划问题的解的概念-：可行解、可行域、图解法" class="headerlink" title="2.线性规划问题的解的概念 ：可行解、可行域、图解法"></a>2.线性规划问题的解的概念 ：可行解、可行域、图解法</h3><p>可行解  满足约束条件（4）的解  称为线性规划问题的可行解， 而使目标函数（3）达到最大值的可行解叫最优解。</p>
-<p>可行域  所有可行解构成的集合称为问题的可行域，记为R 。</p>
-<p>图解法 简单直观，适用于二维决策变量，它有助于了解线性规划问题求解的基本原理。。对于每一固定的值z，使目标函数值等于z的点构成的直线称为目标函数等位线，当z变动时，我们得到一族平行直线。</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/20190424195312914.png"></p>
-<h3 id="2-1-推广到多维空间的线性规划：超平面、多胞形、多面体"><a href="#2-1-推广到多维空间的线性规划：超平面、多胞形、多面体" class="headerlink" title="2.1. 推广到多维空间的线性规划：超平面、多胞形、多面体"></a>2.1. 推广到多维空间的线性规划：超平面、多胞形、多面体</h3><p>以下结论可以推广到一般的线性规划问题，区别只在于空间的维数：</p>
-<p>（1）可行域R 可能会出现多种情况。R 可能是空集也可能是非空集合，当R 非空 时，它必定是若干个半平面的交集（除非遇到空间维数的退化） 。R 既可能是有界区域， 也可能是无界区域。</p>
-<p>（2）在R 非空时，线性规划既可以存在有限最优解，也可以不存在有限最优解（其 目标函数值无界）。</p>
-<p>（3）若线性规划存在有限最优解，则必可找到具有最优目标函数值的可行域R 的 “顶点” 。</p>
-<p>在一般的n维 空间中，满足线性等式  <img src="https://presenter.oss-cn-shanghai.aliyuncs.com/gif.gif">的点集被称为一个<strong>超平面；</strong></p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/gif.gif">或<img src="https://presenter.oss-cn-shanghai.aliyuncs.com/gif.gif">的点集被称为一个半空间，其中<img src="https://presenter.oss-cn-shanghai.aliyuncs.com/gif%20(1).gif">为一个n维行向量，b为一个实数。</p>
-<p>若干个半空间的交集被称为多胞形，有界的多胞形又被称为多面体。易见，线性规划的可行域必为多胞形（为统一起见，空集Φ也被视为多胞形）。 在一般n维空间中，要直接得出多胞形“顶点”概念还有一些困难。二维空间中的顶点可以看成为边界直线的交点，但这一几何概念的推广在一般n维空间中的几何意义并不十分直观。为此，我们将采用另一途径来定义它。</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/20190329152724917.png"></p>
-<p>单纯形法是求解线性规划问题的最常用、最有效的算法之一 ，此处不作介绍。这里我们就不介绍 单纯形法，有兴趣的读者可以参看其它线性规划书籍。下面我们介绍线性规划的 Matlab 解法。</p>
-<h3 id="3-求解线性规划的-Matlab-解法"><a href="#3-求解线性规划的-Matlab-解法" class="headerlink" title="3.求解线性规划的 Matlab 解法"></a>3.求解线性规划的 Matlab 解法</h3><p>Matlab 中规定线性规划的标准形式为</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/2019032915072569.png"></p>
-<p>其中c和 x为n 维列向量， A、 Aeq 为适当维数的矩阵，b 、beq为适当维数的列向量。 （<strong>Aeq</strong> 对应约束条件中<strong>等式约束</strong>的系数矩阵，A为约<strong>不等式约束</strong>的系数矩阵）。</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/20190329153446939.png"></p>
-<p>基本函数形式为 linprog(c,A,b)，它的返回值是向量 x的值。还有其它的一些函数调用形 式（在 Matlab 指令窗运行 help linprog 可以看到所有的函数调用形式），如：</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">[x,fval]=linprog(c,A,b,Aeq,beq,LB,UB,X0,OPTIONS) </span><br></pre></td></tr></table></figure>
-
-<p>这里 <strong>fval 返回目标函数的值，LB 和 UB 分别是变量 x的下界和上界， 0 x 是x的初始值， OPTIONS 是控制参数</strong>。 </p>
-<h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><p>例如求解下列线性规划问题 </p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/20190329153141919.png"></p>
-<p>解 （i）编写 M 文件 </p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">c=[<span class="number">2</span>;<span class="number">3</span>;<span class="number">-5</span>]; </span><br><span class="line">a=[<span class="number">-2</span>,<span class="number">5</span>,<span class="number">-1</span>;<span class="number">1</span>,<span class="number">3</span>,<span class="number">1</span>]; </span><br><span class="line">b=[<span class="number">-10</span>;<span class="number">12</span>]; </span><br><span class="line">aeq=[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]; </span><br><span class="line">beq=<span class="number">7</span>; </span><br><span class="line">x=linprog(-c,a,b,aeq,beq,<span class="built_in">zeros</span>(<span class="number">3</span>,<span class="number">1</span>)) </span><br><span class="line">value=c&#x27;*x</span><br></pre></td></tr></table></figure>
-
-<p>（ii）将M文件存盘，并命名为example1.m。</p>
-<p>（iii）在Matlab指令窗运行example1即可得所求结果。 </p>
-<p>例3 求解线性规划问题 </p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/20190424195629342.png"></p>
-<p>解  编写Matlab程序如下： </p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">c=[<span class="number">2</span>;<span class="number">3</span>;<span class="number">1</span>]; </span><br><span class="line">a=[<span class="number">1</span>,<span class="number">4</span>,<span class="number">2</span>;<span class="number">3</span>,<span class="number">2</span>,<span class="number">0</span>]; </span><br><span class="line">b=[<span class="number">8</span>;<span class="number">6</span>]; </span><br><span class="line">[x,y]=linprog(c,-a,-b,[],[],<span class="built_in">zeros</span>(<span class="number">3</span>,<span class="number">1</span>)) </span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-]]></content>
-      <tags>
-        <tag>最优化理论</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>YACC语法分析器</title>
-    <url>/2022/05/03/YACC%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8/</url>
-    <content><![CDATA[<h3 id="YACC概述"><a href="#YACC概述" class="headerlink" title="YACC概述"></a>YACC概述</h3><p>yacc(Yet Another Compiler Compiler)，是一个经典的生成语法分析器的工具。yacc生成的编译器主要是用C语言写成的语法解析器（Parser），需要与词法解析器Lex一起使用，再把两部份产生出来的C程序一并编译。</p>
-<h3 id="YACC语法规则"><a href="#YACC语法规则" class="headerlink" title="YACC语法规则"></a>YACC语法规则</h3><p>yacc语法包括三部分：定义段、规则段和用户子例程段</p>
-<figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">...定义段...</span><br><span class="line"></span><br><span class="line"><span class="string">%%</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">...规则段...</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">%</span>%</span><br><span class="line"></span><br><span class="line">...用户子例程段...</span><br></pre></td></tr></table></figure>
-
-<p><strong>实例：</strong></p>
-<p>一个简单的四则运算：</p>
-<p>test.l</p>
-<figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line"><span class="string">%&#123;</span></span><br><span class="line"><span class="string">#include &quot;test.tab.h&quot;</span></span><br><span class="line"><span class="string">extern int yylval;</span></span><br><span class="line"><span class="string">%&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="string">%%</span></span><br><span class="line"><span class="string">[0-9]+  &#123; yylval = atoi(yytext); return NUMBER; &#125;</span></span><br><span class="line"><span class="string">[ \t]   ;       /* ignore white space */</span></span><br><span class="line"><span class="string">\n  return 0;   /* logical EOF */</span></span><br><span class="line"><span class="string">.   return yytext[0];</span></span><br><span class="line"><span class="string">%</span>%</span><br></pre></td></tr></table></figure>
-
-<p>test.y</p>
-<figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line"><span class="string">%&#123;</span></span><br><span class="line"><span class="string">#include &lt;stdio.h&gt;</span></span><br><span class="line"><span class="string">%&#125;</span></span><br><span class="line">%token NAME NUMBER</span><br><span class="line"><span class="string">%%</span></span><br><span class="line"><span class="string">statement:  NAME &#x27;=&#x27; expression</span></span><br><span class="line"><span class="string">    |   expression      &#123; printf(&quot;= %</span>d\n<span class="string">&quot;, $1); &#125;</span></span><br><span class="line"><span class="string">    ;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">expression: expression &#x27;+&#x27; NUMBER   &#123; $$ = $1 + $3; &#125;</span></span><br><span class="line"><span class="string">    |   expression &#x27;-&#x27; NUMBER   &#123; $$ = $1 - $3; &#125;</span></span><br><span class="line"><span class="string">    |   expression &#x27;*&#x27; NUMBER   &#123; $$ = $1 * $3; &#125;</span></span><br><span class="line"><span class="string">    |   expression &#x27;/&#x27; NUMBER   &#123; $$ = $1 / $3; &#125;</span></span><br><span class="line"><span class="string">    |   expression &#x27;%&#x27; NUMBER   &#123; $$ = $1 % $3; &#125;</span></span><br><span class="line"><span class="string">    |   NUMBER          &#123; $$ = $1; &#125;</span></span><br><span class="line"><span class="string">    ;</span></span><br><span class="line"><span class="string">%%</span></span><br><span class="line"><span class="string">int main()</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">    yyparse();</span></span><br><span class="line"><span class="string">    return 0;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">int yyerror(char *s)</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">    printf(&quot;</span>%s/n<span class="string">&quot;,s);</span></span><br><span class="line"><span class="string">    return 0;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">flex test.l</span><br><span class="line">bison -d test.y</span><br><span class="line">gcc -o <span class="built_in">test</span> test.tab.c test.yy.c -lfl</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-<p>结果：</p>
-<p><img src="C:/Users/ADMINI~1/AppData/Local/Temp/ksohtml21936/wps1.jpg" alt="img"></p>
-<p><img src="C:/Users/ADMINI~1/AppData/Local/Temp/ksohtml21936/wps2.jpg" alt="img"> </p>
-]]></content>
-      <tags>
-        <tag>C语言</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>VMware配置静态IP</title>
-    <url>/2022/05/04/VMware%E9%85%8D%E7%BD%AE%E9%9D%99%E6%80%81IP/</url>
-    <content><![CDATA[<h1 id="VMware虚拟机中配置静态IP的方法"><a href="#VMware虚拟机中配置静态IP的方法" class="headerlink" title="VMware虚拟机中配置静态IP的方法"></a><a href="https://www.cnblogs.com/jiucai/p/12497925.html">VMware虚拟机中配置静态IP的方法</a></h1><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/1868057-20200315154409190-813762847.png" alt="img">VMnet0：用于虚拟桥接网络下的虚拟交换机</p>
-<p>桥接网络是指本地物理网卡和虚拟网卡通过VMnet0虚拟交换机进行桥接，物理网卡和虚拟网卡在拓扑图上处于同等地位。</p>
-<p>VMnet1：用于虚拟Host-Only网络下的虚拟交换机（仅主机）</p>
-<p>在Host-Only模式下，虚拟网络是一个全封闭的网络，它唯一能够访问的就是主机。</p>
-<p>VMnet8：用于虚拟NAT网络下的虚拟交换机</p>
-<p>在NAT网络中，会用到VMware Network Adepter VMnet8虚拟网卡，主机上的VMware Network Adepter VMnet8虚拟网卡被直接连接到VMnet8虚拟交换机上与虚拟网卡进行通信。</p>
-<p>VMware Network Adepter VMnet1：Host用于与Host-Only虚拟网络进行通信的虚拟网卡</p>
-<p>VMware Network Adepter VMnet8：Host用于与NAT虚拟网络进行通信的虚拟网卡</p>
-<p><strong>综上所诉：在这三种网络模式中NAT模式是最简单的，基本不需要手动配置IP地址相关参数。桥接模需要配置额外的IP地址。</strong></p>
-<h4 id="1、查看网关，以及网段"><a href="#1、查看网关，以及网段" class="headerlink" title="1、查看网关，以及网段"></a>1、查看网关，以及网段</h4><p>【编辑】——〉【虚拟网络编辑器】</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/1868057-20200315154409190-813762847.png" alt="img"></p>
-<p><strong>我们使用NAT模式，所以选择VMnet8.取消【使用本地DHCP】这个选项不打勾，这是分配动态IP的。</strong></p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/1868057-20200315160047395-767075949.png" alt="img"></p>
-<p>网关IP需要记住，通过这个我们得知</p>
-<p>我们的网关192.168.228.2，子网掩码是255.255.255.0。子网IP的192.168.228.0的意思是如果你要往这个网段内添加机器，你的机器ip只能是192.168.228.0~192.168.228.255这个范围内的。其实你会发现192.168.228.2是网关IP了。</p>
-<p>一般而言192.168.228.255是广播IP所以不用，192.168.228.0一般是网段IP也不用。也就是说除了0 2 255这三个，其他的数字你可以随便设置。</p>
-<h4 id="2、设置虚拟机IP"><a href="#2、设置虚拟机IP" class="headerlink" title="2、设置虚拟机IP"></a>2、设置虚拟机IP</h4><p>这里演示的是centos系统</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vi /etc/sysconfig/network-scripts/ifcfg-ens33</span><br></pre></td></tr></table></figure>
-
-
-
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/1868057-20200315160108866-52349871.png" alt="img"></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /etc/sysconfig/network-scripts/**</span><br><span class="line">ls</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/1868057-20200315160117499-1422848875.png" alt="img"></p>
-<p><strong>ifcfg-ens33****第一个就是网卡名称</strong></p>
-<p>编辑</p>
-<p>输入i后编辑更改成ONBOOT：yes</p>
-<p>BOOTPROTO：static</p>
-<p>把IP地址、网关、子网掩码、DNS添加上</p>
-<p>IPADDR：192.168.228.119</p>
-<p>NETMASK：255.255.255.0</p>
-<p>GETEWAY：192.168.228.254</p>
-<p>DNS1：114.114.114.114</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/1868057-20200315160204742-936507531.png" alt="img"></p>
-<p>同样需要在windows下修改vmware8的ip</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/1868057-20200315160305010-661807387.png" alt="img"></p>
-<p>点击internet协议版本4（TCP/IPv4）</p>
-<p>点击输入使用下面的IP地址（S）</p>
-<p>输入IP地址：192.168.228.98</p>
-<p>子网掩码：255.255.255.0</p>
-<p>默认网关：192.168.228.254</p>
-<p>首选DNS服务器（P）：114.114.114.114</p>
-<p>确定再确定保存</p>
-<p>现在就配置完成了，可以尝试ping一下试试能不能ping通</p>
-<p><strong>windows网络和虚拟机的网络ip不要一样，否则会连不上(造成IP冲突)</strong></p>
-]]></content>
-      <tags>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CentOS搭建本地服务器</title>
-    <url>/2022/05/04/CentOS%E6%90%AD%E5%BB%BA%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
-    <content><![CDATA[<h3 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h3><h4 id="更换国内yum源"><a href="#更换国内yum源" class="headerlink" title="更换国内yum源"></a>更换国内yum源</h4><p>国内速度太慢，目前国内的大公司有许多开源镜像站，例如阿里云、网易、清华大学、华为等等，这里使用阿里云的yum源。</p>
-<p>参考官方文档<a href="https://developer.aliyun.com/mirror/centos?spm=a2c6h.13651102.0.0.3e221b11bXrW8A%EF%BC%8C%E4%BE%9D%E6%AC%A1%E6%89%A7%E8%A1%8C">https://developer.aliyun.com/mirror/centos?spm=a2c6h.13651102.0.0.3e221b11bXrW8A，依次执行</a></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#备份原来的源文件</span></span><br><span class="line">mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup </span><br><span class="line"><span class="comment">#修改</span></span><br><span class="line">curl -o /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo</span><br><span class="line">yum clean all</span><br><span class="line">yum makecache</span><br></pre></td></tr></table></figure>
-
-<h4 id="安装ssh"><a href="#安装ssh" class="headerlink" title="安装ssh"></a>安装ssh</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo yum install openssh -y</span><br></pre></td></tr></table></figure>
-
-<p>启动ssh的服务：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl start sshd.service</span><br></pre></td></tr></table></figure>
-
-<p>设置开机自动启动ssh服务</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> sshd.service</span><br></pre></td></tr></table></figure>
-
-<p>配置文件在<code>/etc/ssh/sshd_config</code>，一般不用修改。</p>
-<h4 id="安装ftp"><a href="#安装ftp" class="headerlink" title="安装ftp"></a>安装ftp</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo yum install ftp -y</span><br></pre></td></tr></table></figure>
-
-<h3 id="安装宝塔面板"><a href="#安装宝塔面板" class="headerlink" title="安装宝塔面板"></a>安装宝塔面板</h3><p>宝塔面板可以更简单明了的进行网站的部署和服务器的监控，非常值得推荐。参考官方网站<a href="https://www.bt.cn/bbs/thread-19376-1-1.html">https://www.bt.cn/bbs/thread-19376-1-1.html</a></p>
-<h4 id="一键安装命令"><a href="#一键安装命令" class="headerlink" title="一键安装命令"></a>一键安装命令</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo yum install -y wget &amp;&amp; wget -O install.sh http://download.bt.cn/install/install_6.0.sh &amp;&amp; sh install.sh</span><br></pre></td></tr></table></figure>
-
-<p>耐心等待其安装完成，之后会得到一个访问地址和账户密码，我们先使用内网访问地址进行操作。</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220504224253823.png" alt="image-20220504224253823"></p>
-<p>如果发现登录不上。先进入Centos查看ip</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ip addr</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220504224404341.png" alt="image-20220504224404341"></p>
-<p>使用这个就能成功登录</p>
-<p>第一次进入宝塔面板可以进入设置修改用户名和密码</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220504224502759.png" alt="image-20220504224502759"></p>
-]]></content>
-      <tags>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CentOs安装配置node</title>
-    <url>/2022/05/05/CentOs%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEnode/</url>
-    <content><![CDATA[<h4 id="一、找好安装位置，我这里是：-home-node"><a href="#一、找好安装位置，我这里是：-home-node" class="headerlink" title="一、找好安装位置，我这里是：/home/node"></a>一、找好安装位置，我这里是：/home/node</h4><p> 二、去<a href="https://so.csdn.net/so/search?q=node&spm=1001.2101.3001.7020">node</a>官网下载Linux镜像或者通过命令直接下载</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">wget https:<span class="comment">//npm.taobao.org/mirrors/node/v12.16.1/node-v12.16.1-linux-x64.tar.gz</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<p>三、解压</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -xvf node-v12.16.1-linux-x64.tar.gz</span><br></pre></td></tr></table></figure>
-
-
-
-<p>四、进入解压后的文件执行命令     </p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#切换路径：</span></span><br><span class="line"><span class="built_in">cd</span> node-v12.16.1-linux-x64.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="comment">#执行这个命令：</span></span><br><span class="line">yum install gcc gcc-c++</span><br></pre></td></tr></table></figure>
-
-<p>五、重命名文件名</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mv node-v12.16.1-linux-x64.tar.gz Node</span><br></pre></td></tr></table></figure>
-
-<p> 六、ln指令创建关联</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ln -s /home/node/node/bin/node /usr/bin/node</span><br><span class="line"></span><br><span class="line">ln -s /home/node/node/bin/npm /usr/bin/npm</span><br><span class="line"></span><br><span class="line">ln -s /home/node/node/bin/npx /usr/bin/npx</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<p> 八、安装node守护进程 forever</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">// 全局安装forever</span><br><span class="line">npm i -g forever</span><br><span class="line">// 通过forever启动应用</span><br><span class="line">forever start app.js</span><br><span class="line">// 关闭应用</span><br><span class="line">forever stop app.js</span><br><span class="line">// 关闭所有应用</span><br><span class="line">forever stopall</span><br><span class="line">// 重启所有应用</span><br><span class="line">forever restartall</span><br><span class="line">// 显示所有运行的服务</span><br><span class="line">forever list</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm i forever -g </span><br><span class="line"></span><br><span class="line">ln -s /usr/<span class="built_in">local</span>/temp/Node.js/bin/forever /usr/<span class="built_in">local</span>/bin/forever</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-
-
-
-
-]]></content>
-      <tags>
-        <tag>linux</tag>
+        <tag>博客</tag>
       </tags>
   </entry>
 </search>
