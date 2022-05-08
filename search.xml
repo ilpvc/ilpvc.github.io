@@ -2542,4 +2542,91 @@
         <tag>leetcode</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Openwrt下ipk包的安装、卸载与更新</title>
+    <url>/2022/05/08/Openwrt%E4%B8%8Bipk%E5%8C%85%E7%9A%84%E5%AE%89%E8%A3%85%E3%80%81%E5%8D%B8%E8%BD%BD%E4%B8%8E%E6%9B%B4%E6%96%B0/</url>
+    <content><![CDATA[<h3 id="Openwrt下ipk包的安装、卸载与更新"><a href="#Openwrt下ipk包的安装、卸载与更新" class="headerlink" title="Openwrt下ipk包的安装、卸载与更新"></a>Openwrt下ipk包的安装、卸载与更新</h3><h4 id="一、环境说明"><a href="#一、环境说明" class="headerlink" title="一、环境说明"></a>一、环境说明</h4><p>Openwrt_version:17.01.4<br>Linux_version:4.4.92</p>
+<h4 id="二、安装ipk"><a href="#二、安装ipk" class="headerlink" title="二、安装ipk"></a>二、安装ipk</h4><p>将编译好的.ipk传到开发板上，使用命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">opkg install xxxxx.ipk安装成功的界面如下：</span><br></pre></td></tr></table></figure>
+
+<p>再进入/lib/modules/4.4.92（在/lib/modules文件夹下，不同的机子可能有不同的文件夹），找到xxxx.ko文件，执行命令：insmod xxxx.ko，命令lsmod就能看到插入内核的.ko文件</p>
+<h4 id="三、卸载ipk"><a href="#三、卸载ipk" class="headerlink" title="三、卸载ipk"></a>三、卸载ipk</h4><p>这里有一个需要注意的地方，就是直接执行<br>opkg remove xxxx.ipk是没有用的，因为安装好以后的文件名是和原来的.ipk文件名不一样的<br>步骤：<br>1、执行 opkg list_installed,找到想卸载的文件名称<br>2、执行opkg remove 文件名（就是上一步找到的名称）<br>卸载成功的界面：</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220508232159227.png"></p>
+<h4 id="四、更新"><a href="#四、更新" class="headerlink" title="四、更新"></a>四、更新</h4><p>经过卸载这一步，在重新执行安装步骤即可</p>
+]]></content>
+      <tags>
+        <tag>openwrt</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>VMware安装openwrt</title>
+    <url>/2022/05/08/VMware%E5%AE%89%E8%A3%85openwrt/</url>
+    <content><![CDATA[<h3 id="现在默认已经安装VMware"><a href="#现在默认已经安装VMware" class="headerlink" title="现在默认已经安装VMware"></a>现在默认已经安装VMware</h3><p>准备好openwrt的镜像文件</p>
+<p><a href="https://downloads.openwrt.org/">点击下载</a></p>
+<p>下载路径类似下方</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220508224407205.png"></p>
+<p><strong>我在阿里云盘和学习通又备份</strong></p>
+<p>由于vmware不支持img，需要转换</p>
+<p>使用StarWindV2VConverter将 img 转换为 vmdk</p>
+<p>打开</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220508224522831.png"></p>
+<p>选择local file将刚才下载的openwrt选择</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220508224553958.png"></p>
+<p>然后还是选择local file，在选择如下</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220508224657061.png"></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220508224712728.png"></p>
+<p>然后就可以转换了。</p>
+<h3 id="在VMware中配置虚拟机"><a href="#在VMware中配置虚拟机" class="headerlink" title="在VMware中配置虚拟机"></a>在VMware中配置虚拟机</h3><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220508224822164.png"></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220508224835772.png"></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220508224848661.png"></p>
+<p>然后后面都直接下一步。但是这里要选择</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220508224944494.png"></p>
+<p>然后将转换好的文件选择</p>
+<p>后面基本都直接下一步</p>
+<p>然后开机之后卡住不动记得按回车</p>
+<h3 id="接下来就是修改ip"><a href="#接下来就是修改ip" class="headerlink" title="接下来就是修改ip"></a>接下来就是修改ip</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vi /etc/config/network</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220508225253432.png"></p>
+<p>接下来可以直接浏览器输入ip就能进入界面了。</p>
+<p><a href="https://www.cnblogs.com/bwcxyk/p/13672461.html">VMware安装OpenWrt - 姚坤 - 博客园 (cnblogs.com)</a></p>
+]]></content>
+      <tags>
+        <tag>软路由</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>openwrt安装主题</title>
+    <url>/2022/05/08/openwrt%E5%AE%89%E8%A3%85%E4%B8%BB%E9%A2%98/</url>
+    <content><![CDATA[<h3 id="OpenWrt安装主题"><a href="#OpenWrt安装主题" class="headerlink" title="OpenWrt安装主题"></a>OpenWrt安装主题</h3><p><strong>Argon——超漂亮的OpenWrt主题</strong></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/3877976271.png"></p>
+<h2 id="安装条件"><a href="#安装条件" class="headerlink" title="安装条件"></a>安装条件</h2><blockquote>
+<p>Openwrt及其衍生系统，包括Lede，PandoraBox,DD-Wrt<br>系统版本高于18.0，且能联网下载（这不废话）<br>有Opkg环境，空闲空间&gt;1M，或者有内存卡/U盘</p>
+</blockquote>
+<h2 id="安装方法"><a href="#安装方法" class="headerlink" title="安装方法"></a>安装方法</h2><h3 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">opkg update</span><br><span class="line">opkg install wget</span><br><span class="line">opkg install ca-certificates</span><br><span class="line"><span class="meta">#</span><span class="bash">注意这里版本可能不是最新的，打开https://github.com/jerrykuku/luci-theme-argon/releases/可以看到最新链接</span></span><br><span class="line">wget --no-check-certificate https://github.com/jerrykuku/luci-theme-argon/releases/download/v1.7.3/luci-theme-argon-18.06_1.7.3-20220421_all.ipk</span><br><span class="line">opkg install luci-theme-argon_2.01-20200203_all.ipk</span><br></pre></td></tr></table></figure>
+
+<h3 id="手动安装"><a href="#手动安装" class="headerlink" title="手动安装"></a>手动安装</h3><p><a href="https://code.52pika.cn/usr/uploads/2020/04/2634254018.zip"><strong>下载文件luci-theme-argon_1.5.1.zip</strong></a><br>解压了将ipk通过WinSCP上传到路由器/tmp文件夹，然后：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">opkg install luci-theme-argon_1.5.1.ipk</span><br></pre></td></tr></table></figure>
+
+<h3 id="手动构建"><a href="#手动构建" class="headerlink" title="手动构建"></a>手动构建</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd openwrt/package</span><br><span class="line">git clone https://github.com/jerrykuku/luci-theme-argon.git  </span><br><span class="line">make menuconfig #choose LUCI-&gt;Theme-&gt;Luci-theme-argon  </span><br><span class="line">make -j1 V=s </span><br></pre></td></tr></table></figure>
+
+<p>现在就已经可以了</p>
+<p>如果想换回以前地主题。</p>
+<p>如果出现错误可以尝试这个</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget --no-check-certificate https://github.com/jerrykuku/luci-theme-argon/releases/download/v2.1/luci-theme-argon_2.1-20200206_all.ipk</span><br><span class="line">opkg install luci-theme-argon_2.1-20200206_all.ipk</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h3 id="修改主题"><a href="#修改主题" class="headerlink" title="修改主题"></a>修改主题</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">主题配置是在：/etc/config/luci</span><br></pre></td></tr></table></figure>
+
+<p>第一个红框里面的就是当前主题，改掉就能修改主题。</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/1614698-20200618162007275-421635754.png"></p>
+]]></content>
+      <tags>
+        <tag>openwrt</tag>
+      </tags>
+  </entry>
 </search>
