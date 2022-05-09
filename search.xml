@@ -2526,23 +2526,6 @@
       </tags>
   </entry>
   <entry>
-    <title>leetcode-442题</title>
-    <url>/2022/05/08/leetcode-442%E9%A2%98/</url>
-    <content><![CDATA[<h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>给你一个<strong>长度为 n</strong> 的整数数组 nums ，其中 nums 的所有整数都在<strong>范围 [1, n]</strong> 内，且每个整数<strong>出现 一次 或 两次</strong> 。请你找出所有出现 两次 的整数，并以数组形式返回。</p>
-<p>你必须设计并实现一个时间复杂度为 O(n) 且仅使用常量额外空间的算法解决此问题。</p>
-<h3 id="方法一：取反"><a href="#方法一：取反" class="headerlink" title="方法一：取反"></a>方法一：取反</h3><p>从起始位置进行遍历，每次将下标为 nums[i] - 1nums[i]−1的数字取反；<br>当遍历到 nums[i]nums[i]为负数，需要忽略其负号。<br>若发现下标为 nums[i] - 1nums[i]−1的数字已经是负数，说明之前出现过同样的数字 nums[i]nums[i]，即找到了重复数字；</p>
-<p>动画图解如下：</p>
-<p><img src="https://pic.leetcode-cn.com/1651978075-VevYmq-442.%20%E6%95%B0%E7%BB%84%E4%B8%AD%E9%87%8D%E5%A4%8D%E7%9A%84%E6%95%B0%E6%8D%AE.gif" alt="442. 数组中重复的数据.gif"></p>
-<p>java代码实现：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">findDuplicates</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        List&lt;Integer&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num : nums) &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[Math.abs(num) - <span class="number">1</span>] &lt; <span class="number">0</span>) &#123;</span><br><span class="line">                res.add(Math.abs(num));</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                nums[Math.abs(num) - <span class="number">1</span>] *= -<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><a href="https://leetcode-cn.com/problems/find-all-duplicates-in-an-array/solution/by-fuxuemingzhu-dko5/">原文出处</a></p>
-]]></content>
-      <tags>
-        <tag>leetcode</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Openwrt下ipk包的安装、卸载与更新</title>
     <url>/2022/05/08/Openwrt%E4%B8%8Bipk%E5%8C%85%E7%9A%84%E5%AE%89%E8%A3%85%E3%80%81%E5%8D%B8%E8%BD%BD%E4%B8%8E%E6%9B%B4%E6%96%B0/</url>
     <content><![CDATA[<h3 id="Openwrt下ipk包的安装、卸载与更新"><a href="#Openwrt下ipk包的安装、卸载与更新" class="headerlink" title="Openwrt下ipk包的安装、卸载与更新"></a>Openwrt下ipk包的安装、卸载与更新</h3><h4 id="一、环境说明"><a href="#一、环境说明" class="headerlink" title="一、环境说明"></a>一、环境说明</h4><p>Openwrt_version:17.01.4<br>Linux_version:4.4.92</p>
@@ -2588,6 +2571,8 @@
 
 <p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220508225253432.png"></p>
 <p>接下来可以直接浏览器输入ip就能进入界面了。</p>
+<p>中文包的名称</p>
+<p>luci-i18n-base-zh-cn </p>
 <p><a href="https://www.cnblogs.com/bwcxyk/p/13672461.html">VMware安装OpenWrt - 姚坤 - 博客园 (cnblogs.com)</a></p>
 ]]></content>
       <tags>
@@ -2627,6 +2612,57 @@
 ]]></content>
       <tags>
         <tag>openwrt</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>leetcode-442</title>
+    <url>/2022/05/08/leetcode-442/</url>
+    <content><![CDATA[<h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>给你一个<strong>长度为 n</strong> 的整数数组 nums ，其中 nums 的所有整数都在<strong>范围 [1, n]</strong> 内，且每个整数<strong>出现 一次 或 两次</strong> 。请你找出所有出现 两次 的整数，并以数组形式返回。</p>
+<p>你必须设计并实现一个时间复杂度为 O(n) 且仅使用常量额外空间的算法解决此问题。</p>
+<h3 id="方法一：取反"><a href="#方法一：取反" class="headerlink" title="方法一：取反"></a>方法一：取反</h3><p>从起始位置进行遍历，每次将下标为 nums[i] - 1nums[i]−1的数字取反；<br>当遍历到 nums[i]nums[i]为负数，需要忽略其负号。<br>若发现下标为 nums[i] - 1nums[i]−1的数字已经是负数，说明之前出现过同样的数字 nums[i]nums[i]，即找到了重复数字；</p>
+<p>动画图解如下：</p>
+<p><img src="https://pic.leetcode-cn.com/1651978075-VevYmq-442.%20%E6%95%B0%E7%BB%84%E4%B8%AD%E9%87%8D%E5%A4%8D%E7%9A%84%E6%95%B0%E6%8D%AE.gif" alt="442. 数组中重复的数据.gif"></p>
+<p>java代码实现：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">findDuplicates</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        List&lt;Integer&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num : nums) &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[Math.abs(num) - <span class="number">1</span>] &lt; <span class="number">0</span>) &#123;</span><br><span class="line">                res.add(Math.abs(num));</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                nums[Math.abs(num) - <span class="number">1</span>] *= -<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><a href="https://leetcode-cn.com/problems/find-all-duplicates-in-an-array/solution/by-fuxuemingzhu-dko5/">原文出处</a></p>
+]]></content>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>leetcode-942</title>
+    <url>/2022/05/09/leetcode-942/</url>
+    <content><![CDATA[<h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>由范围 [0,n] 内所有整数组成的 n + 1 个整数的排列序列可以表示为长度为 n 的字符串 s ，其中:</p>
+<p>如果 perm[i] &lt; perm[i + 1] ，那么 s[i] == ‘I’<br>如果 perm[i] &gt; perm[i + 1] ，那么 s[i] == ‘D’<br>给定一个字符串 s ，重构排列 perm 并返回它。如果有多个有效排列perm，则返回其中 任何一个 。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：s = &quot;IDID&quot;</span><br><span class="line">输出：[0,4,1,3,2]</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：s = &quot;III&quot;</span><br><span class="line">输出：[0,1,2,3]</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：s = &quot;DDI&quot;</span><br><span class="line">输出：[3,2,0,1]</span><br></pre></td></tr></table></figure>
+
+<h3 id="方法一：贪心"><a href="#方法一：贪心" class="headerlink" title="方法一：贪心"></a>方法一：贪心</h3><p>考虑 perm[0] 的值，根据题意：</p>
+<p>如果 s[0]=‘I’，那么令 perm[0]=0，则无论perm[1] 为何值都满足perm[0]&lt;perm[1]；<br>如果 s[0]=‘D’，那么令perm[0]=n，则无论 perm[1] 为何值都满足perm[0]&gt;perm[1]；<br>确定好perm[0] 后，剩余的 n−1 个字符和 n 个待确定的数就变成了一个和原问题相同，但规模为 n−1 的问题。因此我们可以继续按照上述方法确定perm[1]：如果 s[1]=‘I’，那么令 perm[1] 为剩余数字中的最小数；如果 s[1]=‘D’，那么令perm[1] 为剩余数字中的最大数。如此循环直至剩下一个数，填入perm[n] 中。</p>
+<p>代码实现时，由于每次都选择的是最小数和最大数，我们可以用两个变量lo 和 hi 表示当前剩余数字中的最小数和最大数。</p>
+<p>代码：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] diStringMatch(String s) &#123;</span><br><span class="line">        <span class="keyword">int</span> n = s.length(), lo = <span class="number">0</span>, hi = n;</span><br><span class="line">        <span class="keyword">int</span>[] perm = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">            perm[i] = s.charAt(i) == <span class="string">&#x27;I&#x27;</span> ? lo++ : hi--;</span><br><span class="line">        &#125;</span><br><span class="line">        perm[n] = lo; <span class="comment">// 最后剩下一个数，此时 lo == hi</span></span><br><span class="line">        <span class="keyword">return</span> perm;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>复杂度分析</strong></p>
+<ul>
+<li>时间复杂度：O(n)<em>O</em>(<em>n</em>)，其中 n<em>n</em> 是字符串 s<em>s</em> 的长度。</li>
+<li>空间复杂度：O(1)<em>O</em>(1)，返回值不计入空间复杂度。</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>leetcode</tag>
       </tags>
   </entry>
 </search>
