@@ -19,6 +19,30 @@
       </tags>
   </entry>
   <entry>
+    <title>Android将图片插入数据库</title>
+    <url>/2022/05/12/Android%E5%B0%86%E5%9B%BE%E7%89%87%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
+    <content><![CDATA[<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p>方法一：将图片解析为二进制的数据，然后放入到数据库中的一种BLOD类型中</p>
+<p>方法二：保存图片的URL路径</p>
+<p>方法三：其实还可以将图片存放到本地文件，那么就以后直接从本地文件进行获取就可以了，但是这就是需要注意下，就是要保证路径都是唯一的，这里可以用时间戳进行产生，或者用我上一篇的第18点中讲到的一些产生Token的方法。</p>
+<p>这里讲方法一：</p>
+<h3 id="一：创建数据库"><a href="#一：创建数据库" class="headerlink" title="一：创建数据库"></a>一：创建数据库</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//表名friend，图像用blob存储，blob实际也是二进制存储</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String CREATE_TABLE_FRIEND = <span class="string">&quot;create table friend ( id Integer primary key autoincrement, img blob, name text ); \n&quot;</span> ;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(SQLiteDatabase sqLiteDatabase)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//sqLiteDatabase.execSQL(createTable(TABLE_NAME));</span></span><br><span class="line">        <span class="comment">//sqLiteDatabase.execSQL(CREATE_TABLE_SQL);</span></span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        sqLiteDatabase.execSQL(CREATE_TABLE_FRIEND);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//插入数据库方法，这里为了测试是否插入成功所以返回了long型。	</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">long</span> <span class="title">insertFriend</span><span class="params">(Friend friend)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">final</span> SQLiteDatabase db = getWritableDatabase();</span><br><span class="line"></span><br><span class="line">        ContentValues values = <span class="keyword">new</span> ContentValues();</span><br><span class="line"></span><br><span class="line">        values.put(<span class="string">&quot;img&quot;</span>,friend.getHeadImg());</span><br><span class="line">        values.put(<span class="string">&quot;name&quot;</span>,friend.getName());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> db.insert(<span class="string">&quot;friend&quot;</span>,<span class="keyword">null</span>,values);</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//将图片转换为二进制数组，并且返回。</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">byte</span>[] getPicture(Drawable drawable) &#123;</span><br><span class="line">        <span class="keyword">if</span>(drawable == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        BitmapDrawable bd = (BitmapDrawable) drawable;</span><br><span class="line">        Bitmap bitmap = bd.getBitmap();</span><br><span class="line">        ByteArrayOutputStream os = <span class="keyword">new</span> ByteArrayOutputStream();</span><br><span class="line">        bitmap.compress(Bitmap.CompressFormat.PNG, <span class="number">100</span>, os);</span><br><span class="line">        <span class="keyword">return</span> os.toByteArray();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		String[] columns = &#123;<span class="string">&quot;img&quot;</span>, <span class="string">&quot;name&quot;</span>&#125;;</span><br><span class="line">        Cursor cursor = sqLiteDatabase.query(<span class="string">&quot;friend&quot;</span>, columns, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>);</span><br><span class="line">	<span class="comment">//绑定Viewholder</span></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onBindViewHolder</span><span class="params">(<span class="meta">@NonNull</span> MyViewHoder holder, <span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        Friend friend = friends.get(position);</span><br><span class="line">        <span class="comment">//将二进制重新加载为图片</span></span><br><span class="line">        Bitmap b = BitmapFactory.decodeByteArray(friend.getHeadImg(), <span class="number">0</span>, friend.getHeadImg().length);</span><br><span class="line">        <span class="comment">//设置组件的图片</span></span><br><span class="line">        holder.img.setImageBitmap(b);</span><br><span class="line">        holder.name.setText(friend.name);</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">//给add组件设置监听事件，里面完成相关操作</span></span><br><span class="line">	add.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">                friend = <span class="keyword">new</span> Friend();</span><br><span class="line">                <span class="comment">//获取需要存进数据库的图片</span></span><br><span class="line">                Drawable drawable = getContext().getResources().getDrawable(R.drawable.login_header_img);</span><br><span class="line">                <span class="comment">//将其转换为byte型。</span></span><br><span class="line">                <span class="keyword">byte</span>[] a = getPicture(drawable);</span><br><span class="line">                <span class="comment">//放进friend对象</span></span><br><span class="line">                friend.setHeadImg(a);</span><br><span class="line">                friend.setName(<span class="string">&quot;seawdawdaw&quot;</span>);</span><br><span class="line">                mySQLiteOpenHelper = <span class="keyword">new</span> MySQLiteOpenHelper(getContext());</span><br><span class="line">                mySQLiteOpenHelper.insertFriend(friend);</span><br><span class="line">                <span class="comment">//mMyAdapter.notifyDataSetChanged();</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h3><p>从服务器上取到图片地址，比如image/XXX/1233455.JPG 然后自己定义一个字符串baseUrl = 10.0.2.2:8080/Demo/ ,和取到的地址拼起来。 总之意思就是你不是直接得到图片，而是得到图片的地址，然后根据地址取出来图片。比如：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 传输网络图片</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Bitmap <span class="title">getPic</span><span class="params">(String uriPic)</span> </span>&#123;</span><br><span class="line">	URL imageUrl = <span class="keyword">null</span>;</span><br><span class="line">	Bitmap bitmap = <span class="keyword">null</span>;</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">		imageUrl = <span class="keyword">new</span> URL(uriPic);</span><br><span class="line">	&#125; <span class="keyword">catch</span> (MalformedURLException e) &#123;</span><br><span class="line">		e.printStackTrace();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">		HttpURLConnection conn = (HttpURLConnection) imageUrl</span><br><span class="line">				.openConnection();</span><br><span class="line">		conn.connect();</span><br><span class="line">		InputStream is = conn.getInputStream();</span><br><span class="line">		bitmap = BitmapFactory.decodeStream(is);</span><br><span class="line">		is.close();</span><br><span class="line">	&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">		e.printStackTrace();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> bitmap;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>取到后相对图片再做处理的话就 bmp = Bitmap.createScaledBitmap(bmp, 长,宽, true);</p>
+]]></content>
+      <tags>
+        <tag>android</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Android的Fragment实现导航栏</title>
     <url>/2022/04/28/Android%E7%9A%84Fragment%E5%AE%9E%E7%8E%B0%E5%AF%BC%E8%88%AA%E6%A0%8F/</url>
     <content><![CDATA[<p>这里只粘贴关键代码，留作自己遗忘查看</p>
@@ -132,6 +156,380 @@
       </tags>
   </entry>
   <entry>
+    <title>CentOs常用命令（更全）</title>
+    <url>/2022/05/12/CentOs%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%EF%BC%88%E6%9B%B4%E5%85%A8%EF%BC%89/</url>
+    <content><![CDATA[<h2 id="系统服务管理"><a href="#系统服务管理" class="headerlink" title="系统服务管理"></a>系统服务管理</h2><h3 id="systemctl"><a href="#systemctl" class="headerlink" title="systemctl"></a>systemctl</h3><blockquote>
+<p><code>systemctl</code>命令是<code>service</code>和<code>chkconfig</code>命令的组合体，可用于管理系统。</p>
+</blockquote>
+<ul>
+<li>输出系统中各个服务的状态：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl list-units --<span class="built_in">type</span>=service</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_01.png"></p>
+<ul>
+<li>查看服务的运行状态：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl status firewalld</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_02.png"></p>
+<ul>
+<li>关闭服务：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl stop firewalld</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_03.png"></p>
+<ul>
+<li>启动服务：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl start firewalld</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_04.png"></p>
+<ul>
+<li>重新启动服务（不管当前服务是启动还是关闭）：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl restart firewalld</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>重新载入配置信息而不中断服务：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl reload firewalld</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>禁止服务开机自启动：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl <span class="built_in">disable</span> firewalld</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_05.png"></p>
+<ul>
+<li>设置服务开机自启动：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> firewalld</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_06.png"></p>
+<h2 id="文件管理"><a href="#文件管理" class="headerlink" title="文件管理"></a>文件管理</h2><h3 id="ls"><a href="#ls" class="headerlink" title="ls"></a>ls</h3><p>列出指定目录下的所有文件，列出<code>/</code>目录下的文件：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ls -l /</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_07.png"></p>
+<h3 id="pwd"><a href="#pwd" class="headerlink" title="pwd"></a>pwd</h3><p>获取目前所在工作目录的绝对路径：</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_08.png"></p>
+<h3 id="cd"><a href="#cd" class="headerlink" title="cd"></a>cd</h3><p>改变当前工作目录：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_09.png"></p>
+<h3 id="date"><a href="#date" class="headerlink" title="date"></a>date</h3><p>显示或修改系统时间与日期；</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">date <span class="string">&#x27;+%Y-%m-%d %H:%M:%S&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_10.png"></p>
+<h3 id="passwd"><a href="#passwd" class="headerlink" title="passwd"></a>passwd</h3><p>用于设置用户密码：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">passwd root</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_11.png"></p>
+<h3 id="su"><a href="#su" class="headerlink" title="su"></a>su</h3><p>改变用户身份（切换到超级用户）：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">su -</span><br></pre></td></tr></table></figure>
+
+<h3 id="clear"><a href="#clear" class="headerlink" title="clear"></a>clear</h3><p>用于清除屏幕信息</p>
+<h3 id="man"><a href="#man" class="headerlink" title="man"></a>man</h3><p>显示指定命令的帮助信息：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">man ls</span><br></pre></td></tr></table></figure>
+
+<h3 id="who"><a href="#who" class="headerlink" title="who"></a>who</h3><ul>
+<li>查询系统处于什么运行级别：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">who -r</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_12.png"></p>
+<ul>
+<li>显示目前登录到系统的用户：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">who -buT</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_13.png"></p>
+<h3 id="free"><a href="#free" class="headerlink" title="free"></a>free</h3><p>显示系统内存状态（单位MB）：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">free -m</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_14.png"></p>
+<h3 id="ps"><a href="#ps" class="headerlink" title="ps"></a>ps</h3><ul>
+<li>显示系统进程运行动态：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ps -ef</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看<code>sshd</code>进程的运行动态：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ps -ef | grep sshd</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_15.png"></p>
+<h3 id="top"><a href="#top" class="headerlink" title="top"></a>top</h3><p>查看即时活跃的进程，类似Windows的任务管理器。</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_16.png"></p>
+<h3 id="mkdir"><a href="#mkdir" class="headerlink" title="mkdir"></a>mkdir</h3><p>创建目录：</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_17.png"></p>
+<h3 id="more"><a href="#more" class="headerlink" title="more"></a>more</h3><p>用于分页查看文件，例如每页10行查看<code>boot.log</code>文件：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">more -c -10 /var/<span class="built_in">log</span>/boot.log</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_18.png"></p>
+<h3 id="cat"><a href="#cat" class="headerlink" title="cat"></a>cat</h3><p>用于查看文件，例如查看Linux启动日志文件文件，并标明行号：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat -Ab /var/<span class="built_in">log</span>/boot.log</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_19.png"></p>
+<h3 id="touch"><a href="#touch" class="headerlink" title="touch"></a>touch</h3><p>用于创建文件，例如创建<code>text.txt</code>文件：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">touch text.txt</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_20.png"></p>
+<h3 id="rm"><a href="#rm" class="headerlink" title="rm"></a>rm</h3><ul>
+<li>删除文件：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rm text.txt</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>强制删除某个目录及其子目录：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rm -rf testdir/</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_21.png"></p>
+<h3 id="cp"><a href="#cp" class="headerlink" title="cp"></a>cp</h3><p>用于拷贝文件，例如将<code>test1</code>目录复制到<code>test2</code>目录</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cp -r /mydata/tes1 /mydata/test2</span><br></pre></td></tr></table></figure>
+
+<h3 id="mv"><a href="#mv" class="headerlink" title="mv"></a>mv</h3><p>用于移动或覆盖文件：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mv text.txt text2.txt</span><br></pre></td></tr></table></figure>
+
+<h2 id="压缩与解压"><a href="#压缩与解压" class="headerlink" title="压缩与解压"></a>压缩与解压</h2><h3 id="tar"><a href="#tar" class="headerlink" title="tar"></a>tar</h3><ul>
+<li>将<code>/etc</code>文件夹中的文件归档到文件<code>etc.tar</code>（并不会进行压缩）：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -cvf /mydata/etc.tar /etc</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>用<code>gzip</code>压缩文件夹<code>/etc</code>中的文件到文件<code>etc.tar.gz</code>：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -zcvf /mydata/etc.tar.gz /etc</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>用<code>bzip2</code>压缩文件夹<code>/etc</code>到文件<code>/etc.tar.bz2</code>：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -jcvf /mydata/etc.tar.bz2 /etc</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_22.png"></p>
+<ul>
+<li>分页查看压缩包中内容（gzip）：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -ztvf /mydata/etc.tar.gz |more -c -10</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_24.png"></p>
+<ul>
+<li>解压文件到当前目录（gzip）：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -zxvf /mydata/etc.tar.gz</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>解压文件到指定目录（gzip）：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -zxvf /mydata/etc.tar.gz -C /mydata/etc</span><br></pre></td></tr></table></figure>
+
+<h2 id="磁盘和网络管理"><a href="#磁盘和网络管理" class="headerlink" title="磁盘和网络管理"></a>磁盘和网络管理</h2><h3 id="df"><a href="#df" class="headerlink" title="df"></a>df</h3><p>查看磁盘空间占用情况：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">df -hT</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_25.png"></p>
+<h3 id="dh"><a href="#dh" class="headerlink" title="dh"></a>dh</h3><p>查看当前目录下的文件及文件夹所占大小：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">du -h --max-depth=1 ./*</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_26.png"></p>
+<h3 id="ifconfig"><a href="#ifconfig" class="headerlink" title="ifconfig"></a>ifconfig</h3><p>显示当前网络接口状态：</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_27.png"></p>
+<h3 id="netstat"><a href="#netstat" class="headerlink" title="netstat"></a>netstat</h3><ul>
+<li>查看当前路由信息：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">netstat -rn</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_28.png"></p>
+<ul>
+<li>查看所有有效TCP连接：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">netstat -an</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看系统中启动的监听服务：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">netstat -tulnp</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_29.png"></p>
+<ul>
+<li>查看处于连接状态的系统资源信息：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">netstat -atunp</span><br></pre></td></tr></table></figure>
+
+<h3 id="wget"><a href="#wget" class="headerlink" title="wget"></a>wget</h3><p>从网络上下载文件</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_30.png"></p>
+<h2 id="文件上传下载"><a href="#文件上传下载" class="headerlink" title="文件上传下载"></a>文件上传下载</h2><ul>
+<li>安装上传下载工具<code>lrzsz</code>；</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install -y lrzsz</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>上传文件，输入以下命令<code>XShell</code>会弹出文件上传框；</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rz</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>下载文件，输入以下命令<code>XShell</code>会弹出文件保存框；</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sz fileName</span><br></pre></td></tr></table></figure>
+
+<h2 id="软件的安装与管理"><a href="#软件的安装与管理" class="headerlink" title="软件的安装与管理"></a>软件的安装与管理</h2><h3 id="rpm"><a href="#rpm" class="headerlink" title="rpm"></a>rpm</h3><blockquote>
+<p>RPM是<code>Red-Hat Package Manager</code>的缩写，一种Linux下通用的软件包管理方式，可用于安装和管理<code>.rpm</code>结尾的软件包。</p>
+</blockquote>
+<ul>
+<li>安装软件包：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rpm -ivh nginx-1.12.2-2.el7.x86_64.rpm</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>模糊搜索软件包：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rpm -qa | grep nginx</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>精确查找软件包：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rpm -qa nginx</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查询软件包的安装路径：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rpm -ql nginx-1.12.2-2.el7.x86_64</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看软件包的概要信息：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rpm -qi nginx-1.12.2-2.el7.x86_64</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>验证软件包内容和安装文件是否一致：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rpm -V nginx-1.12.2-2.el7.x86_64</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>更新软件包：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rpm -Uvh nginx-1.12.2-2.el7.x86_64</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>删除软件包：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rpm -e nginx-1.12.2-2.el7.x86_64</span><br></pre></td></tr></table></figure>
+
+<h3 id="yum"><a href="#yum" class="headerlink" title="yum"></a>yum</h3><blockquote>
+<p>Yum是<code>Yellow dog Updater, Modified</code>的缩写，能够在线自动下载RPM包并安装，可以自动处理依赖性关系，并且一次安装所有依赖的软件包，非常方便！</p>
+</blockquote>
+<ul>
+<li>安装软件包： </li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install nginx</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>检查可以更新的软件包：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum check-update</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>更新指定的软件包：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum update nginx</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在资源库中查找软件包信息：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum info nginx*</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>列出已经安装的所有软件包：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum info installed</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>列出软件包名称：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum list nginx*</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>模糊搜索软件包：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum search nginx</span><br></pre></td></tr></table></figure>
+
+<h2 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h2><h3 id="用户信息查看"><a href="#用户信息查看" class="headerlink" title="用户信息查看"></a>用户信息查看</h3><ul>
+<li>查看用户信息：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat /etc/passwd</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>用户信息格式如下（密码已过滤）：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 用户名:密码:用户标识号:组标识号:组注释性描述:主目录:默认shell</span></span><br><span class="line">root:x:0:0:root:/root:/bin/bash</span><br><span class="line">macro:x:1000:982:macro:/home/macro:/bin/bash</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看用户组信息：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat /etc/group</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>用户组信息格式如下：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 组名:密码:组标识号:组内用户列表</span></span><br><span class="line">root:x:0:</span><br><span class="line">docker:x:982:macro,andy</span><br></pre></td></tr></table></figure>
+
+<h3 id="passwd-1"><a href="#passwd-1" class="headerlink" title="passwd"></a>passwd</h3><p>用于设置用户密码：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">passwd root</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:/Users/Administrator/Desktop/mylab/mall-learning-master/docs/reference/images/linux_command_11.png"></p>
+<h3 id="su-1"><a href="#su-1" class="headerlink" title="su"></a>su</h3><p>改变用户身份（切换到超级用户）：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 切换到root用户</span></span><br><span class="line">su -</span><br><span class="line"><span class="comment"># 切换到macro用户</span></span><br><span class="line">su macro</span><br></pre></td></tr></table></figure>
+
+<h3 id="groupadd"><a href="#groupadd" class="headerlink" title="groupadd"></a>groupadd</h3><p>添加用户组，使用<code>-g</code>可以设置用户组的标志号：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">groupadd -g 1024 macrozheng</span><br></pre></td></tr></table></figure>
+
+<h3 id="groupdel"><a href="#groupdel" class="headerlink" title="groupdel"></a>groupdel</h3><p>删除用户组：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">groupdel macrozheng</span><br></pre></td></tr></table></figure>
+
+<h3 id="useradd"><a href="#useradd" class="headerlink" title="useradd"></a>useradd</h3><p>添加用户，<code>-u</code>设置标志号，<code>-g</code>设置主用户组：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">useradd -u 1024 -g macrozheng macro</span><br></pre></td></tr></table></figure>
+
+<h3 id="usermod"><a href="#usermod" class="headerlink" title="usermod"></a>usermod</h3><p>修改用户所属用户组：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">usermod -g docker macro</span><br></pre></td></tr></table></figure>
+
+<h3 id="userdel"><a href="#userdel" class="headerlink" title="userdel"></a>userdel</h3><p>删除用户，使用<code>-r</code>可以删除用户主目录：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">userdel macro -r</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]]></content>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Git命令</title>
     <url>/2021/11/10/Git%E5%91%BD%E4%BB%A4/</url>
     <content><![CDATA[<h2 id="一、Git常用命令"><a href="#一、Git常用命令" class="headerlink" title="一、Git常用命令"></a>一、Git常用命令</h2><p><strong>1、常用</strong></p>
@@ -175,6 +573,164 @@
 ]]></content>
       <tags>
         <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>IDEA常用设置及插件</title>
+    <url>/2022/05/12/IDEA%E5%B8%B8%E7%94%A8%E8%AE%BE%E7%BD%AE%E5%8F%8A%E6%8F%92%E4%BB%B6/</url>
+    <content><![CDATA[<h2 id="基本设置"><a href="#基本设置" class="headerlink" title="基本设置"></a>基本设置</h2><h3 id="设置界面风格及修改外部UI尺寸大小"><a href="#设置界面风格及修改外部UI尺寸大小" class="headerlink" title="设置界面风格及修改外部UI尺寸大小"></a>设置界面风格及修改外部UI尺寸大小</h3><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/idea_screen_1.png"></p>
+<h3 id="打开IDEA时设置不重新打开最近的项目"><a href="#打开IDEA时设置不重新打开最近的项目" class="headerlink" title="打开IDEA时设置不重新打开最近的项目"></a>打开IDEA时设置不重新打开最近的项目</h3><blockquote>
+<p>IDEA默认会打开最近的项目，有时候我们需要自己选择要打开的项目，不勾选该选项可以实现。</p>
+</blockquote>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/idea_screen_2.png"></p>
+<h3 id="设置IDEA的快捷键"><a href="#设置IDEA的快捷键" class="headerlink" title="设置IDEA的快捷键"></a>设置IDEA的快捷键</h3><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/idea_screen_3.png"></p>
+<h3 id="设置代码字体大小"><a href="#设置代码字体大小" class="headerlink" title="设置代码字体大小"></a>设置代码字体大小</h3><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/idea_screen_4.png"></p>
+<h3 id="设置项目文件编码格式"><a href="#设置项目文件编码格式" class="headerlink" title="设置项目文件编码格式"></a>设置项目文件编码格式</h3><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/idea_screen_5.png"></p>
+<h3 id="设置代码提示的匹配模式"><a href="#设置代码提示的匹配模式" class="headerlink" title="设置代码提示的匹配模式"></a>设置代码提示的匹配模式</h3><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/idea_screen_6.png"></p>
+<h3 id="设置新建类文件的类注释模版"><a href="#设置新建类文件的类注释模版" class="headerlink" title="设置新建类文件的类注释模版"></a>设置新建类文件的类注释模版</h3><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/idea_screen_7.png"></p>
+<h2 id="IDEA和Eclipse常用快捷键对比"><a href="#IDEA和Eclipse常用快捷键对比" class="headerlink" title="IDEA和Eclipse常用快捷键对比"></a>IDEA和Eclipse常用快捷键对比</h2><blockquote>
+<p>友情提示：IDEA可以设置为Eclipse风格的快捷键，在File-&gt;Settings-&gt;Keymap处，如需更改部分快捷键可按如下表格中的英文描述进行搜索，并改为相应快捷键。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Eclipse</th>
+<th>IDEA</th>
+<th>英文描述</th>
+<th>中文描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ctrl+shift+r</td>
+<td>ctrl+shift+n</td>
+<td>Navigate-&gt;File</td>
+<td>找工作空间的文件</td>
+</tr>
+<tr>
+<td>ctrl+shift+t</td>
+<td>ctrl+n</td>
+<td>Navigate-&gt;Class</td>
+<td>找类定义</td>
+</tr>
+<tr>
+<td>ctrl+shift+g</td>
+<td>alt+f7</td>
+<td>Edit-&gt;Find-&gt;Find Usages</td>
+<td>查找方法在哪里调用.变量在哪里被使用</td>
+</tr>
+<tr>
+<td>ctrl+t</td>
+<td>ctrl+t</td>
+<td>Other-&gt;Hierarchy Class</td>
+<td>看类继承结构</td>
+</tr>
+<tr>
+<td>ctrl+o</td>
+<td>ctrl+f12</td>
+<td>Navigate-&gt;File Structure</td>
+<td>搜索一个类里面的方法</td>
+</tr>
+<tr>
+<td>shift+alt+z</td>
+<td>ctrl+alt+t</td>
+<td>Code-&gt;Surround With</td>
+<td>生成常见的代码块</td>
+</tr>
+<tr>
+<td>shift+alt+l</td>
+<td>ctrl+alt+v</td>
+<td>Refactor-&gt;Extract-&gt;Variable</td>
+<td>抽取变量</td>
+</tr>
+<tr>
+<td>shift+alt+m</td>
+<td>ctrl+alt+m</td>
+<td>Refactor-&gt;Extract-&gt;Method</td>
+<td>抽取方法</td>
+</tr>
+<tr>
+<td>alt+左箭头</td>
+<td>ctrl+alt+左箭头</td>
+<td>Navigate-&gt;Back</td>
+<td>回退上一个操作位置</td>
+</tr>
+<tr>
+<td>alt+右箭头</td>
+<td>ctrl+alt+右键头</td>
+<td>Navigate-&gt;Forward</td>
+<td>前进上一个操作位置</td>
+</tr>
+<tr>
+<td>ctrl+home</td>
+<td>ctrl+home</td>
+<td>Move Caret to Text Start</td>
+<td>回到类最前面</td>
+</tr>
+<tr>
+<td>ctrl+end</td>
+<td>ctrl+end</td>
+<td>Move Caret to Text End</td>
+<td>回到类最后面</td>
+</tr>
+<tr>
+<td>ctrl+e</td>
+<td>ctrl+e</td>
+<td>View-&gt;Recent Files</td>
+<td>最近打开的文件</td>
+</tr>
+<tr>
+<td>alt+/</td>
+<td>ctrl+space</td>
+<td>Code-&gt;Completion-&gt;Basic</td>
+<td>提示变量生成</td>
+</tr>
+<tr>
+<td>ctrl+1</td>
+<td>alt+enter</td>
+<td>Other-&gt;Show Intention Actions</td>
+<td>提示可能的操作</td>
+</tr>
+<tr>
+<td>ctrl+h</td>
+<td>ctrl+shift+f</td>
+<td>Find in Path</td>
+<td>全局搜索</td>
+</tr>
+<tr>
+<td>alt+上/下箭头</td>
+<td>alt+shift+上/下箭头</td>
+<td>Code-&gt;Move Line Up/Down</td>
+<td>移动一行代码</td>
+</tr>
+<tr>
+<td>ctrl+/</td>
+<td>ctrl+/</td>
+<td>Other-&gt;Fix doc comment</td>
+<td>方法注释</td>
+</tr>
+<tr>
+<td>ctrl+alt+s</td>
+<td>alt+insert</td>
+<td>Generate</td>
+<td>生成getter,setter,tostring等</td>
+</tr>
+</tbody></table>
+<h2 id="推荐插件"><a href="#推荐插件" class="headerlink" title="推荐插件"></a>推荐插件</h2><blockquote>
+<p>由于IDEA本身就自带很多插件，可以完成大部分需求，这里就推荐两个本人常用的插件。</p>
+</blockquote>
+<h3 id="Free-MyBatis-plugin"><a href="#Free-MyBatis-plugin" class="headerlink" title="Free MyBatis plugin"></a>Free MyBatis plugin</h3><blockquote>
+<p>非常好用的MyBatis插件，对MyBatis的xml具有强大的提示功能，同时可以关联mapper接口和mapper.xml中的sql实现。</p>
+</blockquote>
+<h4 id="可以从mapper接口和mapper-xml文件中相互跳转"><a href="#可以从mapper接口和mapper-xml文件中相互跳转" class="headerlink" title="可以从mapper接口和mapper.xml文件中相互跳转"></a>可以从mapper接口和mapper.xml文件中相互跳转</h4><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/idea_screen_8.png"></p>
+<h4 id="mapper-xml中的各种提示"><a href="#mapper-xml中的各种提示" class="headerlink" title="mapper.xml中的各种提示"></a>mapper.xml中的各种提示</h4><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/idea_screen_9.png"><br><img src="C:/Users/Administrator/Desktop/mylab/mall-learning-master/docs/images/idea_screen_10.png"></p>
+<h3 id="Lombok-plugin"><a href="#Lombok-plugin" class="headerlink" title="Lombok plugin"></a>Lombok plugin</h3><blockquote>
+<p>Lombok为Java语言添加了非常有趣的附加功能，你可以不用再为实体类手写getter,setter等方法，通过一个注解即可拥有。</p>
+</blockquote>
+<p>一个没有getter,setter方法的类通过添加@Getter和@Setter注解拥有了getter,setter方法。</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/idea_screen_11.png"></p>
+]]></content>
+      <tags>
+        <tag>工具</tag>
       </tags>
   </entry>
   <entry>
@@ -1261,25 +1817,6 @@
       </tags>
   </entry>
   <entry>
-    <title>图床搭建</title>
-    <url>/2021/11/19/picgo+%E9%98%BF%E9%87%8C%E4%BA%91oss+typora%E5%9B%BE%E5%BA%8A%E6%90%AD%E5%BB%BA/</url>
-    <content><![CDATA[<h1 id="picgo-阿里云oss-typora图床搭建"><a href="#picgo-阿里云oss-typora图床搭建" class="headerlink" title="picgo+阿里云oss+typora图床搭建"></a>picgo+阿里云oss+typora图床搭建</h1><h2 id="1-购买阿里云的oss对象储存"><a href="#1-购买阿里云的oss对象储存" class="headerlink" title="1.购买阿里云的oss对象储存"></a>1.购买阿里云的oss对象储存</h2><h2 id="2-建立-bucket"><a href="#2-建立-bucket" class="headerlink" title="2.建立 bucket"></a>2.建立 bucket</h2><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210416171724.png" alt="image-20210416171724270"></p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210416172033.png" alt="image-20210416172033033"></p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210416172125.png" alt="image-20210416172125379"></p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210416172219.png" alt="image-20210416172219107"></p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210416172312.png" alt="image-20210416172312448"></p>
-<h3 id="然后记下来显示的AccessKey和AccessKey-Serect。分别是用户号和密码"><a href="#然后记下来显示的AccessKey和AccessKey-Serect。分别是用户号和密码" class="headerlink" title="然后记下来显示的AccessKey和AccessKey Serect。分别是用户号和密码"></a>然后记下来显示的AccessKey和AccessKey Serect。分别是用户号和密码</h3><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210416172507.png" alt="image-20210416172507376"></p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210416172540.png" alt="image-20210416172540595"></p>
-<p>再到picgo</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210416172627.png" alt="image-20210416172627340"></p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210416172754.png" alt="image-20210416172754089"></p>
-<p>然后就可以了。</p>
-]]></content>
-      <tags>
-        <tag>阿里云</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>openwrt安装主题</title>
     <url>/2022/05/08/openwrt%E5%AE%89%E8%A3%85%E4%B8%BB%E9%A2%98/</url>
     <content><![CDATA[<h3 id="OpenWrt安装主题"><a href="#OpenWrt安装主题" class="headerlink" title="OpenWrt安装主题"></a>OpenWrt安装主题</h3><p><strong>Argon——超漂亮的OpenWrt主题</strong></p>
@@ -1312,6 +1849,65 @@
 ]]></content>
       <tags>
         <tag>openwrt</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>图床搭建</title>
+    <url>/2021/11/19/picgo+%E9%98%BF%E9%87%8C%E4%BA%91oss+typora%E5%9B%BE%E5%BA%8A%E6%90%AD%E5%BB%BA/</url>
+    <content><![CDATA[<h1 id="picgo-阿里云oss-typora图床搭建"><a href="#picgo-阿里云oss-typora图床搭建" class="headerlink" title="picgo+阿里云oss+typora图床搭建"></a>picgo+阿里云oss+typora图床搭建</h1><h2 id="1-购买阿里云的oss对象储存"><a href="#1-购买阿里云的oss对象储存" class="headerlink" title="1.购买阿里云的oss对象储存"></a>1.购买阿里云的oss对象储存</h2><h2 id="2-建立-bucket"><a href="#2-建立-bucket" class="headerlink" title="2.建立 bucket"></a>2.建立 bucket</h2><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210416171724.png" alt="image-20210416171724270"></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210416172033.png" alt="image-20210416172033033"></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210416172125.png" alt="image-20210416172125379"></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210416172219.png" alt="image-20210416172219107"></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210416172312.png" alt="image-20210416172312448"></p>
+<h3 id="然后记下来显示的AccessKey和AccessKey-Serect。分别是用户号和密码"><a href="#然后记下来显示的AccessKey和AccessKey-Serect。分别是用户号和密码" class="headerlink" title="然后记下来显示的AccessKey和AccessKey Serect。分别是用户号和密码"></a>然后记下来显示的AccessKey和AccessKey Serect。分别是用户号和密码</h3><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210416172507.png" alt="image-20210416172507376"></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210416172540.png" alt="image-20210416172540595"></p>
+<p>再到picgo</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210416172627.png" alt="image-20210416172627340"></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210416172754.png" alt="image-20210416172754089"></p>
+<p>然后就可以了。</p>
+]]></content>
+      <tags>
+        <tag>阿里云</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>postman:API接口调试器</title>
+    <url>/2022/05/12/postman-API%E6%8E%A5%E5%8F%A3%E8%B0%83%E8%AF%95%E5%99%A8/</url>
+    <content><![CDATA[<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ul>
+<li>下载地址：<a href="https://www.getpostman.com/downloads/">https://www.getpostman.com/downloads/</a></li>
+<li>下载完安装包后直接双击安装即可。</li>
+</ul>
+<h2 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h2><h3 id="主题设置"><a href="#主题设置" class="headerlink" title="主题设置"></a>主题设置</h3><p>这里不得不说，Postman的界面还是做的很好的，比起Swagger来说好多了，Postman默认提供了两种主题，一种亮色和一种暗色，可以通过左上角的File-&gt;Settings按钮打开。</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/postman_screen_01.png"></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/postman_screen_02.png"></p>
+<h3 id="调整字体大小"><a href="#调整字体大小" class="headerlink" title="调整字体大小"></a>调整字体大小</h3><p>可能界面默认的字体大小并不适合你，尤其是大屏幕的电脑，可以在View下的Zoom In和Zoom Out按钮进行放大和缩小。</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/postman_screen_03.png"></p>
+<h2 id="进行接口调试"><a href="#进行接口调试" class="headerlink" title="进行接口调试"></a>进行接口调试</h2><blockquote>
+<p>测试接口均来自mall-admin后台，启动后可以直接测试。</p>
+</blockquote>
+<h3 id="调用GET请求"><a href="#调用GET请求" class="headerlink" title="调用GET请求"></a>调用GET请求</h3><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/postman_screen_04.png"></p>
+<h3 id="调用POST请求提交JSON格式数据"><a href="#调用POST请求提交JSON格式数据" class="headerlink" title="调用POST请求提交JSON格式数据"></a>调用POST请求提交JSON格式数据</h3><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/postman_screen_05.png"></p>
+<h3 id="调用POST请求提交表单"><a href="#调用POST请求提交表单" class="headerlink" title="调用POST请求提交表单"></a>调用POST请求提交表单</h3><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/postman_screen_06.png"></p>
+<h3 id="调用文件上传接口"><a href="#调用文件上传接口" class="headerlink" title="调用文件上传接口"></a>调用文件上传接口</h3><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/postman_screen_07.png"></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/postman_screen_08.png"></p>
+<h3 id="调用需要登录的接口"><a href="#调用需要登录的接口" class="headerlink" title="调用需要登录的接口"></a>调用需要登录的接口</h3><h3 id="调用登录接口获取令牌"><a href="#调用登录接口获取令牌" class="headerlink" title="调用登录接口获取令牌"></a>调用登录接口获取令牌</h3><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/postman_screen_09.png"></p>
+<h3 id="设置令牌头并调用需要登录的接口"><a href="#设置令牌头并调用需要登录的接口" class="headerlink" title="设置令牌头并调用需要登录的接口"></a>设置令牌头并调用需要登录的接口</h3><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/postman_screen_10.png"></p>
+<h2 id="调试文件的导入与导出"><a href="#调试文件的导入与导出" class="headerlink" title="调试文件的导入与导出"></a>调试文件的导入与导出</h2><h3 id="将调试接口信息进行保存"><a href="#将调试接口信息进行保存" class="headerlink" title="将调试接口信息进行保存"></a>将调试接口信息进行保存</h3><p><img src="C:/Users/Administrator/Desktop/mylab/mall-learning-master/docs/images/postman_screen_11.png"></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/postman_screen_12.png"></p>
+<h3 id="导出Collection中的调试信息"><a href="#导出Collection中的调试信息" class="headerlink" title="导出Collection中的调试信息"></a>导出Collection中的调试信息</h3><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/postman_screen_17.png"></p>
+<h3 id="导入Collection中的调试信息"><a href="#导入Collection中的调试信息" class="headerlink" title="导入Collection中的调试信息"></a>导入Collection中的调试信息</h3><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/postman_screen_18.png"></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/postman_screen_19.png"></p>
+<h2 id="使用过程中的一些技巧"><a href="#使用过程中的一些技巧" class="headerlink" title="使用过程中的一些技巧"></a>使用过程中的一些技巧</h2><h3 id="设置不同的环境"><a href="#设置不同的环境" class="headerlink" title="设置不同的环境"></a>设置不同的环境</h3><p>我们开发时，都会分本地环境和测试环境，本地环境用于本机调试接口，测试环境用于前后端联调接口。上面我们把<a href="http://localhost:8080/">http://localhost:8080</a>这个ip端口直接写在请求路径之中，当我们要调试测试环境接口时，就会产生麻烦。定义多个环境变量，在接口地址中进行引用，可以解决这个问题。</p>
+<h4 id="添加本地环境"><a href="#添加本地环境" class="headerlink" title="添加本地环境"></a>添加本地环境</h4><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/postman_screen_13.png"></p>
+<h4 id="添加测试环境"><a href="#添加测试环境" class="headerlink" title="添加测试环境"></a>添加测试环境</h4><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/postman_screen_14.png"></p>
+<h4 id="引用环境变量"><a href="#引用环境变量" class="headerlink" title="引用环境变量"></a>引用环境变量</h4><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/postman_screen_15.png"></p>
+<h4 id="环境变量的切换"><a href="#环境变量的切换" class="headerlink" title="环境变量的切换"></a>环境变量的切换</h4><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/postman_screen_16.png"></p>
+<h3 id="设置通用的登录令牌"><a href="#设置通用的登录令牌" class="headerlink" title="设置通用的登录令牌"></a>设置通用的登录令牌</h3><p>当我们有很多接口需要登录令牌头时，如果以前使用的令牌失效了，那所有接口的令牌头都会需要修改，这里可以把登录令牌定义好，再引用，这样令牌失效了，只需要修改一处即可。</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/postman_screen_20.png"></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/postman_screen_21.png"></p>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2>]]></content>
+      <tags>
+        <tag>postman</tag>
       </tags>
   </entry>
   <entry>
@@ -1404,6 +2000,295 @@
 ]]></content>
       <tags>
         <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>宝塔面板+wordpress搭建博客</title>
+    <url>/2022/05/06/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF-wordpress%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h3 id="在这之前默认已经装好了宝塔面板。"><a href="#在这之前默认已经装好了宝塔面板。" class="headerlink" title="在这之前默认已经装好了宝塔面板。"></a>在这之前默认已经装好了宝塔面板。</h3><p><strong># 5.2 安装 WordPress</strong></p>
+<p>在主面板，软件中选择 “一键部署源码”。如果没有，就在软件商店进行下载</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220506151731695.png"></p>
+<p>如果主面板没有，勾上面板显示</p>
+<p>一键部署 WordPress。</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/v2-126ddbc167827fa2c4c149cef9a6b8de_720w.jpg"></p>
+<p>在域名输入框中填写自己的域名，其他默认，点击 “提交”。（域名我填的本地局域网ip）</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220506151934690.png"></p>
+<p>提交之后可以直接访问这个ip地址就可以</p>
+<p>可能会出现以下错误</p>
+<p><strong>centos 6 7 检测配置文件 /usr/local/nginx/sbin/nginx -t<br>出现以下错误：</strong><br><strong>/usr/local/nginx/sbin/nginx: error while loading shared libraries: libluajit-5.1.so.2: cannot open shared object file: No such file or directory</strong><br>解决方案：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum -y install lua*</span><br></pre></td></tr></table></figure>
+
+<p>接下来访问-》点击现在开始</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220506152135208.png"></p>
+<p>填写上面记录下的数据库信息，提交。（这里是之前得到的账号密码）</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/v2-a61f146678390151326ef1bae08d0a64_720w.jpg"></p>
+<p>填写网站信息，安装WordPress。</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/v2-6604cd5e86c0b03e9e6e48b91205a5f2_r.jpg"></p>
+<p>安装完成后，登陆网站后台，开始创作之旅！访问域名，即可进入自己的网站。</p>
+<p>现在就完成了。（后面可以发布文章，修改主题，下载插件）</p>
+]]></content>
+      <tags>
+        <tag>博客</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>开发者必备Mysql命令</title>
+    <url>/2022/05/12/%E5%BC%80%E5%8F%91%E8%80%85%E5%BF%85%E5%A4%87Mysql%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<h3 id="开发者必备Mtsql命令"><a href="#开发者必备Mtsql命令" class="headerlink" title="开发者必备Mtsql命令"></a>开发者必备Mtsql命令</h3><blockquote>
+<p>开发者必备Mysql常用命令，涵盖了数据定义语句、数据操纵语句及数据控制语句，基于Mysql5.7。</p>
+</blockquote>
+<h2 id="数据定义语句-DDL"><a href="#数据定义语句-DDL" class="headerlink" title="数据定义语句(DDL)"></a>数据定义语句(DDL)</h2><h3 id="数据库操作"><a href="#数据库操作" class="headerlink" title="数据库操作"></a>数据库操作</h3><ul>
+<li>登录数据库：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mysql -uroot -proot</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>创建数据库：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> database test</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看所有数据库：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> databases</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/refer_screen_41.png"></p>
+<ul>
+<li>选择数据库并使用：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">use test</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看所有数据表：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> tables</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>删除数据库：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> database test</span><br></pre></td></tr></table></figure>
+
+<h3 id="表操作"><a href="#表操作" class="headerlink" title="表操作"></a>表操作</h3><ul>
+<li>创建表：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> emp(ename <span class="type">varchar</span>(<span class="number">10</span>),hiredate <span class="type">date</span>,sal <span class="type">decimal</span>(<span class="number">10</span>,<span class="number">2</span>),deptno <span class="type">int</span>(<span class="number">2</span>))  </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> dept(deptno <span class="type">int</span>(<span class="number">2</span>),deptname <span class="type">varchar</span>(<span class="number">10</span>))</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/refer_screen_42.png"></p>
+<ul>
+<li>查看表的定义：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">desc</span> emp</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/refer_screen_43.png"></p>
+<ul>
+<li>查看表定义（详细）：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">create</span> <span class="keyword">table</span> emp \G</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/refer_screen_44.png"></p>
+<ul>
+<li>删除表：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> emp</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>修改表字段：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> emp modify ename <span class="type">varchar</span>(<span class="number">20</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>添加表字段：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> emp <span class="keyword">add</span> <span class="keyword">column</span> age <span class="type">int</span>(<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>删除表字段：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> emp <span class="keyword">drop</span> <span class="keyword">column</span> age</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>字段改名；</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> emp change age age1 <span class="type">int</span>(<span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>修改表名：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> emp rename emp1</span><br></pre></td></tr></table></figure>
+
+<h2 id="数据操纵语句-DML"><a href="#数据操纵语句-DML" class="headerlink" title="数据操纵语句(DML)"></a>数据操纵语句(DML)</h2><h3 id="插入记录"><a href="#插入记录" class="headerlink" title="插入记录"></a>插入记录</h3><ul>
+<li>指定名称插入：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> emp (ename,hiredate,sal,deptno) <span class="keyword">values</span> (<span class="string">&#x27;zhangsan&#x27;</span>,<span class="string">&#x27;2018-01-01&#x27;</span>,<span class="string">&#x27;2000&#x27;</span>,<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>不指定名称插入：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> emp <span class="keyword">values</span> (<span class="string">&#x27;lisi&#x27;</span>,<span class="string">&#x27;2018-01-01&#x27;</span>,<span class="string">&#x27;2000&#x27;</span>,<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>批量插入数据：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> dept <span class="keyword">values</span>(<span class="number">1</span>,<span class="string">&#x27;dept1&#x27;</span>),(<span class="number">2</span>,<span class="string">&#x27;dept2&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改记录"><a href="#修改记录" class="headerlink" title="修改记录"></a>修改记录</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">update emp <span class="keyword">set</span> sal<span class="operator">=</span><span class="string">&#x27;4000&#x27;</span>,deptno<span class="operator">=</span><span class="number">2</span> <span class="keyword">where</span> ename<span class="operator">=</span><span class="string">&#x27;zhangsan&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="删除记录"><a href="#删除记录" class="headerlink" title="删除记录"></a>删除记录</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> emp <span class="keyword">where</span> ename<span class="operator">=</span><span class="string">&#x27;zhangsan&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="查询记录"><a href="#查询记录" class="headerlink" title="查询记录"></a>查询记录</h3><ul>
+<li>查询所有记录：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查询不重复的记录：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">distinct</span> deptno <span class="keyword">from</span> emp</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>条件查询：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">where</span> deptno<span class="operator">=</span><span class="number">1</span> <span class="keyword">and</span> sal<span class="operator">&lt;</span><span class="number">3000</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>排序和限制：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">order</span> <span class="keyword">by</span> deptno <span class="keyword">desc</span> limit <span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>分页查询(查询从第0条记录开始10条)：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">order</span> <span class="keyword">by</span> deptno <span class="keyword">desc</span> limit <span class="number">0</span>,<span class="number">10</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>聚合(查询部门人数大于1的部门编号)：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> deptno,<span class="built_in">count</span>(<span class="number">1</span>) <span class="keyword">from</span> emp <span class="keyword">group</span> <span class="keyword">by</span> deptno <span class="keyword">having</span> <span class="built_in">count</span>(<span class="number">1</span>) <span class="operator">&gt;</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>连接查询：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp e <span class="keyword">left</span> <span class="keyword">join</span> dept d <span class="keyword">on</span> e.deptno<span class="operator">=</span>d.deptno</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>子查询：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">where</span> deptno <span class="keyword">in</span> (<span class="keyword">select</span> deptno <span class="keyword">from</span> dept)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>记录联合：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> deptno <span class="keyword">from</span> emp <span class="keyword">union</span> <span class="keyword">select</span> deptno <span class="keyword">from</span> dept</span><br></pre></td></tr></table></figure>
+
+<h2 id="数据控制语句-DCL"><a href="#数据控制语句-DCL" class="headerlink" title="数据控制语句(DCL)"></a>数据控制语句(DCL)</h2><h3 id="权限相关"><a href="#权限相关" class="headerlink" title="权限相关"></a>权限相关</h3><ul>
+<li>授予操作权限(将test数据库中所有表的select和insert权限授予test用户)：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">grant</span> <span class="keyword">select</span>,<span class="keyword">insert</span> <span class="keyword">on</span> test.<span class="operator">*</span> <span class="keyword">to</span> <span class="string">&#x27;test&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> identified <span class="keyword">by</span> <span class="string">&#x27;123&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看账号权限：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> grants <span class="keyword">for</span> <span class="string">&#x27;test&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/refer_screen_45.png"></p>
+<ul>
+<li>收回操作权限：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">revoke</span> <span class="keyword">insert</span> <span class="keyword">on</span> test.<span class="operator">*</span> <span class="keyword">from</span> <span class="string">&#x27;test&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/refer_screen_46.png"></p>
+<ul>
+<li>授予所有数据库的所有权限：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">grant</span> <span class="keyword">all</span> privileges <span class="keyword">on</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">to</span> <span class="string">&#x27;test&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>授予所有数据库的所有权限(包括grant)：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">grant</span> <span class="keyword">all</span> privileges <span class="keyword">on</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">to</span> <span class="string">&#x27;test&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> <span class="keyword">with</span> <span class="keyword">grant</span> option</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>授予SUPER PROCESS FILE权限（系统权限不能指定数据库）：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">grant</span> super,process,file <span class="keyword">on</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">to</span> <span class="string">&#x27;test&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>只授予登录权限：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">grant</span> usage <span class="keyword">on</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">to</span> <span class="string">&#x27;test&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="帐号相关"><a href="#帐号相关" class="headerlink" title="帐号相关"></a>帐号相关</h3><ul>
+<li>删除账号：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">user</span> <span class="string">&#x27;test&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>修改自己的密码：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span> password <span class="operator">=</span> password(<span class="string">&#x27;123&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>管理员修改他人密码：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span> password <span class="keyword">for</span> <span class="string">&#x27;test&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> <span class="operator">=</span> password(<span class="string">&#x27;123&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="字符集相关"><a href="#字符集相关" class="headerlink" title="字符集相关"></a>字符集相关</h3><ul>
+<li>查看字符集：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> variables <span class="keyword">like</span> <span class="string">&#x27;character%&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/refer_screen_47.png"></p>
+<ul>
+<li>创建数据库时指定字符集：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> database test2 <span class="type">character</span> <span class="keyword">set</span> utf8</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/refer_screen_48.png"></p>
+<h3 id="时区相关"><a href="#时区相关" class="headerlink" title="时区相关"></a>时区相关</h3><ul>
+<li>查看当前时区（UTC为世界统一时间，中国为UTC+8）：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> variables <span class="keyword">like</span> &quot;%time_zone%&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/refer_screen_49.png"></p>
+<ul>
+<li>修改mysql全局时区为北京时间，即我们所在的东8区：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">global</span> time_zone <span class="operator">=</span> <span class="string">&#x27;+8:00&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>修改当前会话时区：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span> time_zone <span class="operator">=</span> <span class="string">&#x27;+8:00&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/refer_screen_50.png"></p>
+<ul>
+<li>立即生效：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">flush privileges</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]]></content>
+      <tags>
+        <tag>mysql</tag>
       </tags>
   </entry>
   <entry>
@@ -1539,35 +2424,6 @@
 <p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20211109104948381.png" alt="image-20211109104948381"></p>
 <p>然后点击save就行</p>
 <p>最后直接连接</p>
-]]></content>
-      <tags>
-        <tag>博客</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>宝塔面板+wordpress搭建博客</title>
-    <url>/2022/05/06/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF-wordpress%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<h3 id="在这之前默认已经装好了宝塔面板。"><a href="#在这之前默认已经装好了宝塔面板。" class="headerlink" title="在这之前默认已经装好了宝塔面板。"></a>在这之前默认已经装好了宝塔面板。</h3><p><strong># 5.2 安装 WordPress</strong></p>
-<p>在主面板，软件中选择 “一键部署源码”。如果没有，就在软件商店进行下载</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220506151731695.png"></p>
-<p>如果主面板没有，勾上面板显示</p>
-<p>一键部署 WordPress。</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/v2-126ddbc167827fa2c4c149cef9a6b8de_720w.jpg"></p>
-<p>在域名输入框中填写自己的域名，其他默认，点击 “提交”。（域名我填的本地局域网ip）</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220506151934690.png"></p>
-<p>提交之后可以直接访问这个ip地址就可以</p>
-<p>可能会出现以下错误</p>
-<p><strong>centos 6 7 检测配置文件 /usr/local/nginx/sbin/nginx -t<br>出现以下错误：</strong><br><strong>/usr/local/nginx/sbin/nginx: error while loading shared libraries: libluajit-5.1.so.2: cannot open shared object file: No such file or directory</strong><br>解决方案：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum -y install lua*</span><br></pre></td></tr></table></figure>
-
-<p>接下来访问-》点击现在开始</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220506152135208.png"></p>
-<p>填写上面记录下的数据库信息，提交。（这里是之前得到的账号密码）</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/v2-a61f146678390151326ef1bae08d0a64_720w.jpg"></p>
-<p>填写网站信息，安装WordPress。</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/v2-6604cd5e86c0b03e9e6e48b91205a5f2_r.jpg"></p>
-<p>安装完成后，登陆网站后台，开始创作之旅！访问域名，即可进入自己的网站。</p>
-<p>现在就完成了。（后面可以发布文章，修改主题，下载插件）</p>
 ]]></content>
       <tags>
         <tag>博客</tag>
@@ -2881,822 +3737,6 @@
 ]]></content>
       <tags>
         <tag>ps</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Android将图片插入数据库</title>
-    <url>/2022/05/12/Android%E5%B0%86%E5%9B%BE%E7%89%87%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
-    <content><![CDATA[<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p>方法一：将图片解析为二进制的数据，然后放入到数据库中的一种BLOD类型中</p>
-<p>方法二：保存图片的URL路径</p>
-<p>方法三：其实还可以将图片存放到本地文件，那么就以后直接从本地文件进行获取就可以了，但是这就是需要注意下，就是要保证路径都是唯一的，这里可以用时间戳进行产生，或者用我上一篇的第18点中讲到的一些产生Token的方法。</p>
-<p>这里讲方法一：</p>
-<h3 id="一：创建数据库"><a href="#一：创建数据库" class="headerlink" title="一：创建数据库"></a>一：创建数据库</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//表名friend，图像用blob存储，blob实际也是二进制存储</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String CREATE_TABLE_FRIEND = <span class="string">&quot;create table friend ( id Integer primary key autoincrement, img blob, name text ); \n&quot;</span> ;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(SQLiteDatabase sqLiteDatabase)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//sqLiteDatabase.execSQL(createTable(TABLE_NAME));</span></span><br><span class="line">        <span class="comment">//sqLiteDatabase.execSQL(CREATE_TABLE_SQL);</span></span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        sqLiteDatabase.execSQL(CREATE_TABLE_FRIEND);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//插入数据库方法，这里为了测试是否插入成功所以返回了long型。	</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">long</span> <span class="title">insertFriend</span><span class="params">(Friend friend)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">final</span> SQLiteDatabase db = getWritableDatabase();</span><br><span class="line"></span><br><span class="line">        ContentValues values = <span class="keyword">new</span> ContentValues();</span><br><span class="line"></span><br><span class="line">        values.put(<span class="string">&quot;img&quot;</span>,friend.getHeadImg());</span><br><span class="line">        values.put(<span class="string">&quot;name&quot;</span>,friend.getName());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> db.insert(<span class="string">&quot;friend&quot;</span>,<span class="keyword">null</span>,values);</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//将图片转换为二进制数组，并且返回。</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">byte</span>[] getPicture(Drawable drawable) &#123;</span><br><span class="line">        <span class="keyword">if</span>(drawable == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        BitmapDrawable bd = (BitmapDrawable) drawable;</span><br><span class="line">        Bitmap bitmap = bd.getBitmap();</span><br><span class="line">        ByteArrayOutputStream os = <span class="keyword">new</span> ByteArrayOutputStream();</span><br><span class="line">        bitmap.compress(Bitmap.CompressFormat.PNG, <span class="number">100</span>, os);</span><br><span class="line">        <span class="keyword">return</span> os.toByteArray();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		String[] columns = &#123;<span class="string">&quot;img&quot;</span>, <span class="string">&quot;name&quot;</span>&#125;;</span><br><span class="line">        Cursor cursor = sqLiteDatabase.query(<span class="string">&quot;friend&quot;</span>, columns, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>);</span><br><span class="line">	<span class="comment">//绑定Viewholder</span></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onBindViewHolder</span><span class="params">(<span class="meta">@NonNull</span> MyViewHoder holder, <span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        Friend friend = friends.get(position);</span><br><span class="line">        <span class="comment">//将二进制重新加载为图片</span></span><br><span class="line">        Bitmap b = BitmapFactory.decodeByteArray(friend.getHeadImg(), <span class="number">0</span>, friend.getHeadImg().length);</span><br><span class="line">        <span class="comment">//设置组件的图片</span></span><br><span class="line">        holder.img.setImageBitmap(b);</span><br><span class="line">        holder.name.setText(friend.name);</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">//给add组件设置监听事件，里面完成相关操作</span></span><br><span class="line">	add.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">                friend = <span class="keyword">new</span> Friend();</span><br><span class="line">                <span class="comment">//获取需要存进数据库的图片</span></span><br><span class="line">                Drawable drawable = getContext().getResources().getDrawable(R.drawable.login_header_img);</span><br><span class="line">                <span class="comment">//将其转换为byte型。</span></span><br><span class="line">                <span class="keyword">byte</span>[] a = getPicture(drawable);</span><br><span class="line">                <span class="comment">//放进friend对象</span></span><br><span class="line">                friend.setHeadImg(a);</span><br><span class="line">                friend.setName(<span class="string">&quot;seawdawdaw&quot;</span>);</span><br><span class="line">                mySQLiteOpenHelper = <span class="keyword">new</span> MySQLiteOpenHelper(getContext());</span><br><span class="line">                mySQLiteOpenHelper.insertFriend(friend);</span><br><span class="line">                <span class="comment">//mMyAdapter.notifyDataSetChanged();</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-<h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h3><p>从服务器上取到图片地址，比如image/XXX/1233455.JPG 然后自己定义一个字符串baseUrl = 10.0.2.2:8080/Demo/ ,和取到的地址拼起来。 总之意思就是你不是直接得到图片，而是得到图片的地址，然后根据地址取出来图片。比如：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 传输网络图片</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Bitmap <span class="title">getPic</span><span class="params">(String uriPic)</span> </span>&#123;</span><br><span class="line">	URL imageUrl = <span class="keyword">null</span>;</span><br><span class="line">	Bitmap bitmap = <span class="keyword">null</span>;</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">		imageUrl = <span class="keyword">new</span> URL(uriPic);</span><br><span class="line">	&#125; <span class="keyword">catch</span> (MalformedURLException e) &#123;</span><br><span class="line">		e.printStackTrace();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">		HttpURLConnection conn = (HttpURLConnection) imageUrl</span><br><span class="line">				.openConnection();</span><br><span class="line">		conn.connect();</span><br><span class="line">		InputStream is = conn.getInputStream();</span><br><span class="line">		bitmap = BitmapFactory.decodeStream(is);</span><br><span class="line">		is.close();</span><br><span class="line">	&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">		e.printStackTrace();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> bitmap;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>取到后相对图片再做处理的话就 bmp = Bitmap.createScaledBitmap(bmp, 长,宽, true);</p>
-]]></content>
-      <tags>
-        <tag>android</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>开发者必备Mysql命令</title>
-    <url>/2022/05/12/%E5%BC%80%E5%8F%91%E8%80%85%E5%BF%85%E5%A4%87Mysql%E5%91%BD%E4%BB%A4/</url>
-    <content><![CDATA[<h3 id="开发者必备Mtsql命令"><a href="#开发者必备Mtsql命令" class="headerlink" title="开发者必备Mtsql命令"></a>开发者必备Mtsql命令</h3><blockquote>
-<p>开发者必备Mysql常用命令，涵盖了数据定义语句、数据操纵语句及数据控制语句，基于Mysql5.7。</p>
-</blockquote>
-<h2 id="数据定义语句-DDL"><a href="#数据定义语句-DDL" class="headerlink" title="数据定义语句(DDL)"></a>数据定义语句(DDL)</h2><h3 id="数据库操作"><a href="#数据库操作" class="headerlink" title="数据库操作"></a>数据库操作</h3><ul>
-<li>登录数据库：</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mysql -uroot -proot</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>创建数据库：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> database test</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>查看所有数据库：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> databases</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/refer_screen_41.png"></p>
-<ul>
-<li>选择数据库并使用：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">use test</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>查看所有数据表：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> tables</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>删除数据库：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> database test</span><br></pre></td></tr></table></figure>
-
-<h3 id="表操作"><a href="#表操作" class="headerlink" title="表操作"></a>表操作</h3><ul>
-<li>创建表：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> emp(ename <span class="type">varchar</span>(<span class="number">10</span>),hiredate <span class="type">date</span>,sal <span class="type">decimal</span>(<span class="number">10</span>,<span class="number">2</span>),deptno <span class="type">int</span>(<span class="number">2</span>))  </span><br></pre></td></tr></table></figure>
-
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> dept(deptno <span class="type">int</span>(<span class="number">2</span>),deptname <span class="type">varchar</span>(<span class="number">10</span>))</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/refer_screen_42.png"></p>
-<ul>
-<li>查看表的定义：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">desc</span> emp</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/refer_screen_43.png"></p>
-<ul>
-<li>查看表定义（详细）：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">create</span> <span class="keyword">table</span> emp \G</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/refer_screen_44.png"></p>
-<ul>
-<li>删除表：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> emp</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>修改表字段：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> emp modify ename <span class="type">varchar</span>(<span class="number">20</span>)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>添加表字段：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> emp <span class="keyword">add</span> <span class="keyword">column</span> age <span class="type">int</span>(<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>删除表字段：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> emp <span class="keyword">drop</span> <span class="keyword">column</span> age</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>字段改名；</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> emp change age age1 <span class="type">int</span>(<span class="number">4</span>)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>修改表名：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> emp rename emp1</span><br></pre></td></tr></table></figure>
-
-<h2 id="数据操纵语句-DML"><a href="#数据操纵语句-DML" class="headerlink" title="数据操纵语句(DML)"></a>数据操纵语句(DML)</h2><h3 id="插入记录"><a href="#插入记录" class="headerlink" title="插入记录"></a>插入记录</h3><ul>
-<li>指定名称插入：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> emp (ename,hiredate,sal,deptno) <span class="keyword">values</span> (<span class="string">&#x27;zhangsan&#x27;</span>,<span class="string">&#x27;2018-01-01&#x27;</span>,<span class="string">&#x27;2000&#x27;</span>,<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>不指定名称插入：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> emp <span class="keyword">values</span> (<span class="string">&#x27;lisi&#x27;</span>,<span class="string">&#x27;2018-01-01&#x27;</span>,<span class="string">&#x27;2000&#x27;</span>,<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>批量插入数据：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> dept <span class="keyword">values</span>(<span class="number">1</span>,<span class="string">&#x27;dept1&#x27;</span>),(<span class="number">2</span>,<span class="string">&#x27;dept2&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-<h3 id="修改记录"><a href="#修改记录" class="headerlink" title="修改记录"></a>修改记录</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">update emp <span class="keyword">set</span> sal<span class="operator">=</span><span class="string">&#x27;4000&#x27;</span>,deptno<span class="operator">=</span><span class="number">2</span> <span class="keyword">where</span> ename<span class="operator">=</span><span class="string">&#x27;zhangsan&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="删除记录"><a href="#删除记录" class="headerlink" title="删除记录"></a>删除记录</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> emp <span class="keyword">where</span> ename<span class="operator">=</span><span class="string">&#x27;zhangsan&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="查询记录"><a href="#查询记录" class="headerlink" title="查询记录"></a>查询记录</h3><ul>
-<li>查询所有记录：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>查询不重复的记录：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">distinct</span> deptno <span class="keyword">from</span> emp</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>条件查询：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">where</span> deptno<span class="operator">=</span><span class="number">1</span> <span class="keyword">and</span> sal<span class="operator">&lt;</span><span class="number">3000</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>排序和限制：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">order</span> <span class="keyword">by</span> deptno <span class="keyword">desc</span> limit <span class="number">2</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>分页查询(查询从第0条记录开始10条)：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">order</span> <span class="keyword">by</span> deptno <span class="keyword">desc</span> limit <span class="number">0</span>,<span class="number">10</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>聚合(查询部门人数大于1的部门编号)：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> deptno,<span class="built_in">count</span>(<span class="number">1</span>) <span class="keyword">from</span> emp <span class="keyword">group</span> <span class="keyword">by</span> deptno <span class="keyword">having</span> <span class="built_in">count</span>(<span class="number">1</span>) <span class="operator">&gt;</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>连接查询：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp e <span class="keyword">left</span> <span class="keyword">join</span> dept d <span class="keyword">on</span> e.deptno<span class="operator">=</span>d.deptno</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>子查询：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">where</span> deptno <span class="keyword">in</span> (<span class="keyword">select</span> deptno <span class="keyword">from</span> dept)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>记录联合：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> deptno <span class="keyword">from</span> emp <span class="keyword">union</span> <span class="keyword">select</span> deptno <span class="keyword">from</span> dept</span><br></pre></td></tr></table></figure>
-
-<h2 id="数据控制语句-DCL"><a href="#数据控制语句-DCL" class="headerlink" title="数据控制语句(DCL)"></a>数据控制语句(DCL)</h2><h3 id="权限相关"><a href="#权限相关" class="headerlink" title="权限相关"></a>权限相关</h3><ul>
-<li>授予操作权限(将test数据库中所有表的select和insert权限授予test用户)：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">grant</span> <span class="keyword">select</span>,<span class="keyword">insert</span> <span class="keyword">on</span> test.<span class="operator">*</span> <span class="keyword">to</span> <span class="string">&#x27;test&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> identified <span class="keyword">by</span> <span class="string">&#x27;123&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>查看账号权限：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> grants <span class="keyword">for</span> <span class="string">&#x27;test&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/refer_screen_45.png"></p>
-<ul>
-<li>收回操作权限：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">revoke</span> <span class="keyword">insert</span> <span class="keyword">on</span> test.<span class="operator">*</span> <span class="keyword">from</span> <span class="string">&#x27;test&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/refer_screen_46.png"></p>
-<ul>
-<li>授予所有数据库的所有权限：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">grant</span> <span class="keyword">all</span> privileges <span class="keyword">on</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">to</span> <span class="string">&#x27;test&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>授予所有数据库的所有权限(包括grant)：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">grant</span> <span class="keyword">all</span> privileges <span class="keyword">on</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">to</span> <span class="string">&#x27;test&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> <span class="keyword">with</span> <span class="keyword">grant</span> option</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>授予SUPER PROCESS FILE权限（系统权限不能指定数据库）：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">grant</span> super,process,file <span class="keyword">on</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">to</span> <span class="string">&#x27;test&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>只授予登录权限：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">grant</span> usage <span class="keyword">on</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">to</span> <span class="string">&#x27;test&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="帐号相关"><a href="#帐号相关" class="headerlink" title="帐号相关"></a>帐号相关</h3><ul>
-<li>删除账号：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">user</span> <span class="string">&#x27;test&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>修改自己的密码：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span> password <span class="operator">=</span> password(<span class="string">&#x27;123&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>管理员修改他人密码：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span> password <span class="keyword">for</span> <span class="string">&#x27;test&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> <span class="operator">=</span> password(<span class="string">&#x27;123&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="字符集相关"><a href="#字符集相关" class="headerlink" title="字符集相关"></a>字符集相关</h3><ul>
-<li>查看字符集：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> variables <span class="keyword">like</span> <span class="string">&#x27;character%&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/refer_screen_47.png"></p>
-<ul>
-<li>创建数据库时指定字符集：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> database test2 <span class="type">character</span> <span class="keyword">set</span> utf8</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/refer_screen_48.png"></p>
-<h3 id="时区相关"><a href="#时区相关" class="headerlink" title="时区相关"></a>时区相关</h3><ul>
-<li>查看当前时区（UTC为世界统一时间，中国为UTC+8）：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> variables <span class="keyword">like</span> &quot;%time_zone%&quot;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/refer_screen_49.png"></p>
-<ul>
-<li>修改mysql全局时区为北京时间，即我们所在的东8区：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">global</span> time_zone <span class="operator">=</span> <span class="string">&#x27;+8:00&#x27;</span>;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>修改当前会话时区：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span> time_zone <span class="operator">=</span> <span class="string">&#x27;+8:00&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/refer_screen_50.png"></p>
-<ul>
-<li>立即生效：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">flush privileges</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-]]></content>
-      <tags>
-        <tag>mysql</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CentOs常用命令（更全）</title>
-    <url>/2022/05/12/CentOs%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%EF%BC%88%E6%9B%B4%E5%85%A8%EF%BC%89/</url>
-    <content><![CDATA[<h2 id="系统服务管理"><a href="#系统服务管理" class="headerlink" title="系统服务管理"></a>系统服务管理</h2><h3 id="systemctl"><a href="#systemctl" class="headerlink" title="systemctl"></a>systemctl</h3><blockquote>
-<p><code>systemctl</code>命令是<code>service</code>和<code>chkconfig</code>命令的组合体，可用于管理系统。</p>
-</blockquote>
-<ul>
-<li>输出系统中各个服务的状态：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl list-units --<span class="built_in">type</span>=service</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_01.png"></p>
-<ul>
-<li>查看服务的运行状态：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl status firewalld</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_02.png"></p>
-<ul>
-<li>关闭服务：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl stop firewalld</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_03.png"></p>
-<ul>
-<li>启动服务：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl start firewalld</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_04.png"></p>
-<ul>
-<li>重新启动服务（不管当前服务是启动还是关闭）：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl restart firewalld</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>重新载入配置信息而不中断服务：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl reload firewalld</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>禁止服务开机自启动：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl <span class="built_in">disable</span> firewalld</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_05.png"></p>
-<ul>
-<li>设置服务开机自启动：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> firewalld</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_06.png"></p>
-<h2 id="文件管理"><a href="#文件管理" class="headerlink" title="文件管理"></a>文件管理</h2><h3 id="ls"><a href="#ls" class="headerlink" title="ls"></a>ls</h3><p>列出指定目录下的所有文件，列出<code>/</code>目录下的文件：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ls -l /</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_07.png"></p>
-<h3 id="pwd"><a href="#pwd" class="headerlink" title="pwd"></a>pwd</h3><p>获取目前所在工作目录的绝对路径：</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_08.png"></p>
-<h3 id="cd"><a href="#cd" class="headerlink" title="cd"></a>cd</h3><p>改变当前工作目录：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_09.png"></p>
-<h3 id="date"><a href="#date" class="headerlink" title="date"></a>date</h3><p>显示或修改系统时间与日期；</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">date <span class="string">&#x27;+%Y-%m-%d %H:%M:%S&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_10.png"></p>
-<h3 id="passwd"><a href="#passwd" class="headerlink" title="passwd"></a>passwd</h3><p>用于设置用户密码：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">passwd root</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_11.png"></p>
-<h3 id="su"><a href="#su" class="headerlink" title="su"></a>su</h3><p>改变用户身份（切换到超级用户）：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">su -</span><br></pre></td></tr></table></figure>
-
-<h3 id="clear"><a href="#clear" class="headerlink" title="clear"></a>clear</h3><p>用于清除屏幕信息</p>
-<h3 id="man"><a href="#man" class="headerlink" title="man"></a>man</h3><p>显示指定命令的帮助信息：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">man ls</span><br></pre></td></tr></table></figure>
-
-<h3 id="who"><a href="#who" class="headerlink" title="who"></a>who</h3><ul>
-<li>查询系统处于什么运行级别：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">who -r</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_12.png"></p>
-<ul>
-<li>显示目前登录到系统的用户：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">who -buT</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_13.png"></p>
-<h3 id="free"><a href="#free" class="headerlink" title="free"></a>free</h3><p>显示系统内存状态（单位MB）：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">free -m</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_14.png"></p>
-<h3 id="ps"><a href="#ps" class="headerlink" title="ps"></a>ps</h3><ul>
-<li>显示系统进程运行动态：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ps -ef</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>查看<code>sshd</code>进程的运行动态：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ps -ef | grep sshd</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_15.png"></p>
-<h3 id="top"><a href="#top" class="headerlink" title="top"></a>top</h3><p>查看即时活跃的进程，类似Windows的任务管理器。</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_16.png"></p>
-<h3 id="mkdir"><a href="#mkdir" class="headerlink" title="mkdir"></a>mkdir</h3><p>创建目录：</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_17.png"></p>
-<h3 id="more"><a href="#more" class="headerlink" title="more"></a>more</h3><p>用于分页查看文件，例如每页10行查看<code>boot.log</code>文件：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">more -c -10 /var/<span class="built_in">log</span>/boot.log</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_18.png"></p>
-<h3 id="cat"><a href="#cat" class="headerlink" title="cat"></a>cat</h3><p>用于查看文件，例如查看Linux启动日志文件文件，并标明行号：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat -Ab /var/<span class="built_in">log</span>/boot.log</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_19.png"></p>
-<h3 id="touch"><a href="#touch" class="headerlink" title="touch"></a>touch</h3><p>用于创建文件，例如创建<code>text.txt</code>文件：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">touch text.txt</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_20.png"></p>
-<h3 id="rm"><a href="#rm" class="headerlink" title="rm"></a>rm</h3><ul>
-<li>删除文件：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rm text.txt</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>强制删除某个目录及其子目录：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rm -rf testdir/</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_21.png"></p>
-<h3 id="cp"><a href="#cp" class="headerlink" title="cp"></a>cp</h3><p>用于拷贝文件，例如将<code>test1</code>目录复制到<code>test2</code>目录</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cp -r /mydata/tes1 /mydata/test2</span><br></pre></td></tr></table></figure>
-
-<h3 id="mv"><a href="#mv" class="headerlink" title="mv"></a>mv</h3><p>用于移动或覆盖文件：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mv text.txt text2.txt</span><br></pre></td></tr></table></figure>
-
-<h2 id="压缩与解压"><a href="#压缩与解压" class="headerlink" title="压缩与解压"></a>压缩与解压</h2><h3 id="tar"><a href="#tar" class="headerlink" title="tar"></a>tar</h3><ul>
-<li>将<code>/etc</code>文件夹中的文件归档到文件<code>etc.tar</code>（并不会进行压缩）：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -cvf /mydata/etc.tar /etc</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>用<code>gzip</code>压缩文件夹<code>/etc</code>中的文件到文件<code>etc.tar.gz</code>：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -zcvf /mydata/etc.tar.gz /etc</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>用<code>bzip2</code>压缩文件夹<code>/etc</code>到文件<code>/etc.tar.bz2</code>：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -jcvf /mydata/etc.tar.bz2 /etc</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_22.png"></p>
-<ul>
-<li>分页查看压缩包中内容（gzip）：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -ztvf /mydata/etc.tar.gz |more -c -10</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_24.png"></p>
-<ul>
-<li>解压文件到当前目录（gzip）：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -zxvf /mydata/etc.tar.gz</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>解压文件到指定目录（gzip）：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -zxvf /mydata/etc.tar.gz -C /mydata/etc</span><br></pre></td></tr></table></figure>
-
-<h2 id="磁盘和网络管理"><a href="#磁盘和网络管理" class="headerlink" title="磁盘和网络管理"></a>磁盘和网络管理</h2><h3 id="df"><a href="#df" class="headerlink" title="df"></a>df</h3><p>查看磁盘空间占用情况：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">df -hT</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_25.png"></p>
-<h3 id="dh"><a href="#dh" class="headerlink" title="dh"></a>dh</h3><p>查看当前目录下的文件及文件夹所占大小：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">du -h --max-depth=1 ./*</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_26.png"></p>
-<h3 id="ifconfig"><a href="#ifconfig" class="headerlink" title="ifconfig"></a>ifconfig</h3><p>显示当前网络接口状态：</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_27.png"></p>
-<h3 id="netstat"><a href="#netstat" class="headerlink" title="netstat"></a>netstat</h3><ul>
-<li>查看当前路由信息：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">netstat -rn</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_28.png"></p>
-<ul>
-<li>查看所有有效TCP连接：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">netstat -an</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>查看系统中启动的监听服务：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">netstat -tulnp</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_29.png"></p>
-<ul>
-<li>查看处于连接状态的系统资源信息：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">netstat -atunp</span><br></pre></td></tr></table></figure>
-
-<h3 id="wget"><a href="#wget" class="headerlink" title="wget"></a>wget</h3><p>从网络上下载文件</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/linux_command_30.png"></p>
-<h2 id="文件上传下载"><a href="#文件上传下载" class="headerlink" title="文件上传下载"></a>文件上传下载</h2><ul>
-<li>安装上传下载工具<code>lrzsz</code>；</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install -y lrzsz</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>上传文件，输入以下命令<code>XShell</code>会弹出文件上传框；</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rz</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>下载文件，输入以下命令<code>XShell</code>会弹出文件保存框；</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sz fileName</span><br></pre></td></tr></table></figure>
-
-<h2 id="软件的安装与管理"><a href="#软件的安装与管理" class="headerlink" title="软件的安装与管理"></a>软件的安装与管理</h2><h3 id="rpm"><a href="#rpm" class="headerlink" title="rpm"></a>rpm</h3><blockquote>
-<p>RPM是<code>Red-Hat Package Manager</code>的缩写，一种Linux下通用的软件包管理方式，可用于安装和管理<code>.rpm</code>结尾的软件包。</p>
-</blockquote>
-<ul>
-<li>安装软件包：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rpm -ivh nginx-1.12.2-2.el7.x86_64.rpm</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>模糊搜索软件包：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rpm -qa | grep nginx</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>精确查找软件包：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rpm -qa nginx</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>查询软件包的安装路径：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rpm -ql nginx-1.12.2-2.el7.x86_64</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>查看软件包的概要信息：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rpm -qi nginx-1.12.2-2.el7.x86_64</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>验证软件包内容和安装文件是否一致：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rpm -V nginx-1.12.2-2.el7.x86_64</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>更新软件包：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rpm -Uvh nginx-1.12.2-2.el7.x86_64</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>删除软件包：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rpm -e nginx-1.12.2-2.el7.x86_64</span><br></pre></td></tr></table></figure>
-
-<h3 id="yum"><a href="#yum" class="headerlink" title="yum"></a>yum</h3><blockquote>
-<p>Yum是<code>Yellow dog Updater, Modified</code>的缩写，能够在线自动下载RPM包并安装，可以自动处理依赖性关系，并且一次安装所有依赖的软件包，非常方便！</p>
-</blockquote>
-<ul>
-<li>安装软件包： </li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install nginx</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>检查可以更新的软件包：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum check-update</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>更新指定的软件包：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum update nginx</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>在资源库中查找软件包信息：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum info nginx*</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>列出已经安装的所有软件包：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum info installed</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>列出软件包名称：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum list nginx*</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>模糊搜索软件包：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum search nginx</span><br></pre></td></tr></table></figure>
-
-<h2 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h2><h3 id="用户信息查看"><a href="#用户信息查看" class="headerlink" title="用户信息查看"></a>用户信息查看</h3><ul>
-<li>查看用户信息：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat /etc/passwd</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>用户信息格式如下（密码已过滤）：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 用户名:密码:用户标识号:组标识号:组注释性描述:主目录:默认shell</span></span><br><span class="line">root:x:0:0:root:/root:/bin/bash</span><br><span class="line">macro:x:1000:982:macro:/home/macro:/bin/bash</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>查看用户组信息：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat /etc/group</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>用户组信息格式如下：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 组名:密码:组标识号:组内用户列表</span></span><br><span class="line">root:x:0:</span><br><span class="line">docker:x:982:macro,andy</span><br></pre></td></tr></table></figure>
-
-<h3 id="passwd-1"><a href="#passwd-1" class="headerlink" title="passwd"></a>passwd</h3><p>用于设置用户密码：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">passwd root</span><br></pre></td></tr></table></figure>
-
-<p><img src="C:/Users/Administrator/Desktop/mylab/mall-learning-master/docs/reference/images/linux_command_11.png"></p>
-<h3 id="su-1"><a href="#su-1" class="headerlink" title="su"></a>su</h3><p>改变用户身份（切换到超级用户）：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 切换到root用户</span></span><br><span class="line">su -</span><br><span class="line"><span class="comment"># 切换到macro用户</span></span><br><span class="line">su macro</span><br></pre></td></tr></table></figure>
-
-<h3 id="groupadd"><a href="#groupadd" class="headerlink" title="groupadd"></a>groupadd</h3><p>添加用户组，使用<code>-g</code>可以设置用户组的标志号：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">groupadd -g 1024 macrozheng</span><br></pre></td></tr></table></figure>
-
-<h3 id="groupdel"><a href="#groupdel" class="headerlink" title="groupdel"></a>groupdel</h3><p>删除用户组：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">groupdel macrozheng</span><br></pre></td></tr></table></figure>
-
-<h3 id="useradd"><a href="#useradd" class="headerlink" title="useradd"></a>useradd</h3><p>添加用户，<code>-u</code>设置标志号，<code>-g</code>设置主用户组：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">useradd -u 1024 -g macrozheng macro</span><br></pre></td></tr></table></figure>
-
-<h3 id="usermod"><a href="#usermod" class="headerlink" title="usermod"></a>usermod</h3><p>修改用户所属用户组：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">usermod -g docker macro</span><br></pre></td></tr></table></figure>
-
-<h3 id="userdel"><a href="#userdel" class="headerlink" title="userdel"></a>userdel</h3><p>删除用户，使用<code>-r</code>可以删除用户主目录：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">userdel macro -r</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-]]></content>
-      <tags>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>IDEA常用设置及插件</title>
-    <url>/2022/05/12/IDEA%E5%B8%B8%E7%94%A8%E8%AE%BE%E7%BD%AE%E5%8F%8A%E6%8F%92%E4%BB%B6/</url>
-    <content><![CDATA[<h2 id="基本设置"><a href="#基本设置" class="headerlink" title="基本设置"></a>基本设置</h2><h3 id="设置界面风格及修改外部UI尺寸大小"><a href="#设置界面风格及修改外部UI尺寸大小" class="headerlink" title="设置界面风格及修改外部UI尺寸大小"></a>设置界面风格及修改外部UI尺寸大小</h3><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/idea_screen_1.png"></p>
-<h3 id="打开IDEA时设置不重新打开最近的项目"><a href="#打开IDEA时设置不重新打开最近的项目" class="headerlink" title="打开IDEA时设置不重新打开最近的项目"></a>打开IDEA时设置不重新打开最近的项目</h3><blockquote>
-<p>IDEA默认会打开最近的项目，有时候我们需要自己选择要打开的项目，不勾选该选项可以实现。</p>
-</blockquote>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/idea_screen_2.png"></p>
-<h3 id="设置IDEA的快捷键"><a href="#设置IDEA的快捷键" class="headerlink" title="设置IDEA的快捷键"></a>设置IDEA的快捷键</h3><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/idea_screen_3.png"></p>
-<h3 id="设置代码字体大小"><a href="#设置代码字体大小" class="headerlink" title="设置代码字体大小"></a>设置代码字体大小</h3><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/idea_screen_4.png"></p>
-<h3 id="设置项目文件编码格式"><a href="#设置项目文件编码格式" class="headerlink" title="设置项目文件编码格式"></a>设置项目文件编码格式</h3><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/idea_screen_5.png"></p>
-<h3 id="设置代码提示的匹配模式"><a href="#设置代码提示的匹配模式" class="headerlink" title="设置代码提示的匹配模式"></a>设置代码提示的匹配模式</h3><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/idea_screen_6.png"></p>
-<h3 id="设置新建类文件的类注释模版"><a href="#设置新建类文件的类注释模版" class="headerlink" title="设置新建类文件的类注释模版"></a>设置新建类文件的类注释模版</h3><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/idea_screen_7.png"></p>
-<h2 id="IDEA和Eclipse常用快捷键对比"><a href="#IDEA和Eclipse常用快捷键对比" class="headerlink" title="IDEA和Eclipse常用快捷键对比"></a>IDEA和Eclipse常用快捷键对比</h2><blockquote>
-<p>友情提示：IDEA可以设置为Eclipse风格的快捷键，在File-&gt;Settings-&gt;Keymap处，如需更改部分快捷键可按如下表格中的英文描述进行搜索，并改为相应快捷键。</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>Eclipse</th>
-<th>IDEA</th>
-<th>英文描述</th>
-<th>中文描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>ctrl+shift+r</td>
-<td>ctrl+shift+n</td>
-<td>Navigate-&gt;File</td>
-<td>找工作空间的文件</td>
-</tr>
-<tr>
-<td>ctrl+shift+t</td>
-<td>ctrl+n</td>
-<td>Navigate-&gt;Class</td>
-<td>找类定义</td>
-</tr>
-<tr>
-<td>ctrl+shift+g</td>
-<td>alt+f7</td>
-<td>Edit-&gt;Find-&gt;Find Usages</td>
-<td>查找方法在哪里调用.变量在哪里被使用</td>
-</tr>
-<tr>
-<td>ctrl+t</td>
-<td>ctrl+t</td>
-<td>Other-&gt;Hierarchy Class</td>
-<td>看类继承结构</td>
-</tr>
-<tr>
-<td>ctrl+o</td>
-<td>ctrl+f12</td>
-<td>Navigate-&gt;File Structure</td>
-<td>搜索一个类里面的方法</td>
-</tr>
-<tr>
-<td>shift+alt+z</td>
-<td>ctrl+alt+t</td>
-<td>Code-&gt;Surround With</td>
-<td>生成常见的代码块</td>
-</tr>
-<tr>
-<td>shift+alt+l</td>
-<td>ctrl+alt+v</td>
-<td>Refactor-&gt;Extract-&gt;Variable</td>
-<td>抽取变量</td>
-</tr>
-<tr>
-<td>shift+alt+m</td>
-<td>ctrl+alt+m</td>
-<td>Refactor-&gt;Extract-&gt;Method</td>
-<td>抽取方法</td>
-</tr>
-<tr>
-<td>alt+左箭头</td>
-<td>ctrl+alt+左箭头</td>
-<td>Navigate-&gt;Back</td>
-<td>回退上一个操作位置</td>
-</tr>
-<tr>
-<td>alt+右箭头</td>
-<td>ctrl+alt+右键头</td>
-<td>Navigate-&gt;Forward</td>
-<td>前进上一个操作位置</td>
-</tr>
-<tr>
-<td>ctrl+home</td>
-<td>ctrl+home</td>
-<td>Move Caret to Text Start</td>
-<td>回到类最前面</td>
-</tr>
-<tr>
-<td>ctrl+end</td>
-<td>ctrl+end</td>
-<td>Move Caret to Text End</td>
-<td>回到类最后面</td>
-</tr>
-<tr>
-<td>ctrl+e</td>
-<td>ctrl+e</td>
-<td>View-&gt;Recent Files</td>
-<td>最近打开的文件</td>
-</tr>
-<tr>
-<td>alt+/</td>
-<td>ctrl+space</td>
-<td>Code-&gt;Completion-&gt;Basic</td>
-<td>提示变量生成</td>
-</tr>
-<tr>
-<td>ctrl+1</td>
-<td>alt+enter</td>
-<td>Other-&gt;Show Intention Actions</td>
-<td>提示可能的操作</td>
-</tr>
-<tr>
-<td>ctrl+h</td>
-<td>ctrl+shift+f</td>
-<td>Find in Path</td>
-<td>全局搜索</td>
-</tr>
-<tr>
-<td>alt+上/下箭头</td>
-<td>alt+shift+上/下箭头</td>
-<td>Code-&gt;Move Line Up/Down</td>
-<td>移动一行代码</td>
-</tr>
-<tr>
-<td>ctrl+/</td>
-<td>ctrl+/</td>
-<td>Other-&gt;Fix doc comment</td>
-<td>方法注释</td>
-</tr>
-<tr>
-<td>ctrl+alt+s</td>
-<td>alt+insert</td>
-<td>Generate</td>
-<td>生成getter,setter,tostring等</td>
-</tr>
-</tbody></table>
-<h2 id="推荐插件"><a href="#推荐插件" class="headerlink" title="推荐插件"></a>推荐插件</h2><blockquote>
-<p>由于IDEA本身就自带很多插件，可以完成大部分需求，这里就推荐两个本人常用的插件。</p>
-</blockquote>
-<h3 id="Free-MyBatis-plugin"><a href="#Free-MyBatis-plugin" class="headerlink" title="Free MyBatis plugin"></a>Free MyBatis plugin</h3><blockquote>
-<p>非常好用的MyBatis插件，对MyBatis的xml具有强大的提示功能，同时可以关联mapper接口和mapper.xml中的sql实现。</p>
-</blockquote>
-<h4 id="可以从mapper接口和mapper-xml文件中相互跳转"><a href="#可以从mapper接口和mapper-xml文件中相互跳转" class="headerlink" title="可以从mapper接口和mapper.xml文件中相互跳转"></a>可以从mapper接口和mapper.xml文件中相互跳转</h4><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/idea_screen_8.png"></p>
-<h4 id="mapper-xml中的各种提示"><a href="#mapper-xml中的各种提示" class="headerlink" title="mapper.xml中的各种提示"></a>mapper.xml中的各种提示</h4><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/idea_screen_9.png"><br><img src="C:/Users/Administrator/Desktop/mylab/mall-learning-master/docs/images/idea_screen_10.png"></p>
-<h3 id="Lombok-plugin"><a href="#Lombok-plugin" class="headerlink" title="Lombok plugin"></a>Lombok plugin</h3><blockquote>
-<p>Lombok为Java语言添加了非常有趣的附加功能，你可以不用再为实体类手写getter,setter等方法，通过一个注解即可拥有。</p>
-</blockquote>
-<p>一个没有getter,setter方法的类通过添加@Getter和@Setter注解拥有了getter,setter方法。</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/idea_screen_11.png"></p>
-]]></content>
-      <tags>
-        <tag>工具</tag>
       </tags>
   </entry>
 </search>
