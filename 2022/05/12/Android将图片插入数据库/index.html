@@ -4,7 +4,7 @@
   <!-- 元数据 -->
   <meta charset="utf-8">
   <link rel="icon" href="/images/logo.png">
-  <title>YACC语法分析器 | ilpvc</title>
+  <title>Android将图片插入数据库 | ilpvc</title>
   <meta name="author" content="ilpvc" />
   <meta http-equiv="Cache-Control" content="no-transform" />
   <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -13,20 +13,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <meta name="format-detection" content="telphone=no, email=no" />
   
-    <meta name="keywords" content="C语言" />
+    <meta name="keywords" content="android" />
   
-  <meta name="description" content="YACC概述yacc(Yet Another Compiler Compiler)，是一个经典的生成语法分析器的工具。yacc生成的编译器主要是用C语言写成的语法解析器（Parser），需要与词法解析器Lex一起使用，再把两部份产生出来的C程序一并编译。 YACC语法规则yacc语法包括三部分：定义段、规则段和用户子例程段 123456789...定义段...%%...规则段...%%...用户子">
+  <meta name="description" content="方法方法一：将图片解析为二进制的数据，然后放入到数据库中的一种BLOD类型中 方法二：保存图片的URL路径 方法三：其实还可以将图片存放到本地文件，那么就以后直接从本地文件进行获取就可以了，但是这就是需要注意下，就是要保证路径都是唯一的，这里可以用时间戳进行产生，或者用我上一篇的第18点中讲到的一些产生Token的方法。 这里讲方法一： 一：创建数据库12345678910111213141516">
 <meta property="og:type" content="article">
-<meta property="og:title" content="YACC语法分析器">
-<meta property="og:url" content="http://ilpvc.github.io/2022/05/03/YACC%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8/index.html">
+<meta property="og:title" content="Android将图片插入数据库">
+<meta property="og:url" content="http://ilpvc.github.io/2022/05/12/Android%E5%B0%86%E5%9B%BE%E7%89%87%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE%E5%BA%93/index.html">
 <meta property="og:site_name" content="ilpvc">
-<meta property="og:description" content="YACC概述yacc(Yet Another Compiler Compiler)，是一个经典的生成语法分析器的工具。yacc生成的编译器主要是用C语言写成的语法解析器（Parser），需要与词法解析器Lex一起使用，再把两部份产生出来的C程序一并编译。 YACC语法规则yacc语法包括三部分：定义段、规则段和用户子例程段 123456789...定义段...%%...规则段...%%...用户子">
+<meta property="og:description" content="方法方法一：将图片解析为二进制的数据，然后放入到数据库中的一种BLOD类型中 方法二：保存图片的URL路径 方法三：其实还可以将图片存放到本地文件，那么就以后直接从本地文件进行获取就可以了，但是这就是需要注意下，就是要保证路径都是唯一的，这里可以用时间戳进行产生，或者用我上一篇的第18点中讲到的一些产生Token的方法。 这里讲方法一： 一：创建数据库12345678910111213141516">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://ilpvc.github.io/images/logo.png">
-<meta property="article:published_time" content="2022-05-03T07:29:58.000Z">
-<meta property="article:modified_time" content="2022-05-11T05:37:59.671Z">
+<meta property="article:published_time" content="2022-05-12T10:35:15.000Z">
+<meta property="article:modified_time" content="2022-05-12T10:59:11.221Z">
 <meta property="article:author" content="ilpvc">
-<meta property="article:tag" content="C语言">
+<meta property="article:tag" content="android">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://ilpvc.github.io/images/logo.png">
 <meta name="twitter:site" content="@null">
@@ -180,17 +180,17 @@
     <div class="kratos-hentry kratos-post-inner clearfix">
         <header class="kratos-entry-header">
             
-                <h1 class="kratos-entry-title text-center">YACC语法分析器</h1>
+                <h1 class="kratos-entry-title text-center">Android将图片插入数据库</h1>
             
             
             <ul class="kratos-post-meta text-center">
-                <li><i class="fa fa-calendar"></i> 2022-05-03</li>
+                <li><i class="fa fa-calendar"></i> 2022-05-12</li>
                 <li><i class="fa fa-user"></i> 作者 ilpvc</li>
                 <li>
                     <i class="fa fa-edit"></i> 
                     
                     
-                        1309
+                        ~3.55K
                     
                     字
                 </li>
@@ -199,25 +199,15 @@
         </header>
         <div class="kratos-post-content">
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1652247479671"></time> 前，其中的内容可能需要更新。
+                本文最后编辑于 <time datetime="1652353151221"></time> 前，其中的内容可能需要更新。
             </div>
             
             <hr />
-            <h3 id="YACC概述"><a href="#YACC概述" class="headerlink" title="YACC概述"></a>YACC概述</h3><p>yacc(Yet Another Compiler Compiler)，是一个经典的生成语法分析器的工具。yacc生成的编译器主要是用C语言写成的语法解析器（Parser），需要与词法解析器Lex一起使用，再把两部份产生出来的C程序一并编译。</p>
-<h3 id="YACC语法规则"><a href="#YACC语法规则" class="headerlink" title="YACC语法规则"></a>YACC语法规则</h3><p>yacc语法包括三部分：定义段、规则段和用户子例程段</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">...定义段...</span><br><span class="line"></span><br><span class="line"><span class="string">%%</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">...规则段...</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">%</span>%</span><br><span class="line"></span><br><span class="line">...用户子例程段...</span><br></pre></td></tr></table></figure>
-
-<p><strong>实例：</strong></p>
-<p>一个简单的四则运算：</p>
-<p>test.l</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">%&#123;</span></span><br><span class="line"><span class="string">#include &quot;test.tab.h&quot;</span></span><br><span class="line"><span class="string">extern int yylval;</span></span><br><span class="line"><span class="string">%&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="string">%%</span></span><br><span class="line"><span class="string">[0-9]+  &#123; yylval = atoi(yytext); return NUMBER; &#125;</span></span><br><span class="line"><span class="string">[ \t]   ;       /* ignore white space */</span></span><br><span class="line"><span class="string">\n  return 0;   /* logical EOF */</span></span><br><span class="line"><span class="string">.   return yytext[0];</span></span><br><span class="line"><span class="string">%</span>%</span><br></pre></td></tr></table></figure>
-
-<p>test.y</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">%&#123;</span></span><br><span class="line"><span class="string">#include &lt;stdio.h&gt;</span></span><br><span class="line"><span class="string">%&#125;</span></span><br><span class="line">%token NAME NUMBER</span><br><span class="line"><span class="string">%%</span></span><br><span class="line"><span class="string">statement:  NAME &#x27;=&#x27; expression</span></span><br><span class="line"><span class="string">    |   expression      &#123; printf(&quot;= %</span>d\n<span class="string">&quot;, $1); &#125;</span></span><br><span class="line"><span class="string">    ;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">expression: expression &#x27;+&#x27; NUMBER   &#123; $$ = $1 + $3; &#125;</span></span><br><span class="line"><span class="string">    |   expression &#x27;-&#x27; NUMBER   &#123; $$ = $1 - $3; &#125;</span></span><br><span class="line"><span class="string">    |   expression &#x27;*&#x27; NUMBER   &#123; $$ = $1 * $3; &#125;</span></span><br><span class="line"><span class="string">    |   expression &#x27;/&#x27; NUMBER   &#123; $$ = $1 / $3; &#125;</span></span><br><span class="line"><span class="string">    |   expression &#x27;%&#x27; NUMBER   &#123; $$ = $1 % $3; &#125;</span></span><br><span class="line"><span class="string">    |   NUMBER          &#123; $$ = $1; &#125;</span></span><br><span class="line"><span class="string">    ;</span></span><br><span class="line"><span class="string">%%</span></span><br><span class="line"><span class="string">int main()</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">    yyparse();</span></span><br><span class="line"><span class="string">    return 0;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">int yyerror(char *s)</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">    printf(&quot;</span>%s/n<span class="string">&quot;,s);</span></span><br><span class="line"><span class="string">    return 0;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">flex test.l</span><br><span class="line">bison -d test.y</span><br><span class="line">gcc -o <span class="built_in">test</span> test.tab.c test.yy.c -lfl</span><br></pre></td></tr></table></figure>
+            <h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p>方法一：将图片解析为二进制的数据，然后放入到数据库中的一种BLOD类型中</p>
+<p>方法二：保存图片的URL路径</p>
+<p>方法三：其实还可以将图片存放到本地文件，那么就以后直接从本地文件进行获取就可以了，但是这就是需要注意下，就是要保证路径都是唯一的，这里可以用时间戳进行产生，或者用我上一篇的第18点中讲到的一些产生Token的方法。</p>
+<p>这里讲方法一：</p>
+<h3 id="一：创建数据库"><a href="#一：创建数据库" class="headerlink" title="一：创建数据库"></a>一：创建数据库</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//表名friend，图像用blob存储，blob实际也是二进制存储</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String CREATE_TABLE_FRIEND = <span class="string">&quot;create table friend ( id Integer primary key autoincrement, img blob, name text ); \n&quot;</span> ;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(SQLiteDatabase sqLiteDatabase)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//sqLiteDatabase.execSQL(createTable(TABLE_NAME));</span></span><br><span class="line">        <span class="comment">//sqLiteDatabase.execSQL(CREATE_TABLE_SQL);</span></span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        sqLiteDatabase.execSQL(CREATE_TABLE_FRIEND);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//插入数据库方法，这里为了测试是否插入成功所以返回了long型。	</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">long</span> <span class="title">insertFriend</span><span class="params">(Friend friend)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">final</span> SQLiteDatabase db = getWritableDatabase();</span><br><span class="line"></span><br><span class="line">        ContentValues values = <span class="keyword">new</span> ContentValues();</span><br><span class="line"></span><br><span class="line">        values.put(<span class="string">&quot;img&quot;</span>,friend.getHeadImg());</span><br><span class="line">        values.put(<span class="string">&quot;name&quot;</span>,friend.getName());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> db.insert(<span class="string">&quot;friend&quot;</span>,<span class="keyword">null</span>,values);</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//将图片转换为二进制数组，并且返回。</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">byte</span>[] getPicture(Drawable drawable) &#123;</span><br><span class="line">        <span class="keyword">if</span>(drawable == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        BitmapDrawable bd = (BitmapDrawable) drawable;</span><br><span class="line">        Bitmap bitmap = bd.getBitmap();</span><br><span class="line">        ByteArrayOutputStream os = <span class="keyword">new</span> ByteArrayOutputStream();</span><br><span class="line">        bitmap.compress(Bitmap.CompressFormat.PNG, <span class="number">100</span>, os);</span><br><span class="line">        <span class="keyword">return</span> os.toByteArray();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		String[] columns = &#123;<span class="string">&quot;img&quot;</span>, <span class="string">&quot;name&quot;</span>&#125;;</span><br><span class="line">        Cursor cursor = sqLiteDatabase.query(<span class="string">&quot;friend&quot;</span>, columns, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>);</span><br><span class="line">	<span class="comment">//绑定Viewholder</span></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onBindViewHolder</span><span class="params">(<span class="meta">@NonNull</span> MyViewHoder holder, <span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        Friend friend = friends.get(position);</span><br><span class="line">        <span class="comment">//将二进制重新加载为图片</span></span><br><span class="line">        Bitmap b = BitmapFactory.decodeByteArray(friend.getHeadImg(), <span class="number">0</span>, friend.getHeadImg().length);</span><br><span class="line">        <span class="comment">//设置组件的图片</span></span><br><span class="line">        holder.img.setImageBitmap(b);</span><br><span class="line">        holder.name.setText(friend.name);</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">//给add组件设置监听事件，里面完成相关操作</span></span><br><span class="line">	add.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">                friend = <span class="keyword">new</span> Friend();</span><br><span class="line">                <span class="comment">//获取需要存进数据库的图片</span></span><br><span class="line">                Drawable drawable = getContext().getResources().getDrawable(R.drawable.login_header_img);</span><br><span class="line">                <span class="comment">//将其转换为byte型。</span></span><br><span class="line">                <span class="keyword">byte</span>[] a = getPicture(drawable);</span><br><span class="line">                <span class="comment">//放进friend对象</span></span><br><span class="line">                friend.setHeadImg(a);</span><br><span class="line">                friend.setName(<span class="string">&quot;seawdawdaw&quot;</span>);</span><br><span class="line">                mySQLiteOpenHelper = <span class="keyword">new</span> MySQLiteOpenHelper(getContext());</span><br><span class="line">                mySQLiteOpenHelper.insertFriend(friend);</span><br><span class="line">                <span class="comment">//mMyAdapter.notifyDataSetChanged();</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
 
@@ -225,10 +215,10 @@
 
 
 
-<p>结果：</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/wps1.jpg"></p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/wps2.jpg"> </p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/thl8664/p/6971244.html">全文参考</a></p>
+<h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h3><p>从服务器上取到图片地址，比如image/XXX/1233455.JPG 然后自己定义一个字符串baseUrl = 10.0.2.2:8080/Demo/ ,和取到的地址拼起来。 总之意思就是你不是直接得到图片，而是得到图片的地址，然后根据地址取出来图片。比如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 传输网络图片</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Bitmap <span class="title">getPic</span><span class="params">(String uriPic)</span> </span>&#123;</span><br><span class="line">	URL imageUrl = <span class="keyword">null</span>;</span><br><span class="line">	Bitmap bitmap = <span class="keyword">null</span>;</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">		imageUrl = <span class="keyword">new</span> URL(uriPic);</span><br><span class="line">	&#125; <span class="keyword">catch</span> (MalformedURLException e) &#123;</span><br><span class="line">		e.printStackTrace();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">		HttpURLConnection conn = (HttpURLConnection) imageUrl</span><br><span class="line">				.openConnection();</span><br><span class="line">		conn.connect();</span><br><span class="line">		InputStream is = conn.getInputStream();</span><br><span class="line">		bitmap = BitmapFactory.decodeStream(is);</span><br><span class="line">		is.close();</span><br><span class="line">	&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">		e.printStackTrace();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> bitmap;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>取到后相对图片再做处理的话就 bmp = Bitmap.createScaledBitmap(bmp, 长,宽, true);</p>
 
         </div>
         
@@ -282,7 +272,7 @@
     <script type="text/javascript">
         $(()=>{
             new QRCode("wechat-qr", {
-                text: "http://ilpvc.github.io/2022/05/03/YACC%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8/",
+                text: "http://ilpvc.github.io/2022/05/12/Android%E5%B0%86%E5%9B%BE%E7%89%87%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE%E5%BA%93/",
                 width: 150,
                 height: 150,
                 correctLevel : QRCode.CorrectLevel.H
@@ -294,9 +284,11 @@
             const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
             const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
             const twitterBase   = "https://twitter.com/intent/tweet?";
-            const hostUrl       = "http://ilpvc.github.io/2022/05/03/YACC%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8/";
-            const title         = "「YACC语法分析器」";
-            const excerpt       = `YACC概述yacc(Yet Another Compiler Compiler)，是一个经典的生成语法分析器的工具。yacc生成的编译器主要是用C语言写成的语法解析器（Parser），需要与词法解析器Lex一起使用，再把两部份产生出...`;
+            const hostUrl       = "http://ilpvc.github.io/2022/05/12/Android%E5%B0%86%E5%9B%BE%E7%89%87%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE%E5%BA%93/";
+            const title         = "「Android将图片插入数据库」";
+            const excerpt       = `方法方法一：将图片解析为二进制的数据，然后放入到数据库中的一种BLOD类型中
+方法二：保存图片的URL路径
+方法三：其实还可以将图片存放到本地文件，那么就以后直接从本地文件进行获取就可以了，但是这就是需要注意下，就是要保证路径都是唯一...`;
             let _URL;
             switch (dest) {
                 case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
@@ -315,10 +307,10 @@
             <div class="footer-tag clearfix">
                 <div class="pull-left">
                 <i class="fa fa-tags"></i>
-                    <a class="tag-none-link" href="/tags/C%E8%AF%AD%E8%A8%80/" rel="tag">C语言</a>
+                    <a class="tag-none-link" href="/tags/android/" rel="tag">android</a>
                 </div>
                 <div class="pull-date">
-                <span>最后编辑：2022-05-11</span>
+                <span>最后编辑：2022-05-12</span>
                 </div>
             </div>
         </footer>
@@ -327,13 +319,9 @@
         <nav class="navigation post-navigation clearfix" role="navigation">
             
             <div class="nav-previous clearfix">
-                <a title=" 线性规划问题" href="/2022/05/02/线性规划问题/">&lt; 上一篇</a>
+                <a title=" Serializable对象序列化" href="/2022/05/11/Serializable对象序列化/">&lt; 上一篇</a>
             </div>
             
-            
-            <div class="nav-next clearfix">
-                <a title=" VMware配置静态IP" href="/2022/05/04/VMware配置静态IP/">下一篇 &gt;</a>
-            </div>
             
         </nav>
     
