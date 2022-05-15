@@ -4,7 +4,7 @@
   <!-- 元数据 -->
   <meta charset="utf-8">
   <link rel="icon" href="/images/logo.png">
-  <title>YACC语法分析器 | ilpvc</title>
+  <title>java泛型<T> T与T的yongfa | ilpvc</title>
   <meta name="author" content="ilpvc" />
   <meta http-equiv="Cache-Control" content="no-transform" />
   <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -13,20 +13,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <meta name="format-detection" content="telphone=no, email=no" />
   
-    <meta name="keywords" content="c语言" />
+    <meta name="keywords" content="java" />
   
-  <meta name="description" content="YACC概述yacc(Yet Another Compiler Compiler)，是一个经典的生成语法分析器的工具。yacc生成的编译器主要是用C语言写成的语法解析器（Parser），需要与词法解析器Lex一起使用，再把两部份产生出来的C程序一并编译。 YACC语法规则yacc语法包括三部分：定义段、规则段和用户子例程段 123456789...定义段...%%...规则段...%%...用户子">
+  <meta name="description" content="Java之泛型 T与T的用法&lt;T&gt; T表示返回值是一个泛型，传递啥，就返回啥类型的数据，而单独的T就是表示限制你传递的参数类型，这个案例中，通过一个泛型的返回方式，获取每一个集合中的第一个数据， 通过返回值&lt;T&gt; T 和T的两种方法实现 &lt;T&gt; T 用法这个&lt;T&gt; T 表示的是返回值T是泛型，T是一个占位符，用来告诉编译器，这个东西先给我留着，等我编">
 <meta property="og:type" content="article">
-<meta property="og:title" content="YACC语法分析器">
-<meta property="og:url" content="http://ilpvc.github.io/2022/05/03/YACC%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8/index.html">
+<meta property="og:title" content="java泛型&lt;T&gt; T与T的yongfa">
+<meta property="og:url" content="http://ilpvc.github.io/2022/05/15/java%E6%B3%9B%E5%9E%8B-T-T%E4%B8%8ET%E7%9A%84%E7%94%A8%E6%B3%95/index.html">
 <meta property="og:site_name" content="ilpvc">
-<meta property="og:description" content="YACC概述yacc(Yet Another Compiler Compiler)，是一个经典的生成语法分析器的工具。yacc生成的编译器主要是用C语言写成的语法解析器（Parser），需要与词法解析器Lex一起使用，再把两部份产生出来的C程序一并编译。 YACC语法规则yacc语法包括三部分：定义段、规则段和用户子例程段 123456789...定义段...%%...规则段...%%...用户子">
+<meta property="og:description" content="Java之泛型 T与T的用法&lt;T&gt; T表示返回值是一个泛型，传递啥，就返回啥类型的数据，而单独的T就是表示限制你传递的参数类型，这个案例中，通过一个泛型的返回方式，获取每一个集合中的第一个数据， 通过返回值&lt;T&gt; T 和T的两种方法实现 &lt;T&gt; T 用法这个&lt;T&gt; T 表示的是返回值T是泛型，T是一个占位符，用来告诉编译器，这个东西先给我留着，等我编">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://ilpvc.github.io/images/logo.png">
-<meta property="article:published_time" content="2022-05-03T07:29:58.000Z">
-<meta property="article:modified_time" content="2022-05-12T13:39:42.351Z">
+<meta property="article:published_time" content="2022-05-15T11:49:41.000Z">
+<meta property="article:modified_time" content="2022-05-15T11:54:13.920Z">
 <meta property="article:author" content="ilpvc">
-<meta property="article:tag" content="c语言">
+<meta property="article:tag" content="java">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://ilpvc.github.io/images/logo.png">
 <meta name="twitter:site" content="@null">
@@ -180,17 +180,17 @@
     <div class="kratos-hentry kratos-post-inner clearfix">
         <header class="kratos-entry-header">
             
-                <h1 class="kratos-entry-title text-center">YACC语法分析器</h1>
+                <h1 class="kratos-entry-title text-center">java泛型<T> T与T的yongfa</h1>
             
             
             <ul class="kratos-post-meta text-center">
-                <li><i class="fa fa-calendar"></i> 2022-05-03</li>
+                <li><i class="fa fa-calendar"></i> 2022-05-15</li>
                 <li><i class="fa fa-user"></i> 作者 ilpvc</li>
                 <li>
                     <i class="fa fa-edit"></i> 
                     
                     
-                        1309
+                        ~2.33K
                     
                     字
                 </li>
@@ -199,25 +199,16 @@
         </header>
         <div class="kratos-post-content">
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1652362782351"></time> 前，其中的内容可能需要更新。
+                本文最后编辑于 <time datetime="1652615653920"></time> 前，其中的内容可能需要更新。
             </div>
             
             <hr />
-            <h3 id="YACC概述"><a href="#YACC概述" class="headerlink" title="YACC概述"></a>YACC概述</h3><p>yacc(Yet Another Compiler Compiler)，是一个经典的生成语法分析器的工具。yacc生成的编译器主要是用C语言写成的语法解析器（Parser），需要与词法解析器Lex一起使用，再把两部份产生出来的C程序一并编译。</p>
-<h3 id="YACC语法规则"><a href="#YACC语法规则" class="headerlink" title="YACC语法规则"></a>YACC语法规则</h3><p>yacc语法包括三部分：定义段、规则段和用户子例程段</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">...定义段...</span><br><span class="line"></span><br><span class="line"><span class="string">%%</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">...规则段...</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">%</span>%</span><br><span class="line"></span><br><span class="line">...用户子例程段...</span><br></pre></td></tr></table></figure>
+            <h1 id="Java之泛型-T与T的用法"><a href="#Java之泛型-T与T的用法" class="headerlink" title="Java之泛型 T与T的用法"></a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/jpfss/p/9929108.html">Java之泛型 T与T的用法</a></h1><p><code>&lt;T&gt; T</code>表示返回值是一个泛型，传递啥，就返回啥类型的数据，而单独的<code>T</code>就是表示限制你传递的参数类型，这个案例中，通过一个泛型的返回方式，获取每一个集合中的第一个数据， 通过返回值<code>&lt;T&gt; T</code> 和<code>T</code>的两种方法实现</p>
+<h2 id="lt-T-gt-T-用法"><a href="#lt-T-gt-T-用法" class="headerlink" title="&lt;T&gt; T 用法"></a><code>&lt;T&gt; T</code> 用法</h2><p>这个<code>&lt;T&gt; T</code> 表示的是返回值T是泛型，T是一个占位符，用来告诉编译器，这个东西先给我留着，等我编译的时候，告诉你。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        Demo demo = <span class="keyword">new</span> Demo();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//获取string类型</span></span><br><span class="line">        List&lt;String&gt; array = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">        array.add(<span class="string">&quot;test&quot;</span>);</span><br><span class="line">        array.add(<span class="string">&quot;doub&quot;</span>);</span><br><span class="line">        String str = demo.getListFisrt(array);</span><br><span class="line">        System.out.println(str);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//获取nums类型</span></span><br><span class="line">        List&lt;Integer&gt; nums = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</span><br><span class="line">        nums.add(<span class="number">12</span>);</span><br><span class="line">        nums.add(<span class="number">13</span>);</span><br><span class="line"></span><br><span class="line">        Integer num = demo.getListFisrt(nums);</span><br><span class="line">        System.out.println(num);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 这个&lt;T&gt; T 可以传入任何类型的List</span></span><br><span class="line"><span class="comment">     * 参数T</span></span><br><span class="line"><span class="comment">     *     第一个 表示是泛型</span></span><br><span class="line"><span class="comment">     *     第二个 表示返回的是T类型的数据</span></span><br><span class="line"><span class="comment">     *     第三个 限制参数类型为T</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> data</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> &lt;T&gt; <span class="function">T <span class="title">getListFisrt</span><span class="params">(List&lt;T&gt; data)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (data == <span class="keyword">null</span> || data.size() == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> data.get(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><strong>实例：</strong></p>
-<p>一个简单的四则运算：</p>
-<p>test.l</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">%&#123;</span></span><br><span class="line"><span class="string">#include &quot;test.tab.h&quot;</span></span><br><span class="line"><span class="string">extern int yylval;</span></span><br><span class="line"><span class="string">%&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="string">%%</span></span><br><span class="line"><span class="string">[0-9]+  &#123; yylval = atoi(yytext); return NUMBER; &#125;</span></span><br><span class="line"><span class="string">[ \t]   ;       /* ignore white space */</span></span><br><span class="line"><span class="string">\n  return 0;   /* logical EOF */</span></span><br><span class="line"><span class="string">.   return yytext[0];</span></span><br><span class="line"><span class="string">%</span>%</span><br></pre></td></tr></table></figure>
-
-<p>test.y</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">%&#123;</span></span><br><span class="line"><span class="string">#include &lt;stdio.h&gt;</span></span><br><span class="line"><span class="string">%&#125;</span></span><br><span class="line">%token NAME NUMBER</span><br><span class="line"><span class="string">%%</span></span><br><span class="line"><span class="string">statement:  NAME &#x27;=&#x27; expression</span></span><br><span class="line"><span class="string">    |   expression      &#123; printf(&quot;= %</span>d\n<span class="string">&quot;, $1); &#125;</span></span><br><span class="line"><span class="string">    ;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">expression: expression &#x27;+&#x27; NUMBER   &#123; $$ = $1 + $3; &#125;</span></span><br><span class="line"><span class="string">    |   expression &#x27;-&#x27; NUMBER   &#123; $$ = $1 - $3; &#125;</span></span><br><span class="line"><span class="string">    |   expression &#x27;*&#x27; NUMBER   &#123; $$ = $1 * $3; &#125;</span></span><br><span class="line"><span class="string">    |   expression &#x27;/&#x27; NUMBER   &#123; $$ = $1 / $3; &#125;</span></span><br><span class="line"><span class="string">    |   expression &#x27;%&#x27; NUMBER   &#123; $$ = $1 % $3; &#125;</span></span><br><span class="line"><span class="string">    |   NUMBER          &#123; $$ = $1; &#125;</span></span><br><span class="line"><span class="string">    ;</span></span><br><span class="line"><span class="string">%%</span></span><br><span class="line"><span class="string">int main()</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">    yyparse();</span></span><br><span class="line"><span class="string">    return 0;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">int yyerror(char *s)</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">    printf(&quot;</span>%s/n<span class="string">&quot;,s);</span></span><br><span class="line"><span class="string">    return 0;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">flex test.l</span><br><span class="line">bison -d test.y</span><br><span class="line">gcc -o <span class="built_in">test</span> test.tab.c test.yy.c -lfl</span><br></pre></td></tr></table></figure>
+<h2 id="T-用法"><a href="#T-用法" class="headerlink" title="T 用法"></a>T 用法</h2><p>返回值，直接写<code>T</code>表示限制参数的类型，这种方法一般多用于共同操作一个类对象，然后获取里面的集合信息啥的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo2</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//限制T 为String 类型</span></span><br><span class="line">        Demo2&lt;String&gt; demo = <span class="keyword">new</span> Demo2&lt;String&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//获取string类型</span></span><br><span class="line">        List&lt;String&gt; array = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">        array.add(<span class="string">&quot;test&quot;</span>);</span><br><span class="line">        array.add(<span class="string">&quot;doub&quot;</span>);</span><br><span class="line">        String str = demo.getListFisrt(array);</span><br><span class="line">        System.out.println(str);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//获取Integer类型 T 为Integer类型</span></span><br><span class="line">        Demo2&lt;Integer&gt; demo2 = <span class="keyword">new</span> Demo2&lt;Integer&gt;();</span><br><span class="line">        List&lt;Integer&gt; nums = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</span><br><span class="line">        nums.add(<span class="number">12</span>);</span><br><span class="line">        nums.add(<span class="number">13</span>);</span><br><span class="line">        Integer num = demo2.getListFisrt(nums);</span><br><span class="line">        System.out.println(num);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 这个只能传递T类型的数据</span></span><br><span class="line"><span class="comment">     * 返回值 就是Demo&lt;T&gt; 实例化传递的对象类型</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> data</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> T <span class="title">getListFisrt</span><span class="params">(List&lt;T&gt; data)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (data == <span class="keyword">null</span> || data.size() == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> data.get(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
@@ -225,10 +216,30 @@
 
 
 
-<p>结果：</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/wps1.jpg"></p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/wps2.jpg"> </p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/thl8664/p/6971244.html">全文参考</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         </div>
         
@@ -282,7 +293,7 @@
     <script type="text/javascript">
         $(()=>{
             new QRCode("wechat-qr", {
-                text: "http://ilpvc.github.io/2022/05/03/YACC%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8/",
+                text: "http://ilpvc.github.io/2022/05/15/java%E6%B3%9B%E5%9E%8B-T-T%E4%B8%8ET%E7%9A%84%E7%94%A8%E6%B3%95/",
                 width: 150,
                 height: 150,
                 correctLevel : QRCode.CorrectLevel.H
@@ -294,9 +305,9 @@
             const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
             const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
             const twitterBase   = "https://twitter.com/intent/tweet?";
-            const hostUrl       = "http://ilpvc.github.io/2022/05/03/YACC%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8/";
-            const title         = "「YACC语法分析器」";
-            const excerpt       = `YACC概述yacc(Yet Another Compiler Compiler)，是一个经典的生成语法分析器的工具。yacc生成的编译器主要是用C语言写成的语法解析器（Parser），需要与词法解析器Lex一起使用，再把两部份产生出...`;
+            const hostUrl       = "http://ilpvc.github.io/2022/05/15/java%E6%B3%9B%E5%9E%8B-T-T%E4%B8%8ET%E7%9A%84%E7%94%A8%E6%B3%95/";
+            const title         = "「java泛型<T> T与T的yongfa」";
+            const excerpt       = `Java之泛型 T与T的用法&lt;T&gt; T表示返回值是一个泛型，传递啥，就返回啥类型的数据，而单独的T就是表示限制你传递的参数类型，这个案例中，通过一个泛型的返回方式，获取每一个集合中的第一个数据， 通过返回值&lt;T&gt...`;
             let _URL;
             switch (dest) {
                 case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
@@ -315,10 +326,10 @@
             <div class="footer-tag clearfix">
                 <div class="pull-left">
                 <i class="fa fa-tags"></i>
-                    <a class="tag-none-link" href="/tags/c%E8%AF%AD%E8%A8%80/" rel="tag">c语言</a>
+                    <a class="tag-none-link" href="/tags/java/" rel="tag">java</a>
                 </div>
                 <div class="pull-date">
-                <span>最后编辑：2022-05-12</span>
+                <span>最后编辑：2022-05-15</span>
                 </div>
             </div>
         </footer>
@@ -327,13 +338,9 @@
         <nav class="navigation post-navigation clearfix" role="navigation">
             
             <div class="nav-previous clearfix">
-                <a title=" 线性规划问题" href="/2022/05/02/线性规划问题/">&lt; 上一篇</a>
+                <a title=" 基本类型和对象类型" href="/2022/05/15/基本类型和对象类型/">&lt; 上一篇</a>
             </div>
             
-            
-            <div class="nav-next clearfix">
-                <a title=" VMware配置静态IP" href="/2022/05/04/VMware配置静态IP/">下一篇 &gt;</a>
-            </div>
             
         </nav>
     

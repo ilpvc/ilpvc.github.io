@@ -15,7 +15,7 @@
 <p>在data/data/com.你的项目位置/databases 里面</p>
 ]]></content>
       <tags>
-        <tag>Android</tag>
+        <tag>android</tag>
       </tags>
   </entry>
   <entry>
@@ -69,7 +69,7 @@
 <p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220428223356012.png" alt="image-20220428223356012"></p>
 ]]></content>
       <tags>
-        <tag>Android</tag>
+        <tag>android</tag>
       </tags>
   </entry>
   <entry>
@@ -1525,6 +1525,51 @@
 ]]></content>
   </entry>
   <entry>
+    <title>java泛型&lt;T&gt; T与T的yongfa</title>
+    <url>/2022/05/15/java%E6%B3%9B%E5%9E%8B-T-T%E4%B8%8ET%E7%9A%84%E7%94%A8%E6%B3%95/</url>
+    <content><![CDATA[<h1 id="Java之泛型-T与T的用法"><a href="#Java之泛型-T与T的用法" class="headerlink" title="Java之泛型 T与T的用法"></a><a href="https://www.cnblogs.com/jpfss/p/9929108.html">Java之泛型 T与T的用法</a></h1><p><code>&lt;T&gt; T</code>表示返回值是一个泛型，传递啥，就返回啥类型的数据，而单独的<code>T</code>就是表示限制你传递的参数类型，这个案例中，通过一个泛型的返回方式，获取每一个集合中的第一个数据， 通过返回值<code>&lt;T&gt; T</code> 和<code>T</code>的两种方法实现</p>
+<h2 id="lt-T-gt-T-用法"><a href="#lt-T-gt-T-用法" class="headerlink" title="&lt;T&gt; T 用法"></a><code>&lt;T&gt; T</code> 用法</h2><p>这个<code>&lt;T&gt; T</code> 表示的是返回值T是泛型，T是一个占位符，用来告诉编译器，这个东西先给我留着，等我编译的时候，告诉你。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        Demo demo = <span class="keyword">new</span> Demo();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//获取string类型</span></span><br><span class="line">        List&lt;String&gt; array = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">        array.add(<span class="string">&quot;test&quot;</span>);</span><br><span class="line">        array.add(<span class="string">&quot;doub&quot;</span>);</span><br><span class="line">        String str = demo.getListFisrt(array);</span><br><span class="line">        System.out.println(str);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//获取nums类型</span></span><br><span class="line">        List&lt;Integer&gt; nums = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</span><br><span class="line">        nums.add(<span class="number">12</span>);</span><br><span class="line">        nums.add(<span class="number">13</span>);</span><br><span class="line"></span><br><span class="line">        Integer num = demo.getListFisrt(nums);</span><br><span class="line">        System.out.println(num);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 这个&lt;T&gt; T 可以传入任何类型的List</span></span><br><span class="line"><span class="comment">     * 参数T</span></span><br><span class="line"><span class="comment">     *     第一个 表示是泛型</span></span><br><span class="line"><span class="comment">     *     第二个 表示返回的是T类型的数据</span></span><br><span class="line"><span class="comment">     *     第三个 限制参数类型为T</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> data</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> &lt;T&gt; <span class="function">T <span class="title">getListFisrt</span><span class="params">(List&lt;T&gt; data)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (data == <span class="keyword">null</span> || data.size() == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> data.get(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="T-用法"><a href="#T-用法" class="headerlink" title="T 用法"></a>T 用法</h2><p>返回值，直接写<code>T</code>表示限制参数的类型，这种方法一般多用于共同操作一个类对象，然后获取里面的集合信息啥的。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo2</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//限制T 为String 类型</span></span><br><span class="line">        Demo2&lt;String&gt; demo = <span class="keyword">new</span> Demo2&lt;String&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//获取string类型</span></span><br><span class="line">        List&lt;String&gt; array = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">        array.add(<span class="string">&quot;test&quot;</span>);</span><br><span class="line">        array.add(<span class="string">&quot;doub&quot;</span>);</span><br><span class="line">        String str = demo.getListFisrt(array);</span><br><span class="line">        System.out.println(str);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//获取Integer类型 T 为Integer类型</span></span><br><span class="line">        Demo2&lt;Integer&gt; demo2 = <span class="keyword">new</span> Demo2&lt;Integer&gt;();</span><br><span class="line">        List&lt;Integer&gt; nums = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</span><br><span class="line">        nums.add(<span class="number">12</span>);</span><br><span class="line">        nums.add(<span class="number">13</span>);</span><br><span class="line">        Integer num = demo2.getListFisrt(nums);</span><br><span class="line">        System.out.println(num);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 这个只能传递T类型的数据</span></span><br><span class="line"><span class="comment">     * 返回值 就是Demo&lt;T&gt; 实例化传递的对象类型</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> data</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> T <span class="title">getListFisrt</span><span class="params">(List&lt;T&gt; data)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (data == <span class="keyword">null</span> || data.size() == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> data.get(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]]></content>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>kali安装.deb的安装包</title>
     <url>/2022/03/18/kali%E5%AE%89%E8%A3%85-deb%E7%9A%84%E5%AE%89%E8%A3%85%E5%8C%85/</url>
     <content><![CDATA[<h3 id="在kali中安装一些下载好的deb安装包时"><a href="#在kali中安装一些下载好的deb安装包时" class="headerlink" title="在kali中安装一些下载好的deb安装包时"></a>在kali中安装一些下载好的deb安装包时</h3><h4 id="一，找到安装包位置"><a href="#一，找到安装包位置" class="headerlink" title="一，找到安装包位置"></a>一，找到安装包位置</h4><p> <img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220318155623220.png" alt="image-20220318155623220"></p>
@@ -1852,6 +1897,20 @@
       </tags>
   </entry>
   <entry>
+    <title>openwrt开启passwall</title>
+    <url>/2022/05/15/openwrt%E5%BC%80%E5%90%AFpasswall/</url>
+    <content><![CDATA[<h3 id="科学上网"><a href="#科学上网" class="headerlink" title="科学上网"></a>科学上网</h3><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220515100457474.png"></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220515100516090.png"></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220515100552968.png"></p>
+<p>这里也可以直接导入剪切板</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220515100617845.png"></p>
+<p>最后保存就行。</p>
+]]></content>
+      <tags>
+        <tag>openwrt</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>图床搭建</title>
     <url>/2021/11/19/picgo+%E9%98%BF%E9%87%8C%E4%BA%91oss+typora%E5%9B%BE%E5%BA%8A%E6%90%AD%E5%BB%BA/</url>
     <content><![CDATA[<h1 id="picgo-阿里云oss-typora图床搭建"><a href="#picgo-阿里云oss-typora图床搭建" class="headerlink" title="picgo+阿里云oss+typora图床搭建"></a>picgo+阿里云oss+typora图床搭建</h1><h2 id="1-购买阿里云的oss对象储存"><a href="#1-购买阿里云的oss对象储存" class="headerlink" title="1.购买阿里云的oss对象储存"></a>1.购买阿里云的oss对象储存</h2><h2 id="2-建立-bucket"><a href="#2-建立-bucket" class="headerlink" title="2.建立 bucket"></a>2.建立 bucket</h2><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image/20210416171724.png" alt="image-20210416171724270"></p>
@@ -2000,6 +2059,41 @@
 ]]></content>
       <tags>
         <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>基本类型和对象类型</title>
+    <url>/2022/05/15/%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%AF%B9%E8%B1%A1%E7%B1%BB%E5%9E%8B/</url>
+    <content><![CDATA[<h3 id="Java中数据类型分两种"><a href="#Java中数据类型分两种" class="headerlink" title="Java中数据类型分两种"></a><strong>Java中数据类型分两种</strong></h3><blockquote>
+<p>1.基本类型：long,int,byte,float,double<br>2.对象类型：Long,Integer,Byte,Float,Double其它一切java提供的，或者你自己创建的类。</p>
+<p>其中Long叫 long的包装类。Integer、Byte和Float也类似，一般包装类的名字首写是数值名的大写开头。</p>
+</blockquote>
+<p><strong>什么是包装类？</strong></p>
+<p>在java中有时候的运算必须是两个类对象之间进行的，不充许对象与数字之间进行运算。所以需要有一个对象，这个对象把数字进行了一下包装，这样这个对象就可以和另一个对象进行运算了。</p>
+<p>比如我们可以定义一个类：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Long</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">int</span> i=<span class="number">0</span>;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Long</span> <span class="params">(<span class="keyword">int</span> i)</span></span>&#123;  </span><br><span class="line">        <span class="keyword">this</span>.i=i;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
+
+<p>这个Long 就是一个包装类，它包装了一个整数值，然后可以在里面写一些运算符重载的方法使它支持某些运算。这个时候可以赋值：<br>Long l = new Long(10);<br>现在变量 l 就是一个对象，不是一个数字。 </p>
+<p>long是原始数据类型,没有属性方法,只能进行数学运算，Long是long相对应的引用数据类型，它有方法和属性，一个没方法属性，一个有方法属性,这就是它们的区别。</p>
+<p>看下面的小程序：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">long</span> l = <span class="number">1</span>;  </span><br><span class="line">Long l1 = <span class="keyword">new</span> Long(<span class="number">1</span>);   </span><br><span class="line">Long l2 = <span class="keyword">new</span> Long(<span class="number">1</span>);   </span><br><span class="line">  </span><br><span class="line"><span class="keyword">if</span> (l == l1)&#123;   </span><br><span class="line">    System.out.println(<span class="string">&quot;=====l与l1相等=====&quot;</span>);  </span><br><span class="line"> &#125;   </span><br><span class="line">  </span><br><span class="line"><span class="keyword">if</span>(l == l2)&#123;   </span><br><span class="line">    System.out.println(<span class="string">&quot;=====l与l2相等=====&quot;</span>);  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">if</span>(l1 == l2)&#123;  </span><br><span class="line">    System.out.println(<span class="string">&quot;=====l1与l2相等=====&quot;</span>);  </span><br><span class="line"> &#125;     </span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">=====l与l1相等=====  </span><br><span class="line">=====l与l2相等===== </span><br></pre></td></tr></table></figure>
+
+<p>如果将第三个if语句的条件换成”l1.equals(l2)”，那么输出结果就会变成：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">=====l与l1相等=====  </span><br><span class="line">=====l与l2相等=====  </span><br><span class="line">=====l1与l2相等=====  </span><br></pre></td></tr></table></figure>
+
+<p>由此也能看出，Long定义的变量为一个Long类型的对象；而long定义的变量为一个长整形数值的数值变量。</p>
+<p><strong>ID用long还是Long？</strong></p>
+<p>hibernate、el表达式等都是包装类型，用Long类型可以减少装箱/拆箱；</p>
+<p>在hibernate中的自增的hid在实体中的类型要用Long 来定义而不是long。否则在DWR的匹配过程中会出现Marshallingerror:null的错误提示。</p>
+<p>到底是选择Long 还是long这个还得看具体环境，如果你认为这个属性不能为null,那么就用long，因为它默认初值为0，如果这个字段可以为null，那么就应该选择Long。</p>
+<p><strong>注意事项</strong></p>
+<p>  <img src="https://presenter.oss-cn-shanghai.aliyuncs.com/20180521104209734.png"></p>
+]]></content>
+      <tags>
+        <tag>java</tag>
       </tags>
   </entry>
   <entry>
@@ -3737,55 +3831,6 @@
 ]]></content>
       <tags>
         <tag>ps</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>openwrt开启passwall</title>
-    <url>/2022/05/15/openwrt%E5%BC%80%E5%90%AFpasswall/</url>
-    <content><![CDATA[<h3 id="科学上网"><a href="#科学上网" class="headerlink" title="科学上网"></a>科学上网</h3><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220515100457474.png"></p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220515100516090.png"></p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220515100552968.png"></p>
-<p>这里也可以直接导入剪切板</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220515100617845.png"></p>
-<p>最后保存就行。</p>
-]]></content>
-      <tags>
-        <tag>openwrt</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>基本类型和对象类型</title>
-    <url>/2022/05/15/%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%AF%B9%E8%B1%A1%E7%B1%BB%E5%9E%8B/</url>
-    <content><![CDATA[<h3 id="Java中数据类型分两种"><a href="#Java中数据类型分两种" class="headerlink" title="Java中数据类型分两种"></a><strong>Java中数据类型分两种</strong></h3><blockquote>
-<p>1.基本类型：long,int,byte,float,double<br>2.对象类型：Long,Integer,Byte,Float,Double其它一切java提供的，或者你自己创建的类。</p>
-<p>其中Long叫 long的包装类。Integer、Byte和Float也类似，一般包装类的名字首写是数值名的大写开头。</p>
-</blockquote>
-<p><strong>什么是包装类？</strong></p>
-<p>在java中有时候的运算必须是两个类对象之间进行的，不充许对象与数字之间进行运算。所以需要有一个对象，这个对象把数字进行了一下包装，这样这个对象就可以和另一个对象进行运算了。</p>
-<p>比如我们可以定义一个类：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Long</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">int</span> i=<span class="number">0</span>;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Long</span> <span class="params">(<span class="keyword">int</span> i)</span></span>&#123;  </span><br><span class="line">        <span class="keyword">this</span>.i=i;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
-
-<p>这个Long 就是一个包装类，它包装了一个整数值，然后可以在里面写一些运算符重载的方法使它支持某些运算。这个时候可以赋值：<br>Long l = new Long(10);<br>现在变量 l 就是一个对象，不是一个数字。 </p>
-<p>long是原始数据类型,没有属性方法,只能进行数学运算，Long是long相对应的引用数据类型，它有方法和属性，一个没方法属性，一个有方法属性,这就是它们的区别。</p>
-<p>看下面的小程序：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">long</span> l = <span class="number">1</span>;  </span><br><span class="line">Long l1 = <span class="keyword">new</span> Long(<span class="number">1</span>);   </span><br><span class="line">Long l2 = <span class="keyword">new</span> Long(<span class="number">1</span>);   </span><br><span class="line">  </span><br><span class="line"><span class="keyword">if</span> (l == l1)&#123;   </span><br><span class="line">    System.out.println(<span class="string">&quot;=====l与l1相等=====&quot;</span>);  </span><br><span class="line"> &#125;   </span><br><span class="line">  </span><br><span class="line"><span class="keyword">if</span>(l == l2)&#123;   </span><br><span class="line">    System.out.println(<span class="string">&quot;=====l与l2相等=====&quot;</span>);  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">if</span>(l1 == l2)&#123;  </span><br><span class="line">    System.out.println(<span class="string">&quot;=====l1与l2相等=====&quot;</span>);  </span><br><span class="line"> &#125;     </span><br></pre></td></tr></table></figure>
-
-<p>输出：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">=====l与l1相等=====  </span><br><span class="line">=====l与l2相等===== </span><br></pre></td></tr></table></figure>
-
-<p>如果将第三个if语句的条件换成”l1.equals(l2)”，那么输出结果就会变成：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">=====l与l1相等=====  </span><br><span class="line">=====l与l2相等=====  </span><br><span class="line">=====l1与l2相等=====  </span><br></pre></td></tr></table></figure>
-
-<p>由此也能看出，Long定义的变量为一个Long类型的对象；而long定义的变量为一个长整形数值的数值变量。</p>
-<p><strong>ID用long还是Long？</strong></p>
-<p>hibernate、el表达式等都是包装类型，用Long类型可以减少装箱/拆箱；</p>
-<p>在hibernate中的自增的hid在实体中的类型要用Long 来定义而不是long。否则在DWR的匹配过程中会出现Marshallingerror:null的错误提示。</p>
-<p>到底是选择Long 还是long这个还得看具体环境，如果你认为这个属性不能为null,那么就用long，因为它默认初值为0，如果这个字段可以为null，那么就应该选择Long。</p>
-<p><strong>注意事项</strong></p>
-<p>  <img src="https://presenter.oss-cn-shanghai.aliyuncs.com/20180521104209734.png"></p>
-]]></content>
-      <tags>
-        <tag>java</tag>
       </tags>
   </entry>
 </search>
