@@ -722,7 +722,7 @@
 <p>非常好用的MyBatis插件，对MyBatis的xml具有强大的提示功能，同时可以关联mapper接口和mapper.xml中的sql实现。</p>
 </blockquote>
 <h4 id="可以从mapper接口和mapper-xml文件中相互跳转"><a href="#可以从mapper接口和mapper-xml文件中相互跳转" class="headerlink" title="可以从mapper接口和mapper.xml文件中相互跳转"></a>可以从mapper接口和mapper.xml文件中相互跳转</h4><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/idea_screen_8.png"></p>
-<h4 id="mapper-xml中的各种提示"><a href="#mapper-xml中的各种提示" class="headerlink" title="mapper.xml中的各种提示"></a>mapper.xml中的各种提示</h4><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/idea_screen_9.png"><br><img src="C:/Users/Administrator/Desktop/mylab/mall-learning-master/docs/images/idea_screen_10.png"></p>
+<h4 id="mapper-xml中的各种提示"><a href="#mapper-xml中的各种提示" class="headerlink" title="mapper.xml中的各种提示"></a>mapper.xml中的各种提示</h4><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/idea_screen_9.png"><br><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/idea_screen_10.png"></p>
 <h3 id="Lombok-plugin"><a href="#Lombok-plugin" class="headerlink" title="Lombok plugin"></a>Lombok plugin</h3><blockquote>
 <p>Lombok为Java语言添加了非常有趣的附加功能，你可以不用再为实体类手写getter,setter等方法，通过一个注解即可拥有。</p>
 </blockquote>
@@ -3737,6 +3737,20 @@
 ]]></content>
       <tags>
         <tag>ps</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>openwrt开启passwall</title>
+    <url>/2022/05/15/openwrt%E5%BC%80%E5%90%AFpasswall/</url>
+    <content><![CDATA[<h3 id="科学上网"><a href="#科学上网" class="headerlink" title="科学上网"></a>科学上网</h3><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220515100457474.png"></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220515100516090.png"></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220515100552968.png"></p>
+<p>这里也可以直接导入剪切板</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220515100617845.png"></p>
+<p>最后保存就行。</p>
+]]></content>
+      <tags>
+        <tag>openwrt</tag>
       </tags>
   </entry>
 </search>
