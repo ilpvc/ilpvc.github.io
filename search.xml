@@ -3753,4 +3753,39 @@
         <tag>openwrt</tag>
       </tags>
   </entry>
+  <entry>
+    <title>基本类型和对象类型</title>
+    <url>/2022/05/15/%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%AF%B9%E8%B1%A1%E7%B1%BB%E5%9E%8B/</url>
+    <content><![CDATA[<h3 id="Java中数据类型分两种"><a href="#Java中数据类型分两种" class="headerlink" title="Java中数据类型分两种"></a><strong>Java中数据类型分两种</strong></h3><blockquote>
+<p>1.基本类型：long,int,byte,float,double<br>2.对象类型：Long,Integer,Byte,Float,Double其它一切java提供的，或者你自己创建的类。</p>
+<p>其中Long叫 long的包装类。Integer、Byte和Float也类似，一般包装类的名字首写是数值名的大写开头。</p>
+</blockquote>
+<p><strong>什么是包装类？</strong></p>
+<p>在java中有时候的运算必须是两个类对象之间进行的，不充许对象与数字之间进行运算。所以需要有一个对象，这个对象把数字进行了一下包装，这样这个对象就可以和另一个对象进行运算了。</p>
+<p>比如我们可以定义一个类：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Long</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">int</span> i=<span class="number">0</span>;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Long</span> <span class="params">(<span class="keyword">int</span> i)</span></span>&#123;  </span><br><span class="line">        <span class="keyword">this</span>.i=i;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
+
+<p>这个Long 就是一个包装类，它包装了一个整数值，然后可以在里面写一些运算符重载的方法使它支持某些运算。这个时候可以赋值：<br>Long l = new Long(10);<br>现在变量 l 就是一个对象，不是一个数字。 </p>
+<p>long是原始数据类型,没有属性方法,只能进行数学运算，Long是long相对应的引用数据类型，它有方法和属性，一个没方法属性，一个有方法属性,这就是它们的区别。</p>
+<p>看下面的小程序：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">long</span> l = <span class="number">1</span>;  </span><br><span class="line">Long l1 = <span class="keyword">new</span> Long(<span class="number">1</span>);   </span><br><span class="line">Long l2 = <span class="keyword">new</span> Long(<span class="number">1</span>);   </span><br><span class="line">  </span><br><span class="line"><span class="keyword">if</span> (l == l1)&#123;   </span><br><span class="line">    System.out.println(<span class="string">&quot;=====l与l1相等=====&quot;</span>);  </span><br><span class="line"> &#125;   </span><br><span class="line">  </span><br><span class="line"><span class="keyword">if</span>(l == l2)&#123;   </span><br><span class="line">    System.out.println(<span class="string">&quot;=====l与l2相等=====&quot;</span>);  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">if</span>(l1 == l2)&#123;  </span><br><span class="line">    System.out.println(<span class="string">&quot;=====l1与l2相等=====&quot;</span>);  </span><br><span class="line"> &#125;     </span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">=====l与l1相等=====  </span><br><span class="line">=====l与l2相等===== </span><br></pre></td></tr></table></figure>
+
+<p>如果将第三个if语句的条件换成”l1.equals(l2)”，那么输出结果就会变成：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">=====l与l1相等=====  </span><br><span class="line">=====l与l2相等=====  </span><br><span class="line">=====l1与l2相等=====  </span><br></pre></td></tr></table></figure>
+
+<p>由此也能看出，Long定义的变量为一个Long类型的对象；而long定义的变量为一个长整形数值的数值变量。</p>
+<p><strong>ID用long还是Long？</strong></p>
+<p>hibernate、el表达式等都是包装类型，用Long类型可以减少装箱/拆箱；</p>
+<p>在hibernate中的自增的hid在实体中的类型要用Long 来定义而不是long。否则在DWR的匹配过程中会出现Marshallingerror:null的错误提示。</p>
+<p>到底是选择Long 还是long这个还得看具体环境，如果你认为这个属性不能为null,那么就用long，因为它默认初值为0，如果这个字段可以为null，那么就应该选择Long。</p>
+<p><strong>注意事项</strong></p>
+<p>  <img src="https://presenter.oss-cn-shanghai.aliyuncs.com/20180521104209734.png"></p>
+]]></content>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
 </search>
