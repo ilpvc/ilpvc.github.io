@@ -1384,6 +1384,46 @@
       </tags>
   </entry>
   <entry>
+    <title>docker移动文件或者文件夹的命令</title>
+    <url>/2022/05/17/docker%E7%A7%BB%E5%8A%A8%E6%96%87%E4%BB%B6%E6%88%96%E8%80%85%E6%96%87%E4%BB%B6%E5%A4%B9%E7%9A%84%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<h3 id="docker与宿主机互相移动文件或者文件夹"><a href="#docker与宿主机互相移动文件或者文件夹" class="headerlink" title="docker与宿主机互相移动文件或者文件夹"></a>docker与宿主机互相移动文件或者文件夹</h3><p>从宿主机到容器：</p>
+<p>先利用：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker ps -a</span><br><span class="line"><span class="comment">#查看所有容器的信息</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220517170746571.png" alt="我电脑里的容器"></p>
+<p>然后：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#移动wordpress整个文件夹到wordpress容器的html目录下（这里要用容器ID）</span></span><br><span class="line">docker cp C:\Users\Administrator\Desktop\wordpress-5.9.3-zh_CN\wordpress\. b011b15fd82c:\var\www\html</span><br><span class="line"><span class="comment">#将某个文件移动到容器</span></span><br><span class="line">docker cp C:\Users\Administrator\Desktop\wordpress-5.9.3-zh_CN\wordpress\license.txt b011b15fd82c:\var\www\html</span><br><span class="line"><span class="comment">#将容器的文件复制到宿主机中</span></span><br><span class="line">docker cp b011b15fd82c:\var\www\html\. C:\Users\Administrator\Desktop\wordpress-5.9.3-zh_CN\wordpress\</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]]></content>
+      <tags>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Git基础</title>
     <url>/2021/11/19/git%E5%9F%BA%E7%A1%80/</url>
     <content><![CDATA[<h1 id="git基础"><a href="#git基础" class="headerlink" title="git基础"></a>git基础</h1><p>==在windows安装好git之后，会在右键菜单出现一个git bash here，点击这个就能进入命令行窗口。==</p>
@@ -1525,7 +1565,7 @@
 ]]></content>
   </entry>
   <entry>
-    <title>java泛型&lt;T&gt; T与T的yongfa</title>
+    <title>java泛型&lt;T&gt; T与T的用法</title>
     <url>/2022/05/15/java%E6%B3%9B%E5%9E%8B-T-T%E4%B8%8ET%E7%9A%84%E7%94%A8%E6%B3%95/</url>
     <content><![CDATA[<h1 id="Java之泛型-T与T的用法"><a href="#Java之泛型-T与T的用法" class="headerlink" title="Java之泛型 T与T的用法"></a><a href="https://www.cnblogs.com/jpfss/p/9929108.html">Java之泛型 T与T的用法</a></h1><p><code>&lt;T&gt; T</code>表示返回值是一个泛型，传递啥，就返回啥类型的数据，而单独的<code>T</code>就是表示限制你传递的参数类型，这个案例中，通过一个泛型的返回方式，获取每一个集合中的第一个数据， 通过返回值<code>&lt;T&gt; T</code> 和<code>T</code>的两种方法实现</p>
 <h2 id="lt-T-gt-T-用法"><a href="#lt-T-gt-T-用法" class="headerlink" title="&lt;T&gt; T 用法"></a><code>&lt;T&gt; T</code> 用法</h2><p>这个<code>&lt;T&gt; T</code> 表示的是返回值T是泛型，T是一个占位符，用来告诉编译器，这个东西先给我留着，等我编译的时候，告诉你。</p>

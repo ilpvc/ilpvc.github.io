@@ -4,7 +4,7 @@
   <!-- 元数据 -->
   <meta charset="utf-8">
   <link rel="icon" href="/images/logo.png">
-  <title>leetcode-442 | ilpvc</title>
+  <title>docker移动文件或者文件夹的命令 | ilpvc</title>
   <meta name="author" content="ilpvc" />
   <meta http-equiv="Cache-Control" content="no-transform" />
   <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -13,20 +13,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <meta name="format-detection" content="telphone=no, email=no" />
   
-    <meta name="keywords" content="leetcode" />
+    <meta name="keywords" content="docker" />
   
-  <meta name="description" content="题目描述给你一个长度为 n 的整数数组 nums ，其中 nums 的所有整数都在范围 [1, n] 内，且每个整数出现 一次 或 两次 。请你找出所有出现 两次 的整数，并以数组形式返回。 你必须设计并实现一个时间复杂度为 O(n) 且仅使用常量额外空间的算法解决此问题。 方法一：取反从起始位置进行遍历，每次将下标为 nums[i] - 1nums[i]−1的数字取反；当遍历到 nums[i]n">
+  <meta name="description" content="docker与宿主机互相移动文件或者文件夹从宿主机到容器： 先利用： 12docker ps -a#查看所有容器的信息   然后： 123456#移动wordpress整个文件夹到wordpress容器的html目录下（这里要用容器ID）docker cp C:\Users\Administrator\Desktop\wordpress-5.9.3-zh_CN\wordpress\. b011b1">
 <meta property="og:type" content="article">
-<meta property="og:title" content="leetcode-442">
-<meta property="og:url" content="http://ilpvc.github.io/2022/05/08/leetcode-442/index.html">
+<meta property="og:title" content="docker移动文件或者文件夹的命令">
+<meta property="og:url" content="http://ilpvc.github.io/2022/05/17/docker%E7%A7%BB%E5%8A%A8%E6%96%87%E4%BB%B6%E6%88%96%E8%80%85%E6%96%87%E4%BB%B6%E5%A4%B9%E7%9A%84%E5%91%BD%E4%BB%A4/index.html">
 <meta property="og:site_name" content="ilpvc">
-<meta property="og:description" content="题目描述给你一个长度为 n 的整数数组 nums ，其中 nums 的所有整数都在范围 [1, n] 内，且每个整数出现 一次 或 两次 。请你找出所有出现 两次 的整数，并以数组形式返回。 你必须设计并实现一个时间复杂度为 O(n) 且仅使用常量额外空间的算法解决此问题。 方法一：取反从起始位置进行遍历，每次将下标为 nums[i] - 1nums[i]−1的数字取反；当遍历到 nums[i]n">
+<meta property="og:description" content="docker与宿主机互相移动文件或者文件夹从宿主机到容器： 先利用： 12docker ps -a#查看所有容器的信息   然后： 123456#移动wordpress整个文件夹到wordpress容器的html目录下（这里要用容器ID）docker cp C:\Users\Administrator\Desktop\wordpress-5.9.3-zh_CN\wordpress\. b011b1">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://ilpvc.github.io/images/logo.png">
-<meta property="article:published_time" content="2022-05-08T05:17:39.000Z">
-<meta property="article:modified_time" content="2022-05-09T00:32:56.440Z">
+<meta property="article:published_time" content="2022-05-17T09:03:19.000Z">
+<meta property="article:modified_time" content="2022-05-17T09:58:19.837Z">
 <meta property="article:author" content="ilpvc">
-<meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="docker">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://ilpvc.github.io/images/logo.png">
 <meta name="twitter:site" content="@null">
@@ -180,17 +180,17 @@
     <div class="kratos-hentry kratos-post-inner clearfix">
         <header class="kratos-entry-header">
             
-                <h1 class="kratos-entry-title text-center">leetcode-442</h1>
+                <h1 class="kratos-entry-title text-center">docker移动文件或者文件夹的命令</h1>
             
             
             <ul class="kratos-post-meta text-center">
-                <li><i class="fa fa-calendar"></i> 2022-05-08</li>
+                <li><i class="fa fa-calendar"></i> 2022-05-17</li>
                 <li><i class="fa fa-user"></i> 作者 ilpvc</li>
                 <li>
                     <i class="fa fa-edit"></i> 
                     
                     
-                        751
+                        484
                     
                     字
                 </li>
@@ -199,19 +199,42 @@
         </header>
         <div class="kratos-post-content">
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1652056376440"></time> 前，其中的内容可能需要更新。
+                本文最后编辑于 <time datetime="1652781499837"></time> 前，其中的内容可能需要更新。
             </div>
             
             <hr />
-            <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>给你一个<strong>长度为 n</strong> 的整数数组 nums ，其中 nums 的所有整数都在<strong>范围 [1, n]</strong> 内，且每个整数<strong>出现 一次 或 两次</strong> 。请你找出所有出现 两次 的整数，并以数组形式返回。</p>
-<p>你必须设计并实现一个时间复杂度为 O(n) 且仅使用常量额外空间的算法解决此问题。</p>
-<h3 id="方法一：取反"><a href="#方法一：取反" class="headerlink" title="方法一：取反"></a>方法一：取反</h3><p>从起始位置进行遍历，每次将下标为 nums[i] - 1nums[i]−1的数字取反；<br>当遍历到 nums[i]nums[i]为负数，需要忽略其负号。<br>若发现下标为 nums[i] - 1nums[i]−1的数字已经是负数，说明之前出现过同样的数字 nums[i]nums[i]，即找到了重复数字；</p>
-<p>动画图解如下：</p>
-<p><img src="https://pic.leetcode-cn.com/1651978075-VevYmq-442.%20%E6%95%B0%E7%BB%84%E4%B8%AD%E9%87%8D%E5%A4%8D%E7%9A%84%E6%95%B0%E6%8D%AE.gif" alt="442. 数组中重复的数据.gif"></p>
-<p>java代码实现：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">findDuplicates</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        List&lt;Integer&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num : nums) &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[Math.abs(num) - <span class="number">1</span>] &lt; <span class="number">0</span>) &#123;</span><br><span class="line">                res.add(Math.abs(num));</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                nums[Math.abs(num) - <span class="number">1</span>] *= -<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+            <h3 id="docker与宿主机互相移动文件或者文件夹"><a href="#docker与宿主机互相移动文件或者文件夹" class="headerlink" title="docker与宿主机互相移动文件或者文件夹"></a>docker与宿主机互相移动文件或者文件夹</h3><p>从宿主机到容器：</p>
+<p>先利用：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker ps -a</span><br><span class="line"><span class="comment">#查看所有容器的信息</span></span><br></pre></td></tr></table></figure>
 
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-all-duplicates-in-an-array/solution/by-fuxuemingzhu-dko5/">原文出处</a></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220517170746571.png" alt="我电脑里的容器"></p>
+<p>然后：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#移动wordpress整个文件夹到wordpress容器的html目录下（这里要用容器ID）</span></span><br><span class="line">docker cp C:\Users\Administrator\Desktop\wordpress-5.9.3-zh_CN\wordpress\. b011b15fd82c:\var\www\html</span><br><span class="line"><span class="comment">#将某个文件移动到容器</span></span><br><span class="line">docker cp C:\Users\Administrator\Desktop\wordpress-5.9.3-zh_CN\wordpress\license.txt b011b15fd82c:\var\www\html</span><br><span class="line"><span class="comment">#将容器的文件复制到宿主机中</span></span><br><span class="line">docker cp b011b15fd82c:\var\www\html\. C:\Users\Administrator\Desktop\wordpress-5.9.3-zh_CN\wordpress\</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         </div>
         
@@ -265,7 +288,7 @@
     <script type="text/javascript">
         $(()=>{
             new QRCode("wechat-qr", {
-                text: "http://ilpvc.github.io/2022/05/08/leetcode-442/",
+                text: "http://ilpvc.github.io/2022/05/17/docker%E7%A7%BB%E5%8A%A8%E6%96%87%E4%BB%B6%E6%88%96%E8%80%85%E6%96%87%E4%BB%B6%E5%A4%B9%E7%9A%84%E5%91%BD%E4%BB%A4/",
                 width: 150,
                 height: 150,
                 correctLevel : QRCode.CorrectLevel.H
@@ -277,10 +300,15 @@
             const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
             const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
             const twitterBase   = "https://twitter.com/intent/tweet?";
-            const hostUrl       = "http://ilpvc.github.io/2022/05/08/leetcode-442/";
-            const title         = "「leetcode-442」";
-            const excerpt       = `题目描述给你一个长度为 n 的整数数组 nums ，其中 nums 的所有整数都在范围 [1, n] 内，且每个整数出现 一次 或 两次 。请你找出所有出现 两次 的整数，并以数组形式返回。
-你必须设计并实现一个时间复杂度为 O(n)...`;
+            const hostUrl       = "http://ilpvc.github.io/2022/05/17/docker%E7%A7%BB%E5%8A%A8%E6%96%87%E4%BB%B6%E6%88%96%E8%80%85%E6%96%87%E4%BB%B6%E5%A4%B9%E7%9A%84%E5%91%BD%E4%BB%A4/";
+            const title         = "「docker移动文件或者文件夹的命令」";
+            const excerpt       = `docker与宿主机互相移动文件或者文件夹从宿主机到容器：
+先利用：
+12docker ps -a#查看所有容器的信息
+
+
+然后：
+123456#移动wordpress整个文件夹到wordpress容器的html目录下（这里要用容器I...`;
             let _URL;
             switch (dest) {
                 case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
@@ -299,10 +327,10 @@
             <div class="footer-tag clearfix">
                 <div class="pull-left">
                 <i class="fa fa-tags"></i>
-                    <a class="tag-none-link" href="/tags/leetcode/" rel="tag">leetcode</a>
+                    <a class="tag-none-link" href="/tags/docker/" rel="tag">docker</a>
                 </div>
                 <div class="pull-date">
-                <span>最后编辑：2022-05-09</span>
+                <span>最后编辑：2022-05-17</span>
                 </div>
             </div>
         </footer>
@@ -311,13 +339,9 @@
         <nav class="navigation post-navigation clearfix" role="navigation">
             
             <div class="nav-previous clearfix">
-                <a title=" 宝塔面板+wordpress搭建博客" href="/2022/05/06/宝塔面板-wordpress搭建博客/">&lt; 上一篇</a>
+                <a title=" java泛型&lt;T&gt; T与T的用法" href="/2022/05/15/java泛型-T-T与T的用法/">&lt; 上一篇</a>
             </div>
             
-            
-            <div class="nav-next clearfix">
-                <a title=" VMware安装openwrt" href="/2022/05/08/VMware安装openwrt/">下一篇 &gt;</a>
-            </div>
             
         </nav>
     
