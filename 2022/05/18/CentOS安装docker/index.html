@@ -4,7 +4,7 @@
   <!-- 元数据 -->
   <meta charset="utf-8">
   <link rel="icon" href="/images/logo.png">
-  <title>二叉树遍历 | ilpvc</title>
+  <title>CentOS安装docker | ilpvc</title>
   <meta name="author" content="ilpvc" />
   <meta http-equiv="Cache-Control" content="no-transform" />
   <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -13,20 +13,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <meta name="format-detection" content="telphone=no, email=no" />
   
-    <meta name="keywords" content="数据结构" />
+    <meta name="keywords" content="docker" />
   
-  <meta name="description" content="二叉树是一种非常重要的数据结构，很多其它数据结构都是基于二叉树的基础演变而来的。对于二叉树，有深度遍历和广度遍历，深度遍历有前序、中序以及后序三种遍历方法，广度遍历即我们平常所说的层次遍历。因为树的定义本身就是递归定义，因此采用递归的方法去实现树的三种遍历不仅容易理解而且代码很简洁，而对于广度遍历来说，需要其他数据结构的支撑，比如堆了。所以，对于一段代码来说，可读性有时候要比代码本身的效率要重要的">
+  <meta name="description" content="官方文档位置# 1、卸载旧的版本12345678sudo yum remove docker \                 docker-client \                 docker-client-latest \                 docker-common \                 docker-latest \">
 <meta property="og:type" content="article">
-<meta property="og:title" content="二叉树遍历">
-<meta property="og:url" content="http://ilpvc.github.io/2022/05/01/%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86/index.html">
+<meta property="og:title" content="CentOS安装docker">
+<meta property="og:url" content="http://ilpvc.github.io/2022/05/18/CentOS%E5%AE%89%E8%A3%85docker/index.html">
 <meta property="og:site_name" content="ilpvc">
-<meta property="og:description" content="二叉树是一种非常重要的数据结构，很多其它数据结构都是基于二叉树的基础演变而来的。对于二叉树，有深度遍历和广度遍历，深度遍历有前序、中序以及后序三种遍历方法，广度遍历即我们平常所说的层次遍历。因为树的定义本身就是递归定义，因此采用递归的方法去实现树的三种遍历不仅容易理解而且代码很简洁，而对于广度遍历来说，需要其他数据结构的支撑，比如堆了。所以，对于一段代码来说，可读性有时候要比代码本身的效率要重要的">
+<meta property="og:description" content="官方文档位置# 1、卸载旧的版本12345678sudo yum remove docker \                 docker-client \                 docker-client-latest \                 docker-common \                 docker-latest \">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://ilpvc.github.io/images/logo.png">
-<meta property="article:published_time" content="2022-05-01T10:37:32.000Z">
-<meta property="article:modified_time" content="2022-05-01T10:45:15.412Z">
+<meta property="article:published_time" content="2022-05-18T11:08:40.000Z">
+<meta property="article:modified_time" content="2022-05-18T11:47:57.527Z">
 <meta property="article:author" content="ilpvc">
-<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="docker">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://ilpvc.github.io/images/logo.png">
 <meta name="twitter:site" content="@null">
@@ -180,17 +180,17 @@
     <div class="kratos-hentry kratos-post-inner clearfix">
         <header class="kratos-entry-header">
             
-                <h1 class="kratos-entry-title text-center">二叉树遍历</h1>
+                <h1 class="kratos-entry-title text-center">CentOS安装docker</h1>
             
             
             <ul class="kratos-post-meta text-center">
-                <li><i class="fa fa-calendar"></i> 2022-05-01</li>
+                <li><i class="fa fa-calendar"></i> 2022-05-18</li>
                 <li><i class="fa fa-user"></i> 作者 ilpvc</li>
                 <li>
                     <i class="fa fa-edit"></i> 
                     
                     
-                        1127
+                        1233
                     
                     字
                 </li>
@@ -199,39 +199,29 @@
         </header>
         <div class="kratos-post-content">
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1651401915412"></time> 前，其中的内容可能需要更新。
+                本文最后编辑于 <time datetime="1652874477527"></time> 前，其中的内容可能需要更新。
             </div>
             
             <hr />
-            <p><strong>二叉树是一种非常重要的数据结构，很多其它数据结构都是基于二叉树的基础演变而来的。对于二叉树，有深度遍历和广度遍历，深度遍历有前序、中序以及后序三种遍历方法，广度遍历即我们平常所说的层次遍历。因为树的定义本身就是递归定义，因此采用递归的方法去实现树的三种遍历不仅容易理解而且代码很简洁，而对于广度遍历来说，需要其他数据结构的支撑，比如堆了。所以，对于一段代码来说，可读性有时候要比代码本身的效率要重要的多。</strong></p>
-<p>四种主要的遍历思想为：</p>
-<p>前序遍历：根结点 —&gt; 左子树 —&gt; 右子树</p>
-<p>中序遍历：左子树—&gt; 根结点 —&gt; 右子树</p>
-<p>后序遍历：左子树 —&gt; 右子树 —&gt; 根结点</p>
-<p>层次遍历：只需按层次遍历即可</p>
-<p>例如，求下面二叉树的各种遍历</p>
-<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/20150204101904649.png" alt="20150204101904649"></p>
-<ul>
-<li><p>前序遍历：1  2  4  5  7  8  3  6 </p>
-</li>
-<li><p>中序遍历：4  2  7  5  8  1  3  6</p>
-</li>
-<li><p>后序遍历：4  7  8  5  2  6  3  1</p>
-</li>
-<li><p>层次遍历：1  2  3  4  5  6  7  8</p>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//前序遍历</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">preOrderTraverse1</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (root != <span class="keyword">null</span>) &#123;</span><br><span class="line">			System.out.print(root.val+<span class="string">&quot;  &quot;</span>);</span><br><span class="line">			preOrderTraverse1(root.left);</span><br><span class="line">			preOrderTraverse1(root.right);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+            <h3 id="官方文档位置"><a href="#官方文档位置" class="headerlink" title="官方文档位置#"></a>官方文档位置<a target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/centos/">#</a></h3><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220518190929849.png" alt="image-20220518190929849"></p>
+<h4 id="1、卸载旧的版本"><a href="#1、卸载旧的版本" class="headerlink" title="1、卸载旧的版本"></a>1、卸载旧的版本</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo yum remove docker \</span><br><span class="line">                 docker-client \</span><br><span class="line">                 docker-client-latest \</span><br><span class="line">                 docker-common \</span><br><span class="line">                 docker-latest \</span><br><span class="line">                 docker-latest-logrotate \</span><br><span class="line">                 docker-logrotate \</span><br><span class="line">                 docker-engine</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//中序遍历</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">inOrderTraverse1</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (root != <span class="keyword">null</span>) &#123;</span><br><span class="line">			inOrderTraverse1(root.left);</span><br><span class="line">			System.out.print(root.val+<span class="string">&quot;  &quot;</span>);</span><br><span class="line">			inOrderTraverse1(root.right);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2、需要的安装包"><a href="#2、需要的安装包" class="headerlink" title="2、需要的安装包"></a>2、需要的安装包</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y yum-utils</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//后序遍历</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">postOrderTraverse1</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (root != <span class="keyword">null</span>) &#123;</span><br><span class="line">			postOrderTraverse1(root.left);</span><br><span class="line">			postOrderTraverse1(root.right);</span><br><span class="line">			System.out.print(root.val+<span class="string">&quot;  &quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3、设置镜像仓库"><a href="#3、设置镜像仓库" class="headerlink" title="3、设置镜像仓库"></a>3、设置镜像仓库</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"> sudo yum-config-manager \</span><br><span class="line">    --add-repo \</span><br><span class="line">    https://download.docker.com/linux/centos/docker-ce.repo #默认是国外的镜像源</span><br><span class="line">    </span><br><span class="line"> sudo yum-config-manager \</span><br><span class="line">    --add-repo \</span><br><span class="line">	https://registry.docker-cn.com		#国内官方源</span><br><span class="line">	</span><br><span class="line">yum-config-manager \</span><br><span class="line">    --add-repo \</span><br><span class="line">    https://download.docker.com/linux/centos/docker-ce.repo  #国外的地址</span><br><span class="line">    </span><br><span class="line">    # 设置阿里云的Docker镜像仓库</span><br><span class="line">yum-config-manager \</span><br><span class="line">    --add-repo \</span><br><span class="line">    https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo  #国内的地址</span><br></pre></td></tr></table></figure>
 
+<h4 id="4、更新yum软件包索引"><a href="#4、更新yum软件包索引" class="headerlink" title="4、更新yum软件包索引"></a>4、更新yum软件包索引</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum makecache fast</span><br></pre></td></tr></table></figure>
 
+<h4 id="5、安装docker相关的配置"><a href="#5、安装docker相关的配置" class="headerlink" title="5、安装docker相关的配置"></a>5、安装docker相关的配置</h4><p>docker-ce 是社区版，docker-ee 企业版</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install docker-ce docker-ce-cli containerd.io</span><br></pre></td></tr></table></figure>
 
+<p>出现了completed即安装成功。</p>
+<h4 id="6、启动Docker"><a href="#6、启动Docker" class="headerlink" title="6、启动Docker"></a>6、启动Docker</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#启动docker服务</span></span><br><span class="line">systemctl start docker</span><br><span class="line"><span class="comment"># 查看当前版本号，是否启动成功</span></span><br><span class="line">docker version</span><br><span class="line"><span class="comment"># 设置开机自启动</span></span><br><span class="line">systemctl <span class="built_in">enable</span> docker</span><br></pre></td></tr></table></figure>
 
-
-
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220518193126040.png"></p>
+<p>查看下载的hello world镜像</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220518193455731.png"></p>
+<h3 id="Docker的卸载"><a href="#Docker的卸载" class="headerlink" title="Docker的卸载"></a>Docker的卸载</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 卸载依赖</span></span><br><span class="line">yum remove docker-ce docker-ce-cli containerd.io</span><br><span class="line"><span class="comment"># 2. 删除资源  . /var/lib/docker是docker的默认工作路径</span></span><br><span class="line">rm -rf /var/lib/docker</span><br></pre></td></tr></table></figure>
 
 
 
@@ -302,7 +292,7 @@
     <script type="text/javascript">
         $(()=>{
             new QRCode("wechat-qr", {
-                text: "http://ilpvc.github.io/2022/05/01/%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86/",
+                text: "http://ilpvc.github.io/2022/05/18/CentOS%E5%AE%89%E8%A3%85docker/",
                 width: 150,
                 height: 150,
                 correctLevel : QRCode.CorrectLevel.H
@@ -314,9 +304,10 @@
             const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
             const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
             const twitterBase   = "https://twitter.com/intent/tweet?";
-            const hostUrl       = "http://ilpvc.github.io/2022/05/01/%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86/";
-            const title         = "「二叉树遍历」";
-            const excerpt       = `二叉树是一种非常重要的数据结构，很多其它数据结构都是基于二叉树的基础演变而来的。对于二叉树，有深度遍历和广度遍历，深度遍历有前序、中序以及后序三种遍历方法，广度遍历即我们平常所说的层次遍历。因为树的定义本身就是递归定义，因此采用递归的...`;
+            const hostUrl       = "http://ilpvc.github.io/2022/05/18/CentOS%E5%AE%89%E8%A3%85docker/";
+            const title         = "「CentOS安装docker」";
+            const excerpt       = `官方文档位置#
+1、卸载旧的版本12345678sudo yum remove docker \                 docker-client \                 docker-client-latest...`;
             let _URL;
             switch (dest) {
                 case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
@@ -335,10 +326,10 @@
             <div class="footer-tag clearfix">
                 <div class="pull-left">
                 <i class="fa fa-tags"></i>
-                    <a class="tag-none-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a>
+                    <a class="tag-none-link" href="/tags/docker/" rel="tag">docker</a>
                 </div>
                 <div class="pull-date">
-                <span>最后编辑：2022-05-01</span>
+                <span>最后编辑：2022-05-18</span>
                 </div>
             </div>
         </footer>
@@ -347,13 +338,9 @@
         <nav class="navigation post-navigation clearfix" role="navigation">
             
             <div class="nav-previous clearfix">
-                <a title=" Android使用SQLite基础" href="/2022/04/30/Android使用SQLite基础/">&lt; 上一篇</a>
+                <a title=" docker移动文件或者文件夹的命令" href="/2022/05/17/docker移动文件或者文件夹的命令/">&lt; 上一篇</a>
             </div>
             
-            
-            <div class="nav-next clearfix">
-                <a title=" 线性规划问题" href="/2022/05/02/线性规划问题/">下一篇 &gt;</a>
-            </div>
             
         </nav>
     

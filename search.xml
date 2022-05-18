@@ -3873,4 +3873,48 @@
         <tag>ps</tag>
       </tags>
   </entry>
+  <entry>
+    <title>CentOS安装docker</title>
+    <url>/2022/05/18/CentOS%E5%AE%89%E8%A3%85docker/</url>
+    <content><![CDATA[<h3 id="官方文档位置"><a href="#官方文档位置" class="headerlink" title="官方文档位置#"></a>官方文档位置<a href="https://docs.docker.com/engine/install/centos/">#</a></h3><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220518190929849.png" alt="image-20220518190929849"></p>
+<h4 id="1、卸载旧的版本"><a href="#1、卸载旧的版本" class="headerlink" title="1、卸载旧的版本"></a>1、卸载旧的版本</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo yum remove docker \</span><br><span class="line">                 docker-client \</span><br><span class="line">                 docker-client-latest \</span><br><span class="line">                 docker-common \</span><br><span class="line">                 docker-latest \</span><br><span class="line">                 docker-latest-logrotate \</span><br><span class="line">                 docker-logrotate \</span><br><span class="line">                 docker-engine</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、需要的安装包"><a href="#2、需要的安装包" class="headerlink" title="2、需要的安装包"></a>2、需要的安装包</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install -y yum-utils</span><br></pre></td></tr></table></figure>
+
+<h4 id="3、设置镜像仓库"><a href="#3、设置镜像仓库" class="headerlink" title="3、设置镜像仓库"></a>3、设置镜像仓库</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"> sudo yum-config-manager \</span><br><span class="line">    --add-repo \</span><br><span class="line">    https://download.docker.com/linux/centos/docker-ce.repo #默认是国外的镜像源</span><br><span class="line">    </span><br><span class="line"> sudo yum-config-manager \</span><br><span class="line">    --add-repo \</span><br><span class="line">	https://registry.docker-cn.com		#国内官方源</span><br><span class="line">	</span><br><span class="line">yum-config-manager \</span><br><span class="line">    --add-repo \</span><br><span class="line">    https://download.docker.com/linux/centos/docker-ce.repo  #国外的地址</span><br><span class="line">    </span><br><span class="line">    # 设置阿里云的Docker镜像仓库</span><br><span class="line">yum-config-manager \</span><br><span class="line">    --add-repo \</span><br><span class="line">    https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo  #国内的地址</span><br></pre></td></tr></table></figure>
+
+<h4 id="4、更新yum软件包索引"><a href="#4、更新yum软件包索引" class="headerlink" title="4、更新yum软件包索引"></a>4、更新yum软件包索引</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum makecache fast</span><br></pre></td></tr></table></figure>
+
+<h4 id="5、安装docker相关的配置"><a href="#5、安装docker相关的配置" class="headerlink" title="5、安装docker相关的配置"></a>5、安装docker相关的配置</h4><p>docker-ce 是社区版，docker-ee 企业版</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install docker-ce docker-ce-cli containerd.io</span><br></pre></td></tr></table></figure>
+
+<p>出现了completed即安装成功。</p>
+<h4 id="6、启动Docker"><a href="#6、启动Docker" class="headerlink" title="6、启动Docker"></a>6、启动Docker</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#启动docker服务</span></span><br><span class="line">systemctl start docker</span><br><span class="line"><span class="comment"># 查看当前版本号，是否启动成功</span></span><br><span class="line">docker version</span><br><span class="line"><span class="comment"># 设置开机自启动</span></span><br><span class="line">systemctl <span class="built_in">enable</span> docker</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220518193126040.png"></p>
+<p>查看下载的hello world镜像</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220518193455731.png"></p>
+<h3 id="Docker的卸载"><a href="#Docker的卸载" class="headerlink" title="Docker的卸载"></a>Docker的卸载</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 1. 卸载依赖</span></span><br><span class="line">yum remove docker-ce docker-ce-cli containerd.io</span><br><span class="line"><span class="comment"># 2. 删除资源  . /var/lib/docker是docker的默认工作路径</span></span><br><span class="line">rm -rf /var/lib/docker</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]]></content>
+      <tags>
+        <tag>docker</tag>
+      </tags>
+  </entry>
 </search>
