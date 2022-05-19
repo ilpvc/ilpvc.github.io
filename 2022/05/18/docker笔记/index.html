@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/logo.png">
+  <title>docker笔记 | ilpvc</title>
+  <meta name="author" content="ilpvc" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="docker" />
+  
+  <meta name="description" content="官方文档位置# 1、卸载旧的版本12345678sudo yum remove docker \                 docker-client \                 docker-client-latest \                 docker-common \                 docker-latest \">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker笔记">
+<meta property="og:url" content="http://ilpvc.github.io/2022/05/18/docker%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="ilpvc">
+<meta property="og:description" content="官方文档位置# 1、卸载旧的版本12345678sudo yum remove docker \                 docker-client \                 docker-client-latest \                 docker-common \                 docker-latest \">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://ilpvc.github.io/images/logo.png">
+<meta property="article:published_time" content="2022-05-18T11:08:40.000Z">
+<meta property="article:modified_time" content="2022-05-19T06:14:23.336Z">
+<meta property="article:author" content="ilpvc">
+<meta property="article:tag" content="docker">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ilpvc.github.io/images/logo.png">
+<meta name="twitter:site" content="@null">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" type="text/css" media="all">
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/night-eighties.min.css" type="text/css" media="all">
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" type="text/css" media="all">
+  <link rel="stylesheet" id="nprogress-css" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" type="text/css" media="all">
+  
+  
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-dark.min.css" type="text/css" media="all">
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="https://cdn.jsdelivr.net/npm/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('https://presenter.oss-cn-shanghai.aliyuncs.com/banner.webp');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('https://presenter.oss-cn-shanghai.aliyuncs.com/bg.webp');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li><a href="/"><i class="fa fa-home"></i>首页</a></li>
+                                    
+                                
+                                    
+                                        <li>
+                                            <a><i class="fa fa-link"></i>资源</a>
+                                            <ul class="sub-menu">
+                                                
+                                                    
+                                                
+                                                    
+                                                        <li><a href="/category01/">学习网站</a></li>
+                                                    
+                                                
+                                                    
+                                                        <li><a href="/category02/">资源网站</a></li>
+                                                    
+                                                
+                                            </ul>
+                                        </li>
+                                    
+                                
+                                    
+                                        <li><a href="/archives/"><i class="fa fa-file"></i>档案馆</a></li>
+                                    
+                                
+                                    
+                                        <li><a href="/friends/"><i class="fa fa-paw"></i>好伙伴</a></li>
+                                    
+                                
+                                    
+                                        <li>
+                                            <a><i class="fa fa-link"></i>链接</a>
+                                            <ul class="sub-menu">
+                                                
+                                                    
+                                                
+                                                    
+                                                        <li><a target="_blank" rel="noopener" href="https://www.ilpvc.xyz">作者博客</a></li>
+                                                    
+                                                
+                                                    
+                                                        <li><a target="_blank" rel="noopener" href="https://github.com/ilpvc/ilpvc.github.io">项目链接</a></li>
+                                                    
+                                                
+                                            </ul>
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">ilpvc</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>ilpvc</h2> <br />
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article>
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center">docker笔记</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><i class="fa fa-calendar"></i> 2022-05-18</li>
+                <li><i class="fa fa-user"></i> 作者 ilpvc</li>
+                <li>
+                    <i class="fa fa-edit"></i> 
+                    
+                    
+                        ~11.41K
+                    
+                    字
+                </li>
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                本文最后编辑于 <time datetime="1652940863336"></time> 前，其中的内容可能需要更新。
+            </div>
+            
+            <hr />
+            <h3 id="官方文档位置"><a href="#官方文档位置" class="headerlink" title="官方文档位置#"></a>官方文档位置<a target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/centos/">#</a></h3><p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220518190929849.png" alt="image-20220518190929849"></p>
+<h4 id="1、卸载旧的版本"><a href="#1、卸载旧的版本" class="headerlink" title="1、卸载旧的版本"></a>1、卸载旧的版本</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo yum remove docker \</span><br><span class="line">                 docker-client \</span><br><span class="line">                 docker-client-latest \</span><br><span class="line">                 docker-common \</span><br><span class="line">                 docker-latest \</span><br><span class="line">                 docker-latest-logrotate \</span><br><span class="line">                 docker-logrotate \</span><br><span class="line">                 docker-engine</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、需要的安装包"><a href="#2、需要的安装包" class="headerlink" title="2、需要的安装包"></a>2、需要的安装包</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y yum-utils</span><br></pre></td></tr></table></figure>
+
+<h4 id="3、设置镜像仓库"><a href="#3、设置镜像仓库" class="headerlink" title="3、设置镜像仓库"></a>3、设置镜像仓库</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"> sudo yum-config-manager \</span><br><span class="line">    --add-repo \</span><br><span class="line">    https://download.docker.com/linux/centos/docker-ce.repo #默认是国外的镜像源</span><br><span class="line">    </span><br><span class="line"> sudo yum-config-manager \</span><br><span class="line">    --add-repo \</span><br><span class="line">	https://registry.docker-cn.com		#国内官方源</span><br><span class="line">	</span><br><span class="line">yum-config-manager \</span><br><span class="line">    --add-repo \</span><br><span class="line">    https://download.docker.com/linux/centos/docker-ce.repo  #国外的地址</span><br><span class="line">    </span><br><span class="line">    # 设置阿里云的Docker镜像仓库</span><br><span class="line">yum-config-manager \</span><br><span class="line">    --add-repo \</span><br><span class="line">    https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo  #国内的地址</span><br></pre></td></tr></table></figure>
+
+<h4 id="4、更新yum软件包索引"><a href="#4、更新yum软件包索引" class="headerlink" title="4、更新yum软件包索引"></a>4、更新yum软件包索引</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum makecache fast</span><br></pre></td></tr></table></figure>
+
+<h4 id="5、安装docker相关的配置"><a href="#5、安装docker相关的配置" class="headerlink" title="5、安装docker相关的配置"></a>5、安装docker相关的配置</h4><p>docker-ce 是社区版，docker-ee 企业版</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install docker-ce docker-ce-cli containerd.io</span><br></pre></td></tr></table></figure>
+
+<p>出现了completed即安装成功。</p>
+<h4 id="6、启动Docker"><a href="#6、启动Docker" class="headerlink" title="6、启动Docker"></a>6、启动Docker</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#启动docker服务</span></span><br><span class="line">systemctl start docker</span><br><span class="line"><span class="comment"># 查看当前版本号，是否启动成功</span></span><br><span class="line">docker version</span><br><span class="line"><span class="comment"># 设置开机自启动</span></span><br><span class="line">systemctl <span class="built_in">enable</span> docker</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220518193126040.png"></p>
+<p>查看下载的hello world镜像</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220518193455731.png"></p>
+<h3 id="Docker的卸载"><a href="#Docker的卸载" class="headerlink" title="Docker的卸载"></a>Docker的卸载</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 卸载依赖</span></span><br><span class="line">yum remove docker-ce docker-ce-cli containerd.io</span><br><span class="line"><span class="comment"># 2. 删除资源  . /var/lib/docker是docker的默认工作路径</span></span><br><span class="line">rm -rf /var/lib/docker</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="配置阿里云镜像加速"><a href="#配置阿里云镜像加速" class="headerlink" title="配置阿里云镜像加速"></a>配置阿里云镜像加速</h3><p><strong>（1）进入阿里云官网，搜索容器镜像服务</strong></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220519104612346.png"></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220519110815790.png"></p>
+<p><strong>（2）依次执行官方的这四条命令</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir -p /etc/docker</span><br><span class="line">sudo tee /etc/docker/daemon.json &lt;&lt;-&#x27;EOF&#x27;</span><br><span class="line">&#123;</span><br><span class="line">  &quot;registry-mirrors&quot;: [&quot;https://man823kr.mirror.aliyuncs.com&quot;]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart docker</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="Docker容器运行流程"><a href="#Docker容器运行流程" class="headerlink" title="Docker容器运行流程"></a>Docker容器运行流程</h3><p>启动一个容器，Docker的运行流程如下图：</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220519112112840.png"></p>
+<h3 id="底层原理"><a href="#底层原理" class="headerlink" title="底层原理"></a>底层原理</h3><p>Docker是一个Client-Server结构的系统，Docker的守护进程运行在主机上，通过Socker从客户端访问！Docker Server接收到Docker-Client的指令，就会执行这个指令！</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220519131002639.png"></p>
+<p>Docker为什么比VM Ware快？</p>
+<p>1、Docker比虚拟机更少的抽象层</p>
+<p>2、docker利用宿主机的内核，VM需要的是Guest OS</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/20200112215511607.png"></p>
+<p>Docker新建一个容器的时候，不需要像虚拟机一样重新加载一个操作系统内核，直接利用宿主机的操作系统，而虚拟机是需要加载Guest OS。Docker和VM的对比如下：</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220519131632278.png"></p>
+<h3 id="Docker常用命令"><a href="#Docker常用命令" class="headerlink" title="Docker常用命令"></a>Docker常用命令</h3><h4 id="基础命令"><a href="#基础命令" class="headerlink" title="基础命令"></a>基础命令</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker version          <span class="comment">#查看docker的版本信息</span></span><br><span class="line">docker info             <span class="comment">#查看docker的系统信息,包括镜像和容器的数量</span></span><br><span class="line">docker 命令 --<span class="built_in">help</span>       <span class="comment">#帮助命令(可查看可选的参数)</span></span><br><span class="line">docker COMMAND --<span class="built_in">help</span></span><br></pre></td></tr></table></figure>
+
+<p>命令的帮助文档地址:<a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/docker/">#</a></p>
+<h4 id="镜像命令"><a href="#镜像命令" class="headerlink" title="镜像命令"></a>镜像命令</h4><p>1.<strong>docker images</strong> 查看本地主机的所有镜像</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@iZwz99sm8v95sckz8bd2c4Z ~]<span class="comment"># docker images</span></span><br><span class="line">REPOSITORY    TAG       IMAGE ID       CREATED         SIZE</span><br><span class="line">hello-world   latest    bf756fb1ae65   11 months ago   13.3kB</span><br><span class="line"></span><br><span class="line"><span class="comment">#解释:</span></span><br><span class="line">1.REPOSITORY  镜像的仓库源</span><br><span class="line"></span><br><span class="line">2.TAG  镜像的标签</span><br><span class="line"></span><br><span class="line">3.IMAGE ID 镜像的id</span><br><span class="line"></span><br><span class="line">4.CREATED 镜像的创建时间</span><br><span class="line"></span><br><span class="line">5.SIZE 镜像的大小</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 可选参数</span></span><br><span class="line"></span><br><span class="line">-a/--all 列出所有镜像</span><br><span class="line"></span><br><span class="line">-q/--quiet 只显示镜像的id</span><br></pre></td></tr></table></figure>
+
+<p>2.<strong>docker search</strong> 搜索镜像</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[root@iZwz99sm8v95sckz8bd2c4Z ~]<span class="comment"># docker search mysql</span></span><br><span class="line">NAME                              DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED</span><br><span class="line">mysql                             MySQL is a widely used, open-source relation…   10308     [OK]</span><br><span class="line">mariadb                           MariaDB is a community-developed fork of MyS…   3819      [OK]</span><br><span class="line">mysql/mysql-server                Optimized MySQL Server Docker images. Create…   754                  [OK]</span><br><span class="line">percona                           Percona Server is a fork of the MySQL relati…   517       [OK]</span><br><span class="line">centos/mysql-57-centos7           MySQL 5.7 SQL database server                   86</span><br><span class="line">mysql/mysql-cluster               Experimental MySQL Cluster Docker images. Cr…   79</span><br><span class="line">centurylink/mysql                 Image containing mysql. Optimized to be link…   60                   [OK]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#可选参数</span></span><br><span class="line"></span><br><span class="line">Search the Docker Hub <span class="keyword">for</span> images</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line">  -f, --filter filter   Filter output based on conditions provided</span><br><span class="line">      --format string   Pretty-print search using a Go template</span><br><span class="line">      --<span class="built_in">limit</span> int       Max number of search results (default 25)</span><br><span class="line">      --no-trunc        Don<span class="string">&#x27;t truncate output</span></span><br><span class="line"><span class="string">      </span></span><br><span class="line"><span class="string">      </span></span><br><span class="line"><span class="string">#搜索收藏数大于3000的镜像</span></span><br><span class="line"><span class="string">[root@iZwz99sm8v95sckz8bd2c4Z ~]# docker search mysql --filter=STARS=3000</span></span><br><span class="line"><span class="string">NAME      DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED</span></span><br><span class="line"><span class="string">mysql     MySQL is a widely used, open-source relation…   10308     [OK]</span></span><br><span class="line"><span class="string">mariadb   MariaDB is a community-developed fordockerk of MyS…   3819      [OK]</span></span><br></pre></td></tr></table></figure>
+
+<p>3.<strong>docker pull 镜像名[:tag]</strong> 下载镜像</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[root@iZwz99sm8v95sckz8bd2c4Z ~]<span class="comment"># docker pull mysql</span></span><br><span class="line">Using default tag: latest            <span class="comment">#如果不写tag默认就是latest</span></span><br><span class="line">latest: Pulling from library/mysql</span><br><span class="line">6ec7b7d162b2: Pull complete          <span class="comment">#分层下载,docker image的核心-联合文件系统</span></span><br><span class="line">fedd960d3481: Pull complete</span><br><span class="line">7ab947313861: Pull complete</span><br><span class="line">64f92f19e638: Pull complete</span><br><span class="line">3e80b17bff96: Pull complete</span><br><span class="line">014e976799f9: Pull complete</span><br><span class="line">59ae84fee1b3: Pull complete</span><br><span class="line">ffe10de703ea: Pull complete</span><br><span class="line">657af6d90c83: Pull complete</span><br><span class="line">98bfb480322c: Pull complete</span><br><span class="line">6aa3859c4789: Pull complete</span><br><span class="line">1ed875d851ef: Pull complete</span><br><span class="line">Digest: sha256:78800e6d3f1b230e35275145e657b82c3fb02a27b2d8e76aac2f5e90c1c30873 <span class="comment">#签名</span></span><br><span class="line">Status: Downloaded newer image <span class="keyword">for</span> mysql:latest</span><br><span class="line">docker.io/library/mysql:latest  <span class="comment">#下载来源的真实地址  #docker pull mysql等价于docker pull docker.io/library/mysql:latest</span></span><br><span class="line">123456789101112131415161718</span><br></pre></td></tr></table></figure>
+
+<p>指定版本下载</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@iZwz99sm8v95sckz8bd2c4Z ~]<span class="comment"># docker pull mysql:5.7</span></span><br><span class="line">5.7: Pulling from library/mysql</span><br><span class="line">6ec7b7d162b2: Already exists</span><br><span class="line">fedd960d3481: Already exists</span><br><span class="line">7ab947313861: Already exists</span><br><span class="line">64f92f19e638: Already exists</span><br><span class="line">3e80b17bff96: Already exists</span><br><span class="line">014e976799f9: Already exists</span><br><span class="line">59ae84fee1b3: Already exists</span><br><span class="line">7d1da2a18e2e: Pull complete</span><br><span class="line">301a28b700b9: Pull complete</span><br><span class="line">529dc8dbeaf3: Pull complete</span><br><span class="line">bc9d021dc13f: Pull complete</span><br><span class="line">Digest: sha256:c3a567d3e3ad8b05dfce401ed08f0f6bf3f3b64cc17694979d5f2e5d78e10173</span><br><span class="line">Status: Downloaded newer image <span class="keyword">for</span> mysql:5.7</span><br><span class="line">docker.io/library/mysql:5.7</span><br><span class="line">12345678910111213141516</span><br></pre></td></tr></table></figure>
+
+<p>4.<strong>docker rmi</strong> 删除镜像</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1.删除指定的镜像id</span></span><br><span class="line">[root@iZwz99sm8v95sckz8bd2c4Z ~]<span class="comment"># docker rmi -f  镜像id</span></span><br><span class="line"><span class="comment">#2.删除多个镜像id</span></span><br><span class="line">[root@iZwz99sm8v95sckz8bd2c4Z ~]<span class="comment"># docker rmi -f  镜像id 镜像id 镜像id</span></span><br><span class="line"><span class="comment">#3.删除全部的镜像id</span></span><br><span class="line">[root@iZwz99sm8v95sckz8bd2c4Z ~]<span class="comment"># docker rmi -f  $(docker images -aq)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#  -f 是不询问的意思</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="容器命令"><a href="#容器命令" class="headerlink" title="容器命令"></a>容器命令</h4><p>如拉取一个centos镜像</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull centos </span><br></pre></td></tr></table></figure>
+
+<p>运行容器的命令说明：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">docker run [可选参数] image</span><br><span class="line"></span><br><span class="line"><span class="comment">#参数说明</span></span><br><span class="line">--name=<span class="string">&quot;名字&quot;</span>           指定容器名字</span><br><span class="line">-d                     后台方式运行</span><br><span class="line">-it                    使用交互方式运行,进入容器查看内容</span><br><span class="line">-p                     指定容器的端口</span><br><span class="line">(</span><br><span class="line">-p ip:主机端口:容器端口  配置主机端口映射到容器端口</span><br><span class="line">-p 主机端口:容器端口</span><br><span class="line">-p 容器端口</span><br><span class="line">)</span><br><span class="line">-P                     随机指定端口(大写的P)</span><br><span class="line">12345678910111213</span><br></pre></td></tr></table></figure>
+
+<p>运行并进入容器centos</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@iZwz99sm8v95sckz8bd2c4Z ~]<span class="comment"># docker run -it centos /bin/bash</span></span><br><span class="line">[root@bd1b8900c547 /]<span class="comment"># ls      </span></span><br><span class="line">bin  dev  etc  home  lib  lib64  lost+found  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var</span><br><span class="line">123</span><br></pre></td></tr></table></figure>
+
+<p>退出容器命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#exit 停止并退出容器（后台方式运行则仅退出）</span></span><br><span class="line"><span class="comment">#Ctrl+P+Q  不停止容器退出</span></span><br><span class="line">[root@bd1b8900c547 /]<span class="comment"># exit</span></span><br><span class="line"><span class="built_in">exit</span></span><br><span class="line">[root@iZwz99sm8v95sckz8bd2c4Z ~]<span class="comment">#</span></span><br><span class="line">12345</span><br><span class="line"></span><br><span class="line">docker attach 容器ID  <span class="comment">#进入容器</span></span><br></pre></td></tr></table></figure>
+
+<p>列出运行过的容器命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#docker ps </span></span><br><span class="line">     <span class="comment"># 列出当前正在运行的容器</span></span><br><span class="line">-a   <span class="comment"># 列出所有容器的运行记录</span></span><br><span class="line">-n=? <span class="comment"># 显示最近创建的n个容器</span></span><br><span class="line">-q   <span class="comment"># 只显示容器的编号</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@iZwz99sm8v95sckz8bd2c4Z ~]<span class="comment"># docker ps</span></span><br><span class="line">CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES</span><br><span class="line">[root@iZwz99sm8v95sckz8bd2c4Z ~]<span class="comment"># docker ps -a</span></span><br><span class="line">CONTAINER ID   IMAGE          COMMAND       CREATED         STATUS                     PORTS     NAMES</span><br><span class="line">bca129320bb5   centos         <span class="string">&quot;/bin/bash&quot;</span>   4 minutes ago   Exited (0) 3 minutes ago             optimistic_shtern</span><br><span class="line">bd1b8900c547   centos         <span class="string">&quot;/bin/bash&quot;</span>   6 minutes ago   Exited (0) 5 minutes ago             cool_tesla</span><br><span class="line">cf6adbf1b506   bf756fb1ae65   <span class="string">&quot;/hello&quot;</span>      5 hours ago     Exited (0) 5 hours ago               optimistic_darwin</span><br><span class="line">1234567891011121314</span><br></pre></td></tr></table></figure>
+
+<p>删除容器命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker rm 容器id                 <span class="comment">#删除指定的容器,不能删除正在运行的容器,强制删除使用 rm -f</span></span><br><span class="line">docker rm -f $(docker ps -aq)   <span class="comment">#删除所有的容器</span></span><br><span class="line">docker ps -a -q|xargs docker rm <span class="comment">#删除所有的容器</span></span><br><span class="line">123</span><br></pre></td></tr></table></figure>
+
+<p>启动和停止容器命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker start 容器id          <span class="comment">#启动容器</span></span><br><span class="line">docker restart 容器id        <span class="comment">#重启容器</span></span><br><span class="line">docker stop 容器id           <span class="comment">#停止当前运行的容器</span></span><br><span class="line">docker <span class="built_in">kill</span> 容器id           <span class="comment">#强制停止当前容器</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="其他常用命令"><a href="#其他常用命令" class="headerlink" title="其他常用命令"></a>其他常用命令</h4><h5 id="日志的查看"><a href="#日志的查看" class="headerlink" title="日志的查看"></a>日志的查看</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">[root@iZwz99sm8v95sckz8bd2c4Z ~]<span class="comment"># docker logs --help</span></span><br><span class="line"></span><br><span class="line">Usage:  docker logs [OPTIONS] CONTAINER</span><br><span class="line"></span><br><span class="line">Fetch the logs of a container</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line">      --details        Show extra details provided to logs</span><br><span class="line">  -f, --follow         Follow <span class="built_in">log</span> output</span><br><span class="line">      --since string   Show logs since timestamp (e.g. 2013-01-02T13:23:37Z) or relative (e.g. 42m <span class="keyword">for</span> 42 minutes)</span><br><span class="line">  -n, --tail string    Number of lines to show from the end of the logs (default <span class="string">&quot;all&quot;</span>)</span><br><span class="line">  -t, --timestamps     Show timestamps</span><br><span class="line">      --until string   Show logs before a timestamp (e.g. 2013-01-02T13:23:37Z) or relative (e.g. 42m <span class="keyword">for</span> 42 minutes)</span><br><span class="line"></span><br><span class="line">常用：</span><br><span class="line">docker logs -tf 容器id</span><br><span class="line">docker logs --tail number 容器id <span class="comment">#num为要显示的日志条数</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#docker容器后台运行，必须要有一个前台的进程，否则会自动停止</span></span><br><span class="line"><span class="comment">#编写shell脚本循环执行，使得centos容器保持运行状态</span></span><br><span class="line">[root@iZwz99sm8v95sckz8bd2c4Z ~]<span class="comment"># docker run -d centos /bin/sh -c &quot;while true;do echo hi;sleep 5;done&quot;</span></span><br><span class="line">c703b5b1911ff84d584390263a35707b6024816e1f46542b61918a6327a570dc</span><br><span class="line">[root@iZwz99sm8v95sckz8bd2c4Z ~]<span class="comment"># docker ps</span></span><br><span class="line">CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS          PORTS     NAMES</span><br><span class="line">c703b5b1911f   centos    <span class="string">&quot;/bin/sh -c &#x27;while t…&quot;</span>   13 seconds ago   Up 10 seconds             pedantic_banach</span><br><span class="line">[root@iZwz99sm8v95sckz8bd2c4Z ~]<span class="comment"># docker logs -tf --tail 10 c703b5b1911f</span></span><br><span class="line">2020-12-27T03:34:07.255599560Z hi</span><br><span class="line">2020-12-27T03:34:12.257641517Z hi</span><br><span class="line">2020-12-27T03:34:17.259706294Z hi</span><br><span class="line">2020-12-27T03:34:22.261693707Z hi</span><br><span class="line">2020-12-27T03:34:27.262609289Z hi</span><br><span class="line">2020-12-27T03:34:32.267862677Z hi</span><br><span class="line">2020-12-27T03:34:37.270382873Z hi</span><br><span class="line">2020-12-27T03:34:42.272414182Z hi</span><br><span class="line">2020-12-27T03:34:47.274823243Z hi</span><br><span class="line">2020-12-27T03:34:52.277419274Z hi</span><br><span class="line">12345678910111213141516171819202122232425262728293031323334353637</span><br></pre></td></tr></table></figure>
+
+<h5 id="查看容器中进程信息"><a href="#查看容器中进程信息" class="headerlink" title="查看容器中进程信息"></a>查看容器中进程信息</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@iZwz99sm8v95sckz8bd2c4Z ~]<span class="comment"># docker top c703b5b1911f</span></span><br><span class="line">UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD</span><br><span class="line">root                11156               11135               0                   11:31               ?                   00:00:00            /bin/sh -c <span class="keyword">while</span> <span class="literal">true</span>;<span class="keyword">do</span> <span class="built_in">echo</span> hi;sleep 5;<span class="keyword">done</span></span><br><span class="line">root                11886               11156               0                   11:43               ?                   00:00:00            /usr/bin/coreutils --coreutils-prog-shebang=sleep /usr/bin/sleep 5</span><br><span class="line">1234</span><br></pre></td></tr></table></figure>
+
+<h5 id="查看容器的元数据"><a href="#查看容器的元数据" class="headerlink" title="查看容器的元数据"></a>查看容器的元数据</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@iZwz99sm8v95sckz8bd2c4Z ~]<span class="comment"># docker inspect 容器id</span></span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+
+<h5 id="进入当前正在运行的容器"><a href="#进入当前正在运行的容器" class="headerlink" title="进入当前正在运行的容器"></a>进入当前正在运行的容器</h5><p>因为通常我们的容器都是使用后台方式来运行的，有时需要进入容器修改配置</p>
+<p>方式一：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@iZwz99sm8v95sckz8bd2c4Z ~]<span class="comment"># docker exec -it c703b5b1911f /bin/bash</span></span><br><span class="line">[root@c703b5b1911f /]<span class="comment"># ls</span></span><br><span class="line">bin  dev  etc  home  lib  lib64  lost+found  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var</span><br><span class="line">[root@c703b5b1911f /]<span class="comment"># ps -ef      </span></span><br><span class="line">UID        PID  PPID  C STIME TTY          TIME CMD</span><br><span class="line">root         1     0  0 03:31 ?        00:00:00 /bin/sh -c <span class="keyword">while</span> <span class="literal">true</span>;<span class="keyword">do</span> <span class="built_in">echo</span> hi;sleep 5;<span class="keyword">done</span></span><br><span class="line">root       279     0  0 03:54 pts/0    00:00:00 /bin/bash</span><br><span class="line">root       315     1  0 03:56 ?        00:00:00 /usr/bin/coreutils --coreutils-prog-shebang=sleep /usr/bin/sleep 5</span><br><span class="line">root       316   279  0 03:56 pts/0    00:00:00 ps -ef</span><br><span class="line">123456789</span><br></pre></td></tr></table></figure>
+
+<p>方式二：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@iZwz99sm8v95sckz8bd2c4Z ~]<span class="comment"># docker attach c703b5b1911f</span></span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+
+<p>docker exec 进入容器后开启一个新的终端，可以在里面操作</p>
+<p>docker attach 进入容器正在执行的终端，不会启动新的进程</p>
+<h5 id="拷贝操作"><a href="#拷贝操作" class="headerlink" title="拷贝操作"></a>拷贝操作</h5><p>拷贝操作的命令如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#拷贝容器的文件到主机中</span></span><br><span class="line">docker cp 容器id:容器内路径  目的主机路径</span><br><span class="line"></span><br><span class="line"><span class="comment">#拷贝宿主机的文件到容器中</span></span><br><span class="line">docker cp 目的主机路径 容器id:容器内路径</span><br><span class="line">12345</span><br><span class="line">[root@iZwz99sm8v95sckz8bd2c4Z ~]<span class="comment"># docker exec -it c703b5b1911f /bin/bash</span></span><br><span class="line">[root@c703b5b1911f /]<span class="comment"># cd home</span></span><br><span class="line">[root@c703b5b1911f home]<span class="comment"># ls</span></span><br><span class="line"><span class="comment">#touch 新建文件</span></span><br><span class="line">[root@c703b5b1911f home]<span class="comment"># touch test.java</span></span><br><span class="line">[root@c703b5b1911f home]<span class="comment"># ls</span></span><br><span class="line">test.java</span><br><span class="line">[root@c703b5b1911f home]<span class="comment"># exit</span></span><br><span class="line"><span class="built_in">exit</span></span><br><span class="line">[root@iZwz99sm8v95sckz8bd2c4Z ~]<span class="comment"># docker ps</span></span><br><span class="line">CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS          PORTS     NAMES</span><br><span class="line">c703b5b1911f   centos    <span class="string">&quot;/bin/sh -c &#x27;while t…&quot;</span>   35 minutes ago   Up 35 minutes             pedantic_banach</span><br><span class="line">[root@iZwz99sm8v95sckz8bd2c4Z ~]<span class="comment"># docker cp c703b5b1911f:/home/test.java /home</span></span><br><span class="line">[root@iZwz99sm8v95sckz8bd2c4Z ~]<span class="comment"># ls /home</span></span><br><span class="line">hai  pan  test.java</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+        
+            <div class="kratos-copyright text-center clearfix">
+                <h5>本作品采用 <a rel="license nofollow" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">知识共享署名-相同方式共享 4.0 国际许可协议</a> 进行许可</h5>
+            </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> 分享</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "http://ilpvc.github.io/2022/05/18/docker%E7%AC%94%E8%AE%B0/",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "http://ilpvc.github.io/2022/05/18/docker%E7%AC%94%E8%AE%B0/";
+            const title         = "「docker笔记」";
+            const excerpt       = `官方文档位置#
+1、卸载旧的版本12345678sudo yum remove docker \                 docker-client \                 docker-client-latest...`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/docker/" rel="tag">docker</a>
+                </div>
+                <div class="pull-date">
+                <span>最后编辑：2022-05-19</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" docker移动文件或者文件夹的命令" href="/2022/05/17/docker移动文件或者文件夹的命令/">&lt; 上一篇</a>
+            </div>
+            
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/avatar.webp" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center"></p>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
+      <div class="tag-clouds">
+        <a href="/tags/android/" style="font-size: 0.73em;">android</a> <a href="/tags/bat/" style="font-size: 0.6em;">bat</a> <a href="/tags/c%E8%AF%AD%E8%A8%80/" style="font-size: 0.67em;">c语言</a> <a href="/tags/docker/" style="font-size: 0.67em;">docker</a> <a href="/tags/git/" style="font-size: 0.67em;">git</a> <a href="/tags/java/" style="font-size: 0.73em;">java</a> <a href="/tags/leetcode/" style="font-size: 0.67em;">leetcode</a> <a href="/tags/linux/" style="font-size: 0.8em;">linux</a> <a href="/tags/mysql/" style="font-size: 0.67em;">mysql</a> <a href="/tags/npm/" style="font-size: 0.6em;">npm</a> <a href="/tags/office/" style="font-size: 0.6em;">office</a> <a href="/tags/openwrt/" style="font-size: 0.73em;">openwrt</a> <a href="/tags/postman/" style="font-size: 0.6em;">postman</a> <a href="/tags/ps/" style="font-size: 0.6em;">ps</a> <a href="/tags/springboot/" style="font-size: 0.67em;">springboot</a> <a href="/tags/win11/" style="font-size: 0.6em;">win11</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 0.6em;">前端</a> <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 0.67em;">博客</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>最新文章</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/2022/05/18/docker%E7%AC%94%E8%AE%B0/"><i class="fa  fa-book"></i> docker笔记</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/05/17/docker%E7%A7%BB%E5%8A%A8%E6%96%87%E4%BB%B6%E6%88%96%E8%80%85%E6%96%87%E4%BB%B6%E5%A4%B9%E7%9A%84%E5%91%BD%E4%BB%A4/"><i class="fa  fa-book"></i> docker移动文件或者文件夹的命令</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/05/15/java%E6%B3%9B%E5%9E%8B-T-T%E4%B8%8ET%E7%9A%84%E7%94%A8%E6%B3%95/"><i class="fa  fa-book"></i> java泛型<T> T与T的用法</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/05/15/%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%AF%B9%E8%B1%A1%E7%B1%BB%E5%9E%8B/"><i class="fa  fa-book"></i> 基本类型和对象类型</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/05/15/openwrt%E5%BC%80%E5%90%AFpasswall/"><i class="fa  fa-book"></i> openwrt开启passwall</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/ilpvc"><i class="fa fa-github"></i></a></li>
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2022 ilpvc 版权所有.</li>
+                            <li>本站已运行<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by ilpvc.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.com/ilpvc/ilpvc.github.io" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+                    <div class="box group-box">
+                        <a href="true" target="_blank" rel="nofollow">
+                            <span class="fa fa-users"></span>
+                        </a>
+                    </div>
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+
+    <script defer src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+    <script defer src="/js/kr-dark.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>
