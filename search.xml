@@ -1306,6 +1306,9 @@
 <p><strong>firewall-cmd –zone=public –add-port=5672/tcp –permanent</strong>  # 开放5672端口</p>
 <p><strong>firewall-cmd –zone=public –remove-port=5672/tcp –permanent</strong> #关闭5672端口</p>
 <p><strong>firewall-cmd –reload</strong>  # 配置立即生效</p>
+<p>批量开启端口</p>
+<p>**firewall-cmd –permanent –zone=public –add-port=100-500/tcp **</p>
+<p><strong>firewall-cmd –permanent –zone=public –add-port=100-500/udp</strong></p>
 <p>2、查看防火墙所有开放的端口</p>
 <p><strong>firewall-cmd –zone=public –list-ports</strong></p>
 <p>3.、关闭防火墙</p>
@@ -2668,6 +2671,11 @@
 <img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220522220224437.png" style="zoom: 200%;" />
 
 <p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220522215918823.png"></p>
+<p>安装tomcat：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#官方的使用</span></span><br><span class="line">docker run -it --rm tomcat:9.0</span><br><span class="line"><span class="comment"># --rm就是删除容器，这个容器在停止时就会被删除，一般用于测试。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#运行容器</span></span><br><span class="line">docker run -d -p 3355:8080 --name tomcat01 tomcat</span><br><span class="line"></span><br><span class="line"><span class="comment">#进入容器</span></span><br><span class="line">docker <span class="built_in">exec</span> -it tomcat01 /bin/bash</span><br><span class="line"></span><br><span class="line"><span class="comment">#发现问题：1.linux命令少了 2.没有webapps。阿里云的原因，默认是最小的镜像，所以不必要的都剔除掉。</span></span><br><span class="line"><span class="comment">#保证最小可运行的环境</span></span><br><span class="line"><span class="comment">#在容器内发现有个webapps.dist.可以将里面的内容cp到webapps里面就可以访问了。</span></span><br><span class="line">root@3ae89d3fa3c1:/usr/<span class="built_in">local</span>/tomcat<span class="comment"># ls</span></span><br><span class="line">BUILDING.txt     LICENSE  README.md      RUNNING.txt  conf  logs            temp     webapps.dist</span><br><span class="line">CONTRIBUTING.md  NOTICE   RELEASE-NOTES  bin          lib   native-jni-lib  webapps  work</span><br><span class="line"></span><br><span class="line"><span class="comment">#复制命令</span></span><br><span class="line"></span><br><span class="line">cp -r webapps.dist/* webapps</span><br></pre></td></tr></table></figure>
+
+
+
 <h3 id="图形化管理工具Portaniner安装"><a href="#图形化管理工具Portaniner安装" class="headerlink" title="图形化管理工具Portaniner安装"></a>图形化管理工具Portaniner安装</h3><p>Portaniner是Docker的图形化管理工具，类似的工具还有Rancher(CI/CD再用)</p>
 <p>下载运行Portaniner镜像并运行，设置本机映射端口为8088</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost conf]<span class="comment"># docker run -d -p 8088:9000 --restart=always -v /var/run/docker.sock:/var/run/docker.sock --privileged=true portainer/portainer</span></span><br><span class="line">Unable to find image <span class="string">&#x27;portainer/portainer:latest&#x27;</span> locally</span><br><span class="line">latest: Pulling from portainer/portainer</span><br><span class="line">94cfa856b2b1: Pull complete</span><br><span class="line">49d59ee0881a: Pull complete</span><br><span class="line">a2300fd28637: Pull complete</span><br><span class="line">Digest: sha256:fb45b43738646048a0a0cc74fcee2865b69efde857e710126084ee5de9be0f3f</span><br><span class="line">Status: Downloaded newer image <span class="keyword">for</span> portainer/portainer:latest</span><br><span class="line">8c525a0137be22965bd1e3944da622a2c4248f8ad20883f4b3ea4f8a6b11e163</span><br><span class="line">[root@iZwz99sm8v95sckz8bd2c4Z ~]<span class="comment"># docker ps</span></span><br><span class="line">CONTAINER ID   IMAGE                 COMMAND        CREATED         STATUS         PORTS                    NAMES</span><br><span class="line">7789d4505a00   portainer/portainer   <span class="string">&quot;/portainer&quot;</span>   6 seconds ago   Up 5 seconds   0.0.0.0:8088-&gt;9000/tcp   quirky_sinoussi</span><br><span class="line">123456789101112</span><br></pre></td></tr></table></figure>

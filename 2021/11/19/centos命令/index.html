@@ -24,7 +24,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://ilpvc.github.io/images/logo.png">
 <meta property="article:published_time" content="2021-11-19T10:18:31.000Z">
-<meta property="article:modified_time" content="2022-05-04T14:53:03.278Z">
+<meta property="article:modified_time" content="2022-05-23T02:26:48.426Z">
 <meta property="article:author" content="ilpvc">
 <meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary">
@@ -190,7 +190,7 @@
                     <i class="fa fa-edit"></i> 
                     
                     
-                        ~3.52K
+                        ~3.65K
                     
                     字
                 </li>
@@ -199,7 +199,7 @@
         </header>
         <div class="kratos-post-content">
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1651675983278"></time> 前，其中的内容可能需要更新。
+                本文最后编辑于 <time datetime="1653272808426"></time> 前，其中的内容可能需要更新。
             </div>
             
             <hr />
@@ -240,6 +240,9 @@
 <p><strong>firewall-cmd –zone=public –add-port=5672/tcp –permanent</strong>  # 开放5672端口</p>
 <p><strong>firewall-cmd –zone=public –remove-port=5672/tcp –permanent</strong> #关闭5672端口</p>
 <p><strong>firewall-cmd –reload</strong>  # 配置立即生效</p>
+<p>批量开启端口</p>
+<p>**firewall-cmd –permanent –zone=public –add-port=100-500/tcp **</p>
+<p><strong>firewall-cmd –permanent –zone=public –add-port=100-500/udp</strong></p>
 <p>2、查看防火墙所有开放的端口</p>
 <p><strong>firewall-cmd –zone=public –list-ports</strong></p>
 <p>3.、关闭防火墙</p>
@@ -401,7 +404,7 @@
                     <a class="tag-none-link" href="/tags/linux/" rel="tag">linux</a>
                 </div>
                 <div class="pull-date">
-                <span>最后编辑：2022-05-04</span>
+                <span>最后编辑：2022-05-23</span>
                 </div>
             </div>
         </footer>
