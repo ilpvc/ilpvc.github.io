@@ -1444,6 +1444,56 @@
 
 <p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220523195947438.png"></p>
 <p>以后修改数据只需要在本地修改即可，docker会自动帮我们同步到容器内</p>
+<h3 id="实战：安装MySQL"><a href="#实战：安装MySQL" class="headerlink" title="实战：安装MySQL"></a>实战：安装MySQL</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#获取mysql5.7的镜像</span></span><br><span class="line">docker pull mysql:5.7</span><br><span class="line"></span><br><span class="line"><span class="comment">#运行容器，需要数据挂载 #安装启动mysql需要配置密码</span></span><br><span class="line"><span class="comment">#官方测试： </span></span><br><span class="line">docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag</span><br><span class="line"><span class="comment">#我的：</span></span><br><span class="line">docker run -d -p 3310:3306 -v /home/mysql/conf:/etc/mysql/conf.d -v /home/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 --name=<span class="string">&quot;mysql_test&quot;</span> mysql:5.7</span><br><span class="line"><span class="comment">#启动成功之后，在本地使用Navicat测试连接</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220523232334775.png"></p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220523232645959.png"></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#在本地创建一个数据库测试是否同步成功</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="具名和匿名挂载"><a href="#具名和匿名挂载" class="headerlink" title="具名和匿名挂载"></a>具名和匿名挂载</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#匿名挂载</span></span><br><span class="line">-v 容器内路径！</span><br><span class="line">docker run -d -P --name nginx01 -v /etc/nginx nginx</span><br><span class="line"><span class="comment">#参看所有的卷的情况</span></span><br><span class="line">docker volume ls</span><br><span class="line"></span><br><span class="line"><span class="comment">#这里发现，这种就是匿名挂载，我们在-v只写了容器内的路径，没有写容器外的路径！</span></span><br><span class="line">DRIVER    VOLUME NAME</span><br><span class="line"><span class="built_in">local</span>     2d5438e11233a296bc9d097a9f7854278fecbd7be7e7d4a701e7191ede1c1c3b</span><br><span class="line"><span class="built_in">local</span>     56b9ea9722cddab11ef4c91beef28ed6188bff1f98fc2139f15396137531a0be</span><br><span class="line"></span><br><span class="line"><span class="comment">#具名挂载</span></span><br><span class="line">docker run -d -P --name nginx02 -v juming-nginx:/etc/nginx nginx</span><br><span class="line"><span class="comment">#再次查看卷的情况</span></span><br><span class="line">DRIVER    VOLUME NAME</span><br><span class="line"><span class="built_in">local</span>     2d5438e11233a296bc9d097a9f7854278fecbd7be7e7d4a701e7191ede1c1c3b</span><br><span class="line"><span class="built_in">local</span>     56b9ea9722cddab11ef4c91beef28ed6188bff1f98fc2139f15396137531a0be</span><br><span class="line"><span class="built_in">local</span>     juming-nginx</span><br><span class="line"></span><br><span class="line"><span class="comment">#通过 -v 卷名：容器内路径</span></span><br><span class="line"><span class="comment">#查看一下这个卷</span></span><br><span class="line">docker volume inspect juming-nginx</span><br><span class="line"></span><br><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;CreatedAt&quot;</span>: <span class="string">&quot;2022-05-20T13:56:57+08:00&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Driver&quot;</span>: <span class="string">&quot;local&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Labels&quot;</span>: null,</span><br><span class="line">        <span class="string">&quot;Mountpoint&quot;</span>: <span class="string">&quot;ar/lib/docker/volumes/juming-nginx/_data&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Name&quot;</span>: <span class="string">&quot;juming-nginx&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Options&quot;</span>: null,</span><br><span class="line">        <span class="string">&quot;Scope&quot;</span>: <span class="string">&quot;local&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="comment">#所有的docker容器内的卷，没有指定目录的情况下都是在/var/lib/docker/volumes/****/_data</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#我们通过具名挂载可以方便找到我们的一个卷，大多数情况在使用居民挂载</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#如何确定是具名挂载还是指定路径挂载！</span></span><br><span class="line">-v 容器内路径    <span class="comment">#匿名挂载</span></span><br><span class="line">-v 卷名:容器内路径   <span class="comment">#具名挂载</span></span><br><span class="line">-v /宿主机路径::容器内路径  <span class="comment">#指定路径挂载</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>拓展</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#通过 -v容器内路径：ro rw改变读写权限</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#ro    readonly 只读</span></span><br><span class="line"><span class="comment">#rw    readwrite 可读可写</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#一旦设置了权限 容器对我们挂在出来的内容就有了限定</span></span><br><span class="line">docker run -d -P --name nginx02 -v juming-nginx:/etc/nginx:ro nginx</span><br><span class="line">docker run -d -P --name nginx02 -v juming-nginx:/etc/nginx:rw nginx</span><br><span class="line"></span><br><span class="line"><span class="comment"># ro 只要看到ro就说明这个路径只能通过宿主机来操作，容器内都是无法操作！</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="初识DockerFile"><a href="#初识DockerFile" class="headerlink" title="初识DockerFile"></a>初识DockerFile</h3><p>DockerFile就是用来构建docker镜像的构建文件！</p>
+<p>通过这个脚本可以生成镜像，镜像是一层一层的，脚本一个个的命令，每个命令都是一层</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#创建一个DockerFile文件；名字可以随机 建议 DockerFile</span></span><br><span class="line"><span class="comment">#文件中的内容 指令（大写） 参数</span></span><br><span class="line"></span><br><span class="line">FROM centos</span><br><span class="line"></span><br><span class="line">VOLUME [<span class="string">&quot;volume01&quot;</span>,<span class="string">&quot;volume02&quot;</span>]</span><br><span class="line"></span><br><span class="line">CMD <span class="built_in">echo</span> <span class="string">&quot;----end-----&quot;</span></span><br><span class="line"></span><br><span class="line">CMD /bin/bash</span><br><span class="line"></span><br><span class="line"><span class="comment">#这里的每个命令都是镜像的一层！</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#构建DockerFile</span></span><br><span class="line">docker build -f /home/docker-test-volume/dockerfile1 -t ilpvc/centos:1.0 .</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220524095022493.png"></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#启动自己写的容器</span></span><br><span class="line">docker run -it 7925f3fefaf6 /bin/bash</span><br><span class="line"><span class="comment">#下面的两个目录就是我们生成镜像自动挂载的，数据卷目录</span></span><br><span class="line"><span class="comment">#这个卷和外部一定有一个同步的目录！</span></span><br><span class="line"><span class="comment">#上面使用的是匿名挂载</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220524095710091.png"></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#可以通过docker inspect 容器名 查看挂载路径</span></span><br><span class="line"><span class="comment">#在mounts里面</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220524100155562.png"></p>
+<blockquote>
+<p>这种方式我们未来使用的十分多，因为我们通常会构建自己的镜像！</p>
+<p>假设构建镜像时没有挂载卷，要手动镜像挂载 -v 卷名：容器内路径！</p>
+</blockquote>
+<h3 id="数据卷容器"><a href="#数据卷容器" class="headerlink" title="数据卷容器"></a>数据卷容器</h3><p>多个mysql同步数据</p>
+<p><img src="https://presenter.oss-cn-shanghai.aliyuncs.com/image-20220524101020136.png"></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 启动三个容器，通过我们自己写的镜像启动</span></span><br><span class="line"><span class="comment"># 启动第一个</span></span><br><span class="line">docker run -it --name docker01 ilpvc/centos:1.0</span><br><span class="line"><span class="comment"># 启动第二个</span></span><br><span class="line">docker run -it --name docker02 --volumes-from docker01 ilpvc/centos:1.0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>此时这两个容器的volume就会自动绑定</p>
+<blockquote>
+<p>docker01-&gt;volume01==docker02-&gt;volume01</p>
+<p>docker01-&gt;volume02==docker02-&gt;volume02</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#测试：删除docker01，docker02的数据还在</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>绑定的多个容器之间的数据卷是拷贝的概念。</p>
+</blockquote>
+<p><strong>多个mysql实现数据共享</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#第一个mysql</span></span><br><span class="line"></span><br><span class="line">docker run -d -p 3310:3306 -v /etc/mysql/conf.d -v /var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 --name=<span class="string">&quot;mysql01&quot;</span> mysql:5.7</span><br><span class="line"></span><br><span class="line"><span class="comment">#第二个mysql</span></span><br><span class="line">docker run -d -p 3310:3306 -e MYSQL_ROOT_PASSWORD=123456 --name=<span class="string">&quot;mysql02&quot;</span> --volumes-from mysql01 mysql:5.7</span><br><span class="line"></span><br><span class="line"><span class="comment">#这个时候，可以实现两个容器数据同步！</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>结论：</strong></p>
+<p>容器之间配置信息的传递，数据卷容器的生命周期一直持续到没有容器使用为止。</p>
+<p>但是一旦你持久化到了本地，那么本地的数据是不会被删除的。</p>
 ]]></content>
       <tags>
         <tag>docker</tag>
