@@ -1,0 +1,1 @@
+var posts=["2023/06/21/JS原型/","2023/06/06/hello-world/","2023/06/08/python-OS包/","2023/06/08/python学习记录/"];function toRandomPost(){pjax.loadUrl('/'+posts[Math.floor(Math.random() * posts.length)]);};
