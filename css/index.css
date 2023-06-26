@@ -2262,14 +2262,14 @@ blockquote > :last-child {
   }
 }
 :root {
-  --hl-color: #eff;
-  --hl-bg: #212121;
-  --hltools-bg: #1c1c1c;
-  --hltools-color: rgba(238,255,255,0.8);
-  --hlnumber-bg: #212121;
-  --hlnumber-color: rgba(238,255,255,0.5);
-  --hlscrollbar-bg: #353535;
-  --hlexpand-bg: linear-gradient(180deg, rgba(33,33,33,0.6), rgba(33,33,33,0.9));
+  --hl-color: #a6accd;
+  --hl-bg: #292d3e;
+  --hltools-bg: #252938;
+  --hltools-color: #a6accd;
+  --hlnumber-bg: #292d3e;
+  --hlnumber-color: rgba(166,172,205,0.5);
+  --hlscrollbar-bg: #393f57;
+  --hlexpand-bg: linear-gradient(180deg, rgba(41,45,62,0.6), rgba(41,45,62,0.9));
 }
 figure.highlight table {
   scrollbar-color: var(--hlscrollbar-bg) transparent;
@@ -2287,7 +2287,7 @@ figure.highlight pre .meta {
   color: #c792ea;
 }
 figure.highlight pre .comment {
-  color: #969896;
+  color: #676e95;
 }
 figure.highlight pre .variable,
 figure.highlight pre .attribute,
@@ -2350,7 +2350,7 @@ figure.highlight pre .javascript .function {
   color: #c792ea;
 }
 #article-container figure.highlight .line.marked {
-  background-color: rgba(97,97,97,0.314);
+  background-color: rgba(113,124,180,0.314);
 }
 #article-container figure.highlight table {
   display: block;
@@ -2521,48 +2521,6 @@ figure.highlight pre .javascript .function {
 }
 #article-container .gist table td {
   border: none;
-}
-#article-container figure.highlight {
-  margin: 0 0 24px;
-  border-radius: 7px;
-  -webkit-box-shadow: 0 5px 10px 0 rgba(0,0,0,0.4);
-  box-shadow: 0 5px 10px 0 rgba(0,0,0,0.4);
-  -webkit-transform: translateZ(0);
-}
-#article-container figure.highlight .highlight-tools:after {
-  position: absolute;
-  left: 14px;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: #fc625d;
-  -webkit-box-shadow: 20px 0 #fdbc40, 40px 0 #35cd4b;
-  box-shadow: 20px 0 #fdbc40, 40px 0 #35cd4b;
-  content: ' ';
-}
-#article-container figure.highlight .highlight-tools .expand {
-  right: 0;
-}
-#article-container figure.highlight .highlight-tools .expand.closed {
-  -webkit-transition: all 0.3s;
-  -moz-transition: all 0.3s;
-  -o-transition: all 0.3s;
-  -ms-transition: all 0.3s;
-  transition: all 0.3s;
-  -webkit-transform: rotate(90deg) !important;
-  -moz-transform: rotate(90deg) !important;
-  -o-transform: rotate(90deg) !important;
-  -ms-transform: rotate(90deg) !important;
-  transform: rotate(90deg) !important;
-}
-#article-container figure.highlight .highlight-tools .expand ~ .copy-notice {
-  right: 3.45em;
-}
-#article-container figure.highlight .highlight-tools .expand ~ .copy-button {
-  right: 2.1em;
-}
-#article-container figure.highlight .highlight-tools .code-lang {
-  left: 75px;
 }
 #article-container .code-expand-btn {
   position: absolute;
@@ -4087,9 +4045,6 @@ body[data-type="music"] .s-sticker div {
   -o-transition: 0.3s;
   -ms-transition: 0.3s;
   transition: 0.3s;
-}
-body:has(#console.show) #nav-music {
-  display: none !important;
 }
 @media screen and (max-width: 1400px) {
   body #anMusic-page #anMusicSwitching,
@@ -5896,52 +5851,37 @@ h1.page-title + .tag-cloud-list {
   -ms-flex-direction: column;
   flex-direction: column;
 }
-#aside-content >.card-widget.card-info {
-  background: var(--anzhiyu-main);
-  background-size: 400%;
-  -webkit-animation: gradient 15s ease infinite;
-  -moz-animation: gradient 15s ease infinite;
-  -o-animation: gradient 15s ease infinite;
-  -ms-animation: gradient 15s ease infinite;
-  animation: gradient 15s ease infinite;
+#aside-content > .card-widget.card-info {
+  background: #fff url("https://bu.dusays.com/2023/04/23/6444b2b59a295.webp") top -24% center no-repeat;
+  position: relative;
 }
-#aside-content .card-info .author-info__name {
-  text-align: left;
-  font-weight: bold;
-  color: var(--anzhiyu-white);
-  font-size: 28px;
-  line-height: 1.1;
-  margin-top: 1.3rem;
-  margin-bottom: 1rem;
+#aside-content > .card-widget.card-info .author-info__name {
+  line-height: 1.5em;
+  margin: 4px 0;
 }
-#aside-content .card-info #author-info__sayhi {
+#aside-content > .card-widget.card-info #author-info__sayhi {
   text-align: left;
-  color: var(--anzhiyu-white);
   background: var(--anzhiyu-white-op);
+  color: var(--font-color);
+  border: var(--style-border);
   font-size: 12px;
   margin-right: auto;
-  padding: 2px 8px;
+  padding: 5px 8px;
   border-radius: 12px;
   width: fit-content;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -webkit-transition: 0.3s;
-  -moz-transition: 0.3s;
-  -o-transition: 0.3s;
-  -ms-transition: 0.3s;
-  transition: 0.3s;
+  display: inline;
+  margin-left: -1px;
 }
-#aside-content .card-info .card-info-avatar .author-status-box {
-  top: 0;
-  left: 0;
+#aside-content > .card-widget.card-info .banner-button-group .banner-button {
+  border-radius: 12px;
+  background: var(--anzhiyu-theme);
 }
-#aside-content .card-info .banner-button-group .banner-button {
-  border-radius: 35px;
-  background: var(--anzhiyu-white-op);
+#aside-content > .card-widget.card-info .banner-button-group .banner-button:hover {
+  background: var(--anzhiyu-theme-deep);
+  color: var(--anzhiyu-white);
 }
-#aside-content .card-info .banner-button-group .banner-button:hover {
-  background: var(--anzhiyu-white);
-  color: var(--anzhiyu-black);
+#aside-content > .card-widget.card-info .card-info-social-icons .social-icon {
+  color: var(--anzhiyu-font);
 }
 .card-widget .author-info-top {
   margin: 15px auto 0;
